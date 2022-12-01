@@ -305,7 +305,7 @@ def adventure_game():
                         'Leviathan. A legendary sea serpent monster which is the embodiment of chaos and encapsulates the space of the material world. You hear the crashing of water, and then all of a sudden you see a massive blue wall in the distance. Leviathan summoned a 1,000 foot high wave that crashes', 
                         'Hellfire. A demon that lies in the underbelly of the earth with the temperature of 1,000 burning suns. The ground turns to lava and you see everything nearby melting. Hellfire\'s eyes glow red, blowing fire from its mouth', 
                         'Shiva. The supreme being known to create and also known as "The Destroyer". The atmosphere becomes so windy, that it\'s faster than the most violent tornado. Shiva assembled 10,000 diamond tipped arrows in the air which shoots across',
-                        'Odin. A highly revered god weilding a spear. Odin summons a dark storm that shadows the battlefield. A powerful lightning bolt shoots down']
+                        'Odin. A highly revered god wielding a spear. Odin summons a dark storm that shadows the battlefield. A powerful lightning bolt shoots down']
                     summoned = random.choice(summons) # Selects a random summon from the summoned list.
                     if summoned == summons[0]:
                         print('''
