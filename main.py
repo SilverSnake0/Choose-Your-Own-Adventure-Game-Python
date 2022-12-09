@@ -681,7 +681,7 @@ jgs .-=-.    ) -.
                 # Prompt the player to hit or stand
                 while True:
                     # Get the player's decision
-                    decision = input("Hit or stand? ")
+                    decision = input("Hit or Stand? ")
 
                     # Check if the player decided to hit
                     if decision.lower() == "hit":
@@ -839,7 +839,7 @@ jgs .-=-.    ) -.
                         poker()
                         poker_ans = input(f'{bulletpoint}Play another hand of poker?')
                     else:
-                        blackjack_ans = input(f'{bulletpoint}How about blackjack?')
+                        blackjack_ans = input(f'{bulletpoint}How about blackjack? The goal is to get close to 21. "Hit" will draw another card, while "Stand" will stop drawing. ')
                         while blackjack_ans.strip().lower() in yes:
                             blackjack()
                             blackjack_ans = input(
