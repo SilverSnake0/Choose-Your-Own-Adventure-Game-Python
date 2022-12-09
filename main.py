@@ -472,6 +472,280 @@ jgs .-=-.    ) -.
             print(
                 f'{hero.name} played: {userChoice}.\n Best Friend Played: {computerChoice}.\n {determineWinner(userChoice, computerChoice)}')
 
+        def poker():
+            # Define global variables
+            deck = []
+            player_hand = []
+            computer_hand = []
+            community_cards = []
+
+            # Define a function to evaluate a poker hand
+            def evaluate_hand(hand):
+
+                # Sort the hand by value
+                hand.sort(key=lambda x: x[0])
+
+                # Count the number of times each card appears in the hand
+                counts = {card[0]: 0 for card in hand}
+                for card in hand:
+                    counts[card[0]] += 1
+
+                # Check for a Royal Flush
+                if all(count == 1 for count in counts.values()):
+                    if hand[0][0] == '10' and hand[-1][0] == 'A':
+                        if all(card[1] == hand[0][1] for card in hand):
+                            return 'Royal Flush'
+
+                # Check for a Straight Flush
+                if all(count == 1 for count in counts.values()):
+                    for i in range(1, len(hand)):
+                        if int(hand[i][0]) - int(hand[i - 1][0]) != 1:
+                            break
+                        else:
+                            return 'Straight Flush'
+
+                # Check for Four of a Kind
+                if 4 in counts.values():
+                    return 'Four of a Kind'
+
+                # Check for a Full House
+                if 3 in counts.values() and 2 in counts.values():
+                    return 'Full House'
+
+                # Check for a Flush
+                if all(count == 1 for count in counts.values()):
+                    return 'Flush'
+
+                # Check for a Straight
+                for i in range(1, len(hand)):
+                    if int(hand[i][0]) - int(hand[i - 1][0]) != 1:
+                        break
+                else:
+                    return 'Straight'
+
+                # Check for Three of a Kind
+                if 3 in counts.values():
+                    return 'Three of a Kind'
+
+                # Check for Two Pair
+                if len([count for count in counts.values() if count == 2]) == 2:
+                    return 'Two Pair'
+
+                # Check for a Pair
+                if 2 in counts.values():
+                    return 'Pair'
+
+                # Return the High Card
+                return 'High Card'
+
+            def create_deck():
+                suits = ['♥ Hearts', '◆ Diamonds', '♠️ Spades', '♣ Clubs']
+                values = ['♠️ A', '2', '3', '4', '5', '6',
+                            '7', '8', '9', '10', '⚜ J', '♕ Q', '♚ K']
+
+                for suit in suits:
+                    for value in values:
+                        card = (value, suit)
+                        deck.append(card)
+
+            # Define a function to shuffle the deck of cards
+            def shuffle_deck():
+                random.shuffle(deck)
+
+            # Define a function to deal cards to the players and the community
+            def deal_cards():
+                for i in range(2):
+                    player_hand.append(deck.pop())
+                    computer_hand.append(deck.pop())
+
+                for i in range(5):
+                    community_cards.append(deck.pop())
+                community_cards_str = ', '.join(
+                [f'{card[0]} {card[1]}' for card in community_cards])
+                print(f'Community hand: {community_cards_str}')
+                print(f'\nPlayer hand: {player_hand}\nCustomer hand: {computer_hand}')
+
+            # Define a function to determine the winner
+            def determine_winner():
+            # Create a list of all possible hands, in descending order of strength
+                possible_hands = [
+                    'Royal Flush',
+                    'Straight Flush',
+                    'Four of a Kind',
+                    'Full House',
+                    'Flush',
+                    'Straight',
+                    'Three of a Kind',
+                    'Two Pair',
+                    'Pair',
+                    'High Card'
+                ]
+
+                # Evaluate the player's hand
+                player_score = evaluate_hand(player_hand + community_cards)
+
+                # Evaluate the computer's hand
+                computer_score = evaluate_hand(computer_hand + community_cards)
+
+                # Determine the winner
+                if player_score > computer_score:
+                    print("\nYou win! :)")
+                    for hand in possible_hands:
+                        if player_score == hand:
+                            print(f"\nYour hand: {hand}")
+                            break
+                elif player_score < computer_score:
+                    print("\nThe Customer Wins :(")
+                    for hand in possible_hands:
+                        if computer_score == hand:
+                            print(f"\nCustomer hand: {hand}")
+                            break
+                else:
+                    print("\nIt's a tie :/")
+
+            # Main function
+            def play_game():
+                create_deck()
+                shuffle_deck()
+                deal_cards()
+                determine_winner()
+
+            # Start the game
+            play_game()
+
+        def blackjack():
+            # Define a list of suits
+            suits = ["Hearts", "Spades", "Clubs", "Diamonds"]
+
+            # Define a list of ranks
+            ranks = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"]
+
+            # Generate a deck of cards as a list of tuples, with each tuple containing a rank and a suit
+            deck = [(rank, suit) for rank in ranks for suit in suits]
+
+            # Import the random module to shuffle the deck
+            import random
+
+            # Shuffle the deck
+            random.shuffle(deck)
+
+            # Define a dictionary to map ranks to numerical values
+            rank_values = {"Ace": 1, "Two": 2, "Three": 3, "Four": 4, "Five": 5, "Six": 6, "Seven": 7, "Eight": 8, "Nine": 9, "Ten": 10, "Jack": 10, "Queen": 10, "King": 10}
+
+            # Define a function to deal a card to a player
+            def deal_card(hand):
+                # Draw a card from the deck and append it to the player's hand
+                hand.append(deck.pop(0))
+
+            # Define a function to calculate the total value of a player's hand
+            def calculate_hand_total(hand):
+                # Initialize a variable to store the total value of the hand
+                total = 0
+
+                # Iterate over the cards in the hand
+                for card in hand:
+                    # Add the value of the card to the total
+                    total += rank_values[card[0]]
+
+                # Check if the hand contains an Ace
+                if any(card[0] == "Ace" for card in hand):
+                    # If so, check if adding 10 to the total would not bust the hand (total > 11)
+                    if total + 10 <= 21:
+                        # If not, add 10 to the total
+                        total += 10
+
+                # Return the total value of the hand
+                return total
+
+            # Define a function to play a game of Blackjack
+            def play_blackjack():
+                # Deal the player and dealer two cards each
+                player_hand = [deck.pop(0), deck.pop(0)]
+                dealer_hand = [deck.pop(0), deck.pop(0)]
+
+                # Print the player's hand
+                print("")
+
+                    # Calculate the total value of the player's hand
+                player_total = calculate_hand_total(player_hand)
+
+                # Print the total value of the player's hand
+                print("Player's hand:", player_hand, "Total:", player_total)
+
+                # Check if the player has 21 (Blackjack)
+                if player_total == 21:
+                    # If so, end the game and print a message
+                    print("Player has Blackjack! Player wins.")
+                    return
+
+                # Prompt the player to hit or stand
+                while True:
+                    # Get the player's decision
+                    decision = input("Hit or stand? ")
+
+                    # Check if the player decided to hit
+                    if decision.lower() == "hit":
+                        # If so, deal a card to the player
+                        print('Player draws a card...')
+                        deal_card(player_hand)
+
+                        # Calculate the total value of the player's hand
+                        player_total = calculate_hand_total(player_hand)
+
+                        # Print the player's hand
+                        print("Player's hand:", player_hand, "Total:", player_total)
+
+                        # Check if the player has busted (total > 21)
+                        if player_total > 21:
+                            # If so, end the game and print a message
+                                print("Player has busted! Dealer wins.")
+                    # If the player decided to stand, break out of the loop
+                    else:
+                        break
+
+                # Calculate the total value of the dealer's hand
+                dealer_total = calculate_hand_total(dealer_hand)
+
+                # Print the dealer's hand
+                print("Dealer's hand:", dealer_hand, "Total:", dealer_total)
+
+                # Check if the dealer has 21 (Blackjack)
+                if dealer_total == 21:
+                    # If so, end the game and print a message
+                    print("Dealer has Blackjack! Dealer wins.")
+                    return
+
+                # While the dealer's hand is less than 17, hit
+                while dealer_total < 17:
+                    # Deal a card to the dealer
+                    print('Dealer draws a card...')
+                    deal_card(dealer_hand)
+
+                    # Calculate the total value of the dealer's hand
+                    dealer_total = calculate_hand_total(dealer_hand)
+
+                    # Print the dealer's hand
+                    print("Dealer's hand:", dealer_hand, "Total:", dealer_total)
+
+                    # Check if the dealer has busted (total > 21)
+                    if dealer_total > 21:
+                        # If so, end the game and print a message
+                        print("Dealer has busted! Player wins.")
+                        return
+
+                # Compare the player's and dealer's totals
+                if player_total > dealer_total:
+                    # If the player's total is greater, the player wins
+                    print("Player wins.")
+                elif player_total < dealer_total:
+                    # If the dealer's total is greater, the dealer wins
+                    print("Dealer wins.")
+                else:
+                    # If the totals are equal, the game is a push
+                    print("Push.")
+
+            # Play a game of Blackjack
+            play_blackjack()
         # The story objects that can be mixed and matched depending on the storyline and player decisions.
         def story():
             new_rank = '' # Sets the empty rank for the empire_recruitment scenario.
@@ -541,6 +815,69 @@ jgs .-=-.    ) -.
                     input(
                         f'{bulletpoint2}The number you entered is not a valid item in the vendor\'s inventory. Please try again.')
                     show_vendor_menu()
+
+            # The Hidden City
+            def hidden_city():
+                city_ans = input(f'{bulletpoint}As you wander through the streets of the city called “The City of the Rising Sun”, you come across a small shop selling trinkets and souvenirs. You decide to take a look and see if there is anything interesting.\nAs you browse the shelves, a friendly old man approaches you and says that this city is a safe haven for those who seek refuge from the troubles of the outside world. It is hidden from the eyes of the Red Dragon Empire and the ice kingdom, and it is a place of harmony. Do you ask him more about the Red Dragon Empire and the Ice Kingdom?')
+                if city_ans.strip().lower() in yes:
+                    city_ans2 = input(f'{bulletpoint}The Red Dragon Empire is a vast and powerful kingdom ruled by a cruel and tyrannical emperor. It is a land of war and conquest, where the strong prey on the weak and the weak must fight to survive. The ice kingdom, on the other hand, is a land of mystery and magic. It is ruled by a wise and benevolent queen, who uses her powers to protect her people and keep the peace. Do you want to hear more?')
+                    if city_ans2.strip().lower() in yes:
+                        city_ans3 = input(f'{bulletpoint2}The old man nods and begins to tell you the history of the Red Dragon Empire. He explains that, long ago, the empire was ruled by a peaceful and benevolent ruler who was loved and respected by his people. But one day, a cruel and ambitious emperor overthrew the peaceful ruler and seized control of the empire.\nUnder the emperor\'s rule, the Red Dragon Empire became a land of conquest and aggression. The emperor sought to expand his power and territory, and he set his sights on the Ice Kingdom.\nBut the Ice Kingdom was a land of magic, and its queen was a powerful sorceress. She used her powers to protect her kingdom and repel the emperor\'s armies. Despite his best efforts, the emperor was unable to conquer the Ice Kingdom, and the two kingdoms have been in a state of cold war ever since.\nThe old man concludes his story by saying that the City of the Rising Sun is a safe haven for those who seek refuge from the conflicts and dangers of the outside world. He offers to show you around the city, if you are interested. What do you say?\n')
+                        if city_ans3.strip().lower() in yes:
+                            menu()
+                            #assassins_guild()
+                        else:
+                            menu()
+                            ice_kingdom()
+                    else:
+                        menu()
+                        ice_kingdom()
+                else:
+                    menu()
+                    poker_ans = input(f'{bulletpoint}A customer nearby walks up to you and asks if you would like to play poker?')
+                    while poker_ans.strip().lower() in yes:
+                        poker()
+                        poker_ans = input(f'{bulletpoint}Play another hand of poker?')
+                    else:
+                        blackjack_ans = input(f'{bulletpoint}How about blackjack?')
+                        while blackjack_ans.strip().lower() in yes:
+                            blackjack()
+                            blackjack_ans = input(
+                                f'{bulletpoint}Play another round of blackjack?')
+                        else:
+                            print(f'{bulletpoint2}The customer says take care!')
+                            ice_kingdom()
+
+            #Get Drunk
+            def get_drunk():
+                drink_ans = input(
+                    f'{bulletpoint}You are sitting at a table in a local tavern. The tavern bartender asks you if you would like a drink. Do you take it?')
+                if drink_ans.lower().strip() in yes:
+                    first_drink_ans = input(
+                        f'{bulletpoint}After the first drink, you feel a warm, relaxed sensation in your chest and limbs, and your inhibitions may start to loosen. You find yourself smiling...\nThe bartender asks if you would like second drink, what do you say?')
+                    if first_drink_ans.lower().strip() in yes:
+                        second_drink_ans = input(
+                            f'{bulletpoint}You feel slightly lightheaded and dizzy, and your movements may become slightly more exaggerated and uncoordinated. Suddenly the bartender says they have a special drink for you. It\'s a rare and potent spirit from the Ice kingdom. Are you brave enough to try it')
+                        if second_drink_ans.lower().strip() in yes:
+                            input(
+                                f'{bulletpoint}You are tempted by the offer. You have always been curious about the ice kingdom and its exotic liquors. After much hesitation, you decide to take the third drink. You raise the glass to your lips and take a sip. The liquid is fiery and sweet, and it burns all the way down your throat\nAs you drink, you notice that the other customers in the tavern are starting to get rowdy. Suddenly, one of them bumps into you and spills your drink.\nBefore you know it, you are locked in a fierce bar fight with the other customer. You throw punches and dodge blows, feeling reckless and invincible.\nBut your drunken state makes you slow and clumsy, and soon you are on the receiving end of a beating. You stumble and fall to the ground, feeling dazed and bruised.\nJust as you are about to black out, you hear a loud noise and feel yourself being lifted off the ground. You open your eyes and see that you are being carried away on a cart by a group of good samaritans.')
+                            menu()
+                            hidden_city()
+                        else:
+                            input(
+                                f'{bulletpoint2}you are already feeling a bit drunk and you know that you should probably stop now before you get into trouble. You decide to travel to a hidden city that you discovered after chatting with a nearby customer.')
+                            menu()
+                            hidden_city()
+                    else:
+                        input(
+                            f'{bulletpoint2}you are already feeling a bit tipsy and you know that you should probably stop now before you get into trouble. You decide to travel to a hidden city that you discovered after chatting with a nearby customer.')
+                        menu()
+                        hidden_city()
+                else:
+                    input(
+                        f'{bulletpoint2}you know that you shouldn\'t drink and pass on the offer. You decide to travel to a hidden city that you discovered after chatting with a nearby customer.')
+                    menu()
+                    hidden_city()
             #Ice Kingdom
             def ice_kingdom():
                 input(f'{bulletpoint2}\nAfter many days of travel, you finally arrive at the gates of the ice kingdom.\nThe guard stops you and asks for your license to pass. Since you don\'t have one, the guard says she can let you through if you answer her riddle correctly...\n')
@@ -2324,7 +2661,8 @@ _,'    \_>\_/    ',_
                     menu()
                     the_secret()
                 else:
-                    pass
+                    menu()
+                    get_drunk()
 
             # Bestfriend
 
