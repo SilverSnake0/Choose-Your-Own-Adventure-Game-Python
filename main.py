@@ -110,6 +110,7 @@ def adventure_game():
         boxer = Monster('Boxer', 150, 60, 150)
         leviathan = Monster('Leviathan', 999, 99, 200)
         phoenix = Monster('Phoenix', 350, 90, 200)
+        minotaur = Monster('Minotaur', 150, 50, 85)
         
         # Function that 1. Checks if the monster has died, 2. Checks if person has died and then restarts/exits game
         def check_health(person):
@@ -540,10 +541,156 @@ jgs .-=-.    ) -.
                     input(
                         f'{bulletpoint2}The number you entered is not a valid item in the vendor\'s inventory. Please try again.')
                     show_vendor_menu()
+            #Ice Kingdom
+            def ice_kingdom():
+                input(f'{bulletpoint2}\nAfter many days of travel, you finally arrive at the gates of the ice kingdom.\nThe guard stops you and asks for your license to pass. Since you don\'t have one, the guard says she can let you through if you answer her riddle correctly...\n')
+                # List of riddles
+                riddles = [
+                    "\nI'm cold and white, and I'm found in the sky. I'm used for sports, and I'm thrown in the air. What am I?",
+                    "\nI'm cold and hard, and I sparkle and shine. I'm used to make ice, and I taste like wine. What am I?",
+                    "\nI'm cold and slippery, and I slide on the ground. I'm used for fun, and I make a funny sound. What am I?",
+                    "\nI'm cold and wet, and I come from a tap. I'm used to clean, and I'm good for a nap. What am I?",
+                    "\nI'm cold and frozen, and I hang from the sky. I'm used for drinks, and I make them cold and dry. What am I?",
+                    "\nI'm cold and frozen, and I'm found in a cave. I'm used for drinks, and I'm smooth on the tongue. What am I?",
+                    "\nI'm cold and crisp, and I'm good with a beer. I'm used to snack, and I'm salty and clear. What am I?",
+                    "\nI'm cold and strong, and I keep you safe at night. I'm used for defense, and I'm made of metal and light. What am I?",
+                    "\nI'm cold and soft, and I'm found on your head. I'm used for warmth, and I'm made of fur and thread. What am I?",
+                    "\nI'm cold and clear, and I'm frozen in time. I'm used for art, and I make things shine. What am I?"
+                ]
+
+                # List of answers
+                answers = [
+                    "Snowball",
+                    "Salt",
+                    "Sled",
+                    "Water",
+                    "Ice Cubes",
+                    "Ice Cream",
+                    "Pretzel",
+                    "Shield",
+                    "Hat",
+                    "Ice Sculpture"
+                ]
+
+                # Function to ask a random riddle and check the answer
+                def askRiddle():
+                    # Select a random riddle
+                    index = random.randint(0, len(riddles) - 1)
+                    riddle = riddles[index]
+                    answer = answers[index]
+
+                    # Ask the riddle and get the user's answer
+                    user_answer = input(f'{bulletpoint}Type "help" for a list of potential answers\n{riddle}\nWhat is your answer: ')
+
+                    # Check if the user's answer is correct
+                    if user_answer.lower() == answer.lower():
+                        print(f'{bulletpoint2}Correct! You may pass!')
+                        pass
+                    elif user_answer.lower() == 'help':
+                        print(f'{bulletpoint2}Potential Answers:')
+                        for i in answers:
+                            print(i)
+                        askRiddle()
+                    else:
+                        print(
+                            f'{bulletpoint2}Incorrect, you may not pass until you answer a riddle correctly.')
+                        askRiddle()
+                askRiddle()
+                input(f'\n{bulletpoint2}The ice kingdom is a breathtaking sight. The city is built of shining white marble and crystal, and it glows with a soft, ethereal light. The streets are filled with people of all shapes and sizes, all dressed in beautiful and colorful clothes.\nAs you walk through the city, you are amazed by the sights and sounds around you. You see snow-white horses pulling elegant carriages, and you hear the soothing melodies of harps and flutes. You feel a sense of peace and tranquility that you have never experienced before.\nYou decide to explore the city further and discover its hidden secrets. You visit the palace of the queen, who greets you with kindness and generosity. You learn about the history and culture of the ice kingdom, and you marvel at the wonders of its magical technology.')
+                go_sailing = input(f'\n{bulletpoint}You see an opportunity to hike a ride on a ship sailing over to the Red Dragon Empire, do you go?')
+                if go_sailing.strip().lower() in yes:
+                    menu()
+                    trade_mission()
+                else:
+                    pass
+                # Only accesses the vendor lady scenario if it's been turned on.
+                if vendor_lady_object == 1:
+                    vendor_lady()
+                else:
+                    input(f'\n{bulletpoint2}As you stand in the Ice Kingdom, you gaze upon the majestic high mountain next to it. The mountain is covered in snow and ice, and it towers above the surrounding landscape.\nYou feel a sudden urge to climb to the highest peak of the mountain. You have never done anything like this before, but you are excited by the challenge and the thrill of the climb.\nYou gather your gear and supplies, and you set off on your journey. You trudge through the snow, making your way up the mountain. The air is cold and thin, and you feel the strain on your body as you climb higher and higher.\nAs you reach the higher elevations, you encounter treacherous ice and snow. You must use your climbing skills and your determination to overcome these obstacles.\nFinally, after many hours of grueling climb, you reach the summit of the mountain. You are exhausted and exhilarated at the same time. You look out at the stunning view from the top of the mountain, and you feel a sense of accomplishment and pride.')
+                    mountain_secret()
+
+            # The Forest
+            def the_forest():
+                forest_ans = input(f'{bulletpoint}\nAs you travel through the mysterious forest, you are struck by its beauty and serenity. The trees are tall and majestic, and the air is fresh and clean. You feel a sense of peace and calm as you walk along the forest path.\nBut you also feel a sense of curiosity and wonder. The forest is filled with strange and exotic plants and animals, and you have never seen anything like them before. You are amazed by the diversity and beauty of the forest, and you cannot help but explore and learn more.\nSuddenly, you come across a fork in the path. One path leads to the left, and the other to the right. You are unsure which way to go, and you stop to think. If you choose to take the path on the left, you continue on your journey through the forest and pass by a pond. If you choose to take the path on the right, you pass through a cave. Do you choose the pond route?')
+                if forest_ans.lower().strip() in yes:
+                    input(f'{bulletpoint2}You come across a small pond, where you see a family of ducks swimming and playing. You are charmed by their playful antics, and you cannot help but watch them for a while. You eventually come across an ancient waterfall. You are struck by its beauty and majesty, and you cannot help but admire it for a while. You are grateful for the journey that brought you to this beautiful place.')
+                    menu()
+                else:
+                    damage = random.randint(3, 20)
+                    hero.health -= damage
+                    input(f'{bulletpoint2}You come across a dark and foreboding cave, and you feel a sense of danger and excitement. You decide to enter the cave, and you find yourself in a beautiful and hidden underground world. You are amazed by the beauty and wonder of this hidden place, and you cannot help but explore but you accidently trip and cut yourself and take {damage} damage to your health. You decide to get back on track and eventually come across an ancient waterfall. You are struck by its beauty and majesty, and you cannot help but admire it for a while. You are grateful for the journey that brought you to this beautiful place.')
+                    menu()
+                
+                # Ancient Waterfall
+                input(f'{bulletpoint2}The waterfall is breathtaking, with its powerful and majestic flow of water. You are drawn to the waterfall and you approach it with awe and wonder. As you get closer to the waterfall, you notice ancient markings on the rocks around it. The markings are faint and worn, but you can still make out the symbols and images of an ancient civilization.\nYou are intrigued by the ancient markings, and you decide to study and decipher them. You spend hours examining the markings and trying to understand their meaning.\nYou learn that the markings are the remnants of an ancient and advanced civilization that once existed in the forest. The civilization was wiped from existence by a great disaster, and only the markings on the rocks remain to tell its story.\nYou are filled with wonder and amazement by your discovery. You feel a sense of connection to the ancient civilization, and appreciate the opportunity to learn about its history and culture.')
+                waterfall_monster = input(f'{bulletpoint}you hear a deep and growling voice. You turn a corner, and you see a monstrous creature standing before you. It is a Minotaur, a creature with the body of a man and the head of a bull. The Minotaur roars at you, and charges towards you. You are terrified, but you also feel a sense of excitement and adrenaline. Do you fight this monster?')
+                if waterfall_monster.lower().strip() in yes:
+                    # Adds monster health if it has already been killed.
+                    add_health(minotaur)
+                    battle(hero, minotaur, 'lowers its head',
+                           'pants heavily', 'raises horns', 'charges with horns')
+                    random_health_gain = random.randint(10, 30)
+                    print(
+                        f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
+                    hero.health += random_health_gain
+                    check_health(hero)
+                    add_money(50, 150)
+                    menu()
+                    input(f'\n{bulletpoint2}After a long and fierce battle, you finally manage to defeat the Minotaur. The creature falls to the ground, and you stand victorious. You are exhausted and battered, but you are also proud and triumphant.')
+                    input(f'\n{bulletpoint}As you leave the ancient waterfall, you continue on your journey through the forest. The sun is shining, and the birds are singing, and you feel a sense of joy and adventure.\nBut as you walk, you notice that the air is getting colder and colder. The trees are starting to look more and more frosted, and the ground is covered in snow. You realize that you are entering a new and different part of the forest.\nAs you continue on your journey, you see a vast and frozen landscape in front of you. The snow is deep and white, and the ice is sparkling and blue. You see tall and majestic mountains in the distance, and you feel a sense of awe and wonder.\nYou realize that you have entered the ice kingdom. You are amazed by the beauty and majesty of this frozen land, and you cannot help but explore and learn more.\nYou continue on your journey, marveling at the ice sculptures and frozen lakes. You see animals that you have never seen before, and you hear music and laughter from hidden villages.')
+                    ice_kingdom()
+                else:
+                    input(f'\n{bulletpoint}As you leave the ancient waterfall, you continue on your journey through the forest. The sun is shining, and the birds are singing, and you feel a sense of joy and adventure.\nBut as you walk, you notice that the air is getting colder and colder. The trees are starting to look more and more frosted, and the ground is covered in snow. You realize that you are entering a new and different part of the forest.\nAs you continue on your journey, you see a vast and frozen landscape in front of you. The snow is deep and white, and the ice is sparkling and blue. You see tall and majestic mountains in the distance, and you feel a sense of awe and wonder.\nYou realize that you have entered the ice kingdom. You are amazed by the beauty and majesty of this frozen land, and you cannot help but explore and learn more.\nYou continue on your journey, marveling at the ice sculptures and frozen lakes. You see animals that you have never seen before, and you hear music and laughter from hidden villages.')
+                    ice_kingdom()
+                
+            def the_marriage():
+                nonlocal current_heir
+                nonlocal new_rank
+                marriage_ans = input(f'\n{bulletpoint}As you walk down the castle hallway of the Red Dragon empire, you see a noble standing by a window, looking out at the sunset. You are immediately drawn to her beauty and grace. She turns to you and smiles, and you feel a spark of attraction.\nYou introduce yourself and think she is a noble from a nearby kingdom. You chat for a while, and you find yourself drawn to her intelligence and wit.\nAs the days pass, you spend more and more time together. You go for walks in the castle gardens, and share meals in the great hall. You find yourself falling more and more in love with her, and you know that she feels the same way.\nOne evening, as you sit by the fire in the great hall, She turns to you and says, "I have never felt this way about anyone before. I think I am falling in love with you."\nYou are overjoyed, and you know that you feel the same way. You take her hand... Do you decide to propose marriage to her?')
+                if marriage_ans.strip().lower() in yes:
+                    input(f'\n{bulletpoint2}You ask her if she will do you the honor of becoming your wife? She looks at you with tears in her eyes, and says, yes, she will marry you. And so, you become engaged, and begin planning for your future together. You know that no matter what challenges you face, you will face them together, as husband and wife. But little did you know, The noble was actually the Red Dragon emperor\'s daughter. You had fallen in love with the emperor\'s daughter without even realizing it. As you plan your future together, you must decide whether you are willing to marry into the royal family and face the challenges that come with it.')
+                    input(f'\n{bulletpoint2}the emperor asks you to marry his daughter, a beautiful and noble young woman. You are hesitant at first, but you are drawn to the princess and you decide to accept the emperor\'s offer.\nYou marry the princess in a grand and lavish ceremony, attended by the nobles and dignitaries of the empire. You are given a title and a position of power and influence in the empire, and you are now a respected and honored member of the royal family.\nAs the husband of the princess, you live a life of luxury and privilege. You are surrounded by wealth and beauty, and you have everything you could ever want. But you also face challenges and dangers. The nobles and courtiers of the empire are jealous and resentful of your position, and they plot and scheme against you. You must be careful and cautious, and always be on your guard.\n Despite the challenges, you are happy and content in your new life. You love your wife and you are grateful for the opportunities and experiences that the empire has given you. You vow to always protect and serve the empire and its people, and to make your marriage a success.')
+                    current_heir = hero_name.title()
+                    input(
+                        f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
+                    menu()
+                    mysterious_monk()
+                else:
+                    input(f'\n{bulletpoint2}You become a skilled and accomplished warrior, and you earn the respect and admiration of the people of the empire. You become a favorite of the emperor, who rewards you with wealth and privilege.\nThe emperor is impressed by your skills and loyalty, and he offers you a position as his right-hand man. You are hesitant at first, but you decide to accept the emperor\'s offer.\nAs the right-hand man to the emperor, you are given a position of great power and influence in the empire. You are responsible for advising the emperor and carrying out his orders. You are also tasked with protecting the emperor and the empire from threats and dangers.\nYour new position is challenging and demanding, but also rewarding and fulfilling. You use your skills and knowledge to serve the emperor and the empire, and you are praised and rewarded for your efforts.\nHowever, you also face challenges and dangers. The nobles and courtiers of the empire are jealous and resentful of your position, and they plot and scheme against you. You must be careful and cautious, and always be on your guard.\nDespite the challenges, you are happy and content in your new life. You are proud to serve the emperor and the empire, and you are grateful for the opportunities and experiences that the empire has given you. You vow to always protect and serve the empire and its people, and to make your new position a success.')
+                    new_rank = ranks[-1]
+                    input(
+                        f'\n{bulletpoint2}\nCongratulations, on reaching the end! Try to discover other secret endings and possibilities...')
+                    menu()
+                    mysterious_monk()
+
+            def kill_best_friend():
+                input(f'\n{bulletpoint2}As you walk up to your best friend\'s house, you feel a heavy weight in your chest. You have never felt so torn in your life. On the one hand, you are loyal to the Red Dragon empire and you don\'t want to disappoint them. On the other hand, you cannot imagine a world without your best friend. You have known him for so long, and you have been through so much together.\nYou knock on the door, and your friend answers. He looks happy to see you, as always. But as you step inside, you know that you have to do what the empire has asked of you. You have to kill him.\nYou try to convince yourself that it is for the greater good, that the empire needs you to do this in order to maintain its power and control. But deep down, you know that it is wrong.\nAs you sit down in the living room and start to chat, you can feel your heart pounding in your chest. You know that you have to act fast, before you lose your nerve. You reach for your concealed knife, and before your friend knows what is happening, you plunge it into his chest.\nThe shock and betrayal on his face is something that you will never forget. You watch as the light in his eyes fades away, and you know that you have done the unthinkable. You have killed your best friend, and there is no going back.\nYou flee the scene, knowing that you have to report back to the empire and face the consequences of your actions. You have betrayed your friend and your own morals, and you know that you will have to live with that guilt for the rest of your life. ')
+                add_money(50, 200)
+                bf_ans = input(f'\n{bulletpoint}After the deed was done you travel into the castle to collect your earnings. You meet an attractive noble inside the castle hallway, but you also see a hidden entrance in the hallway. Do you decide to speak with the noble?')
+                if bf_ans.strip().lower() in yes:
+                    menu()
+                    the_marriage()
+                else:
+                    menu()
+                    passageway()
 
             def secret_job():
-                input(
-                    f'{bulletpoint2}A hooded man approached you and said the empire needs your skills in handling a special task. ')
+                kill_friend_ans = input(
+                    f'\n{bulletpoint}You are standing in front of the Red Dragon Empire\'s palace, staring at the imposing stone walls and the flags fluttering in the wind. Suddenly, a hooded messenger approaches you and hands you a scroll. The Red Dragon Empire has asked you to kill your best friend. You are horrified by the empire\'s request. You cannot imagine a world without your best friend. Do you kill your best friend?')
+                if kill_friend_ans.strip().lower() in yes:
+                    menu()
+                    kill_best_friend()
+                else:
+                    marriage_ans = input(f'\n{bulletpoint}The hooded messenger says very well, The empire has offered you an alternative. If you agree to marry one of the empire\'s nobles, your friend will be spared. You are torn by the decision. On the one hand, you do not want to marry someone you do not love. On the other hand, you cannot bear the thought of losing your best friend. Do you decide to get married to this noble?')
+                    if marriage_ans.strip().lower() in yes:
+                        input(f'\n{bulletpoint2}\nAfter much contemplation, you decide that your friendship is more important than your own happiness. You agree to marry the noble and save your best friend\'s life.')
+                        menu()
+                        the_marriage()
+                    else:
+                        input(f'\n{bulletpoint2}So you don\'t want to kill your best friend and you don\'t want to marry a noble. The empire has instead forced you to go on a task to destroy a mysterious secret. The hooded messenger has guards escort you in a cart. You look next to you and see a mysterious monk as one of the passengers who is joining you on this task.')
+                        menu()
+                        the_secret()
 
             # The Trade Mission
             def trade_mission():
@@ -587,7 +734,7 @@ jgs .-=-.    ) -.
   ⛆⛆⛆⛆⛆⛆🗲⛆⛆⛆    ⛆⛆⛆⛆🗲⛆⛆⛆⛆     ⛆⛆⛆⛆🗲⛆ ⛆⛆⛆⛆ '''
 
                 ship_castle = '              🌳🌳⛰⛰⁣⛰⁣🏰⛰⛰⛰🌳🌳                    '
-                ice_castle = '              🎄🎄⛰⛰⁣⛰⁣🏰⛰⛰⛰🎄🎄                    '
+                snow_castle = '              🎄🎄⛰⛰⁣⛰⁣🏰⛰⛰⛰🎄🎄                    '
                 ship_island = '🌊⁣🌊🌊🌊🌊🌊⁣🌊🌊🏝⁣🏝🏝🏝🏝🌊⁣🌊🌊🌊🌊🌊⁣🌊🌊🌊⁣🌊🌊🌊'
                 ship_trees = '🌊🌊🌊🌊🌊🌊🌊🌊🌳🌳🌳🌳🌳🌳🌊🌊⁣🌊🌊🌊🌊🌊⁣🌊🌊'
                 xmas_trees = '🌊🌊🌊🌊🌊🌊🌊🌊🎄🎄🎄🎄🎄🌊🌊⁣🌊🌊🌊🌊🌊⁣🌊🌊'
@@ -642,9 +789,9 @@ jgs .-=-.    ) -.
                 sea_start = [clouds1, ' '*36 + '༌ ⭒༌', ship_castle, ship_trees, ship_boat,
                             ship_ocean, ship_ocean, ship_ocean]
 
-                ice_castle = [night4, ' '*20 + '༌ ⭒༌', ice_castle, xmas_trees, ship_boat,
+                ice_castle = [night4, ' '*20 + '༌ ⭒༌', snow_castle, xmas_trees, ship_boat,
                             ship_ocean, ship_ocean, ship_ocean]
-                ship_surf = [night4, ' '*20 + '༌ ⭒༌', ice_castle, xmas_trees, ship_surf,
+                ship_surf = [night4, ' '*20 + '༌ ⭒༌', snow_castle, xmas_trees, ship_surf,
                             ship_ocean, ship_ocean, ship_ocean]
 
                 sea_top_left = [clouds2, ' '*34 + '༌ ⭒༌', ship_boat, ship_fish,
@@ -756,7 +903,7 @@ jgs .-=-.    ) -.
                 new_requirement = random.choice(trade_requirements)
                 new_requirement2 = random.choice(trade_requirements)
                 input(
-                    f'{bulletpoint2}You stop by the trade port near the shipyard. The empire needs one of each of these two items ({new_requirement} and {new_requirement2}). If you can acquire them on your journey, you shall be awarded. Note that these items may change due to demand, so it\'s best to stock up on local items.')
+                    f'{bulletpoint2}You stop by the trade port near the shipyard. The trader needs one of each of these two items ({new_requirement} and {new_requirement2}). If you can acquire them on your journey, you shall be awarded. Note that these items may change due to demand, so it\'s best to stock up on local items.')
                 if hero_land_items[new_requirement] > 0 and hero_land_items[new_requirement2] > 0: # Checks if hero's land item stock is more than 0 for the two item requirements.
                     hand_item = input(
                         f'{bulletpoint}It looks like you already have these items in your inventory! Would you like to hand them over?')
@@ -767,14 +914,16 @@ jgs .-=-.    ) -.
                             f'{bulletpoint2}You\'ve made the trade successfully!')
                         input(
                             f'{bulletpoint2}{hero_name}\'s Current Trade Items Held: {hero_land_items}')
-                        input(f'{bulletpoint2}The empire thanks you for your service.')
+                        input(f'{bulletpoint2}The trader thanks you for your help and gives you a nice chunk of change!')
+                        add_money(200, 600)
                     else:
                         pass
                 set_sail = input(f'{bulletpoint}Would you like to set sail?')
                 if set_sail.strip().lower() in yes:
                     pass
                 else:
-                    print(f'You decided instead to do...')
+                    input(f'{bulletpoint2}As you leave the bustling trade port and set off on the road back home, you feel a sense of relief and excitement. You have been away for many weeks, and you are eager to see your loved ones again. As you travel down the road, you notice a beggar sitting on the side of the road.')
+                    beggar()
 
                 # The below code displays a ship for the player to travel between two different kingdoms.
                 while anchor:
@@ -810,7 +959,7 @@ jgs .-=-.    ) -.
                                 print(
                                     f'{bulletpoint2}You reached the destination!')
                                 anchor = False
-                                trade_mission()
+                                beggar()
                             else:
                                 current_position = sea_dark
                         elif current_position == sea_top_left: # Current position is the current scene.
@@ -1016,6 +1165,7 @@ jgs .-=-.    ) -.
                                     f'{bulletpoint2}You reached the destination!')
                                 anchor = False # Ends the while loop
                                 add_health(leviathan) # Resets leviathan monster health if it has already been killed
+                                ice_kingdom()
                             elif command == 'south':
                                 current_position = sea_left_8
                             else:
@@ -1083,8 +1233,8 @@ jgs .-=-.    ) -.
                 nonlocal new_rank
                 # list of random ranks that can be offered to the player.
                 ranks = [
-                    'Stable sweep', 'Swordsman', 'Axeman', 'Spearman', 'Archer', 'Cavalry',
-                    'Lieutenant', 'Captain', 'Knight', 'Commander', 'Baron', 'Viscount', 'Earl', 'Marquis', 'Duke'
+                    'Stable sweep', 'Swordsman', 'Axeman', 'Spearman', 'Archer', 'Cavalry', 'Lieutenant', 'Captain', 
+                    'Knight', 'Commander', 'Baron', 'Viscount', 'Earl', 'Marquis', 'Duke', 'Right Hand'
                 ]
                 empire_recruitment_ans = input(f'\n{bulletpoint} An old guard walks up to you and says they\'re seeking out some new blood into their ranks. Would you be interested in joining the Red Dragon Military?')
                 if new_rank in ranks: # Checks if the player already has a rank in the ranks list.
@@ -1158,6 +1308,7 @@ jgs .-=-.    ) -.
                     check_health(hero)
                     add_money(50, 200)
                     menu()
+                    secret_job()
 
                 else:
                     input(f'\n{bulletpoint2}You decided to prove your loyalty instead by taking on an imperial trade assignment and sail the seas. You were tasked with a mission to locate Sea Storm Island in the west and trade some imperial goods. The emperor will also be joining on the trip so it\'s best to showcase your ability to navigate the seas!')
@@ -1173,8 +1324,7 @@ jgs .-=-.    ) -.
                     menu()
                 else:
                     print('You decided to take the forest route.')
-                    pass
-                    #the_forest()
+                    the_forest()
 
             # Sand Monster Battle
                 add_health(sandworm) # Adds monster health if it has already been killed.
@@ -2160,7 +2310,7 @@ _,'    \_>\_/    ',_
                     maze()
                     
                 else:
-                    input(f'\n{bulletpoint2}You walk along the streets to find a job, but no one you encountered would hire someone with a missing {body_part}. You then come across a mysterious monk.')
+                    input(f'\n{bulletpoint2}You walk along the streets to find a job, but no one you encountered would hire you. You then come across a mysterious monk.')
                     menu()
                     mysterious_monk()
 
@@ -2223,24 +2373,24 @@ _,'    \_>\_/    ',_
                                     print(
                                         f'{bulletpoint2}You were so close! Your best friend says you can think about this job another time.')
                                     menu()
-                                    # Add The secret() or this will lead back to the vendor menu
+                                    secret_job()
                             else:
                                 print(
                                     f'{bulletpoint2}Nice try! Your best friend says you can think about this job another time.')
                                 menu()
-                                # Add The secret() or this will lead back to the vendor menu
+                                secret_job()
                         else:
                             print(f'{bulletpoint2}Perhaps listen carefully! Your best friend says you can think about this job another time.')
                             menu()
-                            # Add The secret() or this will lead back to the vendor menu
+                            secret_job()
                     else:
                         print(f'{bulletpoint2}You\'re not listening! Your best friend says you can think about this job another time.')
                         menu()
-                        # Add The secret() or this will lead back to the vendor menu
+                        secret_job()
                 else:
                     input(f'\n{bulletpoint2}Perhaps next time then. Your best friend says it\'s getting late and we should leave before the nightwolves start roaming the streets. As you leave a hooded person with an insignia of the red dragon empire grabbed you in the darkness... ')
                     menu()
-                    # Add The secret() or this will lead back to the vendor_lady
+                    secret_job()
 
             # Vendor Lady
             def vendor_lady():
