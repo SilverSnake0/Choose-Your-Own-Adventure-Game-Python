@@ -112,6 +112,7 @@ def adventure_game():
         minotaur = Monster('Minotaur', 150, 50, 85)
         beggarbattle = Monster('The Beggar', 50, 10, 20)
         emperorbattle = Monster('The Emperor', 50, 10, 30)
+        cornstalker = Monster('Cornstalker', 200, 80, 180)
         
         # Function that 1. Checks if the monster has died, 2. Checks if person has died and then restarts/exits game
         def check_health(person):
@@ -754,6 +755,7 @@ jgs .-=-.    ) -.
             current_heir = 'the beggar..'
             emperor_life = 'alive'
             noble_life = 'alive'
+            thugs_life = 'alive'
             coin_guess_correctly = False
 
             #Vendor Lady
@@ -821,6 +823,33 @@ jgs .-=-.    ) -.
                         f'{bulletpoint2}The number you entered is not a valid item in the vendor\'s inventory. Please try again.')
                     show_vendor_menu()
 
+            # Monster Hunter Guild
+            def monster_hunter_guild():
+                input(f'{bulletpoint2}\nThe leader of the group, a fierce-looking woman with a scar across her face, sizes you up with a critical eye. She seems impressed by your determination and skill, and she agrees to take you on as a member of the guild.\nYou are excited and eager to begin your new career as a monster hunter. You know that it will be dangerous and challenging, but you are ready for the challenge. You will use your skills and abilities to protect the innocent and keep the world safe from the dangers that lurk in the shadows.\n')
+                input(f'{bulletpoint2}\nAs a member of the monster hunter guild, you quickly learn the guild\'s motto: \n"To protect the innocent and keep the world safe from the dangers that lurk in the shadows." \nThis motto guides the guild\'s actions and decisions, and it is a constant reminder of the important role that they play in the world.\n')
+                input(f'{bulletpoint2}\nThe guild has a wide range of goals, including tracking and defeating dangerous beasts, protecting civilians from harm, and gathering information about the various monsters that inhabit the world.\nAs a new member of the guild, you are tasked with your first mission: to defeat a monster that has been causing havoc in the local farming community. The monster, a massive, hulking plant-like creature known as the "Cornstalker," has been destroying crops and terrorizing the locals.\nYou and your team set out to track down the Cornstalker and put an end to its reign of terror.\n')
+                input(f'{bulletpoint2}Your team found the monster lurking in a field of tall corn. The monster is nearly invisible among the plants, blending in seamlessly with its surroundings.\nAt first glance, the Cornstalker appears to be a massive, plant-like creature. It has a thick, woody trunk, and its vines and leaves are covered in sharp thorns. Its eyes are glowing orbs of green light, and its mouth is filled with razor-sharp teeth.\nAs you approach, the Cornstalker stirs to life, its vines and leaves writhing and twisting as it prepares to attack. The monster is powerful and dangerous, and it will take all of the your skill and determination to defeat it.')
+                add_health(cornstalker)
+                battle(hero, cornstalker, 'raises its vines',
+                       'retreat into its leaves', 'uses a vine whip', 'unleashes a barrage of explosive seeds')
+                random_health_gain = random.randint(10, 30)
+                print(
+                    f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
+                hero.health += random_health_gain
+                check_health(hero)
+                add_money(50, 150)
+                menu()
+                input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way')
+
+            # Murder of the Three Thugs
+            def murder_thugs():
+                nonlocal thugs_life
+                input(f'{bulletpoint2}You spend weeks investigating and gathering information about the thugs. You learn their names, their habits, and their weaknesses. You plan and prepare your attack, determined to make the thugs pay for what they have done to you.\nFinally, the day of your revenge arrives. You ambush the thugs one by one, and you kill them with cold and ruthless efficiency. You feel a sense of satisfaction and relief as you see the thugs fall, knowing that you have avenged the attack.\nBut you also feel a sense of guilt and regret. You know that what you have done is wrong, and you wonder if there was a better way to resolve the conflict. You decide to leave town and start a new life, hoping to leave the past behind and find peace and happiness.\n')
+                thugs_life = 'dead'
+                input(f'{bulletpoint2}As you make your way out of town, you notice a hooded figure following you at a distance. You become suspicious and wary, and you keep a close eye on the figure.\nEventually, you confront the figure and demand to know who they are and why they are following you.\n"I saw what you did," the old man says, his voice cold and accusing. "I saw you kill those thugs. And now, you must face the consequences."\nBefore you can react, the old man throws a powder in your face. You feel a sudden burning sensation and then everything goes black.\nWhen you awaken, you find yourself lying on the ground in a mysterious city. You are disoriented and confused, and you have no idea how you got there.\nYou look around, trying to make sense of your surroundings. You see a group of hooded people standing nearby, watching you with a mixture of curiosity and suspicion.\nYou realize that the old man must have brought you here, and that you are now at the mercy of this mysterious group. You wonder what they will do with you, and you fear the worst.\nThe old man taps you on the shoulder from behind and has you follow him...')
+                menu()
+                assassins_guild()
+
             # The Secret Item
             def secret_item():
                 nonlocal coin_guess_correctly
@@ -846,10 +875,10 @@ jgs .-=-.    ) -.
 
                 # Check if the user's guess is correct
                 if guess.lower() == coin_cup.lower():
-                    print(f'\nCongratulations, you found the coin!')
+                    input(f'\nCongratulations, you found the coin!')
                     coin_guess_correctly = True
                 else:
-                    print(f'\nSorry, the coin was in cup {coin_cup} :(\n')
+                    input(f'\nSorry, the coin was in cup {coin_cup} :(\n')
 
                 if coin_guess_correctly == True:
                     secret_item_list = [valkyrie_crossbow, boomerang, thors_hammer, redempireflag, dragonscale]
@@ -862,10 +891,30 @@ jgs .-=-.    ) -.
                         f'\n{bulletpoint2}Congratulations, you just won the {random_secret_item.name}! I\'m sure you\'ll enjoy it!🎁\nThe {random_secret_item.name} has been added to your inventory. Press enter to continue...')
                     menu()
                     coin_guess_correctly = False
-                    # monster_hunter_guild()
+                    thug_or_monster = input(
+                        f'The husband greets you goodbye and hopes to see you again. Feeling ecstatic, you thank him for the game and turn to leave. As you walk away, you feel a strong desire to punish the three thugs that attacked you now that you\'re empowered with your new item. You could track them down but that would be risky and potentially dangerous.\nAs you ponder your options, you notice a group of people standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. You could join their ranks and get into hunting and defeating dangerous beasts.\nEither way, you know that you must do make a decision... what do you do?')
+                    if thug_or_monster.strip().lower() in ('thug', 'thugs', 'revenge', 'track', 'track down', 'punish'):
+                        input(
+                            f'{bulletpoint2}You cannot forget the attack, and you want to punish them for what they did to you earlier. You decide to track down the thugs and take justice into your own hands.')
+                        murder_thugs()
+                    else:
+                        input(
+                            f'{bulletpoint2}You approach the group and ask about joining their ranks.\n')
+                        menu()
+                        monster_hunter_guild()
                 else:
                     menu()
-                    # murder_thugs()
+                    thug_or_monster = input(
+                        f'The husband greets you goodbye and hopes to see you again. Disappointed, you thank him for the game and turn to leave. As you walk away, a feeling of frustration and anger begins to well up inside you.\nYou think back to the three thugs who beat you up in the past, and you feel a strong desire for revenge. You could track them down and take out your anger on them, but that would be risky and potentially dangerous.\nAs you ponder your options, you notice a group of people standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. You could join their ranks and channel your anger into hunting and defeating dangerous beasts.\nEither way, you know that you must do something to vent your frustration and anger... what do you do?')
+                    if thug_or_monster.strip().lower() in ('thug', 'thugs', 'revenge', 'track', 'track down', 'justice'):
+                        input(
+                            f'{bulletpoint2}You cannot forget the attack, and you want revenge. You decide to track down the thugs and take justice into your own hands.')
+                        murder_thugs()
+                    else:
+                        input(
+                            f'{bulletpoint2}You approach the group and ask about joining their ranks.')
+                        menu()
+                        monster_hunter_guild()
 
 
             # The Assassin Guild
@@ -2288,6 +2337,7 @@ _,'    \_>\_/    ',_
                 else:
                     nonlocal emperor_life
                     nonlocal noble_life
+                    nonlocal thugs_life
                     input(
                         f'{bulletpoint2}The wizard introduces himself as Merlin. He said he had been imprisoned by the empire for decades, forced to build gadgets for the empire\'s grand plan. He was recently working on these metal beings and planned to copy them on behalf of the empire in order to save human lives.')
                     merlin_ans = input(
@@ -2307,6 +2357,7 @@ _,'    \_>\_/    ',_
                         current_heir = 'the beggar..' # Resets the current heir.
                         emperor_life = 'alive'
                         noble_life = 'alive'
+                        thugs_life = 'alive'
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
@@ -2319,6 +2370,7 @@ _,'    \_>\_/    ',_
                         current_heir = 'the beggar..' # Resets the current heir.
                         emperor_life = 'alive'
                         noble_life = 'alive'
+                        thugs_life = 'alive'
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
@@ -2331,6 +2383,7 @@ _,'    \_>\_/    ',_
                         current_heir = 'the beggar..' # Resets the current heir.
                         emperor_life = 'alive'
                         noble_life = 'alive'
+                        thugs_life = 'alive'
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
@@ -2943,17 +2996,20 @@ _,'    \_>\_/    ',_
                         menu()
 
                     # Three Thugs
-                    three_thugs_ans = input(f'\n{bulletpoint}The beggar calls three muscular street thugs over and asks them to rough you up. Do you stay and fight?')
+                    new_goons = 'muscular street thugs'
+                    if thugs_life == 'dead':
+                        new_goons = 'wolves'
+                    three_thugs_ans = input(
+                        f'\n{bulletpoint}The beggar calls three {new_goons} over and asks them to rough you up. Do you stay and fight?')
                     if three_thugs_ans.strip().lower() in yes:
                         damage = random.randint(3,20)
-                        input(f'\n{bulletpoint2}The thugs landed a couple large blows to your stomach and did {damage} damage to your health. You managed to run away as fast as possible to a local street vendor nearby to hide.') 
+                        input(f'\n{bulletpoint2}The {new_goons} landed a couple large blows to your stomach and did {damage} damage to your health. You managed to run away as fast as possible to a local street vendor nearby to hide.')
                         hero.health -= damage
                         menu()
                         if vendor_lady_object == 1: # Only accesses the vendor lady scenario if it's been turned on.
                             vendor_lady()
                         else:
-                            pass
-                            #secret_item()
+                            secret_item()
                     else:
                         input(f'\n{bulletpoint2}You ran over to the castle guards and the street thugs dissapeared. ')
                         menu()
