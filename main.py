@@ -892,7 +892,7 @@ jgs .-=-.    ) -.
                     menu()
                     coin_guess_correctly = False
                     thug_or_monster = input(
-                        f'The husband greets you goodbye and hopes to see you again. Feeling ecstatic, you thank him for the game and turn to leave. As you walk away, you feel a strong desire to punish the three thugs that attacked you now that you\'re empowered with your new item. You could track them down but that would be risky and potentially dangerous.\nAs you ponder your options, you notice a group of people standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. You could join their ranks and get into hunting and defeating dangerous beasts.\nEither way, you know that you must do make a decision... what do you do?')
+                        f'{bulletpoint2}The husband greets you goodbye and hopes to see you again. Feeling ecstatic, you thank him for the game and turn to leave. As you walk away, you feel a strong desire to punish the three thugs that attacked you now that you\'re empowered with your new item. You could track them down but that would be risky and potentially dangerous.\nAs you ponder your options, you notice a group of people standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. You could join their ranks and get into hunting and defeating dangerous beasts.\n{bulletpoint}Either way, you know that you must do make a decision... what do you do?')
                     if thug_or_monster.strip().lower() in ('thug', 'thugs', 'revenge', 'track', 'track down', 'punish'):
                         input(
                             f'{bulletpoint2}You cannot forget the attack, and you want to punish them for what they did to you earlier. You decide to track down the thugs and take justice into your own hands.')
@@ -905,7 +905,7 @@ jgs .-=-.    ) -.
                 else:
                     menu()
                     thug_or_monster = input(
-                        f'The husband greets you goodbye and hopes to see you again. Disappointed, you thank him for the game and turn to leave. As you walk away, a feeling of frustration and anger begins to well up inside you.\nYou think back to the three thugs who beat you up in the past, and you feel a strong desire for revenge. You could track them down and take out your anger on them, but that would be risky and potentially dangerous.\nAs you ponder your options, you notice a group of people standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. You could join their ranks and channel your anger into hunting and defeating dangerous beasts.\nEither way, you know that you must do something to vent your frustration and anger... what do you do?')
+                        f'{bulletpoint2}The husband greets you goodbye and hopes to see you again. Disappointed, you thank him for the game and turn to leave. As you walk away, a feeling of frustration and anger begins to well up inside you.\nYou think back to the three thugs who beat you up in the past, and you feel a strong desire for revenge. You could track them down and take out your anger on them, but that would be risky and potentially dangerous.\nAs you ponder your options, you notice a group of people standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. You could join their ranks and channel your anger into hunting and defeating dangerous beasts.\n{bulletpoint}Either way, you know that you must do something to vent your frustration and anger... what do you do?')
                     if thug_or_monster.strip().lower() in ('thug', 'thugs', 'revenge', 'track', 'track down', 'justice'):
                         input(
                             f'{bulletpoint2}You cannot forget the attack, and you want revenge. You decide to track down the thugs and take justice into your own hands.')
@@ -915,7 +915,6 @@ jgs .-=-.    ) -.
                             f'{bulletpoint2}You approach the group and ask about joining their ranks.')
                         menu()
                         monster_hunter_guild()
-
 
             # The Assassin Guild
             def assassins_guild():
@@ -1194,7 +1193,8 @@ jgs .-=-.    ) -.
                         f'\n{bulletpoint2}\nCongratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                     menu()
                     mysterious_monk()
-
+                    
+            # Kill Best Friend
             def kill_best_friend():
                 input(f'\n{bulletpoint2}As you walk up to your best friend\'s house, you feel a heavy weight in your chest. You have never felt so torn in your life. On the one hand, you are loyal to the Red Dragon empire and you don\'t want to disappoint them. On the other hand, you cannot imagine a world without your best friend. You have known him for so long, and you have been through so much together.\nYou knock on the door, and your friend answers. He looks happy to see you, as always. But as you step inside, you know that you have to do what the empire has asked of you. You have to kill him.\nYou try to convince yourself that it is for the greater good, that the empire needs you to do this in order to maintain its power and control. But deep down, you know that it is wrong.\nAs you sit down in the living room and start to chat, you can feel your heart pounding in your chest. You know that you have to act fast, before you lose your nerve. You reach for your concealed knife, and before your friend knows what is happening, you plunge it into his chest.\nThe shock and betrayal on his face is something that you will never forget. You watch as the light in his eyes fades away, and you know that you have done the unthinkable. You have killed your best friend, and there is no going back.\nYou flee the scene, knowing that you have to report back to the empire and face the consequences of your actions. You have betrayed your friend and your own morals, and you know that you will have to live with that guilt for the rest of your life. ')
                 add_money(50, 200)
@@ -1212,6 +1212,7 @@ jgs .-=-.    ) -.
                     menu()
                     passageway()
 
+            # The Secret Job
             def secret_job():
                 kill_friend_ans = input(
                     f'\n{bulletpoint}You are standing in front of the Red Dragon Empire\'s palace, staring at the imposing stone walls and the flags fluttering in the wind. Suddenly, a hooded messenger approaches you and hands you a scroll. The Red Dragon Empire has asked you to kill your best friend. You are horrified by the empire\'s request. You cannot imagine a world without your best friend. Do you kill your best friend?')
@@ -1861,7 +1862,6 @@ jgs .-=-.    ) -.
                         input(f'\n{bulletpoint2}You decided to prove your loyalty instead by taking on an imperial trade assignment and sail the seas. You were tasked with a mission to locate Sea Storm Island in the west and trade some imperial goods. Since the emperor is dead, it\'s best to showcase your ability to the new ruler and navigate the seas!')
                         menu()
                         trade_mission()
-
 
             # The Secret
             def the_secret():
@@ -3106,8 +3106,9 @@ _,'    \_>\_/    ',_
                 else:
                     print('( ͡❛ 益 ͡❛)')
                 print('Current Items:')
-                
-                print([i for i in hero_items])
+                current_items_list = ', '.join(
+                    [f'{item}' for item in hero_items])
+                print(current_items_list)
             
             # This is the menu display that would be shown throughout the game. It shows hero health, money, morality, and a different display if hero health is under a certain amount.
             def display():
