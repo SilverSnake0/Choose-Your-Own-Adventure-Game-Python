@@ -111,6 +111,8 @@ def adventure_game():
         leviathan = Monster('Leviathan', 999, 99, 200)
         phoenix = Monster('Phoenix', 350, 90, 200)
         minotaur = Monster('Minotaur', 150, 50, 85)
+        beggar = Monster('The Beggar', 50, 10, 20)
+        emperor = Monster('The Emperor', 50, 10, 30)
         
         # Function that 1. Checks if the monster has died, 2. Checks if person has died and then restarts/exits game
         def check_health(person):
@@ -492,13 +494,13 @@ jgs .-=-.    ) -.
 
                 # Check for a Royal Flush
                 if all(count == 1 for count in counts.values()):
-                    if hand[0][0] == '10' and hand[-1][0] == 'A':
+                    if 'A' in counts and 'K' in counts and 'Q' in counts and 'J' in counts and '10' in counts:
                         if all(card[1] == hand[0][1] for card in hand):
                             return 'Royal Flush'
 
                 # Check for a Straight Flush
                 if all(count == 1 for count in counts.values()):
-                    for i in range(1, len(hand)):
+                    for i in range(1, 5):
                         if int(hand[i][0]) - int(hand[i - 1][0]) != 1:
                             break
                         else:
@@ -698,7 +700,8 @@ jgs .-=-.    ) -.
                         # Check if the player has busted (total > 21)
                         if player_total > 21:
                             # If so, end the game and print a message
-                                print("Player has busted! Dealer wins.")
+                            print("Player has busted! Dealer wins.")
+                            break
                     # If the player decided to stand, break out of the loop
                     else:
                         break
@@ -816,16 +819,104 @@ jgs .-=-.    ) -.
                         f'{bulletpoint2}The number you entered is not a valid item in the vendor\'s inventory. Please try again.')
                     show_vendor_menu()
 
+            # The Assassin Guild
+            def assassins_guild():
+                drink_water_ans = input(f'{bulletpoint}As the old man shows you around the City of the Rising Sun, you are struck by the peaceful and serene atmosphere of the city. People from all walks of life can be seen going about their business, and there is a sense of harmony and cooperation among the various different groups.\nThe old man leads you through the winding streets of the city, pointing out the various landmarks and places of interest. He shows you the central market, where merchants from all over the world come to trade their goods. You also visit the city\'s library, which is filled with ancient books and scrolls that contain knowledge and wisdom from the past.\nAs you continue your tour, the old man brings you to the city\'s main square, where a large fountain stands in the center. People are gathered around the fountain, enjoying the cool, refreshing water on a hot day. The old man tells you that the water of the fountain has healing properties, and many people come to drink from it to cure their ailments.\nDo you take a drink of this water?')
+                if drink_water_ans.strip().lower() in yes:
+                    input(f'{bulletpoint}You were healed for 50 health points!')
+                    hero.health += 50
+                    menu()
+                enter_assassin_guild = input(f'{bulletpoint}After exploring the city for a while, the old man leads you to a secluded part of the city, where a mysterious sign stands in front of a hidden door. The sign bears the emblem of a hooded figure holding a curved blade. The old man tells you that this is the entrance to the Assassin Guild, a secretive organization of skilled assassins who serve as protectors.\nYou thank the old man for showing you around the city, and he tells you that he will be waiting for you if you ever need anything. You stand in front of the mysterious sign, considering whether or not you should enter the Assassin Guild and see what secrets it holds. The choice is yours, do you enter the building?\n')
+                if enter_assassin_guild.strip().lower() in yes:
+                    input(f'{bulletpoint2}Inside, you are greeted by a group of hooded figures who introduce themselves as members of the assassin guild. They explain that they are a secret society of trained assassins who use their skills and knowledge to serve the greater good.\nThe guild members offer to train you in the ancient ways of assassination, and you are intrigued by the offer. You decide to accept their offer and become a member of the guild.\n')
+                    input(f'...')
+                    philosophy_ans = input(f'{bulletpoint2}You spend the next few weeks training with the guild, learning the art of stealth, deception, and assassination. You undergo rigorous physical and mental training, and you master the use of a variety of weapons and tools.\nAs you progress in your training, you are taught the secrets of the guild and the philosophy that guides its members. You learn to balance the need for justice with the harsh realities of the world, and you become a skilled and deadly assassin. Do you want to go over the philosophy of the Assassin guild?')
+                    if philosophy_ans.strip().lower() in yes:
+                        input(f'{bulletpoint2}\n\n\n\n\n\n\n\n\n\n\nThe philosophy of the assassin guild is based on the principle of balance. The guild members believe that the world is a complex and dangerous place, and that there is a constant struggle between good and evil, order and chaos.\nThey believe that the guild has a responsibility to maintain the balance of power and prevent any one side from gaining too much control. To achieve this, the guild members use their skills and knowledge to eliminate threats and protect the innocent.\nThe guild has a complicated relationship with the ice kingdom and the Red Dragon Empire. On the one hand, the guild is neutral and does not take sides in political conflicts. On the other hand, the guild members are not afraid to intervene if they believe that the balance of power is being threatened.\nIn the case of the ice kingdom, the guild has a positive relationship with the queen and her people. The queen values the guild\'s skills and knowledge, and she often hires the guild members to carry out important missions. In return, the guild members protect the ice kingdom and its people from threats and dangers.\nIn the case of the Red Dragon Empire, the guild has a more complicated relationship. The emperor and his followers view the guild as a threat and a nuisance, and they often try to suppress the guild\'s activities. However, the guild members are not afraid to challenge the empire and its corrupt rulers, and they will not hesitate to strike if the balance of power is threatened.')
+                    input(
+                        f'{bulletpoint2} You recall the poem they taught you:\n\nThe assassin guild is a secret sect\nOf skilled and deadly powers,\nTheir mission is to keep the check\nIn a world of chaos all hours.\n\nThey move through the shadows unseen,\nSilent and deadly as the night,\nReady to strike at a moment\'s bright\nAnd eliminate any threat in sight.\n\nThey are masters of the blade and the bow,\nTrained in the arts of stealth and deception,\nThey are feared by their enemies\nAnd respected by those who know their profession.\n\nThe guild is a force for right,\nA protector of the innocent and the weak,\nThey will continue to fight\nFor balance and justice in a world that seeks.\n\n')
+                    new_kill = input(
+                        f'{bulletpoint}At the end of your training, you are given a mission to complete. You are to assassinate a...\nPlease enter your assassination target: ')
+                    while new_kill.strip().lower() == hero.name.strip().lower():
+                        new_kill = input(
+                            f'{bulletpoint2}You cannot kill yourself...\n{bulletpoint}Please enter a new assassination target: ')
+                    if new_kill.strip().lower() in ('beggar', 'the beggar'):
+                        input(
+                            f'{bulletpoint2}You are to assassinate a beggar who has been terrorizing the people of the Red Dragon Empire. You accept the mission.')
+                        input(f'{bulletpoint2}You are initially puzzled by the mission. You cannot understand why the guild would want to kill a homeless beggar, who poses no threat to anyone. You decide to question the guild leader about the mission.\nThe guild leader explains that the beggar is not what he seems. He is actually a spy for the ice kingdom, who has been gathering information about the empire\'s defenses and plans. The guild has been hired by the empire to eliminate the spy and prevent him from passing on his information.\nYou are uneasy about the mission, but you trust the guild leader and you decide to carry it out. You disguise yourself as a beggar and approach the beggar outside the castle gates. You strike up a conversation and gain his trust.\nWhen the time is right, you strike the beggar with a hidden blade.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
+                        clean_kill_beggar = random.randint(1, 10)
+                        print(f'{bulletpoint2}You rolled a {clean_kill_beggar}.')
+                        if clean_kill_beggar >= 5:
+                            input(
+                                f'{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.')
+                        else:
+                            add_health(beggar)
+                            battle(hero, beggar, 'hides behind wall',
+                                'curses at you', 'picks up a stick', 'throws a rock at you')
+                            random_health_gain = random.randint(10, 30)
+                            print(
+                                f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
+                            hero.health += random_health_gain
+                            check_health(hero)
+                            add_money(25, 50)
+                            input(
+                                f'{bulletpoint2}The kill was messy. You dispose of the body and return to the guild, reporting the mission as completed.')
+                        menu()
+                        input(
+                            f'\n{bulletpoint2}You go back to strolling along the streets and see a different beggar...\nCongratulations, on reaching the end! Try to discover other secret endings and possibilities...')
+                        beggar()
+                        if 'beggar' in current_heir:
+                            current_heir = 'noble lady'
+                    elif new_kill.strip().lower() in ('emperor', 'the emperor'):
+                        input(
+                            f'{bulletpoint2}You are to assassinate a corrupt and evil ruler who has been terrorizing the people of a neighboring kingdom. You accept the mission.')
+                        input(f'{bulletpoint2}As a member of the assassin guild, you are given a mission to carry out. You are to kill the Red Dragon Emperor, the tyrannical ruler of the empire.\nYou are hesitant about the mission. The emperor is a powerful and dangerous enemy, and killing him will not be easy. You decide to discuss the mission with the other guild members and seek their advice.\nAfter much debate and deliberation, you and the other guild members agree on a plan. You will infiltrate the emperor\'s palace and gain his trust by pretending to be a loyal servant. Once you are close to the emperor, you will strike and kill him with a hidden blade.\nYou carry out the plan with precision and stealth. You gain the emperor\'s trust and become one of his most trusted servants. You bide your time and wait for the right moment to strike.\nOne night, as the emperor is sleeping, you sneak into his chambers and approach his bed. You draw your hidden blade and raise it high, ready to strike.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
+                        clean_kill_emperor = random.randint(1, 10)
+                        print(f'{bulletpoint2}You rolled a {clean_kill_emperor}.')
+                        print(f'')
+                        if clean_kill_emperor >= 5:
+                            input(
+                                f'{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.')
+                        else:
+                            add_health(emperor)
+                            battle(hero, emperor, 'raises shield',
+                                'groans in pain', 'calls guards over', 'uses sharp end of the shield')
+                            random_health_gain = random.randint(10, 30)
+                            print(
+                                f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
+                            hero.health += random_health_gain
+                            check_health(hero)
+                            add_money(25, 50)
+                            input(
+                                f'{bulletpoint2}The kill was messy. You dispose of the body and return to the guild, reporting the mission as completed.')
+                        menu()
+                        input(
+                            f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
+                        beggar()
+                    else:
+                        input(
+                            f'{bulletpoint2}You are to assassinate {new_kill}. You accept the mission.')
+                        input(f'{bulletpoint2}The night was dark and cold, the perfect conditions for an assassination. You crept through the shadows, senses heightened and your heart pounding with anticipation.\nYour target was {new_kill}.You had studied {new_kill}\'s routine and habits, and you knew exactly when and where they would be most vulnerable.\nYou made your way to the designated spot, a secluded alleyway near their residence. Your waited in the shadows, your weapon of choice at the ready.\nAs {new_kill} walked past, you stepped out of the darkness and struck. Your blade sliced through the air with deadly precision, finding its mark in {new_kill}\'s throat. {new_kill} gasped and clutched at their neck, but it was too late. You watched as the life drained from their eyes, and then disappeared into the night, leaving no trace of your presence behind.\nThe kill was clean and efficient, a testament to your skills as an assassin. you would be rewarded for the successful mission, and you would be ready for the next one. That was the life of an assassin, a life of danger and deception, but one that you embraced wholeheartedly.\n')
+                        add_money(25, 50)
+                        menu()
+                        input(
+                            f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
+                        beggar()
+
+                else:
+                    pass
+                    #the_restaurant()
+
             # The Hidden City
             def hidden_city():
                 city_ans = input(f'{bulletpoint}As you wander through the streets of the city called “The City of the Rising Sun”, you come across a small shop selling trinkets and souvenirs. You decide to take a look and see if there is anything interesting.\nAs you browse the shelves, a friendly old man approaches you and says that this city is a safe haven for those who seek refuge from the troubles of the outside world. It is hidden from the eyes of the Red Dragon Empire and the ice kingdom, and it is a place of harmony. Do you ask him more about the Red Dragon Empire and the Ice Kingdom?')
                 if city_ans.strip().lower() in yes:
                     city_ans2 = input(f'{bulletpoint}The Red Dragon Empire is a vast and powerful kingdom ruled by a cruel and tyrannical emperor. It is a land of war and conquest, where the strong prey on the weak and the weak must fight to survive. The ice kingdom, on the other hand, is a land of mystery and magic. It is ruled by a wise and benevolent queen, who uses her powers to protect her people and keep the peace. Do you want to hear more?')
                     if city_ans2.strip().lower() in yes:
-                        city_ans3 = input(f'{bulletpoint2}The old man nods and begins to tell you the history of the Red Dragon Empire. He explains that, long ago, the empire was ruled by a peaceful and benevolent ruler who was loved and respected by his people. But one day, a cruel and ambitious emperor overthrew the peaceful ruler and seized control of the empire.\nUnder the emperor\'s rule, the Red Dragon Empire became a land of conquest and aggression. The emperor sought to expand his power and territory, and he set his sights on the Ice Kingdom.\nBut the Ice Kingdom was a land of magic, and its queen was a powerful sorceress. She used her powers to protect her kingdom and repel the emperor\'s armies. Despite his best efforts, the emperor was unable to conquer the Ice Kingdom, and the two kingdoms have been in a state of cold war ever since.\nThe old man concludes his story by saying that the City of the Rising Sun is a safe haven for those who seek refuge from the conflicts and dangers of the outside world. He offers to show you around the city, if you are interested. What do you say?\n')
+                        city_ans3 = input(f'{bulletpoint2}The old man nods and begins to tell you the history of the Red Dragon Empire. He explains that, long ago, the empire was ruled by a peaceful and benevolent ruler who was loved and respected by his people. But one day, a cruel and ambitious emperor overthrew the peaceful ruler and seized control of the empire.\nUnder the emperor\'s rule, the Red Dragon Empire became a land of conquest and aggression. The emperor sought to expand his power and territory, and he set his sights on the Ice Kingdom.\nBut the Ice Kingdom was a land of magic, and its queen was a powerful sorceress. She used her powers to protect her kingdom and repel the emperor\'s armies. Despite his best efforts, the emperor was unable to conquer the Ice Kingdom, and the two kingdoms have been in a state of cold war ever since.\n{bulletpoint}The old man concludes his story by saying that the City of the Rising Sun is a safe haven for those who seek refuge from the conflicts and dangers of the outside world. He offers to show you around the city, if you are interested. What do you say?\n')
                         if city_ans3.strip().lower() in yes:
                             menu()
-                            #assassins_guild()
+                            assassins_guild()
                         else:
                             menu()
                             ice_kingdom()
@@ -834,12 +925,12 @@ jgs .-=-.    ) -.
                         ice_kingdom()
                 else:
                     menu()
-                    poker_ans = input(f'{bulletpoint}A customer nearby walks up to you and asks if you would like to play poker?')
+                    poker_ans = input(f'{bulletpoint}A customer nearby walks up to you and asks if you would like to play Doker?')
                     while poker_ans.strip().lower() in yes:
                         poker()
-                        poker_ans = input(f'{bulletpoint}Play another hand of poker?')
+                        poker_ans = input(f'{bulletpoint}Play another hand of Doker?')
                     else:
-                        blackjack_ans = input(f'{bulletpoint}How about blackjack? The goal is to get close to 21. "Hit" will draw another card, while "Stand" will stop drawing. ')
+                        blackjack_ans = input(f'{bulletpoint}How about Blackjack? The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing. ')
                         while blackjack_ans.strip().lower() in yes:
                             blackjack()
                             blackjack_ans = input(
@@ -851,13 +942,13 @@ jgs .-=-.    ) -.
             #Get Drunk
             def get_drunk():
                 drink_ans = input(
-                    f'{bulletpoint}You are sitting at a table in a local tavern. The tavern bartender asks you if you would like a drink. Do you take it?')
+                    f'{bulletpoint}You are sitting at a table in a local tavern. The tavern bartender asks you if you would like a drink. Do you take it?\n')
                 if drink_ans.lower().strip() in yes:
                     first_drink_ans = input(
-                        f'{bulletpoint}After the first drink, you feel a warm, relaxed sensation in your chest and limbs, and your inhibitions may start to loosen. You find yourself smiling...\nThe bartender asks if you would like second drink, what do you say?')
+                        f'{bulletpoint}After the first drink, you feel a warm, relaxed sensation in your chest and limbs, and your inhibitions may start to loosen. You find yourself smiling...\nThe bartender asks if you would like a second drink, what do you say?')
                     if first_drink_ans.lower().strip() in yes:
                         second_drink_ans = input(
-                            f'{bulletpoint}You feel slightly lightheaded and dizzy, and your movements may become slightly more exaggerated and uncoordinated. Suddenly the bartender says they have a special drink for you. It\'s a rare and potent spirit from the Ice kingdom. Are you brave enough to try it')
+                            f'{bulletpoint}You feel slightly lightheaded and dizzy, and your movements may become slightly more exaggerated and uncoordinated. Suddenly the bartender says they have a special drink for you. It\'s a rare and potent spirit from the Ice kingdom. Are you brave enough to try it?\n')
                         if second_drink_ans.lower().strip() in yes:
                             input(
                                 f'{bulletpoint}You are tempted by the offer. You have always been curious about the ice kingdom and its exotic liquors. After much hesitation, you decide to take the third drink. You raise the glass to your lips and take a sip. The liquid is fiery and sweet, and it burns all the way down your throat\nAs you drink, you notice that the other customers in the tavern are starting to get rowdy. Suddenly, one of them bumps into you and spills your drink.\nBefore you know it, you are locked in a fierce bar fight with the other customer. You throw punches and dodge blows, feeling reckless and invincible.\nBut your drunken state makes you slow and clumsy, and soon you are on the receiving end of a beating. You stumble and fall to the ground, feeling dazed and bruised.\nJust as you are about to black out, you hear a loud noise and feel yourself being lifted off the ground. You open your eyes and see that you are being carried away on a cart by a group of good samaritans.')
