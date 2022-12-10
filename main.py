@@ -111,8 +111,8 @@ def adventure_game():
         leviathan = Monster('Leviathan', 999, 99, 200)
         phoenix = Monster('Phoenix', 350, 90, 200)
         minotaur = Monster('Minotaur', 150, 50, 85)
-        beggar = Monster('The Beggar', 50, 10, 20)
-        emperor = Monster('The Emperor', 50, 10, 30)
+        beggarbattle = Monster('The Beggar', 50, 10, 20)
+        emperorbattle = Monster('The Emperor', 50, 10, 30)
         
         # Function that 1. Checks if the monster has died, 2. Checks if person has died and then restarts/exits game
         def check_health(person):
@@ -753,6 +753,8 @@ jgs .-=-.    ) -.
         def story():
             new_rank = '' # Sets the empty rank for the empire_recruitment scenario.
             current_heir = 'the beggar..'
+            emperor_life = 'alive'
+            noble_life = 'alive'
 
             #Vendor Lady
             def show_vendor_menu():
@@ -821,6 +823,8 @@ jgs .-=-.    ) -.
 
             # The Assassin Guild
             def assassins_guild():
+                nonlocal emperor_life
+                nonlocal noble_life
                 drink_water_ans = input(f'{bulletpoint}As the old man shows you around the City of the Rising Sun, you are struck by the peaceful and serene atmosphere of the city. People from all walks of life can be seen going about their business, and there is a sense of harmony and cooperation among the various different groups.\nThe old man leads you through the winding streets of the city, pointing out the various landmarks and places of interest. He shows you the central market, where merchants from all over the world come to trade their goods. You also visit the city\'s library, which is filled with ancient books and scrolls that contain knowledge and wisdom from the past.\nAs you continue your tour, the old man brings you to the city\'s main square, where a large fountain stands in the center. People are gathered around the fountain, enjoying the cool, refreshing water on a hot day. The old man tells you that the water of the fountain has healing properties, and many people come to drink from it to cure their ailments.\nDo you take a drink of this water?')
                 if drink_water_ans.strip().lower() in yes:
                     input(f'{bulletpoint}You were healed for 50 health points!')
@@ -850,8 +854,8 @@ jgs .-=-.    ) -.
                             input(
                                 f'{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.')
                         else:
-                            add_health(beggar)
-                            battle(hero, beggar, 'hides behind wall',
+                            add_health(beggarbattle)
+                            battle(hero, beggarbattle, 'hides behind wall',
                                 'curses at you', 'picks up a stick', 'throws a rock at you')
                             random_health_gain = random.randint(10, 30)
                             print(
@@ -878,8 +882,8 @@ jgs .-=-.    ) -.
                             input(
                                 f'{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.')
                         else:
-                            add_health(emperor)
-                            battle(hero, emperor, 'raises shield',
+                            add_health(emperorbattle)
+                            battle(hero, emperorbattle, 'raises shield',
                                 'groans in pain', 'calls guards over', 'uses sharp end of the shield')
                             random_health_gain = random.randint(10, 30)
                             print(
@@ -889,11 +893,14 @@ jgs .-=-.    ) -.
                             add_money(25, 50)
                             input(
                                 f'{bulletpoint2}The kill was messy. You dispose of the body and return to the guild, reporting the mission as completed.')
+                        emperor_life = 'dead'
                         menu()
                         input(
                             f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         beggar()
                     else:
+                        if new_kill.strip().lower() in ('noble', 'noble lady'):
+                            noble_life = 'dead'
                         input(
                             f'{bulletpoint2}You are to assassinate {new_kill}. You accept the mission.')
                         input(f'{bulletpoint2}The night was dark and cold, the perfect conditions for an assassination. You crept through the shadows, senses heightened and your heart pounding with anticipation.\nYour target was {new_kill}.You had studied {new_kill}\'s routine and habits, and you knew exactly when and where they would be most vulnerable.\nYou made your way to the designated spot, a secluded alleyway near their residence. Your waited in the shadows, your weapon of choice at the ready.\nAs {new_kill} walked past, you stepped out of the darkness and struck. Your blade sliced through the air with deadly precision, finding its mark in {new_kill}\'s throat. {new_kill} gasped and clutched at their neck, but it was too late. You watched as the life drained from their eyes, and then disappeared into the night, leaving no trace of your presence behind.\nThe kill was clean and efficient, a testament to your skills as an assassin. you would be rewarded for the successful mission, and you would be ready for the next one. That was the life of an assassin, a life of danger and deception, but one that you embraced wholeheartedly.\n')
@@ -930,11 +937,11 @@ jgs .-=-.    ) -.
                         poker()
                         poker_ans = input(f'{bulletpoint}Play another hand of Doker?')
                     else:
-                        blackjack_ans = input(f'{bulletpoint}How about Blackjack? The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing. ')
+                        blackjack_ans = input(f'{bulletpoint}How about Whackjack? The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing. ')
                         while blackjack_ans.strip().lower() in yes:
                             blackjack()
                             blackjack_ans = input(
-                                f'{bulletpoint}Play another round of blackjack?')
+                                f'{bulletpoint}Play another round of Whackjack?')
                         else:
                             print(f'{bulletpoint2}The customer says take care!')
                             ice_kingdom()
@@ -1110,13 +1117,18 @@ jgs .-=-.    ) -.
                     menu()
                     kill_best_friend()
                 else:
-                    marriage_ans = input(f'\n{bulletpoint}The hooded messenger says very well, The empire has offered you an alternative. If you agree to marry one of the empire\'s nobles, your friend will be spared. You are torn by the decision. On the one hand, you do not want to marry someone you do not love. On the other hand, you cannot bear the thought of losing your best friend. Do you decide to get married to this noble?')
-                    if marriage_ans.strip().lower() in yes:
-                        input(f'\n{bulletpoint2}\nAfter much contemplation, you decide that your friendship is more important than your own happiness. You agree to marry the noble and save your best friend\'s life.')
-                        menu()
-                        the_marriage()
+                    if noble_life == 'alive':
+                        marriage_ans = input(f'\n{bulletpoint}The hooded messenger says very well, The empire has offered you an alternative. If you agree to marry one of the empire\'s nobles, your friend will be spared. You are torn by the decision. On the one hand, you do not want to marry someone you do not love. On the other hand, you cannot bear the thought of losing your best friend. Do you decide to get married to this noble?')
+                        if marriage_ans.strip().lower() in yes:
+                            input(f'\n{bulletpoint2}\nAfter much contemplation, you decide that your friendship is more important than your own happiness. You agree to marry the noble and save your best friend\'s life.')
+                            menu()
+                            the_marriage()
+                        else:
+                            input(f'\n{bulletpoint2}So you don\'t want to kill your best friend and you don\'t want to marry a noble. The empire has instead forced you to go on a task to destroy a mysterious secret. The hooded messenger has guards escort you in a cart. You look next to you and see a mysterious monk as one of the passengers who is joining you on this task.')
+                            menu()
+                            the_secret()
                     else:
-                        input(f'\n{bulletpoint2}So you don\'t want to kill your best friend and you don\'t want to marry a noble. The empire has instead forced you to go on a task to destroy a mysterious secret. The hooded messenger has guards escort you in a cart. You look next to you and see a mysterious monk as one of the passengers who is joining you on this task.')
+                        input(f'\n{bulletpoint2}So you don\'t want to kill your best friend. The empire has instead forced you to go on a task to destroy a mysterious secret. The hooded messenger has guards escort you in a cart. You look next to you and see a mysterious monk as one of the passengers who is joining you on this task.')
                         menu()
                         the_secret()
 
@@ -1739,9 +1751,14 @@ jgs .-=-.    ) -.
                     secret_job()
 
                 else:
-                    input(f'\n{bulletpoint2}You decided to prove your loyalty instead by taking on an imperial trade assignment and sail the seas. You were tasked with a mission to locate Sea Storm Island in the west and trade some imperial goods. The emperor will also be joining on the trip so it\'s best to showcase your ability to navigate the seas!')
-                    menu()
-                    trade_mission()
+                    if emperor_life == 'alive':
+                        input(f'\n{bulletpoint2}You decided to prove your loyalty instead by taking on an imperial trade assignment and sail the seas. You were tasked with a mission to locate Sea Storm Island in the west and trade some imperial goods. The emperor will also be joining on the trip so it\'s best to showcase your ability to navigate the seas!')
+                        menu()
+                        trade_mission()
+                    else:
+                        input(f'\n{bulletpoint2}You decided to prove your loyalty instead by taking on an imperial trade assignment and sail the seas. You were tasked with a mission to locate Sea Storm Island in the west and trade some imperial goods. Since the emperor is dead, it\'s best to showcase your ability to the new ruler and navigate the seas!')
+                        menu()
+                        trade_mission()
 
 
             # The Secret
@@ -2216,6 +2233,8 @@ _,'    \_>\_/    ',_
                         menu()
                         beggar()
                 else:
+                    nonlocal emperor_life
+                    nonlocal noble_life
                     input(
                         f'{bulletpoint2}The wizard introduces himself as Merlin. He said he had been imprisoned by the empire for decades, forced to build gadgets for the empire\'s grand plan. He was recently working on these metal beings and planned to copy them on behalf of the empire in order to save human lives.')
                     merlin_ans = input(
@@ -2233,6 +2252,8 @@ _,'    \_>\_/    ',_
                             f'{bulletpoint2}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...')
                         input(blackhole)
                         current_heir = 'the beggar..' # Resets the current heir.
+                        emperor_life = 'alive'
+                        noble_life = 'alive'
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
@@ -2243,6 +2264,8 @@ _,'    \_>\_/    ',_
                             f'{bulletpoint}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...')
                         input(blackhole)
                         current_heir = 'the beggar..' # Resets the current heir.
+                        emperor_life = 'alive'
+                        noble_life = 'alive'
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
@@ -2253,6 +2276,8 @@ _,'    \_>\_/    ',_
                             f'{bulletpoint}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...')
                         input(blackhole)
                         current_heir = 'the beggar..' # Resets the current heir.
+                        emperor_life = 'alive'
+                        noble_life = 'alive'
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
