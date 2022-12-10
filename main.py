@@ -57,7 +57,6 @@ def adventure_game():
         redempireflag = Item('🚩- Red Empire Flag', 100, 0)
         dragonscale = Item('🛡️- Dragonscale', 200, 0)
 
-
         class Hero:
 
             health = 0
@@ -755,6 +754,7 @@ jgs .-=-.    ) -.
             current_heir = 'the beggar..'
             emperor_life = 'alive'
             noble_life = 'alive'
+            coin_guess_correctly = False
 
             #Vendor Lady
             def show_vendor_menu():
@@ -820,6 +820,53 @@ jgs .-=-.    ) -.
                     input(
                         f'{bulletpoint2}The number you entered is not a valid item in the vendor\'s inventory. Please try again.')
                     show_vendor_menu()
+
+            # The Secret Item
+            def secret_item():
+                nonlocal coin_guess_correctly
+                input(f'{bulletpoint2}\nAs you exit the vendor lady\'s shop, you are approached by the shopkeeper\'s husband. He is a friendly, unassuming man, and he smiles warmly as he greets you.\nHe says hello there traveller, he couldn\'t help but notice that you were browsing the shop. He asks if you would be interested in playing a little game for a secret item.\nIntrigued, you agree to play along. The husband explains that there is a coin hidden under one of the three cups on the table in front of him. He invites you to choose a cup and make a guess as to which one contains the coin.\nIf you guess correctly he\'ll give you a secret item from the shop. It\'s a small token of appreciation for your patronage.\nAnd even if you don\'t win, don\'t worry. It\'s all in good fun.\n')
+
+                # Define the cups and the coin
+                cups = ["A", "B", "C"]
+                coin = "⊛"
+
+                # Shuffle the cups
+                random.shuffle(cups)
+
+                # Place the coin in a random cup
+                coin_cup = random.choice(cups)
+
+                # Print the cups and the coin
+                clean_cups = ', '.join([f'{cup}' for cup in cups])
+                print(f'Cups: {clean_cups}')
+                print(f'Coin: {coin}')
+
+                # Ask the user to guess the cup with the coin
+                guess = input('\nGuess the cup with the coin: ')
+
+                # Check if the user's guess is correct
+                if guess.lower() == coin_cup.lower():
+                    print(f'\nCongratulations, you found the coin!')
+                    coin_guess_correctly = True
+                else:
+                    print(f'\nSorry, the coin was in cup {coin_cup} :(\n')
+
+                if coin_guess_correctly == True:
+                    secret_item_list = [valkyrie_crossbow, boomerang, thors_hammer, redempireflag, dragonscale]
+                    # Add the item's name to hero's items list.
+                    random_secret_item = random.choice(secret_item_list)
+                    hero_items.append(random_secret_item.name)
+                    # Add the item's attributes to the hero.
+                    hero.add_item(random_secret_item)
+                    input(
+                        f'\n{bulletpoint2}Congratulations, you just won the {random_secret_item.name}! I\'m sure you\'ll enjoy it!🎁\nThe {random_secret_item.name} has been added to your inventory. Press enter to continue...')
+                    menu()
+                    coin_guess_correctly = False
+                    # monster_hunter_guild()
+                else:
+                    menu()
+                    # murder_thugs()
+
 
             # The Assassin Guild
             def assassins_guild():
@@ -1102,11 +1149,17 @@ jgs .-=-.    ) -.
             def kill_best_friend():
                 input(f'\n{bulletpoint2}As you walk up to your best friend\'s house, you feel a heavy weight in your chest. You have never felt so torn in your life. On the one hand, you are loyal to the Red Dragon empire and you don\'t want to disappoint them. On the other hand, you cannot imagine a world without your best friend. You have known him for so long, and you have been through so much together.\nYou knock on the door, and your friend answers. He looks happy to see you, as always. But as you step inside, you know that you have to do what the empire has asked of you. You have to kill him.\nYou try to convince yourself that it is for the greater good, that the empire needs you to do this in order to maintain its power and control. But deep down, you know that it is wrong.\nAs you sit down in the living room and start to chat, you can feel your heart pounding in your chest. You know that you have to act fast, before you lose your nerve. You reach for your concealed knife, and before your friend knows what is happening, you plunge it into his chest.\nThe shock and betrayal on his face is something that you will never forget. You watch as the light in his eyes fades away, and you know that you have done the unthinkable. You have killed your best friend, and there is no going back.\nYou flee the scene, knowing that you have to report back to the empire and face the consequences of your actions. You have betrayed your friend and your own morals, and you know that you will have to live with that guilt for the rest of your life. ')
                 add_money(50, 200)
-                bf_ans = input(f'\n{bulletpoint}After the deed was done you travel into the castle to collect your earnings. You meet an attractive noble inside the castle hallway, but you also see a hidden entrance in the hallway. Do you decide to speak with the noble?')
-                if bf_ans.strip().lower() in yes:
-                    menu()
-                    the_marriage()
+                if noble_life == 'alive':
+                    bf_ans = input(f'\n{bulletpoint}After the deed was done you travel into the castle to collect your earnings. You meet an attractive noble inside the castle hallway, but you also see a hidden entrance in the hallway. Do you decide to speak with the noble?')
+                    if bf_ans.strip().lower() in yes:
+                        menu()
+                        the_marriage()
+                    else:
+                        menu()
+                        passageway()
                 else:
+                    input(
+                        f'{bulletpoint2}After the deed was done you travel into the castle to collect your earnings. You happen to a hidden entrance in the hallway and decide to enter it.')
                     menu()
                     passageway()
 
@@ -2855,10 +2908,15 @@ _,'    \_>\_/    ',_
                     menu()
                     vendor_lady_object -= 1 # Turns off the vendor_lady scenario
                 else:
-                    print(f'\n{bulletpoint2}You visit a local tavern and meet someone who became your best friend over the course of months.')
-                    vendor_lady_object -= 1  # Turns off the vendor_lady scenario
-                    best_friend()
-                    menu()
+                    if current_heir in (hero.name, 'beggar', 'the beggar'):
+                        vendor_lady_object -= 1  # Turns off the vendor_lady scenario
+                        secret_item()
+                        menu()
+                    else:
+                        print(f'\n{bulletpoint2}You visit a local tavern and meet someone who became your best friend over the course of months.')
+                        vendor_lady_object -= 1  # Turns off the vendor_lady scenario
+                        best_friend()
+                        menu()
 
             # The Beggar
             def beggar():
