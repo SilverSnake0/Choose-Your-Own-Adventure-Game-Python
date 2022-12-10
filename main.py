@@ -864,7 +864,7 @@ jgs .-=-.    ) -.
                             # Check if the player has won by guessing all the letters in the word
                             if all(letter in guessed_letters for letter in word):
                                 print(
-                                    f'\n{bulletpoint2}Congratulations, you won the game! The word was "{word}"!')
+                                    f'\n{bulletpoint2}Congratulations, you won the game! The inmate was freed! The word was "{word}"!')
                                 break
                     else:
                         # If the letter is not in the word and the letters is more than one character, increment the incorrect guess counter
