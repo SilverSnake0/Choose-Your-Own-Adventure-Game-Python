@@ -749,6 +749,143 @@ jgs .-=-.    ) -.
 
             # Play a game of Blackjack
             play_blackjack()
+
+        def hangman():
+            # Define a list of words to use in the game
+            words = [
+                'elephant','umbrella','sprint','keyboard','volcano','hopscotch','waterfall','jellyfish','frozen', 'giraffe', 'flamingo','peacock','chirping','shipwreck','stretching','crawling','seagull','dolphin','hummingbird',
+                'leaping','dancing','whistling','singing','clapping','laughing','giggling','smiling','grinning','candy',
+                'icecream','waterfall','cookie','pancake','natural','avalanche','sandwich','woodchip','popcorn','mountain',
+                'volcano','kingdom','milkshake','pinstripe','teapot','coffee', 'watermelon', 'blueberry', 'honeydew', ]
+            a_z = alphabet
+            # Define the individual parts of the hangman image
+            background = '☀🏰🚩☁         ☁'
+            rope = '     𓍯'
+            head = '     🤐'
+            dead = '     😵'
+            left_hand = '  O'
+            arm = '='
+            chest = '\_/'
+            right_hand = 'O'
+            left_leg = '     | '
+            right_left = '|'
+            left_foot = '     l '
+            right_foot = 'l'
+            hanged_body = [head, left_hand, arm, arm, chest, arm, arm, right_hand, left_leg, right_left, left_foot, right_foot]
+            full_body = '''
+            ☀🏰🚩☁         ☁
+                    𓍯
+                😵
+                O==\_/==O
+                | |
+                l l  '''
+
+            # Generate a random word from the list
+            word = random.choice(words)
+
+            # Initialize an empty list to store the letters that have been guessed
+            guessed_letters = []
+
+            # Initialize a counter to keep track of the number of incorrect guesses
+            incorrect_guesses = 0
+
+            # Ask the player if they want to hear the instructions for the game
+            hangman_instructions = input(f'Would you like to hear instructions for the Hangman game?')
+            if hangman_instructions.strip().lower() in yes:
+                input("\nHere is a set of instructions for the player to play the hangman game:\n\n1. A word will be randomly chosen from a list of words.\n\n2. The letters in the word will be hidden, and you will have to guess the letters in the word one by one.\n\n3. If a letter you guess is in the word, it will be revealed in the correct position in the word.\n\n4. If a letter you guess is not in the word, you will lose one chance. You have a total of 12 chances.\n\n5. You can also choose to guess the full word at any point during the game. If your guess is correct, you will win the game. If your guess is incorrect, you will lose one of your remaining chances.\n\n6. You win the game if you guess all the letters in the word before running out of chances, or if you correctly guess the full word.\n\n7. You lose the game if you run out of chances without guessing all the letters in the word.\nPress enter to continue...\n")
+            else:
+                pass
+
+            # Print the remaining chances
+            remaining_chances = len(hanged_body)
+            print(f'Remaining Chances: {remaining_chances}')
+
+            # Start a loop to allow the player to guess letters
+            while incorrect_guesses < remaining_chances:
+                # Prints the remaining and guessed letters. The code below also cleans up the strings to look more presentable.
+                new_a_z = ', '.join(
+                [f'{letter}' for letter in a_z])
+                new_guessed_letter = ', '.join(
+                [f'{letter}' for letter in guessed_letters])
+                print(f'\nRemaining Letters: {new_a_z}')
+                print(f'Guessed Letters: {new_guessed_letter}')
+                # Print the hangman image, up to the number of incorrect guesses made
+                print(f'\n{background}\n{rope}\n{head}')
+
+                # Prompt the player to guess a letter
+                guess = input(
+                    f'\n{bulletpoint}Guess the LETTER or WORD: ').lower()
+
+                # If the letter input is a number like "5" or symbol like "^" then this message will be printed
+                while guess not in alphabet:
+                    print(
+                        f'{bulletpoint2}You must enter a letter in the alphabet. Please try again.')
+                    break
+
+                # Check if the letter has already been guessed
+                if guess in guessed_letters:
+                    print(
+                        f'{bulletpoint2}You already guessed that letter. Try again.')
+                else:
+                    # Add the letter to the list of guessed letters
+                    if len(guess) == 1:
+                        if guess in alphabet:
+                            guessed_letters.append(guess)
+                            a_z.remove(guess)
+                            # Check if the player has won by guessing all the letters in the word
+                            if all(letter in guessed_letters for letter in word):
+                                print(
+                                    f'\n{bulletpoint2}Congratulations, you won the game! The inmate was freed!')
+                                break
+                            # If the letter is not in the word, increment the incorrect guess counter
+                            if guess not in word:
+                                incorrect_guesses += 1
+                                print(f'{bulletpoint2}Sorry, please try again.')
+                        else:
+                            pass
+                    # Check if the letter is in the word
+                    elif guess in word:
+                        # Checks if the guess is more than one letter
+                        if len(guess) > 1:
+                            # Checks if the guess is the same as the correct word
+                            if guess == word:
+                                print(f'{bulletpoint2}You guessed the correct word!')
+                                print(
+                                    f'\n{bulletpoint2}Congratulations, you won the game! The inmate was freed! The word was "{word}"!')
+                                break
+                            else:
+                                # If the guess is not the same as the correct word, then increment the incorrect guess counter
+                                print(
+                                    f'{bulletpoint2}Please enter another letter. Try again.')
+                                incorrect_guesses += 1
+                        else:
+                            print(
+                                f'{bulletpoint2}Good guess! The letter is in the word!')
+                            # Check if the player has won by guessing all the letters in the word
+                            if all(letter in guessed_letters for letter in word):
+                                print(
+                                    f'\n{bulletpoint2}Congratulations, you won the game! The word was "{word}"!')
+                                break
+                    else:
+                        # If the letter is not in the word and the letters is more than one character, increment the incorrect guess counter
+                        incorrect_guesses += 1
+                        print(f'{bulletpoint2}Sorry, please try again.')
+
+                    remaining_chances = len(hanged_body)
+                    print(f'\nRemaining Chances: {remaining_chances - incorrect_guesses}')
+
+                    # Print the updated state of the game, with correctly guessed letters revealed
+                    for letter in word:
+                        if letter in guessed_letters:
+                            print(letter, end=" ")
+                        else:
+                            print("_", end=" ")
+
+            # If the player has run out of incorrect guesses, print a message and end the game
+            if incorrect_guesses == remaining_chances:
+                print(full_body)
+                print(f'\n{bulletpoint2}Sorry, you lost the game. The word was "{word}". You watched in regret as your fellow inmate was hanged by your own doing...\n')
+
         # The story objects that can be mixed and matched depending on the storyline and player decisions.
         def story():
             new_rank = '' # Sets the empty rank for the empire_recruitment scenario.
@@ -3037,19 +3174,19 @@ _,'    \_>\_/    ',_
                             if guard_bribe_ans.strip().lower() in yes:
                                 bribe = random.randint(1,10)
                                 if bribe >= 5:
-                                    print(f'\n{bulletpoint2}You give the guard ${bribe}.') 
+                                    input(f'\n{bulletpoint2}You give the guard ${bribe}.') 
                                     hero.money -= bribe
                                     menu()
                                     empire_recruitment()
                                 else:
                                     damage = random.randint(1,10)
-                                    print(f'\n{bulletpoint2}You give the guard ${bribe}. He yells that this is barely anything and slams you into the ground dealing {damage} to you.')
+                                    input(f'\n{bulletpoint2}You give the guard ${bribe}. He yells that this is barely anything and slams you into the ground dealing {damage} to you.')
                                     hero.health -= damage
                                     hero.money -= bribe
                                     menu()
                                     empire_recruitment()
                             else:
-                                print(f'\n{bulletpoint2}He yells at you, calls you a peasant, and then proceeds to jail you in the castle dungeon. ')
+                                input(f'\n{bulletpoint2}He yells at you, calls you a peasant, and then proceeds to jail you in the castle dungeon. ')
                                 menu()
 
                                 #Jail Inmate
@@ -3058,11 +3195,19 @@ _,'    \_>\_/    ',_
                                 body_part = input(f'In your jail cell, you see the inmate next to you with one only one...(type which body part)...body part:')
                                 jail_inmate_ans = input(f'\n{bulletpoint}The inmate with only one {body_part} asks if you would like to be his friend?')
                                 if jail_inmate_ans.strip().lower() in yes:
-                                    input(f'\n{bulletpoint2}The inmate tells you that for the last year he\'s been digging a hole underneath his bed. He say\'s it\'s finally ready and wants you to join him to make the escape.')
-                                    input(
-                                        f'\n{bulletpoint2}In the middle of the night, the inmate lifts his bed and you both went into the hole and made your way out from the sewers. You\'re free now! You and the inmate decide to wash up and then celebrate at a local tavern.')
-                                    best_friend()
-                                    menu()
+                                    snitch_ans = input(f'\n{bulletpoint}The inmate tells you that for the last year he\'s been digging a hole underneath his bed. He says it\'s finally ready and proposes for you to join him to make the escape. Do you snitch to the prisoner guards of the inmate\'s plans or join the inmate in the escape?\n')
+                                    if snitch_ans.strip().lower() in ('tattle', 'tattle tale', 'tell the guards', 'tell the guards about the plan',) or 'snitch' in snitch_ans.strip().lower():
+                                        input(
+                                            f'\n{bulletpoint2}Initially, you were tempted by the idea of escape, but then you had a change of heart. You decided to tell the prisoner guards about the inmate\'s plans, hoping that they would take appropriate action.\n\nThe prisoner guards took the inmate into custody and decided to sentence him to death by hanging. They escorted him to the gallows, where he was to be hanged.\n\nAs the inmate was being hanged, you realized that you had made a terrible mistake. You had second thoughts about turning the inmate in, and you felt incredibly guilty about what had happened.\n\nFortunately, there was a rule in this prison that if you could win a game of hangman, they would release the prisoner.\n')
+                                        hangman()
+                                        input(f'\n{bulletpoint2}The prisoner guard is impressed by your quick thinking and resourcefulness. He offers to let you go on the condition that you join the ranks of the Red Dragon Empire.\n\nThe Red Dragon Empire is a powerful and feared organization that rules over a vast territory. They are known for their martial prowess and their ruthless tactics, and they are always looking for strong and capable individuals to join their ranks.\n\nYou are hesitant at first, but you realize that this may be your only chance to escape from the prison and start a new life. You agree to join the Red Dragon Empire, and the prisoner guard lets you go free.\n')
+                                        menu()
+                                        empire_recruitment()
+                                    else:
+                                        input(
+                                            f'\n{bulletpoint2}In the middle of the night, the inmate lifts his bed and you both went into the hole and made your way out from the sewers. You\'re free now! You and the inmate decide to wash up and then celebrate at a local tavern.')
+                                        menu()
+                                        best_friend()
                                 else:
                                     input(f'\n{bulletpoint2}You sleep in the damp dark cell filled with dead rats and a repulsive stench. You wake up the next morning and discover your inmate has disappeared. You discover a hole underneath his bed, and prepare to make your escape...but just as you\'re about to leave, the guards force you out and says the captain wants to speak with you immediately!')
                                     menu()
@@ -3070,8 +3215,8 @@ _,'    \_>\_/    ',_
                                     #Captain Offer
                                     captain_offer_ans = input(f'\n{bulletpoint}The captain says he\'s looking for some prisoners to help get rid of a local monster that\'s been causing problems. He asks if you would like to fight, and in return, you\'ll be freed and provided some money. Do you accept the offer?')
                                     if captain_offer_ans.strip().lower() in yes:
-                                        empire_recruitment()
                                         menu()
+                                        empire_recruitment()
                                     else:
                                         damage = random.randint(5, 15)
                                         hero.health -= damage
