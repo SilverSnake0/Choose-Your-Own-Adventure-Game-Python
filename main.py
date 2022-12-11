@@ -12,15 +12,9 @@ hero_items = [
 hero_land_items = {
     '🐎': 0, '☕️': 0, '🌽': 0, '🍯': 0, '🦪': 0, '🍍': 0, '🐡': 0, '🍨': 0, '⚗️': 0
 }
-# These are ascii art of swords which will be properly displayed in the game vendor menu. \n is new line.
-rusty_sword = '    /\n0===[====================-\n    \\'
-sword_one = '          ./\n()=@XXXXX@=[0}================--\n          `\_'
-sword_two = "            /\ \n/vvvvvvvvvvvv \--------------------------------------,\n`^^^^^^^^^^^^ /=====================================\" \n            \/"
-mythic = " ,.\n \%`.\n  `.%`.\n    `.%`.\n      `.%`.\n        `.%`.\n          `.%`.    __\n            `.%`.  \ \\ \n              `.%`./_/\n                `./ /.\n               __/\/:/;.\n               \__/  `:/;.\n                       `:/;.,   \n                    Krogg`:/ ;\n                           `'\n"
-mythic_two = "                _\n               /\)\n              /\/\n             /\/\n           _/L/\n          (/\_)\n          /%/  \n         /%/  \n        /%/\n       /%/\n      /%/\n     /%/\n    /%/\n   /%/\n  /%/\n /%/ Krogg\n/,'\n\" "
 # Special items that add different abilities in monster battles.
 battle_items = [
-    '🏺- Invisibility Potion', '🔮Merlin\'s Crystal Ball', '☄️Fireball Spell', '🍶Elixir of the Gods', '👾Ancient Drone']
+    '🏺- Invisibility Potion', '🔮Merlin\'s Crystal Ball', '☄️Fireball Spell', '🍶Elixir of the Gods', '👾Ancient Drone', '⛣- Ring of Nirvana']
 
 def exit_game():
     exit()
@@ -28,7 +22,6 @@ def exit_game():
 def adventure_game():
     bulletpoint = '✴ ' # Used to emphasize requiring the user's input for the story.
     bulletpoint2 = '◼ '# Regular bulletpoint for sentences not requiring user's input.
-    body_part = 'arm' # Fixed string to be inserted into parts of the story. This variable can be changed later.
        
     def restart():
         vendor_lady_object = 1 
@@ -52,12 +45,19 @@ def adventure_game():
         masamune_katana = Item('🗡- Masamune Katana', -99, 150)
         krogg_moon_blade = Item('🗡- Krogg Moon Blade', 200, 0)
         krogg_moon_katana = Item('🗡- Krogg Moon Katana', 0, 50)
-        ringofnirvana= Item('⛣- Ring of Nirvana', 200, 0)
         valkyrie_crossbow = Item('🏹- Valkyrie', 200, 50)
         boomerang = Item('🪃- Boomerang', 0, 15)
         thors_hammer = Item('⚒️- Thor\'s Hammer', 100, 100)
         redempireflag = Item('🚩- Red Empire Flag', 100, 0)
         dragonscale = Item('🛡️- Dragonscale', 200, 0)
+        merlins_crystal_ball = Item('🔮Merlin\'s Crystal Ball', 0, 0)
+        fireball_spell = Item('☄️Fireball Spell', 0, 0)
+        elixir_of_the_gods = Item('🍶Elixir of the Gods', 0, 0)
+        ancient_drone = Item('👾Ancient Drone', 0, 0)
+        ring_of_nirvana = Item('⛣- Ring of Nirvana', 0, 0)
+        ancientriotshield = Item('🛡️ Ancient Riot Shield', 100, 0)
+        adamantineblade = Item('🗡 Adamantine Blade', 0, 90)
+        warriorshelm = Item('👑 Warrior\'s Helm', 100, 0)
 
         class Hero:
 
@@ -117,6 +117,7 @@ def adventure_game():
         cornstalker = Monster('Cornstalker', 200, 80, 180)
         gloopus = Monster('Gloopus', 180, 70, 200)
         behemoth = Monster('Behemoth', 250, 100, 250)
+        goldscale = Monster('Goldscale', 250, 100, 400)
 
         available_monster_list = [sandworm, giant, arachne, tiamat, merlin, robots, kitty, fenrir,
                                   alexa9000, griffin, skeletonwarrior, boxer, leviathan, phoenix, minotaur, cornstalker, gloopus, behemoth]
@@ -141,9 +142,10 @@ def adventure_game():
                         exit_game()
                 elif type(person) == Monster:
                     if person.name not in tamed_monster_list:
-                        input(
-                            f'As a member of the Monster Hunter Guild, you possess the skills to tame and train even the most ferocious beasts!\nYour collection of monsters has grown, and with it your power has increased!\n{person.name} has been added to your stable of powerful allies!')
-                        tamed_monster_list.append(person.name)
+                        if hero.health > 0:
+                            input(
+                                f'As a member of the Monster Hunter Guild, you possess the skills to tame and train even the most ferocious beasts!\nYour collection of monsters has grown, and with it your power has increased!\n{person.name} has been added to your stable of powerful allies!')
+                            tamed_monster_list.append(person.name)
                     else:
                         pass
             else:
@@ -233,6 +235,14 @@ def adventure_game():
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠙⠓⠲⠤⠤⣄⣀⠀⠀⠈⠙⠲⠤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀                 '''
         # Simulate a Battle system between a hero and a monster. This implements a block, counter, and attack style system. The first two arguments take two entities that are battling, and then the rest are the string names of the monster moves.
         def battle(person, monster, defend, weak, counter, attack):
+            current_person_health = person.health
+            current_monster_health = monster.health
+            elixir_hp = person.health
+            elixir_turns = 4
+            elixir_activated = False
+            elixir_count = 1  # Number of times user can use the elixir.
+            drone_actived = False
+            drone_battery = 10
             print('Monster Attack Damage:')
             monster_attack = monster.attack()  # Returns random monster damage number
             print('Player Attack Damage:')
@@ -246,11 +256,38 @@ def adventure_game():
             # Combined the battle menu with the checking health function together to make it easier to call for the code below.
             battle_Health_Menu()
             def battlemenu():
+                nonlocal drone_battery
+                nonlocal elixir_turns
+                if drone_actived == True:
+                    if drone_battery > 0:
+                        print(f'{bulletpoint2}Incoming Drone Strikes!!!')
+                        strike_hit = random.randint(0, 10)
+                        if strike_hit > 5:
+                            input(f'{bulletpoint2}The strike was successful! {monster.name} was dealt 20 damage!')
+                            monster.health -= 20
+                        else:
+                            input(
+                                f'{bulletpoint2}The strike missed.')
+                        drone_battery -= 1
+                        if drone_battery == 0:
+                            input(f'{bulletpoint2}The ancient drone\'s battery has been depleted.')
+                if elixir_activated == True:
+                    if elixir_turns > 0:
+                        person.health = elixir_hp
+                        input(f'{bulletpoint2}After drinking the elixir, your wounds stop bleeding and your health state becomes frozen. Any damage dealt to you will be immediately nullified.')
+                        elixir_turns -= 1
+                    if elixir_turns == 0:
+                        input(f'{bulletpoint2}The effects of the elixir have worn off...')
                 battle_Health_Menu()
                 check_health(monster)
                 check_health(person)
             invisibility_count = 3 # Number of times user can use the invisibility potion.
-            tamed_monster_count = len(tamed_monster_list)
+            ringofnirvana_count = 1 # Number of times user can use the ring of nirvana.
+            crystal_ball_count = 1 # Number of times user can use the crystal ball.
+            fireball_count = 3 # Number of times user can use the fireball.
+            drone_count = 1 # Number of times user can use the ancient drone.
+            tamed_monster_count = len(tamed_monster_list) # Find out the number of tamed monsters which counts for the amount of summons available
+            special_item_command_count = 1 # This is so that the special item command string is printed only once
             while monster.health >= 0:
                 # Breaks out of the while loop once monster health reaches less than 0
                 if monster.health <= 0:
@@ -259,11 +296,31 @@ def adventure_game():
                 # If there are items existing in the battle_items list, then it will print the special item commands to be shown in the battle menu.
                 if battle_items:
                     for i in battle_items:
-                        if i in hero_items: # Double checks to make sure battle item exists in hero items
-                            print(f'{bulletpoint2}Special Item Commands:')
+                        if i in hero_items: # Checks to make sure battle item exists in hero items
+                            if special_item_command_count == 1:
+                                print(f'{bulletpoint2}Special Item Commands:')
+                            else:
+                                pass
+                            special_item_command_count = 0
                             if i == '🏺- Invisibility Potion':
                                 print(
-                                    f'{bulletpoint2}{i} Command: "abracadabra"  Uses Left: {invisibility_count}')
+                                    f'{bulletpoint2}{i} Command: "Abracadabra"  Uses Left: {invisibility_count}')
+                            elif i == '⛣- Ring of Nirvana':
+                                print(
+                                    f'{bulletpoint2}{i} Command: "Estelio"  Uses Left: {ringofnirvana_count}')
+                            elif i == '🔮Merlin\'s Crystal Ball':
+                                    print(
+                                        f'{bulletpoint2}{i} Command: "Annúnadar"  Uses Left: {crystal_ball_count}')
+                            elif i == '☄️Fireball Spell':
+                                    print(
+                                        f'{bulletpoint2}{i} Command: "Caladran"  Uses Left: {fireball_count}')
+                            elif i == '👾Ancient Drone':
+                                    print(
+                                        f'{bulletpoint2}{i} Command: "Robostrike"  Uses Left: {drone_count}')
+                            elif i == '🍶Elixir of the Gods':
+                                    print(
+                                        f'{bulletpoint2}{i} Command: "Ithilien"  Uses Left: {elixir_count}')
+
 
                 if monster_guild_membership == True:
                     if tamed_monster_list:
@@ -444,7 +501,7 @@ jgs .-=-.    ) -.
                 elif person_move.lower().strip() == 'abracadabra':
                     if '🏺- Invisibility Potion' in hero_items: # Checks if the item is in hero items, otherwise below code won't execute.
                         if invisibility_count > 0:
-                            print(
+                            input(
                                 f'{bulletpoint}{monster.name} tried to {monster_moves}, but {person.name} vanished and attacked {monster.name} from behind dealing 💥{person.damage} damage!\n')
                             monster.health -= person_attack
                             invisibility_count -= 1 # Reduction of the 3 remaining times the hero can use this item.
@@ -452,8 +509,90 @@ jgs .-=-.    ) -.
                         else:
                             print(
                                 f'{bulletpoint2}You have used up all of the invisibility potion for this battle.')
-                            print(
+                            input(
                                 f'{bulletpoint2}{monster.name} attacked and dealt {monster_attack} damage to {person.name}, while {person.name} was fiddling around with the potion.\n')
+                            person.health -= monster_attack
+                            battlemenu()
+                elif person_move.lower().strip() == 'estelio':
+                    # Checks if the item is in hero items, otherwise below code won't execute.
+                    if '⛣- Ring of Nirvana' in hero_items:
+                        if ringofnirvana_count > 0:
+                            input(
+                                f'{bulletpoint}As you hold the Ring of Nirvana in your hand, you feel its magic pulsing and swirling around you.\nThe power of the ring flows into your body, filling you with a sense of strength and vitality.\nYou feel your wounds begin to close and your strength returning, as if the ring is infusing you with 50 points of health.\nThe magic of the ring surrounds you like a glowing aura, protecting you from harm and enabling you to continue fighting on the battlefield.\n')
+                            person.health += 50
+                            # Reduction of the 3 remaining times the hero can use this item.
+                            ringofnirvana_count -= 1
+                            battlemenu()
+                        else:
+                            print(
+                                f'{bulletpoint2}You have used up all of the ring of nirvana power for this battle.')
+                            input(
+                                f'{bulletpoint2}{monster.name} attacked and dealt {monster_attack} damage to {person.name}, while {person.name} was fiddling around with the ring.\n')
+                            person.health -= monster_attack
+                            battlemenu()
+                elif person_move.lower().strip() == 'caladran':
+                    # Checks if the item is in hero items, otherwise below code won't execute.
+                    if '☄️Fireball Spell' in hero_items:
+                        if fireball_count > 0:
+                            fireball_dmg = random.randint(1, 40)
+                            input(
+                                f'{bulletpoint}As you stand on the battlefield facing your enemy, you raise your hand and unleash a barrage of fireballs at it. The fireballs streak through the air, leaving trails of sparks and smoke in their wake.\nYour enemy roars in pain as the fireballs hit it dealing {fireball_dmg} damage, setting its body alight and charring its flesh.\n')
+                            monster.health -= fireball_dmg
+                            # Reduction of the 3 remaining times the hero can use this item.
+                            fireball_count -= 1
+                            battlemenu()
+                        else:
+                            print(
+                                f'{bulletpoint2}You have used up all of the ring of nirvana power for this battle.')
+                            input(
+                                f'{bulletpoint2}{monster.name} attacked and dealt {monster_attack} damage to {person.name}, while {person.name} was fiddling around with the ring.\n')
+                            person.health -= monster_attack
+                            battlemenu()
+                elif person_move.lower().strip() == 'robostrike':
+                    # Checks if the item is in hero items, otherwise below code won't execute.
+                    if '👾Ancient Drone' in hero_items:
+                        if drone_count > 0:
+                            input(f'{bulletpoint2}As you stand on the battlefield facing your enemy, you turn on an ancient device and hear a low humming sound coming from behind.\nYou turn to see an ancient drone rising into the air, its wings beating steadily as it hovers above the ground. You recognize the drone as one of the ancient weapons that were used in battles long ago.')
+                            drone_actived = True
+                            drone_count -= 1
+                            battlemenu()
+                        else:
+                            print(
+                                f'{bulletpoint2}You have already used the drone for this battle.')
+                            input(
+                                f'{bulletpoint2}{monster.name} attacked and dealt {monster_attack} damage to {person.name}, while {person.name} was figuring out where the drone was.\n')
+                            person.health -= monster_attack
+                            battlemenu()
+                elif person_move.lower().strip() in ('annunadar','annúnadar'):
+                    # Checks if the item is in hero items, otherwise below code won't execute.
+                    if '🔮Merlin\'s Crystal Ball' in hero_items:
+                        if crystal_ball_count > 0:
+                            input(
+                                f'{bulletpoint}With a burst of magical energy, you activate the crystal ball\'s power of time reversal. You see the enemy pausing in mid-lunge. Time seems to slow down them reverse as the enemy\'s moves backwards in time.\nUsing the crystal ball\'s power of time reversal, you are able to turn the tide of the battle in your favor to the initial starting state of the battle.\nNew {monster.name} Health: {current_monster_health}\nNew {person.name} Health: {current_person_health}')
+                            person.health = current_person_health
+                            monster.health = current_monster_health
+                            # Reduction of the 1 remaining time the hero can use this item.
+                            crystal_ball_count -= 1
+                            battlemenu()
+                        else:
+                            print(
+                                f'{bulletpoint2}You have used up all of the crystal ball power for this battle.')
+                            input(
+                                f'{bulletpoint2}{monster.name} attacked and dealt {monster_attack} damage to {person.name}, while {person.name} was fiddling around with the crystal ball.\n')
+                            person.health -= monster_attack
+                            battlemenu()
+                elif person_move.lower().strip() == 'ithilien':
+                    # Checks if the item is in hero items, otherwise below code won't execute.
+                    if '🍶Elixir of the Gods' in hero_items:
+                        if elixir_count > 0:
+                            elixir_activated = True
+                            elixir_count -= 1
+                            battlemenu()
+                        else:
+                            print(
+                                f'{bulletpoint2}You have already drank the elixir for this battle.')
+                            input(
+                                f'{bulletpoint2}{monster.name} attacked and dealt {monster_attack} damage to {person.name}, while {person.name} was fiddling around with the empty elixir bottle.\n')
                             person.health -= monster_attack
                             battlemenu()
                 elif person_move.lower().strip() == 'iamgod.':
@@ -1216,6 +1355,13 @@ jgs .-=-.    ) -.
             #Vendor Lady
             def show_vendor_menu():
                 count = 1
+
+                # These are ascii art of swords which will be properly displayed in the game vendor menu. \n is new line.
+                rusty_sword = '    /\n0===[====================-\n    \\'
+                sword_one = '          ./\n()=@XXXXX@=[0}================--\n          `\_'
+                sword_two = "            /\ \n/vvvvvvvvvvvv \--------------------------------------,\n`^^^^^^^^^^^^ /=====================================\" \n            \/"
+                mythic = " ,.\n \%`.\n  `.%`.\n    `.%`.\n      `.%`.\n        `.%`.\n          `.%`.    __\n            `.%`.  \ \\ \n              `.%`./_/\n                `./ /.\n               __/\/:/;.\n               \__/  `:/;.\n                       `:/;.,   \n                    Krogg`:/ ;\n                           `'\n"
+                mythic_two = "                _\n               /\)\n              /\/\n             /\/\n           _/L/\n          (/\_)\n          /%/  \n         /%/  \n        /%/\n       /%/\n      /%/\n     /%/\n    /%/\n   /%/\n  /%/\n /%/ Krogg\n/,'\n\" "
                 # Printing ascii art
                 vendor_display = [rusty_sword, sword_one,
                                 sword_two, mythic, mythic_two]
@@ -1252,8 +1398,7 @@ jgs .-=-.    ) -.
                                     f'{bulletpoint2}\nYou already own {sold_item.name} in your inventory!. Press enter to continue...')
                             else:
                                 hero.money -= vendor_price[int(buy_item) - 1] # Deduction of hero's money of the item's price.
-                                hero_items.append(sold_item.name) # Add the item's name to hero's items list.
-                                hero.add_item(sold_item) # Add the item's attributes to the hero.
+                                hero.add_item(sold_item) # Add the item's attributes to the hero and add the item's name to hero's items list.
                                 input(
                                     f'\n{bulletpoint2}Congratulations on your purchase! I\'m sure you\'ll enjoy it!🎁\nThe {sold_item.name} has been added to your inventory. Press enter to continue...')
                             menu()
@@ -1262,7 +1407,8 @@ jgs .-=-.    ) -.
                             wheat = input(
                                 f'{bulletpoint2}\nSorry, you can\'t afford this item. Press enter to continue...')
                             if wheat.lower() == 'gimmethebread':
-                                hero.money += 5000
+                                input(f'{bulletpoint2}Money magically appeared in your inventory!')
+                                hero.money += 10000
                             else:
                                 pass
                     elif buy_item == '0': # Exit of the vendor menu.
@@ -1271,12 +1417,15 @@ jgs .-=-.    ) -.
                     
                 except:
                     input(
-                        f'{bulletpoint2}The number you entered is not a valid item in the vendor\'s inventory. Please try again.')
-                    show_vendor_menu()
+                        f'{bulletpoint2}Please try again.')
                 else:
                     input(
-                        f'{bulletpoint2}The number you entered is not a valid item in the vendor\'s inventory. Please try again.')
+                        f'{bulletpoint2}Please try again.')
+                #Try and except added here to fix a bug where if you visit the vendor lady then die to a monster, this will raise an error.
+                try:
                     show_vendor_menu()
+                except:
+                    pass
 
             # The Restaurant
             def the_restaurant():
@@ -1464,8 +1613,7 @@ jgs .-=-.    ) -.
                         input(
                             f'\n{bulletpoint2}Congratulations, you just earned a nice chunk of change! I\'m sure you\'ll enjoy it!🎁\nThe money has been added to your inventory. Press enter to continue...')
                     else:
-                        hero_items.append(random_secret_item.name)
-                        # Add the item's attributes to the hero.
+                        # Add the item's attributes to the hero and add the item's name to hero's items list.
                         hero.add_item(random_secret_item)
                         input(
                             f'\n{bulletpoint2}Congratulations, you just won the {random_secret_item.name}! I\'m sure you\'ll enjoy it!🎁\nThe {random_secret_item.name} has been added to your inventory. Press enter to continue...')
@@ -1535,11 +1683,51 @@ jgs .-=-.    ) -.
                 nonlocal emperor_life
                 nonlocal noble_life
                 nonlocal assassin_guild_membership
+                global current_fountain_money
+                current_fountain_money = 135
                 drink_water_ans = input(f'\n{bulletpoint}As the old man shows you around the City of the Rising Sun, you are struck by the peaceful and serene atmosphere of the city. People from all walks of life can be seen going about their business, and there is a sense of harmony and cooperation among the various different groups.\n\nThe old man leads you through the winding streets of the city, pointing out the various landmarks and places of interest. He shows you the central market, where merchants from all over the world come to trade their goods. You also visit the city\'s library, which is filled with ancient books and scrolls that contain knowledge and wisdom from the past.\n\nAs you continue your tour, the old man brings you to the city\'s main square, where a large fountain stands in the center. People are gathered around the fountain, enjoying the cool, refreshing water on a hot day. The old man tells you that the water of the fountain has healing properties, and many people come to drink from it to cure their ailments.\n\nDo you take a drink of this water?\n')
                 if drink_water_ans.strip().lower() in yes:
                     input(f'{bulletpoint}You were healed for 50 health points!')
                     hero.health += 50
                     menu()
+                    throw_fountain = input(f'{bulletpoint2}Current Fountain Change: {current_fountain_money}\nSome people throw some money into the fountain for good luck. Would you like to throw anything in or steal the fountain money?')
+                    if 'throw' in throw_fountain.strip().lower():
+                        money_throw = input(f'{bulletpoint2}Current money: ${hero.money}\nEnter the money amount you would like to throw:')
+                        try:
+                            if int(money_throw) > 0 and int(money_throw) <= hero.money:
+                                hero.money -= int(money_throw)
+                                current_fountain_money += int(money_throw)
+                                input(
+                                    f'{bulletpoint2}You\'ve successfully thrown ${money_throw} into the fountain!\nCurrent Fountain Change: {current_fountain_money}')
+                                if current_fountain_money >= 20000:
+                                    add_health(goldscale)
+                                    input(f'{bulletpoint2}All of a sudden, a fountain monster called Goldscale pops up from the fountain after your threw the money in. This monster has a body made of shimmering gold, with scales covering its skin. Its eyes glowing orbs of pure gold, and a long, serpentine tail that writhes and coils behind it.\n\nWhen the monster emerges from the fountain, it is enraged by the act of having money thrown into its home. It then starts attacking you, seeking to defend itself and its territory.')
+                                    battle(hero, goldscale, 'swims behind a coin chest',
+                                        'surrounds itself with coins', 'launches a shower of gold coins', 'surrounds you with coin projectiles')
+                                    random_health_gain = random.randint(10, 30)
+                                    print(
+                                        f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
+                                    hero.health += random_health_gain
+                                    check_health(hero)
+                                    add_money(500, 1000)
+                                    input(f'{bulletpoint2}In the end, after a long and grueling battle, you emerged victorious. Goldscale, defeated, retreated back into the fountain. The adventurer, triumphant, went on to tell the tale of their victory to all who would listen. And so, the legend of the fountain monster was born.')
+                                    menu()
+                            elif int(money_throw) == 0:
+                                input(f'{bulletpoint2}You changed your mind.')
+                            else:
+                                input(f'{bulletpoint2}This is not a valid number. You changed your mind and left.')
+                        except:
+                            input(f'{bulletpoint2}This is not a valid number. You changed your mind and left.')
+                    elif 'steal' in throw_fountain.strip().lower():
+                        input(f'{bulletpoint2}You decided to take the {current_fountain_money}!\n')
+                        hero.money -= current_fountain_money
+                        current_fountain_money = 0
+                        input(f'{bulletpoint2}Current fountain money: ${current_fountain_money}\n')
+                        menu()
+                    else:
+                        input(
+                            f'{bulletpoint2}You decided to leave the fountain the way it is.')
+
                 enter_assassin_guild = input(f'\n{bulletpoint}After exploring the city for a while, the old man leads you to a secluded part of the city, where a mysterious sign stands in front of a hidden door. The sign bears the emblem of a hooded figure holding a curved blade. The old man tells you that this is the entrance to the Assassin Guild, a secretive organization of skilled assassins who serve as protectors.\n\nYou thank the old man for showing you around the city, and he tells you that he will be waiting for you if you ever need anything. You stand in front of the mysterious sign, considering whether or not you should enter the Assassin Guild and see what secrets it holds. The choice is yours, do you enter the building?\n\n')
                 if enter_assassin_guild.strip().lower() in yes:
                     if assassin_guild_membership == False:
@@ -2504,9 +2692,11 @@ jgs .-=-.    ) -.
                 add_health(sandworm) # Adds monster health if it has already been killed.
                 sand_monster_ans = input(f'\n{bulletpoint}You see something like a mountain rise up from the sand. The monk says that this must be the legendary 1000 year old {sandworm.name}. You stare up and see a massive hole with thousands of sharp teeth at every corner of its mouth. Do you even attempt to fight this thing?')
                 if sand_monster_ans.strip().lower() in yes:
-
+                    # Cleaning up the hero item strings to play be displayed properly
+                    clean_hero_items = ', '.join(
+                        [f'{letter}' for letter in hero_items])
                     sand_monster_weapon = input(
-                        f'\n{bulletpoint}The monk asks you what weapon you plan to fight this thing when we only have {hero_items}? You respond with "I\'ll just use the..."')
+                        f'\n{bulletpoint}The monk asks you what weapon you plan to fight this thing when we only have {clean_hero_items}? You respond with "I\'ll just use the..."')
                     input(f'\n{bulletpoint2}As you try your plan of attacking with the {sand_monster_weapon}... you utterly failed. The {sandworm.name} then surrounded you with a giant wall of sand, preventing your escape...') 
                     battle(hero, sandworm, 'digs at ground',
                            'twists body', 'shrieks', 'moves underground')
@@ -2684,14 +2874,6 @@ _,'    \_>\_/    ',_
                 def treasure_room_ending():
                     input(
                         f'\n{bulletpoint2}You hear horns and guards yelling outside of the treasure room. It seems that you made too much noise and are about to be caught! The only time to escape is now. You escape from the room and saw guards running past you.\n')
-                # Item creation for the treasure room.
-                ancientriotshield = Item('🛡️ Ancient Riot Shield', 100, 0)
-                adamantineblade = Item('🗡 Adamantine Blade', 0, 90)
-                elixirofthegods = Item('🍶 Elixir of the Gods', 0, 0)
-                ancientdrone = Item('👾 Ancient Drone', 0, 0)
-                merlinscrystalball = Item('🔮 Merlin\'s Crystal Ball', 0, 0)
-                fireball = Item('🔥 Fireball Spell', 0, 0)
-                warriorshelm = Item('👑 Warrior\'s Helm', 100, 0)
                 
                 print('💰🪙💍'*500) # Treasure room display.
                 treasure_ans = input(
@@ -2710,7 +2892,7 @@ _,'    \_>\_/    ',_
                            'meow meow', 'roars', 'stalks')
                     input(
                         f'{bulletpoint2}You took care of the Kitty monster! You reach to pick up the Ancient Riot Shield! This item will add 100 health.')
-                    hero.add_item(ancientriotshield) # Adds item attributes and to hero item list if the monster was killed.
+                    hero.add_item(ancientriotshield) # Add the item's attributes to the hero and add the item's name to hero's items list.
                     check_health(hero) # Check if the hero died and will restart game if that is the case.
                     check_health(kitty) # Check if the monster died and will print that the monster has died.
                     treasure_room_ending()
@@ -2727,7 +2909,7 @@ _,'    \_>\_/    ',_
                            'whimpers', 'growls', 'wags tail')
                     input(
                         f'{bulletpoint2}You took care of the Fenrir monster! You reach to pick up the Adamantine Blade! This item will add 90 attack damage.')
-                    hero.add_item(adamantineblade) # Adds item attributes and to hero item list if the monster was killed.
+                    hero.add_item(adamantineblade) # Add the item's attributes to the hero and add the item's name to hero's items list.
                     check_health(hero) # Check if the hero died and will restart game if that is the case.
                     check_health(fenrir) # Check if the monster died and will print that the monster has died.
                     treasure_room_ending()
@@ -2762,7 +2944,7 @@ _,'    \_>\_/    ',_
                                             question3_count = 0  # Resets the third count
                                             input(
                                                 f'{bulletpoint2}You opened the final box! The door opens and you reach to pick up the Elixir of the Gods! This item will help heal you 100 health once per battle.')
-                                            hero.add_item(elixirofthegods)
+                                            hero.add_item(elixir_of_the_gods) # Add the item's attributes to the hero and add the item's name to hero's items list.
                                             treasure_room_ending()
                                             print(
                                                 f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
@@ -2788,16 +2970,16 @@ _,'    \_>\_/    ',_
                     beggar()
         
                 elif treasure_ans == '4':
-                    add_health(ancientdrone) # Adds monster health if it has already been killed.
+                    add_health(alexa9000) # Adds monster health if it has already been killed.
                     input(
                         f'\n{bulletpoint2}When you enter the room, you see a strange metal object that looks like it hasn\'t been cleaned in decades. All of a sudden the lights on it start lighting up, and it transforms into a large metal monster. It yells "Trespassers shall be terminated"!\n')
                     battle(hero, alexa9000, 'says "beep boop"',
                            'powers down', 'says "beep beep"', 'says "boop beep"')
                     input(
                         f'{bulletpoint2}You took care of the Robot monster! You reach to pick up the ancient drone! This robot will help you attack the enemy in battles.')
-                    hero.add_item(ancientdrone) # Adds item attributes and to hero item list if the monster was killed.
+                    hero.add_item(ancient_drone) # Add the item's attributes to the hero and add the item's name to hero's items list.
                     check_health(hero) # Check if the hero died and will restart game if that is the case.
-                    check_health(ancientdrone) # Check if the monster died and will print that the monster has died.
+                    check_health(alexa9000) # Check if the monster died and will print that the monster has died.
                     treasure_room_ending()
                     print(
                         f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
@@ -2831,7 +3013,8 @@ _,'    \_>\_/    ',_
                     if int(guess1) == random_num:
                         input(
                             f'\n{bulletpoint2}You foresaw the correct answer! You reach to pick up the crystal ball! This item will reveal the enemy\'s actions one time per battle.\n')
-                        hero.add_item(merlinscrystalball) # Adds item attributes and to hero item list if the monster was killed.
+                        # Add the item's attributes to the hero and add the item's name to hero's items list.
+                        hero.add_item(merlins_crystal_ball)
                         treasure_room_ending()
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
@@ -2850,7 +3033,7 @@ _,'    \_>\_/    ',_
                            'beak turns left', 'flaps wings', 'raises talons')
                     input(
                         f'\n{bulletpoint2}You took care of the Griffin monster! You reach to pick up the Fireball scroll which tells you secret words! You can use this spell during battles to attack the enemy!\n')
-                    hero.add_item(fireball) # Adds item attributes and to hero item list if the monster was killed.
+                    hero.add_item(fireball_spell) # Add the item's attributes to the hero and add the item's name to hero's items list.
                     check_health(hero) # Check if the hero died and will restart game if that is the case.
                     check_health(griffin) # Check if the monster died and will print that the monster has died.
                     treasure_room_ending()
@@ -2865,7 +3048,7 @@ _,'    \_>\_/    ',_
                     battle(hero, skeletonwarrior, 'raises shield','bones crack', 'cracks knuckles', 'raises sword')
                     input(
                         f'{bulletpoint2}You took care of the Skeleton monster! You reach to pick up the Warrior\'s Helm! This item will add 100 health.')
-                    hero.add_item(warriorshelm) # Adds item attributes and to hero item list if the monster was killed.
+                    hero.add_item(warriorshelm) # Add the item's attributes to the hero and add the item's name to hero's items list.
                     check_health(hero) # Check if the hero died and will restart game if that is the case.
                     check_health(skeletonwarrior) # Check if the monster died and will print that the monster has died.
                     treasure_room_ending()
@@ -3188,14 +3371,14 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄      𐀪⨔')
                                 print('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄                 ▄▄▄▄▄▄')
                                 print('▄▄▄▄         ▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
-                                if ringofnirvana.name not in hero_items:
+                                if ring_of_nirvana.name not in hero_items:
                                     take_ring = input(
                                         f'{bulletpoint}You hear a acoustic humming noise and see a shining ring floating in mid air. Do you take it?')
                                     if take_ring.lower() == 'yes':
-                                        if ringofnirvana not in hero_items:
+                                        if ring_of_nirvana not in hero_items:
                                             input(
-                                                f'{bulletpoint2}You took it and wore the {ringofnirvana.name}. You feel your health increase by {ringofnirvana.health_bonus}!')
-                                            hero.add_item(ringofnirvana)
+                                                f'{bulletpoint2}You took it and wore the {ring_of_nirvana.name}!')
+                                            hero.add_item(ring_of_nirvana) # Add the item's attributes to the hero and add the item's name to hero's items list.
                                             menu()
                                     else:
                                         input(
@@ -3512,7 +3695,6 @@ _,'    \_>\_/    ',_
                     f'\n{bulletpoint}A mysterious monk came to you and asks if you would be so kind to help with a task. The monk says it won\'t be easy and there is no pay. Do you still help?')
                 if mysterious_monk_ans.strip().lower() in yes:
                     print(f'\n{bulletpoint2} You\'ll be joining the monk to help lead this journey. The monk gives you an ancient map that shows different routes you can take to reach the top. ') 
-                    hero.morality += 10
                     menu()
                     the_secret()
                 else:
@@ -3614,18 +3796,15 @@ _,'    \_>\_/    ',_
                 if beggar_ans.strip().lower() in yes:
                     print(f'\n{bulletpoint2}You hand over $5 and he thanks you for your kindness. The beggar introduces you to a mysterious monk who needs some assistance with something.') 
                     hero.money -= 5
-                    hero.morality += 5
                     menu()
                     mysterious_monk() 
                 else:
                     if current_heir == 'Beggar' or current_heir == 'The Beggar':
                         input(
                             f'\n{bulletpoint2}You kick him, spit on him, and yell that you don\'t acknowledge a dirty beggar as the next heir and walk away laughing.')
-                        hero.morality -= 5
                         menu()
                     else:
                         print(f'\n{bulletpoint2}You kick his bowl of change, spit on him, and walk away laughing.')
-                        hero.morality -= 5
                         menu()
 
                     # Three Thugs
@@ -3736,16 +3915,6 @@ _,'    \_>\_/    ',_
             
             def items():
 
-                if hero.morality >= 80:
-                    print('( ͡ᵔ ͜ʖ ͡ᵔ)')
-                elif hero.morality >= 60:
-                    print('( ͡❛ ͜ʖ ͡❛)')
-                elif hero.morality >= 40:
-                    print('( ͡❛ ▭ ͡❛)')
-                elif hero.morality >= 20:
-                    print('( ͡❛ 皿 ͡❛)')
-                else:
-                    print('( ͡❛ 益 ͡❛)')
                 print('Current Items:')
                 current_items_list = ', '.join(
                     [f'{item}' for item in hero_items])
@@ -3758,7 +3927,7 @@ _,'    \_>\_/    ',_
                     print('█             █     █          █    ▐        ▐               █    █     █    ▐   █          █   █    █       █ █    ▐   ▐              ')
                     print('▐             ▐     ▐          ▐                             ▐    ▐     ▐        ▐          ▐   ▐    ▐       ▐ ▐                        ')
                 
-                print(f'█   Money: ${hero.money}                                        Morality: {hero.morality}                                    Remaining Health: {hero.health}        █')
+                print(f'█   Money: ${hero.money}                                                                                        Remaining Health: {hero.health}        █')
                 items()
                 print('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
                 if hero.health <=70:
