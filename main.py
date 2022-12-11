@@ -21,6 +21,7 @@ mythic_two = "                _\n               /\)\n              /\/\n        
 # Special items that add different abilities in monster battles.
 battle_items = [
     '🏺- Invisibility Potion', '🔮Merlin\'s Crystal Ball', '☄️Fireball Spell', '🍶Elixir of the Gods', '👾Ancient Drone']
+
 def exit_game():
     exit()
 
@@ -31,7 +32,8 @@ def adventure_game():
        
     def restart():
         vendor_lady_object = 1 
-
+        monster_guild_membership = True
+        assassin_guild_membership = False
         class Item:
             # Constructor function for the Item class.
             def __init__(self, name, health_bonus, attack_bonus):
@@ -114,6 +116,10 @@ def adventure_game():
         emperorbattle = Monster('Emperor', 50, 10, 30)
         cornstalker = Monster('Cornstalker', 200, 80, 180)
         gloopus = Monster('Gloopus', 180, 70, 200)
+
+        available_monster_list = [sandworm, giant, arachne, tiamat, merlin, robots, kitty, fenrir,
+                                  alexa9000, griffin, skeletonwarrior, boxer, leviathan, phoenix, minotaur, cornstalker, gloopus]
+        tamed_monster_list = []
         
         # Function that 1. Checks if the monster has died, 2. Checks if person has died and then restarts/exits game
         def check_health(person):
@@ -132,6 +138,13 @@ def adventure_game():
   █   █ █  █ █  █  ▄   █ █ █   █    ▄  █▄▄▄▄▄█ █  █   █   █       █   █  █ █  █   █   █       █  ▄   █ █   █ █   █ █ █   █  █▄▄█ █
   █▄▄▄█ █▄▄█ █▄▄█▄█ █▄▄█▄█  █▄▄█▄▄▄█ █▄█▄▄▄▄▄▄▄█  █▄▄▄█   █▄▄▄▄▄▄▄█▄▄▄█  █▄█  █▄▄▄█   █▄▄▄▄▄▄▄█▄█ █▄▄█ █▄▄▄█ █▄▄▄█▄█  █▄▄█▄▄▄▄▄▄▄█''')
                         exit_game()
+                elif type(person) == Monster:
+                    if person.name not in tamed_monster_list:
+                        input(
+                            f'As a member of the Monster Hunter Guild, you possess the skills to tame and train even the most ferocious beasts!\nYour collection of monsters has grown, and with it your power has increased!\n{person.name} has been added to your stable of powerful allies!')
+                        tamed_monster_list.append(person.name)
+                    else:
+                        pass
             else:
                 pass
         # Function to randomly add a certain amount of money depending on the scenario.
@@ -236,6 +249,7 @@ def adventure_game():
                 check_health(monster)
                 check_health(person)
             invisibility_count = 3 # Number of times user can use the invisibility potion.
+            tamed_monster_count = len(tamed_monster_list)
             while monster.health >= 0:
                 # Breaks out of the while loop once monster health reaches less than 0
                 if monster.health <= 0:
@@ -249,7 +263,16 @@ def adventure_game():
                             if i == '🏺- Invisibility Potion':
                                 print(
                                     f'{bulletpoint2}{i} Command: "abracadabra"  Uses Left: {invisibility_count}')
-                            
+
+                if monster_guild_membership == True:
+                    if tamed_monster_list:
+                        if tamed_monster_count > 0:
+                            print(f'{bulletpoint2}Tamed Monster Commands:')
+                            for i in tamed_monster_list:
+                                print(f'{i}')
+                            print(
+                                f'{bulletpoint2}Remaining Monster Summons: {tamed_monster_count}')
+
                 monster_moves = random.choice(monster_potential_moves)
                 print(f'The {monster.name} {monster_moves}...')
                 person_move = input('Do you defend, counter, or attack?\n')
@@ -435,6 +458,21 @@ jgs .-=-.    ) -.
                 elif person_move.lower().strip() == 'iamgod.':
                     input(f'{bulletpoint2}The forces all around you cause the fabric of reality to temporarily break. Your eyes turn white and you have a blinding aura radiating around you as unfathomable power seeps into your human veins. You just turned into a god.')
                     hero.health += 999999
+                elif person_move.title().strip() in tamed_monster_list:
+                    if tamed_monster_count > 0:
+                        # Generate a random number between the minimum and maximum damage of the monster selected by the user
+                        tamed_monster = [
+                            mon for mon in available_monster_list if mon.name == person_move.title().strip()][0]
+                        tamed_monster_damage = random.randint(
+                            tamed_monster.min_damage, tamed_monster.max_damage)
+                        # Print the damage done by the selected monster
+                        input(
+                            f'{bulletpoint2}{tamed_monster.name} does {tamed_monster_damage} to {monster.name}')
+                        monster.health -= tamed_monster_damage
+                        tamed_monster_count -= 1
+                        battlemenu()
+                    else:
+                        pass
                 else:
                     print(
                         f'{bulletpoint}{person.name} did nothing... {monster.name} attacked and dealt {monster_attack} damage to {person.name}.\n')
@@ -1283,6 +1321,7 @@ jgs .-=-.    ) -.
 
             # Monster Hunter Guild
             def monster_hunter_guild():
+                nonlocal monster_guild_membership
                 input(f'{bulletpoint2}\nThe leader of the group, a fierce-looking woman with a scar across her face, sizes you up with a critical eye. She seems impressed by your determination and skill, and she agrees to take you on as a member of the guild.\nYou are excited and eager to begin your new career as a monster hunter. You know that it will be dangerous and challenging, but you are ready for the challenge. You will use your skills and abilities to protect the innocent and keep the world safe from the dangers that lurk in the shadows.\n')
                 input(f'{bulletpoint2}\nAs a member of the monster hunter guild, you quickly learn the guild\'s motto: \n"To protect the innocent and keep the world safe from the dangers that lurk in the shadows." \nThis motto guides the guild\'s actions and decisions, and it is a constant reminder of the important role that they play in the world.\n')
                 input(f'{bulletpoint2}\nThe guild has a wide range of goals, including tracking and defeating dangerous beasts, protecting civilians from harm, and gathering information about the various monsters that inhabit the world.\nAs a new member of the guild, you are tasked with your first mission: to defeat a monster that has been causing havoc in the local farming community. The monster, a massive, hulking plant-like creature known as the "Cornstalker," has been destroying crops and terrorizing the locals.\nYou and your team set out to track down the Cornstalker and put an end to its reign of terror.\n')
@@ -1298,6 +1337,7 @@ jgs .-=-.    ) -.
                 add_money(50, 150)
                 menu()
                 input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way\n')
+                monster_guild_membership = True
                 menu()
                 the_restaurant()
 
@@ -1386,6 +1426,7 @@ jgs .-=-.    ) -.
             def assassins_guild():
                 nonlocal emperor_life
                 nonlocal noble_life
+                nonlocal assassin_guild_membership
                 drink_water_ans = input(f'\n{bulletpoint}As the old man shows you around the City of the Rising Sun, you are struck by the peaceful and serene atmosphere of the city. People from all walks of life can be seen going about their business, and there is a sense of harmony and cooperation among the various different groups.\n\nThe old man leads you through the winding streets of the city, pointing out the various landmarks and places of interest. He shows you the central market, where merchants from all over the world come to trade their goods. You also visit the city\'s library, which is filled with ancient books and scrolls that contain knowledge and wisdom from the past.\n\nAs you continue your tour, the old man brings you to the city\'s main square, where a large fountain stands in the center. People are gathered around the fountain, enjoying the cool, refreshing water on a hot day. The old man tells you that the water of the fountain has healing properties, and many people come to drink from it to cure their ailments.\n\nDo you take a drink of this water?\n')
                 if drink_water_ans.strip().lower() in yes:
                     input(f'{bulletpoint}You were healed for 50 health points!')
@@ -1395,20 +1436,21 @@ jgs .-=-.    ) -.
                 if enter_assassin_guild.strip().lower() in yes:
                     input(f'\n{bulletpoint2}Inside, you are greeted by a group of hooded figures who introduce themselves as members of the assassin guild. They explain that they are a secret society of trained assassins who use their skills and knowledge to serve the greater good.\n\nThe guild members offer to train you in the ancient ways of assassination, and you are intrigued by the offer. You decide to accept their offer and become a member of the guild.\n')
                     input(f'...')
+                    assassin_guild_membership = True
                     philosophy_ans = input(f'{bulletpoint2}You spend the next few weeks training with the guild, learning the art of stealth, deception, and assassination. You undergo rigorous physical and mental training, and you master the use of a variety of weapons and tools.\n\nAs you progress in your training, you are taught the secrets of the guild and the philosophy that guides its members. You learn to balance the need for justice with the harsh realities of the world, and you become a skilled and deadly assassin. Do you want to go over the philosophy of the Assassin guild?\n')
                     if philosophy_ans.strip().lower() in yes:
                         input(f'{bulletpoint2}\n\n\n\n\n\n\n\n\n\n\nThe philosophy of the assassin guild is based on the principle of balance. The guild members believe that the world is a complex and dangerous place, and that there is a constant struggle between good and evil, order and chaos.\n\nThey believe that the guild has a responsibility to maintain the balance of power and prevent any one side from gaining too much control. To achieve this, the guild members use their skills and knowledge to eliminate threats and protect the innocent.\n\nThe guild has a complicated relationship with the ice kingdom and the Red Dragon Empire. On the one hand, the guild is neutral and does not take sides in political conflicts. On the other hand, the guild members are not afraid to intervene if they believe that the balance of power is being threatened.\n\nIn the case of the ice kingdom, the guild has a positive relationship with the queen and her people. The queen values the guild\'s skills and knowledge, and she often hires the guild members to carry out important missions. In return, the guild members protect the ice kingdom and its people from threats and dangers.\n\nIn the case of the Red Dragon Empire, the guild has a more complicated relationship. The emperor and his followers view the guild as a threat and a nuisance, and they often try to suppress the guild\'s activities. However, the guild members are not afraid to challenge the empire and its corrupt rulers, and they will not hesitate to strike if the balance of power is threatened.\n\n')
                     input(
-                        f'{bulletpoint2} You recall the poem they taught you:\n\nThe assassin guild is a secret sect\nOf skilled and deadly powers,\nTheir mission is to keep the check\nIn a world of chaos all hours.\n\nThey move through the shadows unseen,\nSilent and deadly as the night,\nReady to strike at a moment\'s bright\nAnd eliminate any threat in sight.\n\nThey are masters of the blade and the bow,\nTrained in the arts of stealth and deception,\nThey are feared by their enemies\nAnd respected by those who know their profession.\n\nThe guild is a force for right,\nA protector of the innocent and the weak,\nThey will continue to fight\nFor balance and justice in a world that seeks.\n\n')
+                        f'{bulletpoint2} You recall the poem they taught you:\n\nThe assassin guild is a secret sect\nOf skilled and deadly powers,\nTheir mission is to keep the check\nIn a world of chaos all hours.\n\nThey move through the shadows unseen,\nSilent and deadly as the night,\nReady to strike at a moment\'s bright\nAnd eliminate any threat in sight.\n\nThey are masters of the blade and the bow,\nTrained in the arts of stealth and deception,\nThey are feared by their enemies\nAnd respected by those who know their profession.\n\nThe guild is a force for right,\nA protector of the innocent and the weak,\nThey will continue to fight\nFor balance and justice in a world that seeks.\n')
                     new_kill = input(
-                        f'{bulletpoint}At the end of your training, you are given a mission to complete. You are to assassinate a...\nPlease enter your assassination target: ')
+                        f'\n{bulletpoint}At the end of your training, you are given a mission to complete. You are to assassinate a...\nPlease enter your assassination target: ')
                     while new_kill.strip().lower() == hero.name.strip().lower():
                         new_kill = input(
                             f'{bulletpoint2}You cannot kill yourself...\n{bulletpoint}Please enter a new assassination target: ')
                     if new_kill.strip().lower() in ('beggar', 'the beggar'):
                         input(
-                            f'{bulletpoint2}You are to assassinate a beggar who has been terrorizing the people of the Red Dragon Empire. You accept the mission.')
-                        input(f'{bulletpoint2}You are initially puzzled by the mission. You cannot understand why the guild would want to kill a homeless beggar, who poses no threat to anyone. You decide to question the guild leader about the mission.\nThe guild leader explains that the beggar is not what he seems. He is actually a spy for the ice kingdom, who has been gathering information about the empire\'s defenses and plans. The guild has been hired by the empire to eliminate the spy and prevent him from passing on his information.\nYou are uneasy about the mission, but you trust the guild leader and you decide to carry it out. You disguise yourself as a beggar and approach the beggar outside the castle gates. You strike up a conversation and gain his trust.\nWhen the time is right, you strike the beggar with a hidden blade.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
+                            f'\n{bulletpoint2}You are to assassinate a beggar who has been terrorizing the people of the Red Dragon Empire. You accept the mission.\n')
+                        input(f'\n{bulletpoint2}You are initially puzzled by the mission. You cannot understand why the guild would want to kill a homeless beggar, who poses no threat to anyone. You decide to question the guild leader about the mission.\n\nThe guild leader explains that the beggar is not what he seems. He is actually a spy for the ice kingdom, who has been gathering information about the empire\'s defenses and plans. The guild has been hired by the empire to eliminate the spy and prevent him from passing on his information.\n\nYou are uneasy about the mission, but you trust the guild leader and you decide to carry it out. You disguise yourself as a beggar and approach the beggar outside the castle gates. You strike up a conversation and gain his trust.\nWhen the time is right, you strike the beggar with a hidden blade.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
                         clean_kill_beggar = random.randint(1, 10)
                         print(f'{bulletpoint2}You rolled a {clean_kill_beggar}.')
                         if clean_kill_beggar >= 5:
@@ -1435,11 +1477,14 @@ jgs .-=-.    ) -.
                     elif new_kill.strip().lower() in ('emperor', 'the emperor'):
                         input(
                             f'\n{bulletpoint2}You are to assassinate a corrupt and evil ruler who has been terrorizing the people of a neighboring kingdom. You accept the mission.\n')
-                        input(f'\n{bulletpoint2}As a member of the assassin guild, you are given a mission to carry out. You are to kill the Red Dragon Emperor, the tyrannical ruler of the empire.\n\nYou are hesitant about the mission. The emperor is a powerful and dangerous enemy, and killing him will not be easy. You decide to discuss the mission with the other guild members and seek their advice.\n\nAfter much debate and deliberation, you and the other guild members agree on a plan. You will infiltrate the emperor\'s palace and gain his trust by pretending to be a loyal servant. Once you are close to the emperor, you will strike and kill him with a hidden blade.\n\nYou carry out the plan with precision and stealth. You gain the emperor\'s trust and become one of his most trusted servants. You bide your time and wait for the right moment to strike.\n\nOne night, as the emperor is sleeping, you sneak into his chambers and approach his bed. You draw your hidden blade and raise it high, ready to strike.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
+                        input(f'\n{bulletpoint2}As a member of the assassin guild, you are given a mission to carry out. You are to kill the Red Dragon Emperor, the tyrannical ruler of the empire.\n\nYou are hesitant about the mission. The emperor is a powerful and dangerous enemy, and killing him will not be easy. It was a mission that many had attempted, and few had survived. But you were determined to succeed. You decide to discuss the mission with the other guild members and seek their advice.\n\nAfter much debate and deliberation, you and the other guild members agree on a plan. You will infiltrate the emperor\'s palace and gain his trust by pretending to be a loyal servant. Once you are close to the emperor, you will strike and kill him with a hidden blade.\n\nYou carry out the plan with precision and stealth. You gain the emperor\'s trust and become one of his most trusted servants. You bide your time and wait for the right moment to strike.\n\nOne night, as the emperor is sleeping, you sneak into his chambers and approach his bed. You draw your hidden blade and raise it high, ready to strike.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
                         clean_kill_emperor = random.randint(1, 10)
-                        print(f'{bulletpoint2}You rolled a {clean_kill_emperor}.')
-                        print(f'')
-                        if clean_kill_emperor >= 5:
+                        print(f'{bulletpoint2}You rolled a {clean_kill_emperor}')
+
+                        if clean_kill_emperor == 10:
+                            input(
+                                f'\n{bulletpoint2}As you reached the emperor\'s bedside, you unsheathed your blade and struck with precision and speed. The emperor never saw it coming. With a single, clean strike, you ended his reign and claimed your reward.\n\nAs you turned to leave, you spotted something out of the corner of your eye. A hidden compartment in the wall, cleverly concealed by a painting. You reached out and touched it, and the painting swung open to reveal an ancient tablet.\n\nYou hesitated for a moment, unsure of what to do. But then you noticed a strange inscription on the tablet. It said, "iamgod.". Could it be a command of some sort?\nYou placed your hand on the tablet and spoke the words out loud. "iamgod."\n\nSuddenly, you felt a surge of power coursing through your veins. You could feel your senses heightening, your strength increasing, your reflexes sharpening. You had gained the abilities of a god.\n\nYou grinned with excitement and anticipation. With your newfound powers, you could take on any challenge that came your way. You were ready for anything the battlefield might throw at you.\n\nYou dispose of the body and return to the guild, reporting the mission as completed.\n')
+                        elif clean_kill_emperor >= 5:
                             input(
                                 f'\n{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.\n')
                         else:
@@ -2468,8 +2513,11 @@ _,'    \_>\_/    ',_
                     print(f'{bulletpoint2}You passed!\nYou hear the ground shake, and one of the boxes you had counted previously had just opened. You take a look inside and you see a letter. There is a message that says that this must be delivered to the beggar just outside the Red Dragon castle.')
                     open_letter = input(f'{bulletpoint}You were told not to open the letter. Do you still decide to open the letter?')
                     if open_letter.strip().lower() in yes:
-                        input(
-                            f'{bulletpoint2} You decided to open the letter. A legendary phoenix with electric feathers pops out and says it is the guardian of this letter. You are not the intended recipient and shall be erased from existence!')
+                        if monster_guild_membership == False:
+                            input(
+                                f'\n{bulletpoint2} You decided to open the letter. A legendary phoenix with electric feathers pops out and says it is the guardian of this letter. You are not the intended recipient and shall be erased from existence!\n')
+                        else:
+                            input(f'\n{bulletpoint2}As you stood atop the ice mountain, facing the Phoenix monster, you knew that this would be a battle for the ages. You had trained for years as a member of the Monster Hunter Guild, honing your skills and mastering the art of monster taming. You were ready.\n\nThe Phoenix let out a mighty cry and lunged at you, its electric feathers crackling with energy. You dodged its attacks, weaving and ducking to avoid its deadly strikes. You knew that you couldn\'t defeat the Phoenix through sheer strength alone. You needed to outsmart it.\n')
                         input(phoenix_image)
                         add_health(phoenix) # Adds monster health if it has already been killed.
                         battle(hero, phoenix, 'feathers turns into diamond', 'feathers turns into white', 'feathers turn into magnets', 'feathers turns into plasma')
@@ -2477,8 +2525,10 @@ _,'    \_>\_/    ',_
                         check_health(hero) # Check if the hero died and will restart game if that is the case.
                         check_health(phoenix) # Check if the monster died and will print that the monster has died.
                         add_money(50, 200)
+                        if monster_guild_membership == True:
+                            input(f'\n{bulletpoint2}The Phoenix\'s eyes glazed over, and it let out a final, pitiful cry before becoming still. You had done it. You had defeated the Phoenix and added it to your collection of tamed monsters.\n\nAs you stood there, panting and exhausted, you couldn\'t help but feel a sense of pride and satisfaction. You were a member of the Monster Hunter Guild, and with every monster you defeated, your power grew. Now, every time you faced a new monster, you knew that you could tame it and add it to your collection.\n\nWith each new monster you tamed, you gained more chances to summon them into battle. You knew that with your collection of powerful allies at your side, you could take on any challenge that came your way. You were ready for whatever the future might hold.\n\nYou are now the Beastmaster! Next time you cannot afford an item at the vendor lady shop, enter "gimmethebread";)')
                         erase_name = input(
-                            f'{bulletpoint}You read the letter and it says that the next heir to the throne is {current_heir}. Do you decide to erase this name and change it to something else?')
+                            f'\n{bulletpoint}The Phoenix had been guarding a secret letter, and now that it was defeated, the letter was revealed. You picked it up and read it...\n\nIt says that the next heir to the throne is {current_heir}. Do you decide to erase this name and change it to something else?\n')
                         if erase_name.strip().lower() in yes:
                             new_heir = input(
                                 f'📜 What name would you like to change this to?')
@@ -2487,7 +2537,7 @@ _,'    \_>\_/    ',_
                                 f'{bulletpoint2}The new heir to the Red Dragon Empire shall be {current_heir}!')
                             if 'Beggar' in current_heir.title(): # Checking if the player changed the name back to the beggar.
                                 input(
-                                    f'{bulletpoint2}You remembered that you were told not to open the letter and failed on your promise. You decide to deliver the letter back to the beggar. The beggar opens up the letter and a legendary phoenix with electric feathers pops out. The phoenix says that it is the guardian of this letter, and that the beggar is the next heir to the Red Dragon Empire. The beggar is in shock and thanks you for delivering this message. The beggar will hand you a special reward the next time he sees you. The phoenix then kicks some dirt in your face and flies far away...')
+                                    f'\n{bulletpoint2}You remembered that you were told not to open the letter and failed on your promise. You decide to deliver the letter back to the beggar. The beggar opens up the letter and a legendary phoenix with electric feathers pops out.\n\nThe phoenix says that it is the guardian of this letter, and that the beggar is the next heir to the Red Dragon Empire. The beggar is in shock and thanks you for delivering this message.\n\nThe beggar will hand you a special reward the next time he sees you. The phoenix then kicks some dirt in your face and flies far away...\n')
                             elif hero_name.title() == current_heir: # Checking if the player changed the name to hero_name.
                                 print(f'You decided to alter the course of humanity for your own benefit!')
                             input(
@@ -2503,7 +2553,7 @@ _,'    \_>\_/    ',_
                         beggar()
                     else:
                         input(
-                            f'{bulletpoint2}You remembered that you were told not to open the letter and kept your promise. You decide to deliver the letter back to the beggar. The beggar opens up the letter and a legendary phoenix with electric feathers pops out. The phoenix says that it is the guardian of this letter, and that the beggar is the next heir to the Red Dragon Empire. The beggar is in shock and thanks you for delivering this message. The beggar will hand you a special reward the next time he sees you. The phoenix then flies far away...')
+                            f'\n{bulletpoint2}You remembered that you were told not to open the letter and kept your promise. You decide to deliver the letter back to the beggar.\n\nThe beggar opens up the letter and a legendary phoenix with electric feathers pops out. The phoenix says that it is the guardian of this letter, and that the beggar is the next heir to the Red Dragon Empire.\n\nThe beggar is in shock and thanks you for delivering this message. The beggar will hand you a special reward the next time he sees you. The phoenix then flies far away...\n')
                         input(phoenix_image)
                         current_heir = 'Beggar'
                         input(
@@ -2520,7 +2570,7 @@ _,'    \_>\_/    ',_
             def treasure_room():
                 def treasure_room_ending():
                     input(
-                        f'{bulletpoint2}You hear horns and guards yelling outside of the treasure room. It seems that you made too much noise and are about to be caught! The only time to escape is now. You escape from the room and saw guards running past you.')
+                        f'\n{bulletpoint2}You hear horns and guards yelling outside of the treasure room. It seems that you made too much noise and are about to be caught! The only time to escape is now. You escape from the room and saw guards running past you.\n')
                 # Item creation for the treasure room.
                 ancientriotshield = Item('🛡️ Ancient Riot Shield', 100, 0)
                 adamantineblade = Item('🗡 Adamantine Blade', 0, 90)
@@ -2532,7 +2582,7 @@ _,'    \_>\_/    ',_
                 
                 print('💰🪙💍'*500) # Treasure room display.
                 treasure_ans = input(
-                    f'{bulletpoint2}You enter a massive room with walls made of pure gold. You only just now realized that you forgot to bring a large enough bag to hold all these valuables. There\'s a large amount of gold in front of you that you can take now and leave. There are also 7 unknown sealed rooms. What do you do?\n 0. Grab the money in front of you and leave.\n 1. Room 1\n 2. Room 2\n 3. Room 3\n 4. Room 4\n 5. Room 5 \n 6. Room 6\n 7. Room 7\n Please enter the number for your choice:\n')
+                    f'\n{bulletpoint2}You enter a massive room with walls made of pure gold. You only just now realized that you forgot to bring a large enough bag to hold all these valuables. There\'s a large amount of gold in front of you that you can take now and leave. There are also 7 unknown sealed rooms. What do you do?\n 0. Grab the money in front of you and leave.\n 1. Room 1\n 2. Room 2\n 3. Room 3\n 4. Room 4\n 5. Room 5 \n 6. Room 6\n 7. Room 7\n Please enter the number for your choice:\n')
                 if treasure_ans == '0':
                     add_money(200,500)
                     print(
@@ -2542,7 +2592,7 @@ _,'    \_>\_/    ',_
                 elif treasure_ans == '1':
                     add_health(kitty) # Adds monster health if it has already been killed.
                     input(
-                        f'{bulletpoint2}When you enter the room, you see a giant cat the size of a whale. The cat sees you and immediately pounces!')
+                        f'\n{bulletpoint2}When you enter the room, you see a giant cat the size of a whale. The cat sees you and immediately pounces!\n')
                     battle(hero, kitty, 'licks paw',
                            'meow meow', 'roars', 'stalks')
                     input(
@@ -2559,7 +2609,7 @@ _,'    \_>\_/    ',_
                 elif treasure_ans == '2':
                     add_health(fenrir) # Adds monster health if it has already been killed.
                     input(
-                        f'{bulletpoint2}When you enter the room, you see a chained up black wolf with glowing red eyes. He growls at runs toward you!')
+                        f'\n{bulletpoint2}When you enter the room, you see a chained up black wolf with glowing red eyes. He growls at runs toward you!\n')
                     battle(hero, fenrir, 'tucks tail',
                            'whimpers', 'growls', 'wags tail')
                     input(
@@ -2574,11 +2624,11 @@ _,'    \_>\_/    ',_
                     beggar()
         
                 elif treasure_ans == '3':
-                    input(f'{bulletpoint2}When you enter the room, you see a large transparent glass box. Inside this box there are two other transparent boxes. In the middle you see a wine bottle that never stops pouring. You walk over to touch the exterior box and it asks you a question...')
+                    input(f'\n{bulletpoint2}When you enter the room, you see a large transparent glass box. Inside this box there are two other transparent boxes. In the middle you see a wine bottle that never stops pouring. You walk over to touch the exterior box and it asks you a question...\n')
                     question_count = 3 # Number of tries the player has remaining to answer each question.
                     #3 riddles with 3 chances per riddle.
                     while question_count > 0:
-                        question1 = input(f'{bulletpoint}Remaining Chances: {question_count}\nA man goes out drinking every night, returning to his home in the wee hours of every morning. No matter how much he drinks, he never gets a hangover. This drink is very well known, but is rarely consumed, served warm and taken straight from its source. The man is a sucker for a free drink, especially since he can\'t live without it. What is his favorite drink?')
+                        question1 = input(f'\n{bulletpoint}Remaining Chances: {question_count}\nA man goes out drinking every night, returning to his home in the wee hours of every morning. No matter how much he drinks, he never gets a hangover. This drink is very well known, but is rarely consumed, served warm and taken straight from its source. The man is a sucker for a free drink, especially since he can\'t live without it. What is his favorite drink?\n')
                         if question1 == 'blood':
                             question2_count = 3
                             question_count = 0   # Resets the first count
@@ -2627,7 +2677,7 @@ _,'    \_>\_/    ',_
                 elif treasure_ans == '4':
                     add_health(ancientdrone) # Adds monster health if it has already been killed.
                     input(
-                        f'{bulletpoint2}When you enter the room, you see a strange metal object that looks like it hasn\'t been cleaned in decades. All of a sudden the lights on it start lighting up, and it transforms into a large metal monster. It yells "Trespassers shall be terminated"!')
+                        f'\n{bulletpoint2}When you enter the room, you see a strange metal object that looks like it hasn\'t been cleaned in decades. All of a sudden the lights on it start lighting up, and it transforms into a large metal monster. It yells "Trespassers shall be terminated"!\n')
                     battle(hero, alexa9000, 'says "beep boop"',
                            'powers down', 'says "beep beep"', 'says "boop beep"')
                     input(
@@ -2643,13 +2693,13 @@ _,'    \_>\_/    ',_
         
                 elif treasure_ans == '5':
                     input(
-                        f'{bulletpoint2}When you enter the room, you see a strange crystal ball on a table. When you walk over to it, all of a sudden an invisible force stops you in your path and a voice asks you a question...')
+                        f'\n{bulletpoint2}When you enter the room, you see a strange crystal ball on a table. When you walk over to it, all of a sudden an invisible force stops you in your path and a voice asks you a question...\n')
                     random_num = random.randint(1,10) # Random number generator
                     tries = 3 # Number of tries
                     while tries != 0:
                         # Guessing Number Minigame
                         guess1 = input(
-                            f'{bulletpoint}You have three chances to guess the correct number that was randomly selected from 1 to 10. What is your guess?')
+                            f'\n{bulletpoint}You have three chances to guess the correct number that was randomly selected from 1 to 10. What is your guess?\n')
                         if int(guess1) == random_num:
                             print(f'You guessed the correct number!')
                             tries = 0
@@ -2667,7 +2717,7 @@ _,'    \_>\_/    ',_
                                 tries -= 1
                     if int(guess1) == random_num:
                         input(
-                            f'{bulletpoint2}You foresaw the correct answer! You reach to pick up the crystal ball! This item will reveal the enemy\'s actions one time per battle.')
+                            f'\n{bulletpoint2}You foresaw the correct answer! You reach to pick up the crystal ball! This item will reveal the enemy\'s actions one time per battle.\n')
                         hero.add_item(merlinscrystalball) # Adds item attributes and to hero item list if the monster was killed.
                         treasure_room_ending()
                         print(
@@ -2682,11 +2732,11 @@ _,'    \_>\_/    ',_
                 elif treasure_ans == '6':
                     add_health(griffin) # Adds monster health if it has already been killed.
                     input(
-                        f'{bulletpoint2}When you enter the room, you see a magestic griffin monster with the body, tail, and back legs of a lion; the head and wings of an eagle. It turns over to you and starts attacking!')
+                        f'\n{bulletpoint2}When you enter the room, you see a magestic griffin monster with the body, tail, and back legs of a lion; the head and wings of an eagle. It turns over to you and starts attacking!\n')
                     battle(hero, griffin, 'tucks wings',
                            'beak turns left', 'flaps wings', 'raises talons')
                     input(
-                        f'{bulletpoint2}You took care of the Griffin monster! You reach to pick up the Fireball scroll which tells you secret words! You can use this spell during battles to attack the enemy!')
+                        f'\n{bulletpoint2}You took care of the Griffin monster! You reach to pick up the Fireball scroll which tells you secret words! You can use this spell during battles to attack the enemy!\n')
                     hero.add_item(fireball) # Adds item attributes and to hero item list if the monster was killed.
                     check_health(hero) # Check if the hero died and will restart game if that is the case.
                     check_health(griffin) # Check if the monster died and will print that the monster has died.
@@ -2698,7 +2748,7 @@ _,'    \_>\_/    ',_
                 elif treasure_ans == '7':
                     add_health(skeletonwarrior) # Adds monster health if it has already been killed.
                     input(
-                        f'{bulletpoint2}When you enter the room, you see a skeleton with a shield and sword displayed in the middle of the room. You walk over and touch it. All of a sudden the hand grabs your arm and it starts attacking you!')
+                        f'\n{bulletpoint2}When you enter the room, you see a skeleton with a shield and sword displayed in the middle of the room. You walk over and touch it. All of a sudden the hand grabs your arm and it starts attacking you!\n')
                     battle(hero, skeletonwarrior, 'raises shield','bones crack', 'cracks knuckles', 'raises sword')
                     input(
                         f'{bulletpoint2}You took care of the Skeleton monster! You reach to pick up the Warrior\'s Helm! This item will add 100 health.')
@@ -2770,34 +2820,35 @@ _,'    \_>\_/    ',_
  _.-'       |      BBb       '-.  '-. 
 (________mrf\____.dBBBb.________)____)''')
                 wizard_ans_one = input(
-                    f'{bulletpoint2}You enter a massive silver colored room with various foreign gadgets that make unfamiliar noise. An old man with a long beard and purple hat turns around and is suprised to see you. He starts questioning who you are and if you were sent by the emperor to kill him. Do you say yes or no:')
+                    f'\n{bulletpoint2}You enter a massive silver colored room with various foreign gadgets that make unfamiliar noise. An old man with a long beard and purple hat turns around and is suprised to see you. He starts questioning who you are and if you were sent by the emperor to kill him.\n\nDo you say yes or no:')
                 if wizard_ans_one.lower() in yes:
                     input(
-                        f'{bulletpoint2}The wizard sends three 🤖🤖🤖 magical metal beings to grab a hold of you. They make weird "beep boop noises".')
+                        f'\n{bulletpoint2}The wizard sends three 🤖🤖🤖 magical metal beings to grab a hold of you. They make weird "beep boop noises".\n')
                     battle(hero, robots, 'say TURTLE MODE ACTIVATED!',
                            'say RECOVER MODE!', 'say ANALYZING FIGHT PATTERNS!', 'say ATTACK MODE!')
                     check_health(hero) # Check if the hero died and will restart game if that is the case.
                     check_health(robots) # Check if the monster died and will print that the monster has died.
-                    input(f'{bulletpoint2} You took care of these metal monsters. The wizard gets visibly furious and takes out a long glowing staff with a ball of electrical energy at the top. He starts cursing and says he\'ll take care of you himself!')
+                    input(f'\n{bulletpoint2} You took care of these metal monsters. The wizard gets visibly furious and takes out a long glowing staff with a ball of electrical energy at the top. He starts cursing and says he\'ll take care of you himself!\n')
                     battle(hero, merlin, 'whispers "siri Beri nin"...',
                            'whispers "siri Rac cin"...', 'whispers "siri Gúl cai"...', 'whispers "siri Naur corn"...')
                     check_health(hero) # Check if the hero died and will restart game if that is the case.
                     check_health(merlin) # Check if the monster died and will print that the monster has died.
                     add_money(200, 600) # Adds random amount of money to hero after boss battle between 200 and 600.
                     menu()
-                    print(f'{bulletpoint2}The wizard Merlin was murdered. He had been imprisoned by the empire for decades, forced to build gadgets for the empire\'s grand plan. Rumors among the nobility spread that the empire figured out his schemes to take over using his magical metal beings. Rumors also had it that the empire planned to get rid of him before that happened. Back in the wizard\'s lab, you stood over his dead body with blood on your hands. You see a strange blue crystal ball in a separate translucent room and walk over to it.')
+                    print(f'\n{bulletpoint2}The wizard Merlin was murdered. He had been imprisoned by the empire for decades, forced to build gadgets for the empire\'s grand plan. Rumors among the nobility spread that the empire figured out his schemes to take over using his magical metal beings.\n\nRumors also had it that the empire planned to get rid of him before that happened. Back in the wizard\'s lab, you stood over his dead body with blood on your hands. You see a strange blue crystal ball in a separate translucent room and walk over to it.\n')
                     crystal_ball_ans = input(f'{bulletpoint}Do you touch the crystal ball?')
                     if crystal_ball_ans.lower() in yes:
                         vendor_lady_object = 1 # This turns on the vendor lady scenario when you restart
                         menu()
-                        print(f'{bulletpoint}All of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...')
+                        print(
+                            f'\n{bulletpoint}All of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...\n')
                         input(blackhole)
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         beggar()
                     else:
                         print(
-                            f'{bulletpoint}The room started sparking all over the place after the battle. All of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a black hole in the distance...')
+                            f'\n{bulletpoint}The room started sparking all over the place after the battle. All of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a black hole in the distance...\n')
                         input(blackhole)
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
@@ -2808,7 +2859,7 @@ _,'    \_>\_/    ',_
                     nonlocal noble_life
                     nonlocal thugs_life
                     input(
-                        f'{bulletpoint2}The wizard introduces himself as Merlin. He said he had been imprisoned by the empire for decades, forced to build gadgets for the empire\'s grand plan. He was recently working on these metal beings and planned to copy them on behalf of the empire in order to save human lives.')
+                        f'\n{bulletpoint2}The wizard introduces himself as Merlin. He said he had been imprisoned by the empire for decades, forced to build gadgets for the empire\'s grand plan. He was recently working on these metal beings and planned to copy them on behalf of the empire in order to save human lives.\n')
                     merlin_ans = input(
                         f'''
                         {bulletpoint}You decided to ask ONE of the following question:
@@ -2819,9 +2870,9 @@ _,'    \_>\_/    ',_
                         Please type the number for the question:
                         ''')
                     if merlin_ans == '1':
-                        input(f'{bulletpoint2}Merlin tells you that he\'s seen visions of the prior human civilization in his crystal ball. He doesn\'t care about taking over the empire with what he calls the magical metal beings as "machines". He just wants to better humanity and steer the destruction of humanity to a more positive direction using the empire\'s finances. He gives you a secret tip that at the entrance of the passageway, you can say the magical phrase "opensesame" to instantly teleport you to the room with the three doors.')
+                        input(f'\n{bulletpoint2}Merlin tells you that he\'s seen visions of the prior human civilization in his crystal ball. He doesn\'t care about taking over the empire with what he calls the magical metal beings as "machines".\n\nHe just wants to better humanity and steer the destruction of humanity to a more positive direction using the empire\'s finances.\n\nHe gives you a secret tip that at the entrance of the passageway, you can say the magical phrase "opensesame" to instantly teleport you to the room with the three doors.\n')
                         input(
-                            f'{bulletpoint2}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...')
+                            f'\n{bulletpoint2}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...\n')
                         input(blackhole)
                         current_heir = 'the beggar..' # Resets the current heir.
                         emperor_life = 'alive'
@@ -2832,9 +2883,9 @@ _,'    \_>\_/    ',_
                         menu()
                         beggar()
                     elif merlin_ans == '2':
-                        input(f'{bulletpoint2}Merlin tells you that he only made 25% of the gadgets which were improved on remnant ancient technology. He says that in the ancient past, there was an advanced civilization called the "Hums" that developed flying ships and millions of machines. They were destroyed by war internally and made something called a "bomb" that destroyed cities with the power of a thousand suns.Speaking of bombs, Merlin reveals to you that if you ever play rock, paper, scissors, and whisper the magic word "bomb", you\'ll instantly win. Anyways, he says, after that civilization, the "An" civilization had to deal with the legendary dragon that fell from a space egg, which hatched on earth and caused havoc across the lands. They were the ones to help seal the dragon with ancient tech and save humanity. There are only a few kingdoms that managed to preserve some of the ancient technology today and they hold on to them to maintain their power. ')
+                        input(f'\n{bulletpoint2}Merlin tells you that he only made 25% of the gadgets which were improved on remnant ancient technology. He says that in the ancient past, there was an advanced civilization called the "Hums" that developed flying ships and millions of machines. They were destroyed by war internally and made something called a "bomb" that destroyed cities with the power of a thousand suns.\n\nSpeaking of bombs, Merlin reveals to you that if you ever play rock, paper, scissors, and whisper the magic word "bomb", you\'ll instantly win.\n\nAnyways, he says, after that civilization, the "An" civilization had to deal with the legendary dragon that fell from a space egg, which hatched on earth and caused havoc across the lands. They were the ones to help seal the dragon with ancient tech and save humanity. There are only a few kingdoms that managed to preserve some of the ancient technology today and they hold on to them to maintain their power.\n')
                         input(
-                            f'{bulletpoint}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...')
+                            f'\n{bulletpoint}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...\n')
                         input(blackhole)
                         current_heir = 'the beggar..' # Resets the current heir.
                         emperor_life = 'alive'
@@ -2845,9 +2896,9 @@ _,'    \_>\_/    ',_
                         menu()
                         beggar()
                     elif merlin_ans == '3':
-                        input(f'{bulletpoint2}Merlin says that\'s an interesting proposition! He tells you that he would love to explore the lands but he would need funding to carry on his experiments. If only we could get hands on the empire\'s treasury, now that\'s a different story...')
+                        input(f'\n{bulletpoint2}Merlin says that\'s an interesting proposition! He tells you that he would love to explore the lands but he would need funding to carry on his experiments. If only we could get hands on the empire\'s treasury, now that\'s a different story...\n')
                         input(
-                            f'{bulletpoint}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...')
+                            f'\n{bulletpoint}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...\n')
                         input(blackhole)
                         current_heir = 'the beggar..' # Resets the current heir.
                         emperor_life = 'alive'
@@ -2917,8 +2968,8 @@ _,'    \_>\_/    ',_
                                                              d8
                 ''')
                 input(
-                    f'{bulletpoint2}You enter a massive cavern that is pitch black. All of a sudden you see flames in front of you and its bone-chilling face appears. You realized that this was the legendary red dragon Tiamat which fell from the heavens onto Earth in the ancient past. You remembered the myth that it caused havoc across the lands, before it was finally captured and sealed by magic by the ancient advanced civilization... ')
-                input(f'{bulletpoint2}The doors behind you magically disappeared or blended into the wall. There was no escape. You thought about all the choices you made prior to choosing this door, and what you could have done to avoid this fate. You face death in front of you and it\'s too late to turn back...')
+                    f'\n{bulletpoint2}You enter a massive cavern that is pitch black. All of a sudden you see flames in front of you and its bone-chilling face appears. You realized that this was the legendary red dragon Tiamat which fell from the heavens onto Earth in the ancient past. You remembered the myth that it caused havoc across the lands, before it was finally captured and sealed by magic by the ancient advanced civilization...\n')
+                input(f'\n{bulletpoint2}The doors behind you magically disappeared or blended into the wall. There was no escape. You thought about all the choices you made prior to choosing this door, and what you could have done to avoid this fate. You face death in front of you and it\'s too late to turn back...\n')
                 # Same boss, but different health and moves depending if the hero already killed the first one.
                 if tiamat.health <= 1000:
                     battle(hero, tiamat, 'raises all wings',
@@ -2930,7 +2981,7 @@ _,'    \_>\_/    ',_
                 check_health(hero) # Check if the hero died and will restart game if that is the case.
                 add_money(200, 1000) # Adds random amount of money to hero after boss battle between 200 and 1000.
                 menu()
-                input(f'{bulletpoint}You beat the Red Dragon Tiamat! All of a sudden... Tiamat\'s body starts moving again. Tiamat starts sprouting two extra wings and its muscles double in size. Its eyes glow red with smoke steaming out as it gets up and flies away. What could this mean...?\nCongratulations, on reaching the end! Try to discover other secret endings and possibilities... ')
+                input(f'\n{bulletpoint}You beat the Red Dragon Tiamat! All of a sudden... Tiamat\'s body starts moving again. Tiamat starts sprouting two extra wings and its muscles double in size. Its eyes glow red with smoke steaming out as it gets up and flies away. What could this mean...?\nCongratulations, on reaching the end! Try to discover other secret endings and possibilities...\n')
                 input(f'{bulletpoint2}Press enter to continue...')
                 beggar()
             # Passageway
