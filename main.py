@@ -113,6 +113,7 @@ def adventure_game():
         beggarbattle = Monster('Beggar', 50, 10, 20)
         emperorbattle = Monster('Emperor', 50, 10, 30)
         cornstalker = Monster('Cornstalker', 200, 80, 180)
+        gloopus = Monster('Gloopus', 180, 70, 200)
         
         # Function that 1. Checks if the monster has died, 2. Checks if person has died and then restarts/exits game
         def check_health(person):
@@ -255,18 +256,23 @@ def adventure_game():
                 if person_move == 'defend': # Scenarios where the hero selected DEFEND
                     if monster_moves == defend:  # If person DEFENDED and monster DEFENDED
                         print(f'Both {person.name} and {monster.name} defended.\n')
+                        battlemenu()
                     elif monster_moves == counter:  # If person DEFENDED and monster COUNTERED
                         print(
                             f'{bulletpoint2}{person.name} successfully defended the attack!\n')
+                        battlemenu()
                     elif monster_moves == weak:  # If person DEFENDED and monster was WEAK
                         print(f'Nothing happened.\n')
+                        battlemenu()
                     else:  # If person DEFENDED and monster ATTACKED
                         print(
                             f'{bulletpoint2}{person.name} successfully blocked the attack!\n')
+                        battlemenu()
                 elif person_move == 'counter':
                     if monster_moves == defend:  # If person COUNTERED and monster DEFENDED
                         print(
                             f'{person.name} countered and {monster.name} blocked the attack.\n')
+                        battlemenu()
                     elif monster_moves == counter:  # If person COUNTERED and monster COUNTERED
                         monster_counter_damage = monster_attack / 2
                         person_counter_damage = person_attack / 2
@@ -276,8 +282,8 @@ def adventure_game():
                         battlemenu()
                     elif monster_moves == weak:  # If person COUNTERED and monster was WEAK
                         print(f'Nothing happened.\n')
+                        battlemenu()
                     else:  # If person COUNTERED and monster ATTACKED
-
                         print(
                             f'{bulletpoint}{monster.name} dealt 0 damage to {person.name}, and was countered. {monster.name} took {person_attack} damage!\n')
                         monster.health -= person_attack
@@ -286,6 +292,7 @@ def adventure_game():
                     if monster_moves == defend:  # If person ATTACKED and monster DEFENDED
                         print(
                             f'{person.name} tried attacking but {monster.name} blocked the attack.\n')
+                        battlemenu()
                     elif monster_moves == counter:  # If person ATTACKED and monster COUNTERED
                         print(
                             f'{person.name} dealt 0 damage to {monster.name}, {person.name} was countered and took {monster_attack} damage.')
@@ -886,6 +893,278 @@ jgs .-=-.    ) -.
                 print(full_body)
                 print(f'\n{bulletpoint2}Sorry, you lost the game. The word was "{word}". You watched in regret as your fellow inmate was hanged by your own doing...\n')
 
+        def restaurant_menu():
+            import random
+            # List of dish items for the restaurant as a dictionary
+            dishes = [{
+                'name': 'Sushi Burrito',
+                'ingredients': [
+                        'Sushi Rice',
+                        'Norwegian Salmon',
+                        'Avocado',
+                        'Cucumber',
+                        'Sriracha Mayo',
+                        {'taste': ['salty', 'spicy', 'tangy']}
+                ]
+            },
+                {
+                    'name': 'Pad Thai Tacos',
+                    'ingredients': [
+                        'Pad Thai Noodles',
+                        'Shrimp',
+                        'Bean Sprouts',
+                        'Scallions',
+                        'Peanuts',
+                        'Lime',
+                        'Taco Shells',
+                        {'taste': ['savory', 'spicy', 'tangy']}
+                    ]
+            },
+                {
+                    'name': 'Peking Duck Pizza',
+                    'ingredients': [
+                        'Pizza Dough',
+                        'Hoisin Sauce',
+                        'Duck Breast',
+                        'Scallions',
+                        'Cucumber',
+                        'Plum Sauce',
+                        {'taste': ['savory', 'rich', 'tangy']}
+                    ]
+            },
+                {
+                    'name': 'Chicken Tikka Masala Fondue',
+                    'ingredients': [
+                        'Chicken Tikka Masala',
+                        'Bread',
+                        'Vegetables',
+                        'Fondue Pot',
+                        {'taste': ['savory', 'spicy', 'rich']}
+                    ]
+            },
+                {
+                    'name': 'Fish and Chips Spring Rolls',
+                    'ingredients': [
+                        'Fish Fillets',
+                        'Chips',
+                        'Spring Roll Wrappers',
+                        'Tartar Sauce',
+                        {'taste': ['savory', 'crispy', 'tangy']}
+                    ]
+            },
+                {
+                    'name': 'Tomato Basil Soup',
+                    'ingredients': [
+                        'Ripe Tomatoes',
+                        'Basil',
+                        'Garlic',
+                        'Onion',
+                        'Vegetable Stock',
+                        {'taste': ['tangy', 'salty', 'savory']}
+                    ]
+            },
+                {
+                    'name': 'Chicken Parmesan',
+                    'ingredients': [
+                        'Breaded Chicken Breast',
+                        'Marinara Sauce',
+                        'Mozzarella Cheese',
+                        'Parmesan Cheese',
+                        'Basil',
+                        {'taste': ['savory', 'salty', 'umami']}
+                    ]
+            },
+                {
+                    'name': 'Spaghetti Carbonara',
+                    'ingredients': [
+                        'Spaghetti Noodles',
+                        'Bacon',
+                        'Eggs',
+                        'Parmesan Cheese',
+                        'Pepper',
+                        {'taste': ['savory', 'salty', 'umami']}
+                    ]
+            },
+                {
+                    'name': 'Falafel Pita',
+                    'ingredients': [
+                        'Falafel Balls',
+                        'Pita Bread',
+                        'Tomatoes',
+                        'Onions',
+                        'Tzatziki Sauce',
+                        {'taste': ['savory', 'tangy', 'herby']}
+                    ]
+            },
+                {
+                    'name': 'Spicy Tofu Stir-Fry',
+                    'ingredients': [
+                        'Tofu',
+                        'Bell Peppers',
+                        'Onions',
+                        'Soy Sauce',
+                        'Sriracha',
+                        {'taste': ['savory', 'spicy', 'umami']}
+                    ]
+            },
+                {
+                    'name': 'Grilled Salmon Salad',
+                    'ingredients': [
+                        'Grilled Salmon',
+                        'Mixed Greens',
+                        'Cherry Tomatoes',
+                        'Cucumber',
+                        'Lemon Vinaigrette',
+                        {'taste': ['savory', 'tangy', 'umami']}
+                    ]
+            },
+                {
+                    'name': 'BBQ Pulled Pork Sandwich',
+                    'ingredients': [
+                        'Pulled Pork',
+                        'BBQ Sauce',
+                        'Hamburger Bun',
+                        'Coleslaw',
+                        'Pickles',
+                        {'taste': ['savory', 'tangy', 'smoky']}
+                    ]
+            },
+            ]
+            # List of dessert items for the restaurant as a dictionary
+            desserts = [{
+                'name': 'Strawberry Cheesecake Stuffed French Toast',
+                'ingredients': [
+                    'French bread',
+                    'Cream cheese',
+                    'Strawberries',
+                    'Eggs',
+                    'Milk',
+                    'Vanilla extract',
+                    'Powdered sugar',
+                    {'taste': ['sweet', 'rich']}
+                ]
+            },
+                {
+                'name': 'Banana Split Waffle Sundae',
+                'ingredients': [
+                    'Waffle mix',
+                    'Bananas',
+                    'Strawberry jam',
+                    'Whipped cream',
+                    'Chocolate sauce',
+                    'Pecans',
+                    {'taste': ['sweet', 'fruity']}
+                ]
+            },
+                {
+                'name': 'Lemon Blueberry Panna Cotta',
+                'ingredients': [
+                    'Heavy cream',
+                    'Sugar',
+                    'Gelatin',
+                    'Lemon zest',
+                    'Blueberries',
+                    'Lemon juice',
+                    {'taste': ['tart', 'smooth']}
+                ]
+            },
+                {
+                'name': 'Peanut Butter and Jelly Donut Milkshake',
+                'ingredients': [
+                    'Peanut butter',
+                    'Jelly',
+                    'Vanilla ice cream',
+                    'Milk',
+                    'Donuts',
+                    {'taste': ['sweet', 'peanutty']}
+                ]
+            },
+                {
+                'name': 'Chocolate Hazelnut Mousse Cake',
+                'ingredients': [
+                    'Dark chocolate',
+                    'Hazelnuts',
+                    'Heavy cream',
+                    'Egg whites',
+                    'Sugar',
+                    {'taste': ['rich', 'chocolatey']}
+                ]
+            }
+            ]
+
+            # order_complete is a flag variable that is used to determine whether the order is complete or not
+            order_complete = False
+
+            # if order_complete is False, it prints the restaurant menu
+            # otherwise, it prints the user's order
+            def generate_menu(dishes):
+                if order_complete == False:
+                    print('\nGlobal Gourmet Kitchen\nRestaurant Menu:')
+                else:
+                    print('\nYour Order:')
+                print('-' * 30)
+
+                # iterate over the list of dishes and print the dish name and ingredients
+                for dish in dishes:
+                    print(f'{"Dish Name:":<20s} {dish["name"]:<20s}')
+                    print(f'{"Ingredients:":<20s} {", ".join(dish["ingredients"][:-1]):<20s}')  # exclude the taste of the dish
+                    print()
+                print('-' * 30)
+
+            # prompt the user to press enter to see the main dishes
+            input(f'Press enter to see the main dishes...')
+
+            # generate the menu for the main dishes
+            generate_menu(dishes)
+
+            # prompt the user to input the dish they would like to try
+            # if the dish is not on the menu, generate a random dish instead
+            dish_name = input(
+                '(Enter the full dish name)\nWhat dish would you like to try: ').lower().strip()
+            selected_dish = next(
+                (dish for dish in dishes if dish['name'].lower().strip() == dish_name.lower().strip()), None)
+            if selected_dish is None:
+                selected_dish = random.choice(dishes)
+                input(f'This dish is not on our menu, we\'ll instead give you the chef special!')
+
+            # prompt the user to press enter to see the main desserts
+            input(f'Press enter to see the main desserts...')
+
+            # generate the menu for the main desserts
+            generate_menu(desserts)
+
+            # prompt the user to input the dessert they would like to try
+            # if the dessert is not on the menu, generate a random dessert instead
+            dessert_name = input(
+                '(Enter the full dessert name)\nWhat dessert would you like to try: ').lower().strip()
+            selected_dessert = next(
+                (dessert for dessert in desserts if dessert['name'].lower().strip() == dessert_name.lower().strip()), None)
+            if selected_dessert is None:
+                selected_dessert = random.choice(desserts)
+                input(f'This dessert is not on our menu, we\'ll instead give you the chef special!')
+
+            # set order_complete to True, since the order is complete
+            order_complete = True
+
+            # generate the menus for the selected dishes and desserts
+            generate_menu([selected_dish])
+            generate_menu([selected_dessert])
+
+            # print the tastes of the selected dishes and desserts
+            dish_tastes = selected_dish["ingredients"][-1]["taste"]
+            dessert_tastes = selected_dessert["ingredients"][-1]["taste"]
+            input(
+                f'You decided to order the "{selected_dish["name"]}". It arrived at your table a couple minutes later, and you could hardly contain your excitement as you took your first bite.\nThe "{selected_dish["name"]}" has a {", ".join(dish_tastes)} taste!')
+            # print the selected dessert and its taste
+            input(
+                f'You decided to order the "{selected_dessert["name"]}". It arrived at your table after your main dish, and you started drooling as you took the first bite.\nThe "{selected_dessert["name"]}" had a {", ".join(dessert_tastes)} taste!')
+
+            # if the order is complete, print the food bill and prompt the user for a tip
+            if order_complete == True:
+                input('\nYour food bill: $100')
+                food_tip = input('\nHow much tip do you pay:')
+                input(f'\nYour total bill: $100 plus {food_tip}.')
+
         # The story objects that can be mixed and matched depending on the storyline and player decisions.
         def story():
             new_rank = '' # Sets the empty rank for the empire_recruitment scenario.
@@ -960,6 +1239,48 @@ jgs .-=-.    ) -.
                         f'{bulletpoint2}The number you entered is not a valid item in the vendor\'s inventory. Please try again.')
                     show_vendor_menu()
 
+            # The Restaurant
+            def the_restaurant():
+                input(f'{bulletpoint2}It was a cold and rainy day, and you were feeling particularly hungry. You decided to stop by a local restaurant to see if they had any good food.\n\nAs you entered the restaurant, you were greeted by the friendly staff. They led you to a table and handed you a menu. \nYou scanned the offerings, and your mouth began to water at the thought of all the delicious dishes that were available.\n')
+                restaurant_menu()
+                input(f'\n\n{bulletpoint2}As you were just about to pay your meal, you heard a loud commotion. You asked the restaurant staff what was going on, and they explained that there was a disaster happening in the kitchen. A monster that looked like a moving gray glob was attacking the chefs.\n\nYou were not about to let this monster get away with ruining your meal. You grabbed a nearby kitchen knife and charged into the kitchen, ready to take on the monster.\n\nYou quickly notice a large cauldron of burning hot soup over the monster\'s head.\n\n{bulletpoint}Press enter to roll if you were successful in tipping it over:')
+                clean_kill_gloopus = random.randint(1, 10)
+                input(f'{bulletpoint2}You rolled a {clean_kill_gloopus}.')
+                if clean_kill_gloopus >= 5:
+                    input(
+                        f'\n{bulletpoint2}You took out the monster quick and efficiently! Since gloopus monsters are typically made of a sticky, viscous substance, they would be vulnerable to intense heat, which the cauldron soup caused the monster to rapidly dry out and disintegrate!\n')
+                    add_money(300, 600)
+                    menu()
+                    input(f'\n{bulletpoint2}\nThe chefs were grateful for your help, and they promised to keep the kitchen clean and safe from monsters in the future. You left the restaurant feeling satisfied, not only because you had saved the day, but also because you had enjoyed a delicious complimentary meal earlier ;)\n')
+                    input(
+                        f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
+                    beggar()
+                else:
+                    print(f'{bulletpoint2}You missed!')
+                    block_ans = input(
+                        f'{bulletpoint}\nThe {gloopus.name} monster threw some pots and pans at you. You blocked by...\nEnter what happened next:')
+                    weak_ans = input(
+                        f'{bulletpoint}\nThe {gloopus.name} monster threw a kitchen knife that grazed your leg, you screamed in pain and...\nEnter what happened next:')
+                    counter_ans = input(
+                        f'{bulletpoint}\nThe {gloopus.name} monster starting gathering more pots, pans, and knives, and you saw multiple moving balls of goo started crawling towards you. You tried to prepare for the attack by...\nEnter what happened next:')
+                    attack_ans = input(
+                        f'{bulletpoint}\nThe {gloopus.name} monster stopped moving and rested, you attacked by...\nEnter what happened next:')
+                    input(f'\n{bulletpoint2}You stopped to think to yourself that this didn\'t look like any gloopus monster you had ever seen before. This one was different. It had a strange  glob shape, and its eyes glinted with a sinister, intelligent light.\n\nYou watched in amazement as the glob monster began to morph and change, its body reshaping itself into a humanoid form. And then, to your horror, you realized that it was beginning to look like you.\n\nIt had the same face, the same hair, the same clothes. But its eyes were different. They were cold, gray, and piercing, filled with a malevolent intelligence.\n\nYou didn\'t hesitate. You lunged at the gloopus monster.\n')
+                    add_health(gloopus)
+                    battle(hero, gloopus, block_ans,
+                            weak_ans, counter_ans, attack_ans)
+                    random_health_gain = random.randint(10, 30)
+                    print(
+                        f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
+                    hero.health += random_health_gain
+                    check_health(hero)
+                    add_money(300, 600)
+                    menu()
+                    input(f'\n{bulletpoint2}You battled the monster for what seemed like an hour, but eventually you managed to defeat it.\n\nThe chefs were grateful for your help, and they promised to keep the kitchen clean and safe from monsters in the future. You left the restaurant feeling satisfied, not only because you had saved the day, but also because you had enjoyed a delicious complimentary meal earlier ;)\n')
+                    input(
+                        f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
+                    beggar()
+
             # Monster Hunter Guild
             def monster_hunter_guild():
                 input(f'{bulletpoint2}\nThe leader of the group, a fierce-looking woman with a scar across her face, sizes you up with a critical eye. She seems impressed by your determination and skill, and she agrees to take you on as a member of the guild.\nYou are excited and eager to begin your new career as a monster hunter. You know that it will be dangerous and challenging, but you are ready for the challenge. You will use your skills and abilities to protect the innocent and keep the world safe from the dangers that lurk in the shadows.\n')
@@ -976,7 +1297,9 @@ jgs .-=-.    ) -.
                 check_health(hero)
                 add_money(50, 150)
                 menu()
-                input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way')
+                input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way\n')
+                menu()
+                the_restaurant()
 
             # Murder of the Three Thugs
             def murder_thugs():
@@ -1149,16 +1472,16 @@ jgs .-=-.    ) -.
                         beggar()
 
                 else:
-                    pass
-                    #the_restaurant()
+                    menu()
+                    the_restaurant()
 
             # The Hidden City
             def hidden_city():
-                city_ans = input(f'{bulletpoint}As you wander through the streets of the city called “The City of the Rising Sun”, you come across a small shop selling trinkets and souvenirs. You decide to take a look and see if there is anything interesting.\n\nAs you browse the shelves, a friendly old man approaches you and says that this city is a safe haven for those who seek refuge from the troubles of the outside world. It is hidden from the eyes of the Red Dragon Empire and the ice kingdom, and it is a place of harmony. Do you ask him more about the Red Dragon Empire and the Ice Kingdom?\n')
+                city_ans = input(f'{bulletpoint}As you wander through the streets of the city called “The City of the Rising Sun”, you come across a small shop selling trinkets and souvenirs. You decide to take a look and see if there is anything interesting.\n\nAs you browse the shelves, a friendly old man approaches you and says that this city is a safe haven for those who seek refuge from the troubles of the outside world. It is hidden from the eyes of the Red Dragon Empire and the Ice kingdom, and it is a place of harmony. Do you ask him more about the Red Dragon Empire and the Ice Kingdom?\n')
                 if city_ans.strip().lower() in yes:
                     city_ans2 = input(f'\n{bulletpoint}The Red Dragon Empire is a vast and powerful kingdom ruled by a cruel and tyrannical emperor. It is a land of war and conquest, where the strong prey on the weak and the weak must fight to survive.\n\nThe ice kingdom, on the other hand, is a land of mystery and magic. It is ruled by a wise and benevolent queen, who uses her powers to protect her people and keep the peace. Do you want to hear more?\n')
                     if city_ans2.strip().lower() in yes:
-                        city_ans3 = input(f'\n{bulletpoint2}The old man nods and begins to tell you the history of the Red Dragon Empire. He explains that, long ago, the empire was ruled by a peaceful and benevolent ruler who was loved and respected by his people. But one day, a cruel and ambitious emperor overthrew the peaceful ruler and seized control of the empire.\n\nUnder the emperor\'s rule, the Red Dragon Empire became a land of conquest and aggression. The emperor sought to expand his power and territory, and he set his sights on the Ice Kingdom.\n\nBut the Ice Kingdom was a land of magic, and its queen was a powerful sorceress. She used her powers to protect her kingdom and repel the emperor\'s armies. Despite his best efforts, the emperor was unable to conquer the Ice Kingdom, and the two kingdoms have been in a state of cold war ever since.\n\n{bulletpoint}The old man concludes his story by saying that the City of the Rising Sun is a safe haven for those who seek refuge from the conflicts and dangers of the outside world. He offers to show you around the city, if you are interested. What do you say?\n')
+                        city_ans3 = input(f'\n{bulletpoint2}The old man nods and begins to tell you the history of the Red Dragon Empire. He explains that, long ago, the empire was ruled by a peaceful and benevolent ruler who was loved and respected by his people.\nBut one day, a cruel and ambitious emperor overthrew the peaceful ruler and seized control of the empire.\n\nUnder the emperor\'s rule, the Red Dragon Empire became a land of conquest and aggression. The emperor sought to expand his power and territory, and he set his sights on the Ice Kingdom.\n\nBut the Ice Kingdom was a land of magic, and its queen was a powerful sorceress. She used her powers to protect her kingdom and repel the emperor\'s armies. Despite his best efforts,\nthe emperor was unable to conquer the Ice Kingdom, and the two kingdoms have been in a state of cold war ever since.\n\n{bulletpoint}The old man concludes his story by saying that the City of the Rising Sun is a safe haven for those who seek refuge from the conflicts and dangers of the outside world. He offers to show you around the city, if you are interested. What do you say?\n')
                         if city_ans3.strip().lower() in yes:
                             menu()
                             assassins_guild()
@@ -1176,7 +1499,8 @@ jgs .-=-.    ) -.
                         poker()
                         poker_ans = input(f'{bulletpoint}Play another hand of Doker?')
                     else:
-                        blackjack_ans = input(f'{bulletpoint}How about Whackjack? The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing. ')
+                        blackjack_ans = input(
+                            f'{bulletpoint}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\nHow about Whackjack?  ')
                         while blackjack_ans.strip().lower() in yes:
                             blackjack()
                             blackjack_ans = input(
@@ -3273,7 +3597,7 @@ _,'    \_>\_/    ',_
                 print(f'█   Money: ${hero.money}                                        Morality: {hero.morality}                                    Remaining Health: {hero.health}        █')
                 items()
                 print('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
-                if hero.health <=50:
+                if hero.health <=70:
                     print('        █             █     █          █    ▐        ▐               █    █     █    ▐   █          █   █    █       █ █    ▐   ▐              ')
                     print('        ▐             ▐     ▐          ▐                             ▐    ▐     ▐        ▐          ▐   ▐    ▐       ▐ ▐                        ')
                 print('\n\n\n\n\n\n\n\n\n\n\n')
