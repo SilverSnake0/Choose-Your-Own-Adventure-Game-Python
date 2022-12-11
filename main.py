@@ -32,7 +32,7 @@ def adventure_game():
        
     def restart():
         vendor_lady_object = 1 
-        monster_guild_membership = True
+        monster_guild_membership = False
         assassin_guild_membership = False
         class Item:
             # Constructor function for the Item class.
@@ -116,9 +116,10 @@ def adventure_game():
         emperorbattle = Monster('Emperor', 50, 10, 30)
         cornstalker = Monster('Cornstalker', 200, 80, 180)
         gloopus = Monster('Gloopus', 180, 70, 200)
+        behemoth = Monster('Behemoth', 250, 100, 250)
 
         available_monster_list = [sandworm, giant, arachne, tiamat, merlin, robots, kitty, fenrir,
-                                  alexa9000, griffin, skeletonwarrior, boxer, leviathan, phoenix, minotaur, cornstalker, gloopus]
+                                  alexa9000, griffin, skeletonwarrior, boxer, leviathan, phoenix, minotaur, cornstalker, gloopus, behemoth]
         tamed_monster_list = []
         
         # Function that 1. Checks if the monster has died, 2. Checks if person has died and then restarts/exits game
@@ -1322,20 +1323,75 @@ jgs .-=-.    ) -.
             # Monster Hunter Guild
             def monster_hunter_guild():
                 nonlocal monster_guild_membership
-                input(f'{bulletpoint2}\nThe leader of the group, a fierce-looking woman with a scar across her face, sizes you up with a critical eye. She seems impressed by your determination and skill, and she agrees to take you on as a member of the guild.\nYou are excited and eager to begin your new career as a monster hunter. You know that it will be dangerous and challenging, but you are ready for the challenge. You will use your skills and abilities to protect the innocent and keep the world safe from the dangers that lurk in the shadows.\n')
-                input(f'{bulletpoint2}\nAs a member of the monster hunter guild, you quickly learn the guild\'s motto: \n"To protect the innocent and keep the world safe from the dangers that lurk in the shadows." \nThis motto guides the guild\'s actions and decisions, and it is a constant reminder of the important role that they play in the world.\n')
-                input(f'{bulletpoint2}\nThe guild has a wide range of goals, including tracking and defeating dangerous beasts, protecting civilians from harm, and gathering information about the various monsters that inhabit the world.\nAs a new member of the guild, you are tasked with your first mission: to defeat a monster that has been causing havoc in the local farming community. The monster, a massive, hulking plant-like creature known as the "Cornstalker," has been destroying crops and terrorizing the locals.\nYou and your team set out to track down the Cornstalker and put an end to its reign of terror.\n')
-                input(f'{bulletpoint2}Your team found the monster lurking in a field of tall corn. The monster is nearly invisible among the plants, blending in seamlessly with its surroundings.\nAt first glance, the Cornstalker appears to be a massive, plant-like creature. It has a thick, woody trunk, and its vines and leaves are covered in sharp thorns. Its eyes are glowing orbs of green light, and its mouth is filled with razor-sharp teeth.\nAs you approach, the Cornstalker stirs to life, its vines and leaves writhing and twisting as it prepares to attack. The monster is powerful and dangerous, and it will take all of the your skill and determination to defeat it.')
-                add_health(cornstalker)
-                battle(hero, cornstalker, 'raises its vines',
-                       'retreat into its leaves', 'uses a vine whip', 'unleashes a barrage of explosive seeds')
-                random_health_gain = random.randint(10, 30)
-                print(
-                    f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
-                hero.health += random_health_gain
-                check_health(hero)
-                add_money(50, 150)
-                menu()
+                def behemoth_battle():
+                    input(f'\n{bulletpoint2}Out of nowhere a beast springs out from the tall grass and lunges at people next to you. You quickly draw your sword and charge at the Behemoth, determined to protect your fellow guild members!\n')
+                    add_health(behemoth)
+                    battle(hero, behemoth, 'raises massive claws',
+                        'becomes reckless and aggressive', 'becomes quick and agile', 'rushes forward with horns and claws')
+                    random_health_gain = random.randint(10, 30)
+                    print(
+                        f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
+                    hero.health += random_health_gain
+                    check_health(hero)
+                    add_money(50, 150)
+                    menu()
+                    input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way\n')
+                    the_restaurant()
+                if monster_guild_membership == False:
+                    input(f'{bulletpoint2}\nThe leader of the group, a fierce-looking woman with a scar across her face, sizes you up with a critical eye. She seems impressed by your determination and skill, and she agrees to take you on as a member of the guild.\nYou are excited and eager to begin your new career as a monster hunter. You know that it will be dangerous and challenging, but you are ready for the challenge. You will use your skills and abilities to protect the innocent and keep the world safe from the dangers that lurk in the shadows.\n')
+                    input(f'{bulletpoint2}\nAs a member of the monster hunter guild, you quickly learn the guild\'s motto: \n"To protect the innocent and keep the world safe from the dangers that lurk in the shadows." \nThis motto guides the guild\'s actions and decisions, and it is a constant reminder of the important role that they play in the world.\n')
+                    input(f'{bulletpoint2}\nThe guild has a wide range of goals, including tracking and defeating dangerous beasts, protecting civilians from harm, and gathering information about the various monsters that inhabit the world.\nAs a new member of the guild, you are tasked with your first mission: to defeat a monster that has been causing havoc in the local farming community. The monster, a massive, hulking plant-like creature known as the "Cornstalker," has been destroying crops and terrorizing the locals.\nYou and your team set out to track down the Cornstalker and put an end to its reign of terror.\n')
+                    input(f'{bulletpoint2}Your team found the monster lurking in a field of tall corn. The monster is nearly invisible among the plants, blending in seamlessly with its surroundings.\nAt first glance, the Cornstalker appears to be a massive, plant-like creature. It has a thick, woody trunk, and its vines and leaves are covered in sharp thorns. Its eyes are glowing orbs of green light, and its mouth is filled with razor-sharp teeth.\nAs you approach, the Cornstalker stirs to life, its vines and leaves writhing and twisting as it prepares to attack. The monster is powerful and dangerous, and it will take all of the your skill and determination to defeat it.')
+                    add_health(cornstalker)
+                    battle(hero, cornstalker, 'raises its vines',
+                        'retreat into its leaves', 'uses a vine whip', 'unleashes a barrage of explosive seeds')
+                    random_health_gain = random.randint(10, 30)
+                    print(
+                        f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
+                    hero.health += random_health_gain
+                    check_health(hero)
+                    add_money(50, 150)
+                    menu()
+                else:
+                    recruit_num = random.randint(1,10)
+                    recruit_ans = input(f'\n{bulletpoint}As you and your fellow monster hunter guild members stand before the three potential recruits, you carefully assess each of them.\n\nThe first potential recruit is a skinny young man with a timid expression on his face.\n\nThe second is a child no older than 10, with a determined look in their eyes.\n\nThe third is a short and chubby man, who looks ready for a fight. \n\nYou will task one of them to take out the Cornstalker Monster. Who do you select?\n')
+                    if recruit_ans.strip().lower() in ('1', 'first', 'skinny man', 'skinny young man', 'young man', 'first one', 'the first one', 'timid one', 'the timid one', 'the skinny one', 'the first'):
+                        input(f'{bulletpoint}Press enter to determine if the recruit was successful or not by rolling from 1 to 10...')
+                        input(f'{bulletpoint2}You rolled a {recruit_num}.')
+                        if recruit_num >= 5:
+                            input(
+                                f'\n{bulletpoint2}The skinny young man, despite his small stature, was quick on his feet and agile. He dodged the Cornstalker\'s vines and thorns with ease, darting in and out to deliver precise blows with his sword. The Cornstalker roared in pain and fury as the young man\'s sword sliced through its thick bark, leaving deep gashes in its woody trunk.\n\nDespite its size and strength, the Cornstalker was no match for the young man\'s skill and determination. With a final, desperate swipe of its vines, the Cornstalker stumbled and fell, its glowing eyes dimming as it lay still on the ground.\n\nThe young man, panting and covered in sweat, looked around at the members of the Monster Hunter Guild, who were watching in amazement. The leader of the group, the fierce-looking woman with the scar, nodded in approval. "You have proven yourself worthy to join our ranks," she said. "Welcome to the Monster Hunter Guild."\n')
+                            behemoth_battle()
+                        else:
+                            input(
+                                f'\n{bulletpoint2}The skinny young man approached the cornstalker monster with confidence, but as soon as the cornstalker attacked, he realized he was no match for its strength and ferocity. The cornstalker\'s vines and thorns ripped through the young man\'s armor, and its sharp teeth tore into his flesh. Despite his valiant efforts, the young man was no match for the cornstalker and was quickly overpowered and killed.\n')
+                            behemoth_battle()
+                    elif recruit_ans.strip().lower() in ('2', 'second', 'child', 'the child', 'the 10 year old', 'the youngling', 'the kid', 'the second one', 'the second', 'the 10 yr old'):
+                        input(f'{bulletpoint}Press enter to determine if the recruit was successful or not by rolling from 1 to 10...')
+                        input(f'{bulletpoint2}You rolled a {recruit_num}.')
+                        if recruit_num >= 5:
+                            input(
+                                f'\n{bulletpoint2}The child, no older than 10, approaches the Cornstalker with a determined look in their eyes. They quickly notice that the monster\'s glowing orbs of green light are its weak spot, and they begin to circle the creature, dodging its sharp vines and thorns.\n\nUsing their agility and quick thinking, the child manages to get close to the Cornstalker and strike its weak spot with a well-placed attack. The monster howls in pain and falls to the ground, defeated.\n\nThe child, triumphant, turns to the awe-struck guild members with a triumphant grin. The child says "Looks like I\'m not just a kid anymore"')
+                            behemoth_battle()
+                        else:
+                            input(
+                                f'\n{bulletpoint2}As the child faced off against the Cornstalker, it quickly became apparent that the young fighter was no match for the massive plant-like creature. Despite their determination and skill, the child struggled to land a single blow on the Cornstalker. The monster\'s thick trunk and sharp thorns proved to be formidable defenses, and the child was soon overpowered by the Cornstalker\'s vicious attacks. Despite their valiant effort, the child was ultimately defeated by the monster.\n')
+                            behemoth_battle()
+                    elif recruit_ans.strip().lower() in ('3', 'third', 'chubby', 'the chubby one', 'the man', 'the chubby man', 'the short man', 'the short man', 'the third', 'the third one'):
+                        input(f'{bulletpoint}Press enter to determine if the recruit was successful or not by rolling from 1 to 10...')
+                        input(f'{bulletpoint2}You rolled a {recruit_num}.')
+                        if recruit_num >= 5:
+                            input(
+                                f'\n{bulletpoint2}The short and chubby man takes a deep breath and squares up against the Cornstalker. With a determined look on his face, he charges at the monster, dodging its vines and thorns as he weaves in and out of its reach. He lands a few powerful blows to the monster\'s trunk, but the Cornstalker seems unfazed.\n\nThe man\'s determination only grows stronger, and he continues to fight with all his might. After a grueling battle, the man finally lands a decisive blow, and the Cornstalker falls to the ground with a mighty crash.\n\nThe man stands panting, his chest heaving with exertion, but with a proud grin on his face. "I told you I was ready for a fight," he says, dusting off his hands. "Now let\'s go find some more monsters to defeat."\n')
+                            behemoth_battle()
+                        else:
+                            input(
+                                f'\n{bulletpoint2}As the chubby man charged at the Cornstalker monster, he swung his sword wildly in an attempt to cut through the monster\'s thick, woody trunk.\n\nHowever, the monster easily countered his attacks with its sharp thorns and vines. The chubby man was no match for the Cornstalker\'s strength and speed, and he was quickly overpowered.\n\nThe monster grabbed him with its vines and lifted him up to its glowing green eyes. The chubby man struggled and screamed as the monster brought him closer to its razor-sharp teeth.\n\nWith one final bite, the Cornstalker monster devoured the chubby man, leaving nothing but a pile of bones on the ground. The other members of the Monster Hunter Guild watched in horror as the Cornstalker let out a triumphant roar.\n')
+                            behemoth_battle()
+                    else:
+                        input(f'\n{bulletpoint2}You decide that none of them are worth recruiting and told them all to get lost!\n')
+                        behemoth_battle()
+
                 input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way\n')
                 monster_guild_membership = True
                 menu()
@@ -1343,17 +1399,35 @@ jgs .-=-.    ) -.
 
             # Murder of the Three Thugs
             def murder_thugs():
+                nonlocal assassin_guild_membership
                 nonlocal thugs_life
-                input(f'{bulletpoint2}You spend weeks investigating and gathering information about the thugs. You learn their names, their habits, and their weaknesses. You plan and prepare your attack, determined to make the thugs pay for what they have done to you.\nFinally, the day of your revenge arrives. You ambush the thugs one by one, and you kill them with cold and ruthless efficiency. You feel a sense of satisfaction and relief as you see the thugs fall, knowing that you have avenged the attack.\nBut you also feel a sense of guilt and regret. You know that what you have done is wrong, and you wonder if there was a better way to resolve the conflict. You decide to leave town and start a new life, hoping to leave the past behind and find peace and happiness.\n')
-                thugs_life = 'dead'
-                input(f'{bulletpoint2}As you make your way out of town, you notice a hooded figure following you at a distance. You become suspicious and wary, and you keep a close eye on the figure.\nEventually, you confront the figure and demand to know who they are and why they are following you.\n"I saw what you did," the old man says, his voice cold and accusing. "I saw you kill those thugs. And now, you must face the consequences."\nBefore you can react, the old man throws a powder in your face. You feel a sudden burning sensation and then everything goes black.\nWhen you awaken, you find yourself lying on the ground in a mysterious city. You are disoriented and confused, and you have no idea how you got there.\nYou look around, trying to make sense of your surroundings. You see a group of hooded people standing nearby, watching you with a mixture of curiosity and suspicion.\nYou realize that the old man must have brought you here, and that you are now at the mercy of this mysterious group. You wonder what they will do with you, and you fear the worst.\nThe old man taps you on the shoulder from behind and has you follow him...')
+                if thugs_life == 'alive':
+                    input(f'{bulletpoint2}You spend weeks investigating and gathering information about the thugs. You learn their names, their habits, and their weaknesses. You plan and prepare your attack, determined to make the thugs pay for what they have done to you.\nFinally, the day of your revenge arrives. You ambush the thugs one by one, and you kill them with cold and ruthless efficiency. You feel a sense of satisfaction and relief as you see the thugs fall, knowing that you have avenged the attack.\nBut you also feel a sense of guilt and regret. You know that what you have done is wrong, and you wonder if there was a better way to resolve the conflict. You decide to leave town and start a new life, hoping to leave the past behind and find peace and happiness.\n')
+                    thugs_life = 'dead'
+                    input(f'\n{bulletpoint2}As you make your way out of town, you notice a hooded figure following you at a distance. You become suspicious and wary, and you keep a close eye on the figure.\nEventually, you confront the figure and demand to know who they are and why they are following you.\n"I saw what you did," the old man says, his voice cold and accusing. "I saw you kill those thugs. And now, you must face the consequences."\nBefore you can react, the old man throws a powder in your face. You feel a sudden burning sensation and then everything goes black.\nWhen you awaken, you find yourself lying on the ground in a mysterious city. You are disoriented and confused, and you have no idea how you got there.\nYou look around, trying to make sense of your surroundings. You see a group of hooded people standing nearby, watching you with a mixture of curiosity and suspicion.\nYou realize that the old man must have brought you here, and that you are now at the mercy of this mysterious group. You wonder what they will do with you, and you fear the worst.\nThe old man taps you on the shoulder from behind and has you follow him...\n')
+                else:
+                    input(f'\n{bulletpoint2}As you approach the scene of the crime, you carefully assess the situation. The three thugs are heavily focused on the couple, leaving them vulnerable to attack.\n\nYou silently make your way behind the first thug and deliver a swift kick to the back of his knees, causing him to fall to the ground.\n\nThe second thug turns to face you, but you are too quick for him. You dodge his clumsy swings and deliver a series of quick punches, eventually knocking him unconscious.\n\nThe third thug tries to run, but you easily catch up to him and grab him by the collar. With a flick of your wrist, you disable his ability to move and leave him on the ground.')
+                    if assassin_guild_membership == True:
+                        end_new_thugs = input(f'\n{bulletpoint}With your skills in the art of assassination, do you decide to end the lives of these thugs?')
+                        if end_new_thugs.strip().lower() in yes:
+                            input(f'\n{bulletpoint2}You quickly draw your sword and approach the three thugs. With a single, fluid motion, you strike each of them down.\n\nThe couple you had saved looks on in shock and gratitude. You nod at them, indicating that they are safe now.\n\nYou then turn to leave, but not before spotting a fellow member of the assassins guild watching from a nearby alley. You nod at them in recognition before making your way towards the City of the Rising Sun, where the guild headquarters is located.\n')
+                            menu()
+                            assassins_guild()
+                        else:
+                            input(f'\n{bulletpoint2}As you make your way away from the scene, you spot another hooded figure watching you from a nearby alleyway. You recognize the signature red sash around their waist as a sign of their membership in the assassin guild. The figure approaches you, revealing themselves to be a fellow guild member.\n\nHe nods in acknowledgement, pleased with your performance. You both then set off towards the City of the Rising Sun.\n')
+                            menu()
+                            assassins_guild()
+                    else:
+                        input(f'\n{bulletpoint2}As you make your way out of town, you notice a hooded figure following you at a distance. You become suspicious and wary, and you keep a close eye on the figure.\nEventually, you confront the figure and demand to know who they are and why they are following you.\n"I saw what you did," the old man says, his voice cold and accusing. "I saw you take down those thugs. And now, you must face the consequences."\nBefore you can react, the old man throws a powder in your face. You feel a sudden burning sensation and then everything goes black.\nWhen you awaken, you find yourself lying on the ground in a mysterious city. You are disoriented and confused, and you have no idea how you got there.\nYou look around, trying to make sense of your surroundings. You see a group of hooded people standing nearby, watching you with a mixture of curiosity and suspicion.\nYou realize that the old man must have brought you here, and that you are now at the mercy of this mysterious group. You wonder what they will do with you, and you fear the worst.\nThe old man taps you on the shoulder from behind and has you follow him...\n')
+                        menu()
+                        assassins_guild()
                 menu()
                 assassins_guild()
 
             # The Secret Item
             def secret_item():
                 nonlocal coin_guess_correctly
-                input(f'{bulletpoint2}\nAs you exit the vendor lady\'s shop, you are approached by the shopkeeper\'s husband. He is a friendly, unassuming man, and he smiles warmly as he greets you.\nHe says hello there traveller, he couldn\'t help but notice that you were browsing the shop. He asks if you would be interested in playing a little game for a secret item.\nIntrigued, you agree to play along. The husband explains that there is a coin hidden under one of the three cups on the table in front of him. He invites you to choose a cup and make a guess as to which one contains the coin.\nIf you guess correctly he\'ll give you a secret item from the shop. It\'s a small token of appreciation for your patronage.\nAnd even if you don\'t win, don\'t worry. It\'s all in good fun.\n')
+                input(f'{bulletpoint2}\nAs you exit the vendor lady\'s shop, you are approached by the shopkeeper\'s husband. He is a friendly, unassuming man, and he smiles warmly as he greets you.\nHe says hello there traveller, he couldn\'t help but notice that you were browsing the shop. He asks if you would be interested in playing a little game for a secret item.\nIntrigued, you agree to play along. The husband explains that there is a coin hidden under one of the three cups on the table in front of him. He invites you to choose a cup and make a guess as to which one contains the coin.\n\nIf you guess correctly he\'ll give you a secret item from the shop. It\'s a small token of appreciation for your patronage.\nAnd even if you don\'t win, don\'t worry. It\'s all in good fun.\n')
 
                 # Define the cups and the coin
                 cups = ["A", "B", "C"]
@@ -1395,8 +1469,11 @@ jgs .-=-.    ) -.
                         hero.add_item(random_secret_item)
                         input(
                             f'\n{bulletpoint2}Congratulations, you just won the {random_secret_item.name}! I\'m sure you\'ll enjoy it!🎁\nThe {random_secret_item.name} has been added to your inventory. Press enter to continue...')
-                    menu()
-                    coin_guess_correctly = False
+                else:
+                    pass
+                menu()
+                coin_guess_correctly = False
+                if thugs_life == 'alive' and monster_guild_membership == False:
                     thug_or_monster = input(
                         f'\n{bulletpoint2}The husband greets you goodbye and hopes to see you again. Feeling ecstatic, you thank him for the game and turn to leave. As you walk away, you feel a strong desire to punish the three thugs that attacked you now that you\'re empowered with your new earnings. You could track them down but that would be risky and potentially dangerous.\n\nAs you ponder your options, you notice a group of people standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. You could join their ranks and get into hunting and defeating dangerous beasts.\n\n{bulletpoint}Either way, you know that you must do make a decision... what do you do?\n')
                     if thug_or_monster.strip().lower() in ('thug', 'thugs', 'revenge', 'track', 'track down', 'punish'):
@@ -1408,17 +1485,48 @@ jgs .-=-.    ) -.
                             f'\n{bulletpoint2}You approach the group and ask about joining their ranks.\n')
                         menu()
                         monster_hunter_guild()
-                else:
-                    menu()
+                elif thugs_life == 'alive' and monster_guild_membership == True:
                     thug_or_monster = input(
-                        f'\n{bulletpoint2}The husband greets you goodbye and hopes to see you again. Disappointed, you thank him for the game and turn to leave. As you walk away, a feeling of frustration and anger begins to well up inside you.\n\nYou think back to the three thugs who beat you up in the past, and you feel a strong desire for revenge. You could track them down and take out your anger on them, but that would be risky and potentially dangerous.\n\nAs you ponder your options, you notice a group of people standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. You could join their ranks and channel your anger into hunting and defeating dangerous beasts.\n\n{bulletpoint}Either way, you know that you must do something to vent your frustration and anger... what do you do?')
-                    if thug_or_monster.strip().lower() in ('thug', 'thugs', 'revenge', 'track', 'track down', 'justice'):
+                        f'\n{bulletpoint2}The husband greets you goodbye and hopes to see you again. Feeling ecstatic, you thank him for the game and turn to leave. As you walk away, you feel a strong desire to punish the three thugs that attacked you now that you\'re empowered with your new earnings. You could track them down but that would be risky and potentially dangerous.\n\nAs you ponder your options, you notice your fellow monster guild members standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. Would you like to help them recruit?\n\n{bulletpoint}Either way, you know that you must do make a decision... what do you do?\n')
+                    if thug_or_monster.strip().lower() in ('thug', 'thugs', 'revenge', 'track', 'track down', 'punish'):
                         input(
-                            f'\n{bulletpoint2}You cannot forget the attack, and you want revenge. You decide to track down the thugs and take justice into your own hands.\n')
+                            f'\n{bulletpoint2}You cannot forget the attack, and you want to punish them for what they did to you earlier. You decide to track down the thugs and take justice into your own hands.\n')
+                        murder_thugs()
+                    else:
+                        input(
+                            f'\n{bulletpoint2}You approach the guild members and assist them in the recruitment.\n')
+                        menu()
+                        monster_hunter_guild()
+                elif thugs_life == 'dead' and monster_guild_membership == False:
+                    thug_or_monster = input(
+                        f'\n{bulletpoint2}The husband greets you goodbye and hopes to see you again. Feeling ecstatic, you thank him for the game and turn to leave. As you walk away, you see three thugs that are assaulting a couple. You could go after them to help the couple, but that would be risky and potentially dangerous.\n\nAs you ponder your options, you notice a group of people standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. You could join their ranks and get into hunting and defeating dangerous beasts.\n\n{bulletpoint}Either way, you know that you must do make a decision... what do you do?\n')
+                    if thug_or_monster.strip().lower() in ('thug', 'thugs', 'go after them', 'track', 'track down', 'punish', 'three thugs', 'couple', 'help', 'help the couple'):
+                        if assassin_guild_membership == True:
+                            input(
+                                f'\n{bulletpoint2}You cannot forget the attack, and you want to punish them for what they did to the couple. With your abilities gained from the assassins guild, you easily track down the thugs and take justice into your own hands.\n')
+                        else:
+                            input(
+                                f'\n{bulletpoint2}You cannot forget the attack, and you want to punish them for what they did to the couple. You decide to track down the thugs and take justice into your own hands.\n')
                         murder_thugs()
                     else:
                         input(
                             f'\n{bulletpoint2}You approach the group and ask about joining their ranks.\n')
+                        menu()
+                        monster_hunter_guild()
+                elif thugs_life == 'dead' and monster_guild_membership == True:
+                    thug_or_monster = input(
+                        f'\n{bulletpoint2}The husband greets you goodbye and hopes to see you again. Feeling ecstatic, you thank him for the game and turn to leave. As you walk away, you see three thugs that are assaulting a couple. You could go after them to help the couple, but that would be risky and potentially dangerous.\n\nAs you ponder your options, you notice your fellow monster guild members standing nearby. They are dressed in strange, exotic clothing, and they appear to be recruiting for their monster hunter guild. Would you like to help them recruit?\n\n{bulletpoint}Either way, you know that you must do make a decision... what do you do?\n')
+                    if thug_or_monster.strip().lower() in ('thug', 'thugs', 'go after them', 'track', 'track down', 'punish', 'three thugs', 'couple', 'help', 'help the couple'):
+                        if assassin_guild_membership == True:
+                            input(
+                                f'\n{bulletpoint2}You cannot forget the attack, and you want to punish them for what they did to the couple. With your abilities gained from the assassins guild, you easily track down the thugs and take justice into your own hands.\n')
+                        else:
+                            input(
+                                f'\n{bulletpoint2}You cannot forget the attack, and you want to punish them for what they did to the couple. You decide to track down the thugs and take justice into your own hands.\n')
+                        murder_thugs()
+                    else:
+                        input(
+                            f'\n{bulletpoint2}You approach the guild members and assist them in the recruitment.\n')
                         menu()
                         monster_hunter_guild()
 
@@ -1434,16 +1542,21 @@ jgs .-=-.    ) -.
                     menu()
                 enter_assassin_guild = input(f'\n{bulletpoint}After exploring the city for a while, the old man leads you to a secluded part of the city, where a mysterious sign stands in front of a hidden door. The sign bears the emblem of a hooded figure holding a curved blade. The old man tells you that this is the entrance to the Assassin Guild, a secretive organization of skilled assassins who serve as protectors.\n\nYou thank the old man for showing you around the city, and he tells you that he will be waiting for you if you ever need anything. You stand in front of the mysterious sign, considering whether or not you should enter the Assassin Guild and see what secrets it holds. The choice is yours, do you enter the building?\n\n')
                 if enter_assassin_guild.strip().lower() in yes:
-                    input(f'\n{bulletpoint2}Inside, you are greeted by a group of hooded figures who introduce themselves as members of the assassin guild. They explain that they are a secret society of trained assassins who use their skills and knowledge to serve the greater good.\n\nThe guild members offer to train you in the ancient ways of assassination, and you are intrigued by the offer. You decide to accept their offer and become a member of the guild.\n')
-                    input(f'...')
-                    assassin_guild_membership = True
-                    philosophy_ans = input(f'{bulletpoint2}You spend the next few weeks training with the guild, learning the art of stealth, deception, and assassination. You undergo rigorous physical and mental training, and you master the use of a variety of weapons and tools.\n\nAs you progress in your training, you are taught the secrets of the guild and the philosophy that guides its members. You learn to balance the need for justice with the harsh realities of the world, and you become a skilled and deadly assassin. Do you want to go over the philosophy of the Assassin guild?\n')
-                    if philosophy_ans.strip().lower() in yes:
-                        input(f'{bulletpoint2}\n\n\n\n\n\n\n\n\n\n\nThe philosophy of the assassin guild is based on the principle of balance. The guild members believe that the world is a complex and dangerous place, and that there is a constant struggle between good and evil, order and chaos.\n\nThey believe that the guild has a responsibility to maintain the balance of power and prevent any one side from gaining too much control. To achieve this, the guild members use their skills and knowledge to eliminate threats and protect the innocent.\n\nThe guild has a complicated relationship with the ice kingdom and the Red Dragon Empire. On the one hand, the guild is neutral and does not take sides in political conflicts. On the other hand, the guild members are not afraid to intervene if they believe that the balance of power is being threatened.\n\nIn the case of the ice kingdom, the guild has a positive relationship with the queen and her people. The queen values the guild\'s skills and knowledge, and she often hires the guild members to carry out important missions. In return, the guild members protect the ice kingdom and its people from threats and dangers.\n\nIn the case of the Red Dragon Empire, the guild has a more complicated relationship. The emperor and his followers view the guild as a threat and a nuisance, and they often try to suppress the guild\'s activities. However, the guild members are not afraid to challenge the empire and its corrupt rulers, and they will not hesitate to strike if the balance of power is threatened.\n\n')
+                    if assassin_guild_membership == False:
+                        input(f'\n{bulletpoint2}Inside, you are greeted by a group of hooded figures who introduce themselves as members of the assassin guild. They explain that they are a secret society of trained assassins who use their skills and knowledge to serve the greater good.\n\nThe guild members offer to train you in the ancient ways of assassination, and you are intrigued by the offer. You decide to accept their offer and become a member of the guild.\n')
+                        input(f'...')
+                        assassin_guild_membership = True
+                        philosophy_ans = input(f'{bulletpoint2}You spend the next few weeks training with the guild, learning the art of stealth, deception, and assassination. You undergo rigorous physical and mental training, and you master the use of a variety of weapons and tools.\n\nAs you progress in your training, you are taught the secrets of the guild and the philosophy that guides its members. You learn to balance the need for justice with the harsh realities of the world, and you become a skilled and deadly assassin. Do you want to go over the philosophy of the Assassin guild?\n')
+                        if philosophy_ans.strip().lower() in yes:
+                            input(f'{bulletpoint2}\n\n\n\n\n\n\n\n\n\n\nThe philosophy of the assassin guild is based on the principle of balance. The guild members believe that the world is a complex and dangerous place, and that there is a constant struggle between good and evil, order and chaos.\n\nThey believe that the guild has a responsibility to maintain the balance of power and prevent any one side from gaining too much control. To achieve this, the guild members use their skills and knowledge to eliminate threats and protect the innocent.\n\nThe guild has a complicated relationship with the ice kingdom and the Red Dragon Empire. On the one hand, the guild is neutral and does not take sides in political conflicts. On the other hand, the guild members are not afraid to intervene if they believe that the balance of power is being threatened.\n\nIn the case of the ice kingdom, the guild has a positive relationship with the queen and her people. The queen values the guild\'s skills and knowledge, and she often hires the guild members to carry out important missions. In return, the guild members protect the ice kingdom and its people from threats and dangers.\n\nIn the case of the Red Dragon Empire, the guild has a more complicated relationship. The emperor and his followers view the guild as a threat and a nuisance, and they often try to suppress the guild\'s activities. However, the guild members are not afraid to challenge the empire and its corrupt rulers, and they will not hesitate to strike if the balance of power is threatened.\n\n')
                     input(
                         f'{bulletpoint2} You recall the poem they taught you:\n\nThe assassin guild is a secret sect\nOf skilled and deadly powers,\nTheir mission is to keep the check\nIn a world of chaos all hours.\n\nThey move through the shadows unseen,\nSilent and deadly as the night,\nReady to strike at a moment\'s bright\nAnd eliminate any threat in sight.\n\nThey are masters of the blade and the bow,\nTrained in the arts of stealth and deception,\nThey are feared by their enemies\nAnd respected by those who know their profession.\n\nThe guild is a force for right,\nA protector of the innocent and the weak,\nThey will continue to fight\nFor balance and justice in a world that seeks.\n')
-                    new_kill = input(
-                        f'\n{bulletpoint}At the end of your training, you are given a mission to complete. You are to assassinate a...\nPlease enter your assassination target: ')
+                    if assassin_guild_membership == False:
+                        new_kill = input(
+                            f'\n{bulletpoint}At the end of your training, you are given a mission to complete. You are to assassinate a...\nPlease enter your assassination target: ')
+                    else:
+                        new_kill = input(
+                            f'\n{bulletpoint}As a veteran Assassin, you are given a new mission to complete. You are to assassinate a...\nPlease enter your assassination target: ')
                     while new_kill.strip().lower() == hero.name.strip().lower():
                         new_kill = input(
                             f'{bulletpoint2}You cannot kill yourself...\n{bulletpoint}Please enter a new assassination target: ')
