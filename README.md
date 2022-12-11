@@ -14,5 +14,4 @@ So what are you waiting for? Start your adventure today!
 
 # Potential Choices Available
 
-This game is currently unfinished. The choices you see with a gold star are stories that are mostly completed.
 ![Choices Tree](Resources/images/choice_tree.png)
