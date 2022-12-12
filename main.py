@@ -662,146 +662,6 @@ jgs .-=-.    ) -.
             print(
                 f'{hero.name} played: {userChoice}.\n Best Friend Played: {computerChoice}.\n {determineWinner(userChoice, computerChoice)}')
 
-        def poker():
-            # Define global variables
-            deck = []
-            player_hand = []
-            computer_hand = []
-            community_cards = []
-
-            # Define a function to evaluate a poker hand
-            def evaluate_hand(hand):
-
-                # Sort the hand by value
-                hand.sort(key=lambda x: x[0])
-
-                # Count the number of times each card appears in the hand
-                counts = {card[0]: 0 for card in hand}
-                for card in hand:
-                    counts[card[0]] += 1
-
-                # Check for a Royal Flush
-                if all(count == 1 for count in counts.values()):
-                    if 'A' in counts and 'K' in counts and 'Q' in counts and 'J' in counts and '10' in counts:
-                        if all(card[1] == hand[0][1] for card in hand):
-                            return 'Royal Flush'
-
-                # Check for a Straight Flush
-                if all(count == 1 for count in counts.values()):
-                    for i in range(1, 5):
-                        if int(hand[i][0]) - int(hand[i - 1][0]) != 1:
-                            break
-                        else:
-                            return 'Straight Flush'
-
-                # Check for Four of a Kind
-                if 4 in counts.values():
-                    return 'Four of a Kind'
-
-                # Check for a Full House
-                if 3 in counts.values() and 2 in counts.values():
-                    return 'Full House'
-
-                # Check for a Flush
-                if all(count == 1 for count in counts.values()):
-                    return 'Flush'
-
-                # Check for a Straight
-                for i in range(1, len(hand)):
-                    if int(hand[i][0]) - int(hand[i - 1][0]) != 1:
-                        break
-                else:
-                    return 'Straight'
-
-                # Check for Three of a Kind
-                if 3 in counts.values():
-                    return 'Three of a Kind'
-
-                # Check for Two Pair
-                if len([count for count in counts.values() if count == 2]) == 2:
-                    return 'Two Pair'
-
-                # Check for a Pair
-                if 2 in counts.values():
-                    return 'Pair'
-
-                # Return the High Card
-                return 'High Card'
-
-            def create_deck():
-                suits = ['♥ Hearts', '◆ Diamonds', '♠️ Spades', '♣ Clubs']
-                values = ['♠️ A', '2', '3', '4', '5', '6',
-                            '7', '8', '9', '10', '⚜ J', '♕ Q', '♚ K']
-
-                for suit in suits:
-                    for value in values:
-                        card = (value, suit)
-                        deck.append(card)
-
-            # Define a function to shuffle the deck of cards
-            def shuffle_deck():
-                random.shuffle(deck)
-
-            # Define a function to deal cards to the players and the community
-            def deal_cards():
-                for i in range(2):
-                    player_hand.append(deck.pop())
-                    computer_hand.append(deck.pop())
-
-                for i in range(5):
-                    community_cards.append(deck.pop())
-                community_cards_str = ', '.join(
-                [f'{card[0]} {card[1]}' for card in community_cards])
-                print(f'Community hand: {community_cards_str}')
-                print(f'\nPlayer hand: {player_hand}\nCustomer hand: {computer_hand}')
-
-            # Define a function to determine the winner
-            def determine_winner():
-            # Create a list of all possible hands, in descending order of strength
-                possible_hands = [
-                    'Royal Flush',
-                    'Straight Flush',
-                    'Four of a Kind',
-                    'Full House',
-                    'Flush',
-                    'Straight',
-                    'Three of a Kind',
-                    'Two Pair',
-                    'Pair',
-                    'High Card'
-                ]
-
-                # Evaluate the player's hand
-                player_score = evaluate_hand(player_hand + community_cards)
-
-                # Evaluate the computer's hand
-                computer_score = evaluate_hand(computer_hand + community_cards)
-
-                # Determine the winner
-                if player_score > computer_score:
-                    print("\nYou win! :)")
-                    for hand in possible_hands:
-                        if player_score == hand:
-                            print(f"\nYour hand: {hand}")
-                            break
-                elif player_score < computer_score:
-                    print("\nThe Customer Wins :(")
-                    for hand in possible_hands:
-                        if computer_score == hand:
-                            print(f"\nCustomer hand: {hand}")
-                            break
-                else:
-                    print("\nIt's a tie :/")
-
-            # Main function
-            def play_game():
-                create_deck()
-                shuffle_deck()
-                deal_cards()
-                determine_winner()
-
-            # Start the game
-            play_game()
 
         def blackjack():
             # Define a list of suits
@@ -1388,9 +1248,9 @@ jgs .-=-.    ) -.
             thugs_life = 'alive'
             icequeen_life = 'alive'
             current_kingdom_name = 'Ice Kingdom'
+            new_monk_replacement = 'monk'
             coin_guess_correctly = False
             new_monk_replacement_list = ['knight', 'healer', 'bard', 'adventurer', 'fairy', 'dwarf']
-            new_monk_replacement = 'monk'
 
             #Vendor Lady
             def show_vendor_menu():
@@ -1971,21 +1831,18 @@ jgs .-=-.    ) -.
                         ice_kingdom()
                 else:
                     menu()
-                    poker_ans = input(
-                        f'\n{bulletpoint}A customer nearby walks up to you and asks if you would like to play Doker?\n')
-                    while poker_ans.strip().lower() in yes:
-                        poker()
-                        poker_ans = input(f'{bulletpoint}Play another hand of Doker?')
-                    else:
+                    blackjack_ans = input(
+                        f'\n{bulletpoint}A customer nearby walks up to you and asks if you would like to play Whackjack?\n')
+                    if blackjack_ans.strip().lower() in yes:
+                        input(
+                            f'\n{bulletpoint2}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\n')
+                    while blackjack_ans.strip().lower() in yes:
+                        blackjack()
                         blackjack_ans = input(
-                            f'{bulletpoint}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\nHow about Whackjack?  ')
-                        while blackjack_ans.strip().lower() in yes:
-                            blackjack()
-                            blackjack_ans = input(
-                                f'{bulletpoint}Play another round of Whackjack?')
-                        else:
-                            print(f'{bulletpoint2}The customer says take care!')
-                            ice_kingdom()
+                            f'\n{bulletpoint2}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\n{bulletpoint}Play another round of Whackjack?\n')
+                    else:
+                        print(f'\n{bulletpoint2}The customer says take care!\n')
+                        ice_kingdom()
 
             #Get Drunk
             def get_drunk():
@@ -2103,16 +1960,40 @@ jgs .-=-.    ) -.
                         input(f'\n{bulletpoint2}You finally arrive at the gates of the Empire of Ice.\n\nThe guard stops you and asks for your license to pass.\nUpon seeing your crown bearing the symbol of the Red Dragon Empire, the guard\'s expression immediately changed to one of suspicion. Without a word, she signaled for her fellow guards to arrest you. You were taken into custody and brought before the new queen of the Empire of Ice, who was known for her ruthless and cruel nature.\n\nAs you stood before the queen, you could see the anger and hatred in her eyes. She accused you of being a spy and threatened to have you executed. In that moment, you knew that you had to act quickly if you wanted to save your life.\n\n')
                         input(f'{bulletpoint2}You pleaded with the queen, explaining that you were simply curious and wanted to learn more about the world beyond your own land. You begged for her mercy and offered to pay any price she demanded.\n\nBut the queen was unmoved by your pleas. She sneered at you and ordered her guards to take you to the gallows to be hanged!\n')
                         gamble_life = True
-                        hangman()
                         if current_emperor.strip().lower() == hero.name.strip().lower():
                             input(f'\n{bulletpoint2}The queen all of a sudden shouted "HALT!"')
                             input(f'{bulletpoint2}She says she just discovered from her spies that you\'re the real emperor of the Red Dragon Empire.\nShe then says "Your presence in my kingdom was a threat to my rule and the safety of my people. Now, you will pay the price for your deception and your treachery. You may be the Red Dragon Emperor, but in my Empire of Ice, you are nothing but a common traitor. May your death serve as a warning to all who would dare to challenge my authority."')
-                            input(hangman().fullbody())
+                            print("""
+                                 |\|
+                                 |\|
+                                 |\|
+                                 |\|
+                                 |\|
+                                 |\|
+                                 |_| 
+                                (___)
+                                (___)
+                                (___)
+                                (___)
+                                (___)
+                                (___)
+                              ,(/   \),
+                             ('/     \\')
+                            ('/       \\')
+                            |/|       |/|
+                            |/|       |/|
+                            |/|       |/|
+                            (-\       /-)
+                             \-\     /-/
+                              \-\___/-/ 
+                               '-----'
+                            """)
                             input(
-                        f'\n{bulletpoint2}Congratulations, on reaching a bad ending! Try to discover other secret endings and possibilities...')
+                        f'\n{bulletpoint2}You\'ve reached a bad ending! Try to discover other secret endings and possibilities...')
                             hero.health = 0
                             check_health(hero)
                         else:
+                            hangman()
                             input(f'{bulletpoint2}You were allowed to leave the Empire of Ice unharmed. It was a harsh lesson, but one that you would never forget. The world was a dangerous place and your would have to be cautious and wise in your dealings with other kingdoms if you wanted to rule the Red Dragon Empire with honor and dignity.\n')
                             input(
                                 f'{bulletpoint2}You were granted a boat with free passage to leave the kingdom, and you sailed off back to the Red Dragon Empire.')
@@ -3399,7 +3280,6 @@ _,'    \_>\_/    ',_
             
             #The Wizard
             def wizard():
-                nonlocal current_heir
                 nonlocal vendor_lady_object
                 add_health(merlin)
                 blackhole = '''⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -3487,10 +3367,26 @@ _,'    \_>\_/    ',_
                         menu()
                         beggar()
                 else:
-                    nonlocal emperor_life
-                    nonlocal noble_life
-                    nonlocal thugs_life
-                    nonlocal icequeen_life
+                    # Reverse Time function resets the state of the game
+                    def reverse_time():
+                        nonlocal current_heir
+                        nonlocal emperor_life
+                        nonlocal noble_life
+                        nonlocal thugs_life
+                        nonlocal icequeen_life
+                        nonlocal current_emperor
+                        nonlocal current_kingdom_name
+                        nonlocal new_monk_replacement
+                        nonlocal coin_guess_correctly
+                        current_heir = 'the beggar..' # Resets the current heir.
+                        current_emperor = 'emperor'
+                        emperor_life = 'alive'
+                        noble_life = 'alive'
+                        thugs_life = 'alive'
+                        icequeen_life = 'alive'
+                        current_kingdom_name = 'Ice Kingdom'
+                        new_monk_replacement = 'monk'
+                        coin_guess_correctly = False
                     input(
                         f'\n{bulletpoint2}The wizard introduces himself as Merlin. He said he had been imprisoned by the empire for decades, forced to build gadgets for the empire\'s grand plan. He was recently working on these metal beings and planned to copy them on behalf of the empire in order to save human lives.\n')
                     merlin_ans = input(
@@ -3507,11 +3403,7 @@ _,'    \_>\_/    ',_
                         input(
                             f'\n{bulletpoint2}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...\n')
                         input(blackhole)
-                        current_heir = 'the beggar..' # Resets the current heir.
-                        emperor_life = 'alive'
-                        noble_life = 'alive'
-                        thugs_life = 'alive'
-                        icequeen_life = 'alive'
+                        reverse_time()
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
@@ -3521,11 +3413,7 @@ _,'    \_>\_/    ',_
                         input(
                             f'\n{bulletpoint}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...\n')
                         input(blackhole)
-                        current_heir = 'the beggar..' # Resets the current heir.
-                        emperor_life = 'alive'
-                        noble_life = 'alive'
-                        thugs_life = 'alive'
-                        icequeen_life = 'alive'
+                        reverse_time()
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
@@ -3535,11 +3423,7 @@ _,'    \_>\_/    ',_
                         input(
                             f'\n{bulletpoint}Merlin says that if you touch the crystal ball, it will bring you to the past. Who wouldn\'t want to change something they regret in their lives! You walk over and see yourself in the crystal ball, you touch it and then all of a sudden you\'ve been sucked into a hole. All you see around you is warped stars and you see a white hole in the distance...\n')
                         input(blackhole)
-                        current_heir = 'the beggar..' # Resets the current heir.
-                        emperor_life = 'alive'
-                        noble_life = 'alive'
-                        thugs_life = 'alive'
-                        icequeen_life = 'alive'
+                        reverse_time()
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
