@@ -10,7 +10,7 @@ hero_items = [
     '💰', '🍲 - Chicken soup', '🥢- Chopsticks', '🥐 Croissant', '🧥 - Coat', '🍶 - Jar of Fresh Water', '🛌- Pillow and Sleeping Bag']
 # Currently held trade items for the trade mission story.
 hero_land_items = {
-    '🐎': 0, '☕️': 0, '🌽': 0, '🍯': 0, '🦪': 0, '🍍': 0, '🐡': 0, '🍨': 0, '⚗️': 0
+    '🍇': 0, '☕️': 0, '🌽': 0, '🍯': 0, '🦪': 0, '🍍': 0, '🐡': 0, '🍨': 0, '⚗️': 0, 
 }
 # Special items that add different abilities in monster battles.
 battle_items = [
@@ -118,9 +118,11 @@ def adventure_game():
         gloopus = Monster('Gloopus', 180, 70, 200)
         behemoth = Monster('Behemoth', 250, 100, 250)
         goldscale = Monster('Goldscale', 250, 100, 400)
+        snowfang = Monster('Snowfang', 180, 80, 200)
 
         available_monster_list = [sandworm, giant, arachne, tiamat, merlin, robots, kitty, fenrir,
-                                  alexa9000, griffin, skeletonwarrior, boxer, leviathan, phoenix, minotaur, cornstalker, gloopus, behemoth]
+                                  alexa9000, griffin, skeletonwarrior, boxer, leviathan, phoenix, 
+                                  minotaur, cornstalker, gloopus, behemoth, goldscale, snowfang]
         tamed_monster_list = []
         
         # Function that 1. Checks if the monster has died, 2. Checks if person has died and then restarts/exits game
@@ -140,14 +142,15 @@ def adventure_game():
   █   █ █  █ █  █  ▄   █ █ █   █    ▄  █▄▄▄▄▄█ █  █   █   █       █   █  █ █  █   █   █       █  ▄   █ █   █ █   █ █ █   █  █▄▄█ █
   █▄▄▄█ █▄▄█ █▄▄█▄█ █▄▄█▄█  █▄▄█▄▄▄█ █▄█▄▄▄▄▄▄▄█  █▄▄▄█   █▄▄▄▄▄▄▄█▄▄▄█  █▄█  █▄▄▄█   █▄▄▄▄▄▄▄█▄█ █▄▄█ █▄▄▄█ █▄▄▄█▄█  █▄▄█▄▄▄▄▄▄▄█''')
                         exit_game()
+                # Checks if the type of the person is a Monster
                 elif type(person) == Monster:
+                    # If the monster is not in the tamed monster list, then this code will add it to the tamed monster list.
                     if person.name not in tamed_monster_list:
-                        if hero.health > 0:
-                            input(
-                                f'As a member of the Monster Hunter Guild, you possess the skills to tame and train even the most ferocious beasts!\nYour collection of monsters has grown, and with it your power has increased!\n{person.name} has been added to your stable of powerful allies!')
-                            tamed_monster_list.append(person.name)
-                    else:
-                        pass
+                        if monster_guild_membership == True:
+                            if hero.health > 0:
+                                input(
+                                    f'As a member of the Monster Hunter Guild, you possess the skills to tame and train even the most ferocious beasts!\nYour collection of monsters has grown, and with it your power has increased!\n{person.name} has been added to your stable of powerful allies!')
+                                tamed_monster_list.append(person.name)
             else:
                 pass
         # Function to randomly add a certain amount of money depending on the scenario.
@@ -321,7 +324,7 @@ def adventure_game():
                                     print(
                                         f'{bulletpoint2}{i} Command: "Ithilien"  Uses Left: {elixir_count}')
 
-
+                # Checks if the hero is a member of the monster guild, then will print the current tamed monster summons available
                 if monster_guild_membership == True:
                     if tamed_monster_list:
                         if tamed_monster_count > 0:
@@ -885,7 +888,7 @@ jgs .-=-.    ) -.
                         # Check if the player has busted (total > 21)
                         if player_total > 21:
                             # If so, end the game and print a message
-                            print("Player has busted! Dealer wins.")
+                            input("Player has busted! Dealer wins.")
                             break
                     # If the player decided to stand, break out of the loop
                     else:
@@ -900,13 +903,13 @@ jgs .-=-.    ) -.
                 # Check if the dealer has 21 (Blackjack)
                 if dealer_total == 21:
                     # If so, end the game and print a message
-                    print("Dealer has Blackjack! Dealer wins.")
+                    input("Dealer has Blackjack! Dealer wins.")
                     return
 
                 # While the dealer's hand is less than 17, hit
                 while dealer_total < 17:
                     # Deal a card to the dealer
-                    print('Dealer draws a card...')
+                    input('Dealer draws a card...')
                     deal_card(dealer_hand)
 
                     # Calculate the total value of the dealer's hand
@@ -918,24 +921,36 @@ jgs .-=-.    ) -.
                     # Check if the dealer has busted (total > 21)
                     if dealer_total > 21:
                         # If so, end the game and print a message
-                        print("Dealer has busted! Player wins.")
+                        input("Dealer has busted! Player wins.")
                         return
 
                 # Compare the player's and dealer's totals
                 if player_total > dealer_total:
-                    # If the player's total is greater, the player wins
-                    print("Player wins.")
+                    if player_total <= 21:
+                    # If the player's total is greater and less than or equal to 21, the player wins
+                        input("Player wins.")
                 elif player_total < dealer_total:
-                    # If the dealer's total is greater, the dealer wins
-                    print("Dealer wins.")
+                    if dealer_total <= 21:
+                    # If the dealer's total is greater and less than or equal to 21, the dealer wins
+                        input("Dealer wins.")
                 else:
                     # If the totals are equal, the game is a push
-                    print("Push.")
+                    input("Push.")
 
             # Play a game of Blackjack
             play_blackjack()
 
+        gamble_life = False
+        hanged_person = 'inmate'
+        the_gamble = 'the game'
         def hangman():
+            nonlocal hanged_person
+            nonlocal gamble_life
+            nonlocal the_gamble
+            hanged_person = 'inmate'
+            if gamble_life == True:
+                hanged_person = hero.name
+                the_gamble = 'YOUR LIFE'
             # Define a list of words to use in the game
             words = [
                 'elephant','umbrella','sprint','keyboard','volcano','hopscotch','waterfall','jellyfish','frozen', 'giraffe', 'flamingo','peacock','chirping','shipwreck','stretching','crawling','seagull','dolphin','hummingbird',
@@ -947,7 +962,6 @@ jgs .-=-.    ) -.
             background = '☀🏰🚩☁         ☁'
             rope = '     𓍯'
             head = '     🤐'
-            dead = '     😵'
             left_hand = '  O'
             arm = '='
             chest = '\_/'
@@ -977,7 +991,8 @@ jgs .-=-.    ) -.
             # Ask the player if they want to hear the instructions for the game
             hangman_instructions = input(f'Would you like to hear instructions for the Hangman game?')
             if hangman_instructions.strip().lower() in yes:
-                input("\nHere is a set of instructions for the player to play the hangman game:\n\n1. A word will be randomly chosen from a list of words.\n\n2. The letters in the word will be hidden, and you will have to guess the letters in the word one by one.\n\n3. If a letter you guess is in the word, it will be revealed in the correct position in the word.\n\n4. If a letter you guess is not in the word, you will lose one chance. You have a total of 12 chances.\n\n5. You can also choose to guess the full word at any point during the game. If your guess is correct, you will win the game. If your guess is incorrect, you will lose one of your remaining chances.\n\n6. You win the game if you guess all the letters in the word before running out of chances, or if you correctly guess the full word.\n\n7. You lose the game if you run out of chances without guessing all the letters in the word.\nPress enter to continue...\n")
+                input(
+                    f'\nHere is a set of instructions for you to play the hangman game:\n\n1. A word will be randomly chosen from a list of words.\n\n2. The letters in the word will be hidden, and you will have to guess the letters in the word one by one.\n\n3. If a letter you guess is in the word, it will be revealed in the correct position in the word.\n\n4. If a letter you guess is not in the word, you will lose one chance. You have a total of 12 chances.\n\n5. You can also choose to guess the full word at any point during the game. If your guess is correct, you will win {the_gamble}. If your guess is incorrect, you will lose one of your remaining chances.\n\n6. You win {the_gamble} if you guess all the letters in the word before running out of chances, or if you correctly guess the full word.\n\n7. You lose {the_gamble} if you run out of chances without guessing all the letters in the word.\nPress enter to continue...\n')
             else:
                 pass
 
@@ -1019,8 +1034,10 @@ jgs .-=-.    ) -.
                             a_z.remove(guess)
                             # Check if the player has won by guessing all the letters in the word
                             if all(letter in guessed_letters for letter in word):
+                                if hanged_person == hero.name:
+                                    gamble_life = False
                                 print(
-                                    f'\n{bulletpoint2}Congratulations, you won the game! The inmate was freed!')
+                                    f'\n{bulletpoint2}The word was "{word}".\nCongratulations, you won the game! {hanged_person} was freed!')
                                 break
                             # If the letter is not in the word, increment the incorrect guess counter
                             if guess not in word:
@@ -1035,8 +1052,10 @@ jgs .-=-.    ) -.
                             # Checks if the guess is the same as the correct word
                             if guess == word:
                                 print(f'{bulletpoint2}You guessed the correct word!')
+                                if hanged_person == hero.name:
+                                    gamble_life = False
                                 print(
-                                    f'\n{bulletpoint2}Congratulations, you won the game! The inmate was freed! The word was "{word}"!')
+                                    f'\n{bulletpoint2}The word was "{word}".\nCongratulations, you won the game! {hanged_person} was freed! The word was "{word}"!')
                                 break
                             else:
                                 # If the guess is not the same as the correct word, then increment the incorrect guess counter
@@ -1048,8 +1067,10 @@ jgs .-=-.    ) -.
                                 f'{bulletpoint2}Good guess! The letter is in the word!')
                             # Check if the player has won by guessing all the letters in the word
                             if all(letter in guessed_letters for letter in word):
+                                if hanged_person == hero.name:
+                                    gamble_life = False
                                 print(
-                                    f'\n{bulletpoint2}Congratulations, you won the game! The inmate was freed! The word was "{word}"!')
+                                    f'\n{bulletpoint2}The word was "{word}".\nCongratulations, you won the game! {hanged_person} was freed! The word was "{word}"!')
                                 break
                     else:
                         # If the letter is not in the word and the letters is more than one character, increment the incorrect guess counter
@@ -1069,8 +1090,13 @@ jgs .-=-.    ) -.
             # If the player has run out of incorrect guesses, print a message and end the game
             if incorrect_guesses == remaining_chances:
                 print(full_body)
-                print(f'\n{bulletpoint2}Sorry, you lost the game. The word was "{word}". You watched in regret as your fellow inmate was hanged by your own doing...\n')
-
+                if hanged_person == 'inmate':
+                    input(f'\n{bulletpoint2}Sorry, you lost the game. The word was "{word}". You watched in regret as your fellow inmate was hanged by your own doing...\n')
+                else:
+                    gamble_life = False
+                    input(f'\n{bulletpoint2}Sorry, you lost the game. The word was "{word}". As the trapdoor beneath your feet opened and you fell into the dark abyss, your last thoughts were of regret. You had been so close to freedom, but in the end, you had failed.\n\nBut even as you breathed your last, Your knew that your spirit would not be broken. You would fight on, even in death, until the Empire of Ice was brought to justice and the Red Dragon Empire was restored to its former glory.\n')
+                    hero.health = 0
+                    check_health(hero)
         def restaurant_menu():
             import random
             # List of dish items for the restaurant as a dictionary
@@ -1277,7 +1303,7 @@ jgs .-=-.    ) -.
             # otherwise, it prints the user's order
             def generate_menu(dishes):
                 if order_complete == False:
-                    print('\nGlobal Gourmet Kitchen\nRestaurant Menu:')
+                    print('\nLava Ice Kitchen\nRestaurant Menu:')
                 else:
                     print('\nYour Order:')
                 print('-' * 30)
@@ -1285,7 +1311,7 @@ jgs .-=-.    ) -.
                 # iterate over the list of dishes and print the dish name and ingredients
                 for dish in dishes:
                     print(f'{"Dish Name:":<20s} {dish["name"]:<20s}')
-                    print(f'{"Ingredients:":<20s} {", ".join(dish["ingredients"][:-1]):<20s}')  # exclude the taste of the dish
+                    print(f'{"Ingredients:":<20s} {", ".join(dish["ingredients"][:-1]):<20s}')  
                     print()
                 print('-' * 30)
 
@@ -1343,13 +1369,27 @@ jgs .-=-.    ) -.
                 food_tip = input('\nHow much tip do you pay:')
                 input(f'\nYour total bill: $100 plus {food_tip}.')
 
+        def ascii_dice():
+            input('''
+                  (( _______            
+                   /\       \           
+                  /()\   ()  \          
+                 /    \_______\  ))       
+                 \    /()     /         
+                  \()/   ()  /          
+                   \/_____()/  ))
+                   ((
+            ''')
+
         # The story objects that can be mixed and matched depending on the storyline and player decisions.
         def story():
             new_rank = '' # Sets the empty rank for the empire_recruitment scenario.
-            current_heir = 'the beggar..'
+            current_heir = hero.name
             emperor_life = 'alive'
             noble_life = 'alive'
             thugs_life = 'alive'
+            icequeen_life = 'alive'
+            current_kingdom_name = 'Ice Kingdom'
             coin_guess_correctly = False
 
             #Vendor Lady
@@ -1433,6 +1473,7 @@ jgs .-=-.    ) -.
                 restaurant_menu()
                 input(f'\n\n{bulletpoint2}As you were just about to pay your meal, you heard a loud commotion. You asked the restaurant staff what was going on, and they explained that there was a disaster happening in the kitchen. A monster that looked like a moving gray glob was attacking the chefs.\n\nYou were not about to let this monster get away with ruining your meal. You grabbed a nearby kitchen knife and charged into the kitchen, ready to take on the monster.\n\nYou quickly notice a large cauldron of burning hot soup over the monster\'s head.\n\n{bulletpoint}Press enter to roll if you were successful in tipping it over:')
                 clean_kill_gloopus = random.randint(1, 10)
+                ascii_dice()
                 input(f'{bulletpoint2}You rolled a {clean_kill_gloopus}.')
                 if clean_kill_gloopus >= 5:
                     input(
@@ -1501,11 +1542,13 @@ jgs .-=-.    ) -.
                     check_health(hero)
                     add_money(50, 150)
                     menu()
+                    monster_guild_membership = True
                 else:
                     recruit_num = random.randint(1,10)
                     recruit_ans = input(f'\n{bulletpoint}As you and your fellow monster hunter guild members stand before the three potential recruits, you carefully assess each of them.\n\nThe first potential recruit is a skinny young man with a timid expression on his face.\n\nThe second is a child no older than 10, with a determined look in their eyes.\n\nThe third is a short and chubby man, who looks ready for a fight. \n\nYou will task one of them to take out the Cornstalker Monster. Who do you select?\n')
                     if recruit_ans.strip().lower() in ('1', 'first', 'skinny man', 'skinny young man', 'young man', 'first one', 'the first one', 'timid one', 'the timid one', 'the skinny one', 'the first'):
                         input(f'{bulletpoint}Press enter to determine if the recruit was successful or not by rolling from 1 to 10...')
+                        ascii_dice()
                         input(f'{bulletpoint2}You rolled a {recruit_num}.')
                         if recruit_num >= 5:
                             input(
@@ -1517,6 +1560,7 @@ jgs .-=-.    ) -.
                             behemoth_battle()
                     elif recruit_ans.strip().lower() in ('2', 'second', 'child', 'the child', 'the 10 year old', 'the youngling', 'the kid', 'the second one', 'the second', 'the 10 yr old'):
                         input(f'{bulletpoint}Press enter to determine if the recruit was successful or not by rolling from 1 to 10...')
+                        ascii_dice()
                         input(f'{bulletpoint2}You rolled a {recruit_num}.')
                         if recruit_num >= 5:
                             input(
@@ -1528,6 +1572,7 @@ jgs .-=-.    ) -.
                             behemoth_battle()
                     elif recruit_ans.strip().lower() in ('3', 'third', 'chubby', 'the chubby one', 'the man', 'the chubby man', 'the short man', 'the short man', 'the third', 'the third one'):
                         input(f'{bulletpoint}Press enter to determine if the recruit was successful or not by rolling from 1 to 10...')
+                        ascii_dice()
                         input(f'{bulletpoint2}You rolled a {recruit_num}.')
                         if recruit_num >= 5:
                             input(
@@ -1542,7 +1587,6 @@ jgs .-=-.    ) -.
                         behemoth_battle()
 
                 input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way\n')
-                monster_guild_membership = True
                 menu()
                 the_restaurant()
 
@@ -1682,9 +1726,10 @@ jgs .-=-.    ) -.
             def assassins_guild():
                 nonlocal emperor_life
                 nonlocal noble_life
+                nonlocal icequeen_life
                 nonlocal assassin_guild_membership
                 global current_fountain_money
-                current_fountain_money = 135
+                current_fountain_money = random.randint(1, 150)
                 drink_water_ans = input(f'\n{bulletpoint}As the old man shows you around the City of the Rising Sun, you are struck by the peaceful and serene atmosphere of the city. People from all walks of life can be seen going about their business, and there is a sense of harmony and cooperation among the various different groups.\n\nThe old man leads you through the winding streets of the city, pointing out the various landmarks and places of interest. He shows you the central market, where merchants from all over the world come to trade their goods. You also visit the city\'s library, which is filled with ancient books and scrolls that contain knowledge and wisdom from the past.\n\nAs you continue your tour, the old man brings you to the city\'s main square, where a large fountain stands in the center. People are gathered around the fountain, enjoying the cool, refreshing water on a hot day. The old man tells you that the water of the fountain has healing properties, and many people come to drink from it to cure their ailments.\n\nDo you take a drink of this water?\n')
                 if drink_water_ans.strip().lower() in yes:
                     input(f'{bulletpoint}You were healed for 50 health points!')
@@ -1699,7 +1744,7 @@ jgs .-=-.    ) -.
                                 current_fountain_money += int(money_throw)
                                 input(
                                     f'{bulletpoint2}You\'ve successfully thrown ${money_throw} into the fountain!\nCurrent Fountain Change: {current_fountain_money}')
-                                if current_fountain_money >= 20000:
+                                if current_fountain_money >= 1000:
                                     add_health(goldscale)
                                     input(f'{bulletpoint2}All of a sudden, a fountain monster called Goldscale pops up from the fountain after your threw the money in. This monster has a body made of shimmering gold, with scales covering its skin. Its eyes glowing orbs of pure gold, and a long, serpentine tail that writhes and coils behind it.\n\nWhen the monster emerges from the fountain, it is enraged by the act of having money thrown into its home. It then starts attacking you, seeking to defend itself and its territory.')
                                     battle(hero, goldscale, 'swims behind a coin chest',
@@ -1720,7 +1765,7 @@ jgs .-=-.    ) -.
                             input(f'{bulletpoint2}This is not a valid number. You changed your mind and left.')
                     elif 'steal' in throw_fountain.strip().lower():
                         input(f'{bulletpoint2}You decided to take the {current_fountain_money}!\n')
-                        hero.money -= current_fountain_money
+                        hero.money += current_fountain_money
                         current_fountain_money = 0
                         input(f'{bulletpoint2}Current fountain money: ${current_fountain_money}\n')
                         menu()
@@ -1728,20 +1773,44 @@ jgs .-=-.    ) -.
                         input(
                             f'{bulletpoint2}You decided to leave the fountain the way it is.')
 
+                #The assassin guild building
+                input("""
+                                   ...                            
+                                 ;::::;                           
+                               ;::::; :;                          
+                             ;:::::'   :;                         
+                            ;:::::;     ;.                        
+                           ,:::::'       ;           OOO\         
+                           ::::::;       ;          OOOOO\        
+                           ;:::::;       ;         OOOOOOOO       
+                          ,;::::::;     ;'         / OOOOOOO      
+                        ;:::::::::`. ,,,;.        /  / DOOOOOO    
+                      .';:::::::::::::::::;,     /  /     DOOOO   
+                     ,::::::;::::::;;;;::::;,   /  /        DOOO  
+                    ;`::::::`'::::::;;;::::: ,#/  /          DOOO 
+                    :`:::::::`;::::::;;::: ;::#  /            DOOO
+                    ::`:::::::`;:::::::: ;::::# /              DOO
+                    `:`:::::::`;:::::: ;::::::#/               DOO
+                     :::`:::::::`;; ;:::::::::##                OO
+                     ::::`:::::::`;::::::::;:::#                OO
+                     `:::::`::::::::::::;'`:;::#                O 
+                      `:::::`::::::::;' /  / `:#                  
+                       ::::::`:::::;'  /  /   `#              
+                """)
                 enter_assassin_guild = input(f'\n{bulletpoint}After exploring the city for a while, the old man leads you to a secluded part of the city, where a mysterious sign stands in front of a hidden door. The sign bears the emblem of a hooded figure holding a curved blade. The old man tells you that this is the entrance to the Assassin Guild, a secretive organization of skilled assassins who serve as protectors.\n\nYou thank the old man for showing you around the city, and he tells you that he will be waiting for you if you ever need anything. You stand in front of the mysterious sign, considering whether or not you should enter the Assassin Guild and see what secrets it holds. The choice is yours, do you enter the building?\n\n')
                 if enter_assassin_guild.strip().lower() in yes:
                     if assassin_guild_membership == False:
                         input(f'\n{bulletpoint2}Inside, you are greeted by a group of hooded figures who introduce themselves as members of the assassin guild. They explain that they are a secret society of trained assassins who use their skills and knowledge to serve the greater good.\n\nThe guild members offer to train you in the ancient ways of assassination, and you are intrigued by the offer. You decide to accept their offer and become a member of the guild.\n')
                         input(f'...')
-                        assassin_guild_membership = True
                         philosophy_ans = input(f'{bulletpoint2}You spend the next few weeks training with the guild, learning the art of stealth, deception, and assassination. You undergo rigorous physical and mental training, and you master the use of a variety of weapons and tools.\n\nAs you progress in your training, you are taught the secrets of the guild and the philosophy that guides its members. You learn to balance the need for justice with the harsh realities of the world, and you become a skilled and deadly assassin. Do you want to go over the philosophy of the Assassin guild?\n')
                         if philosophy_ans.strip().lower() in yes:
-                            input(f'{bulletpoint2}\n\n\n\n\n\n\n\n\n\n\nThe philosophy of the assassin guild is based on the principle of balance. The guild members believe that the world is a complex and dangerous place, and that there is a constant struggle between good and evil, order and chaos.\n\nThey believe that the guild has a responsibility to maintain the balance of power and prevent any one side from gaining too much control. To achieve this, the guild members use their skills and knowledge to eliminate threats and protect the innocent.\n\nThe guild has a complicated relationship with the ice kingdom and the Red Dragon Empire. On the one hand, the guild is neutral and does not take sides in political conflicts. On the other hand, the guild members are not afraid to intervene if they believe that the balance of power is being threatened.\n\nIn the case of the ice kingdom, the guild has a positive relationship with the queen and her people. The queen values the guild\'s skills and knowledge, and she often hires the guild members to carry out important missions. In return, the guild members protect the ice kingdom and its people from threats and dangers.\n\nIn the case of the Red Dragon Empire, the guild has a more complicated relationship. The emperor and his followers view the guild as a threat and a nuisance, and they often try to suppress the guild\'s activities. However, the guild members are not afraid to challenge the empire and its corrupt rulers, and they will not hesitate to strike if the balance of power is threatened.\n\n')
+                            input(f'{bulletpoint2}\n\n\n\n\n\n\n\n\n\n\nThe philosophy of the assassin guild is based on the principle of balance. The guild members believe that the world is a complex and dangerous place, and that there is a constant struggle between good and evil, order and chaos.\n\nThey believe that the guild has a responsibility to maintain the balance of power and prevent any one side from gaining too much control. To achieve this, the guild members use their skills and knowledge to eliminate threats and protect the innocent.\n\nThe guild has a complicated relationship with the {current_kingdom_name} and the Red Dragon Empire. On the one hand, the guild is neutral and does not take sides in political conflicts. On the other hand, the guild members are not afraid to intervene if they believe that the balance of power is being threatened.\n\nIn the case of the {current_kingdom_name}, the guild has a positive relationship with the queen and her people. The queen values the guild\'s skills and knowledge, and she often hires the guild members to carry out important missions. In return, the guild members protect the {current_kingdom_name} and its people from threats and dangers.\n\nIn the case of the Red Dragon Empire, the guild has a more complicated relationship. The emperor and his followers view the guild as a threat and a nuisance, and they often try to suppress the guild\'s activities. However, the guild members are not afraid to challenge the empire and its corrupt rulers, and they will not hesitate to strike if the balance of power is threatened.\n\n')
                     input(
                         f'{bulletpoint2} You recall the poem they taught you:\n\nThe assassin guild is a secret sect\nOf skilled and deadly powers,\nTheir mission is to keep the check\nIn a world of chaos all hours.\n\nThey move through the shadows unseen,\nSilent and deadly as the night,\nReady to strike at a moment\'s bright\nAnd eliminate any threat in sight.\n\nThey are masters of the blade and the bow,\nTrained in the arts of stealth and deception,\nThey are feared by their enemies\nAnd respected by those who know their profession.\n\nThe guild is a force for right,\nA protector of the innocent and the weak,\nThey will continue to fight\nFor balance and justice in a world that seeks.\n')
                     if assassin_guild_membership == False:
                         new_kill = input(
                             f'\n{bulletpoint}At the end of your training, you are given a mission to complete. You are to assassinate a...\nPlease enter your assassination target: ')
+                        assassin_guild_membership = True
                     else:
                         new_kill = input(
                             f'\n{bulletpoint}As a veteran Assassin, you are given a new mission to complete. You are to assassinate a...\nPlease enter your assassination target: ')
@@ -1751,8 +1820,9 @@ jgs .-=-.    ) -.
                     if new_kill.strip().lower() in ('beggar', 'the beggar'):
                         input(
                             f'\n{bulletpoint2}You are to assassinate a beggar who has been terrorizing the people of the Red Dragon Empire. You accept the mission.\n')
-                        input(f'\n{bulletpoint2}You are initially puzzled by the mission. You cannot understand why the guild would want to kill a homeless beggar, who poses no threat to anyone. You decide to question the guild leader about the mission.\n\nThe guild leader explains that the beggar is not what he seems. He is actually a spy for the ice kingdom, who has been gathering information about the empire\'s defenses and plans. The guild has been hired by the empire to eliminate the spy and prevent him from passing on his information.\n\nYou are uneasy about the mission, but you trust the guild leader and you decide to carry it out. You disguise yourself as a beggar and approach the beggar outside the castle gates. You strike up a conversation and gain his trust.\nWhen the time is right, you strike the beggar with a hidden blade.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
+                        input(f'\n{bulletpoint2}You are initially puzzled by the mission. You cannot understand why the guild would want to kill a homeless beggar, who poses no threat to anyone. You decide to question the guild leader about the mission.\n\nThe guild leader explains that the beggar is not what he seems. He is actually a spy for the {current_kingdom_name}, who has been gathering information about the empire\'s defenses and plans. The guild has been hired by the empire to eliminate the spy and prevent him from passing on his information.\n\nYou are uneasy about the mission, but you trust the guild leader and you decide to carry it out. You disguise yourself as a beggar and approach the beggar outside the castle gates. You strike up a conversation and gain his trust.\nWhen the time is right, you strike the beggar with a hidden blade.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
                         clean_kill_beggar = random.randint(1, 10)
+                        ascii_dice()
                         print(f'{bulletpoint2}You rolled a {clean_kill_beggar}.')
                         if clean_kill_beggar >= 5:
                             input(
@@ -1773,34 +1843,75 @@ jgs .-=-.    ) -.
                         input(
                             f'\n{bulletpoint2}You go back to strolling along the streets and see a different beggar...\nCongratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         beggar()
+                        # This changes the current heir to be the noble lady if you assassinate the beggar, or the emperor's cousin if the noble lady is already dead
                         if 'beggar' in current_heir:
-                            current_heir = 'noble lady'
+                            if noble_life == 'alive':
+                                current_heir = 'noble lady'
+                            else:
+                                current_heir = 'Emperor\'s cousin'
                     elif new_kill.strip().lower() in ('emperor', 'the emperor'):
-                        input(
-                            f'\n{bulletpoint2}You are to assassinate a corrupt and evil ruler who has been terrorizing the people of a neighboring kingdom. You accept the mission.\n')
-                        input(f'\n{bulletpoint2}As a member of the assassin guild, you are given a mission to carry out. You are to kill the Red Dragon Emperor, the tyrannical ruler of the empire.\n\nYou are hesitant about the mission. The emperor is a powerful and dangerous enemy, and killing him will not be easy. It was a mission that many had attempted, and few had survived. But you were determined to succeed. You decide to discuss the mission with the other guild members and seek their advice.\n\nAfter much debate and deliberation, you and the other guild members agree on a plan. You will infiltrate the emperor\'s palace and gain his trust by pretending to be a loyal servant. Once you are close to the emperor, you will strike and kill him with a hidden blade.\n\nYou carry out the plan with precision and stealth. You gain the emperor\'s trust and become one of his most trusted servants. You bide your time and wait for the right moment to strike.\n\nOne night, as the emperor is sleeping, you sneak into his chambers and approach his bed. You draw your hidden blade and raise it high, ready to strike.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
-                        clean_kill_emperor = random.randint(1, 10)
-                        print(f'{bulletpoint2}You rolled a {clean_kill_emperor}')
+                        if emperor_life == 'alive':
+                            input(
+                                f'\n{bulletpoint2}You are to assassinate a corrupt and evil ruler who has been terrorizing the people of a neighboring kingdom. You accept the mission.\n')
+                            input(f'\n{bulletpoint2}As a member of the assassin guild, you are given a mission to carry out. You are to kill the Red Dragon Emperor, the tyrannical ruler of the empire.\n\nYou are hesitant about the mission. The emperor is a powerful and dangerous enemy, and killing him will not be easy. It was a mission that many had attempted, and few had survived. But you were determined to succeed. You decide to discuss the mission with the other guild members and seek their advice.\n\nAfter much debate and deliberation, you and the other guild members agree on a plan. You will infiltrate the emperor\'s palace and gain his trust by pretending to be a loyal servant. Once you are close to the emperor, you will strike and kill him with a hidden blade.\n\nYou carry out the plan with precision and stealth. You gain the emperor\'s trust and become one of his most trusted servants. You bide your time and wait for the right moment to strike.\n\nOne night, as the emperor is sleeping, you sneak into his chambers and approach his bed. You draw your hidden blade and raise it high, ready to strike.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
+                            clean_kill_emperor = random.randint(1, 10)
+                            ascii_dice()
+                            print(f'{bulletpoint2}You rolled a {clean_kill_emperor}')
 
-                        if clean_kill_emperor == 10:
-                            input(
-                                f'\n{bulletpoint2}As you reached the emperor\'s bedside, you unsheathed your blade and struck with precision and speed. The emperor never saw it coming. With a single, clean strike, you ended his reign and claimed your reward.\n\nAs you turned to leave, you spotted something out of the corner of your eye. A hidden compartment in the wall, cleverly concealed by a painting. You reached out and touched it, and the painting swung open to reveal an ancient tablet.\n\nYou hesitated for a moment, unsure of what to do. But then you noticed a strange inscription on the tablet. It said, "iamgod.". Could it be a command of some sort?\nYou placed your hand on the tablet and spoke the words out loud. "iamgod."\n\nSuddenly, you felt a surge of power coursing through your veins. You could feel your senses heightening, your strength increasing, your reflexes sharpening. You had gained the abilities of a god.\n\nYou grinned with excitement and anticipation. With your newfound powers, you could take on any challenge that came your way. You were ready for anything the battlefield might throw at you.\n\nYou dispose of the body and return to the guild, reporting the mission as completed.\n')
-                        elif clean_kill_emperor >= 5:
-                            input(
-                                f'\n{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.\n')
+                            if clean_kill_emperor == 10:
+                                input(
+                                    f'\n{bulletpoint2}As you reached the emperor\'s bedside, you unsheathed your blade and struck with precision and speed. The emperor never saw it coming. With a single, clean strike, you ended his reign and claimed your reward.\n\nAs you turned to leave, you spotted something out of the corner of your eye. A hidden compartment in the wall, cleverly concealed by a painting. You reached out and touched it, and the painting swung open to reveal an ancient tablet.\n\nYou hesitated for a moment, unsure of what to do. But then you noticed a strange inscription on the tablet. It said, "iamgod.". Could it be a command of some sort?\nYou placed your hand on the tablet and spoke the words out loud. "iamgod."\n\nSuddenly, you felt a surge of power coursing through your veins. You could feel your senses heightening, your strength increasing, your reflexes sharpening. You had gained the abilities of a god.\n\nYou grinned with excitement and anticipation. With your newfound powers, you could take on any challenge that came your way. You were ready for anything the battlefield might throw at you.\n\nYou dispose of the body and return to the guild, reporting the mission as completed.\n')
+                            elif clean_kill_emperor >= 5:
+                                input(
+                                    f'\n{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.\n')
+                            else:
+                                add_health(emperorbattle)
+                                battle(hero, emperorbattle, 'raises shield',
+                                    'groans in pain', 'calls guards over', 'uses sharp end of the shield')
+                                random_health_gain = random.randint(10, 30)
+                                print(
+                                    f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
+                                hero.health += random_health_gain
+                                check_health(hero)
+                                add_money(25, 500)
+                                input(
+                                    f'\n{bulletpoint2}The kill was messy. You dispose of the body and return to the guild, reporting the mission as completed.\n')
+                            emperor_life = 'dead'
                         else:
-                            add_health(emperorbattle)
-                            battle(hero, emperorbattle, 'raises shield',
-                                'groans in pain', 'calls guards over', 'uses sharp end of the shield')
-                            random_health_gain = random.randint(10, 30)
-                            print(
-                                f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
-                            hero.health += random_health_gain
-                            check_health(hero)
-                            add_money(25, 50)
                             input(
-                                f'\n{bulletpoint2}The kill was messy. You dispose of the body and return to the guild, reporting the mission as completed.\n')
-                        emperor_life = 'dead'
+                                f'\n{bulletpoint2}The emperor is already dead and has already been quickly replaced by a new emperor!')
+                        menu()
+                        input(
+                            f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
+                        beggar()
+                    elif new_kill.strip().lower() in ('icequeen', 'the ice queen', 'queen', 'ice queen', 'queen of ice', 'ice'):
+                        if icequeen_life == 'alive':
+                            input(
+                                f'\n{bulletpoint2}You are to assassinate a benevolent ruler of the neighboring Ice Kingdom. You accept the mission.\n')
+                            input(f'\n{bulletpoint2}As a member of the assassin guild, you are given a mission to carry out. You are a highly trained and skilled killer. You are proficient in a variety of weapons and techniques, and well-versed in the art of stealth and deception.\n\nYou carefully plan your attack, studying the queen\'s routine and the layout of her palace in order to find the perfect moment to strike. When the opportunity presents itself, you move in silently, weapons at the ready.\n\nAs you approach the queen\'s chambers, you can sense a powerful magical aura emanating from within. You know that the queen is a powerful magician, and you\'re prepared for her to use her powers against you. You focus your mind and steel your resolve, determined to complete the mission.\n\nYou burst into the queen\'s chambers, your weapons flashing in the dim light. The queen is taken by surprise, but she quickly recovers and raises her hands, unleashing a powerful spell at you. You dodge and weave, using all of your training and experience to avoid her attacks.\n\nThe queen and you engage in a fierce battle, the magic and weapons clashing with explosive force. The room is filled with the sound of crashing thunder and flashing lightning as your both duel. Despite her power, You\'re able to outmaneuver the queen and land a killing blow, silencing her forever.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine whether her Ice Monster pet "Snowfang" wakes up or not...\n')
+                            clean_kill_queen = random.randint(1, 10)
+                            ascii_dice()
+                            print(f'{bulletpoint2}You rolled a {clean_kill_queen}')
+
+                            if clean_kill_queen >= 5:
+                                input(
+                                    f'\n{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.\n')
+                            else:
+                                input(f'{bulletpoint2}Snowfang yawned and stretched as she woke up from her long winter\'s nap, then immediately started growling at you!')
+                                add_health(snowfang)
+                                battle(hero, snowfang, 'creates a wall of solid ice',
+                                    'starts creating wall of solid ice', 'does frostbite', 'summons a swirling snowstorm')
+                                random_health_gain = random.randint(10, 30)
+                                print(
+                                    f'{bulletpoint2} You took some rest and gained {random_health_gain} health back.')
+                                hero.health += random_health_gain
+                                check_health(hero)
+                                add_money(50, 200)
+                                input(
+                                    f'\n{bulletpoint2}The kill was messy. You dispose of the body and return to the guild, reporting the mission as completed.\n')
+                            icequeen_life = 'dead'
+                        else:
+                            input(f'\n{bulletpoint2}The queen is already dead!')
                         menu()
                         input(
                             f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
@@ -1810,8 +1921,8 @@ jgs .-=-.    ) -.
                             noble_life = 'dead'
                         input(
                             f'\n{bulletpoint2}You are to assassinate {new_kill}. You accept the mission.')
-                        input(f'{bulletpoint2}The night was dark and cold, the perfect conditions for an assassination. You crept through the shadows, senses heightened and your heart pounding with anticipation.\n\nYour target was {new_kill}.You had studied {new_kill}\'s routine and habits, and you knew exactly when and where they would be most vulnerable.\n\nYou made your way to the designated spot, a secluded alleyway near their residence. Your waited in the shadows, your weapon of choice at the ready.\n\nAs {new_kill} walked past, you stepped out of the darkness and struck. Your blade sliced through the air with deadly precision, finding its mark in {new_kill}\'s throat. {new_kill} gasped and clutched at their neck, but it was too late. You watched as the life drained from their eyes, and then disappeared into the night, leaving no trace of your presence behind.\n\nThe kill was clean and efficient, a testament to your skills as an assassin. you would be rewarded for the successful mission, and you would be ready for the next one. That was the life of an assassin, a life of danger and deception, but one that you embraced wholeheartedly.\n')
-                        add_money(25, 50)
+                        input(f'{bulletpoint2}The night was dark and cold, the perfect conditions for an assassination. You crept through the shadows, senses heightened and your heart pounding with anticipation.\n\nYour target was {new_kill}. You had studied {new_kill}\'s routine and habits, and you knew exactly when and where they would be most vulnerable.\n\nYou made your way to the designated spot, a secluded alleyway near their residence. Your waited in the shadows, your weapon of choice at the ready.\n\nAs {new_kill} walked past, you stepped out of the darkness and struck. Your blade sliced through the air with deadly precision, finding its mark in {new_kill}\'s throat. {new_kill} gasped and clutched at their neck, but it was too late. You watched as the life drained from their eyes, and then disappeared into the night, leaving no trace of your presence behind.\n\nThe kill was clean and efficient, a testament to your skills as an assassin. you would be rewarded for the successful mission, and you would be ready for the next one. That was the life of an assassin, a life of danger and deception, but one that you embraced wholeheartedly.\n')
+                        add_money(25, 100)
                         menu()
                         input(
                             f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
@@ -1823,11 +1934,14 @@ jgs .-=-.    ) -.
 
             # The Hidden City
             def hidden_city():
-                city_ans = input(f'{bulletpoint}As you wander through the streets of the city called “The City of the Rising Sun”, you come across a small shop selling trinkets and souvenirs. You decide to take a look and see if there is anything interesting.\n\nAs you browse the shelves, a friendly old man approaches you and says that this city is a safe haven for those who seek refuge from the troubles of the outside world. It is hidden from the eyes of the Red Dragon Empire and the Ice kingdom, and it is a place of harmony. Do you ask him more about the Red Dragon Empire and the Ice Kingdom?\n')
+                city_ans = input(f'{bulletpoint}As you wander through the streets of the city called “The City of the Rising Sun”, you come across a small shop selling trinkets and souvenirs. You decide to take a look and see if there is anything interesting.\n\nAs you browse the shelves, a friendly old man approaches you and says that this city is a safe haven for those who seek refuge from the troubles of the outside world. It is hidden from the eyes of the Red Dragon Empire and the {current_kingdom_name}, and it is a place of harmony. Do you ask him more about the Red Dragon Empire and the {current_kingdom_name}?\n')
                 if city_ans.strip().lower() in yes:
-                    city_ans2 = input(f'\n{bulletpoint}The Red Dragon Empire is a vast and powerful kingdom ruled by a cruel and tyrannical emperor. It is a land of war and conquest, where the strong prey on the weak and the weak must fight to survive.\n\nThe ice kingdom, on the other hand, is a land of mystery and magic. It is ruled by a wise and benevolent queen, who uses her powers to protect her people and keep the peace. Do you want to hear more?\n')
+                    if icequeen_life == 'alive':
+                        city_ans2 = input(f'\n{bulletpoint}The Red Dragon Empire is a vast and powerful kingdom ruled by a cruel and tyrannical emperor. It is a land of war and conquest, where the strong prey on the weak and the weak must fight to survive.\n\nThe ice kingdom, on the other hand, is a land of mystery and magic. It is ruled by a wise and benevolent queen, who uses her powers to protect her people and keep the peace. Do you want to hear more?\n')
+                    else:
+                        city_ans2 = input(f'\n{bulletpoint}The Red Dragon Empire is a vast and powerful kingdom ruled by a cruel and tyrannical emperor. It is a land of war and conquest, where the strong prey on the weak and the weak must fight to survive.\n\nThe Empire of Ice\'s new ruler was the sister to the original benevolent Queen and had usurped the throne. She is a ruthless and power-hungry individual who is willing to resort to violence and treachery in order to gain and maintain power. The people of the Empire of Ice may be in danger under this ruler\'s rule, and it is possible that there may be political unrest and conflict within the kingdom. Do you want to hear more?\n')
                     if city_ans2.strip().lower() in yes:
-                        city_ans3 = input(f'\n{bulletpoint2}The old man nods and begins to tell you the history of the Red Dragon Empire. He explains that, long ago, the empire was ruled by a peaceful and benevolent ruler who was loved and respected by his people.\nBut one day, a cruel and ambitious emperor overthrew the peaceful ruler and seized control of the empire.\n\nUnder the emperor\'s rule, the Red Dragon Empire became a land of conquest and aggression. The emperor sought to expand his power and territory, and he set his sights on the Ice Kingdom.\n\nBut the Ice Kingdom was a land of magic, and its queen was a powerful sorceress. She used her powers to protect her kingdom and repel the emperor\'s armies. Despite his best efforts,\nthe emperor was unable to conquer the Ice Kingdom, and the two kingdoms have been in a state of cold war ever since.\n\n{bulletpoint}The old man concludes his story by saying that the City of the Rising Sun is a safe haven for those who seek refuge from the conflicts and dangers of the outside world. He offers to show you around the city, if you are interested. What do you say?\n')
+                        city_ans3 = input(f'\n{bulletpoint2}The old man nods and begins to tell you the history of the Red Dragon Empire. He explains that, long ago, the empire was ruled by a peaceful and benevolent ruler who was loved and respected by his people.\nBut one day, a cruel and ambitious emperor overthrew the peaceful ruler and seized control of the empire.\n\nUnder the emperor\'s rule, the Red Dragon Empire became a land of conquest and aggression. The emperor sought to expand his power and territory, and he set his sights on the Ice Kingdom.\n\nBut the Ice Kingdom was a land of magic, and its queen was a powerful sorceress. She used her powers to protect her kingdom and repel the emperor\'s armies. Despite his best efforts,\nthe emperor was unable to conquer the Ice Kingdom... now called the Empire of Ice, and the two kingdoms have been in a state of cold war ever since.\n\n{bulletpoint}The old man concludes his story by saying that the City of the Rising Sun is a safe haven for those who seek refuge from the conflicts and dangers of the outside world. He offers to show you around the city, if you are interested. What do you say?\n')
                         if city_ans3.strip().lower() in yes:
                             menu()
                             assassins_guild()
@@ -1864,10 +1978,10 @@ jgs .-=-.    ) -.
                         f'\n{bulletpoint}After the first drink, you feel a warm, relaxed sensation in your chest and limbs, and your inhibitions may start to loosen. You find yourself smiling...\n\nThe bartender asks if you would like a second drink, what do you say?\n')
                     if first_drink_ans.lower().strip() in yes:
                         second_drink_ans = input(
-                            f'\n{bulletpoint}You feel slightly lightheaded and dizzy, and your movements may become slightly more exaggerated and uncoordinated. Suddenly the bartender says they have a special drink for you. It\'s a rare and potent spirit from the Ice kingdom. Are you brave enough to try it?\n\n')
+                            f'\n{bulletpoint}You feel slightly lightheaded and dizzy, and your movements may become slightly more exaggerated and uncoordinated. Suddenly the bartender says they have a special drink for you. It\'s a rare and potent spirit from the {current_kingdom_name}. Are you brave enough to try it?\n\n')
                         if second_drink_ans.lower().strip() in yes:
                             input(
-                                f'\n{bulletpoint}You are tempted by the offer. You have always been curious about the ice kingdom and its exotic liquors. After much hesitation, you decide to take the third drink. You raise the glass to your lips and take a sip. The liquid is fiery and sweet, and it burns all the way down your throat\n\nAs you drink, you notice that the other customers in the tavern are starting to get rowdy. Suddenly, one of them bumps into you and spills your drink.\n\nBefore you know it, you are locked in a fierce bar fight with the other customer. You throw punches and dodge blows, feeling reckless and invincible.\n\nBut your drunken state makes you slow and clumsy, and soon you are on the receiving end of a beating. You stumble and fall to the ground, feeling dazed and bruised.\n\nJust as you are about to black out, you hear a loud noise and feel yourself being lifted off the ground. You open your eyes and see that you are being carried away on a cart by a group of good samaritans.\n')
+                                f'\n{bulletpoint}You are tempted by the offer. You have always been curious about the {current_kingdom_name} and its exotic liquors. After much hesitation, you decide to take the third drink. You raise the glass to your lips and take a sip. The liquid is fiery and sweet, and it burns all the way down your throat\n\nAs you drink, you notice that the other customers in the tavern are starting to get rowdy. Suddenly, one of them bumps into you and spills your drink.\n\nBefore you know it, you are locked in a fierce bar fight with the other customer. You throw punches and dodge blows, feeling reckless and invincible.\n\nBut your drunken state makes you slow and clumsy, and soon you are on the receiving end of a beating. You stumble and fall to the ground, feeling dazed and bruised.\n\nJust as you are about to black out, you hear a loud noise and feel yourself being lifted off the ground. You open your eyes and see that you are being carried away on a cart by a group of good samaritans.\n')
                             menu()
                             hidden_city()
                         else:
@@ -1887,73 +2001,168 @@ jgs .-=-.    ) -.
                     hidden_city()
             #Ice Kingdom
             def ice_kingdom():
-                input(f'\n{bulletpoint2}After many days of travel, you finally arrive at the gates of the ice kingdom.\n\nThe guard stops you and asks for your license to pass. Since you don\'t have one, the guard says she can let you through if you answer her riddle correctly...\n')
-                # List of riddles
-                riddles = [
-                    "\nI'm cold and white, and I'm found in the sky. I'm used for sports, and I'm thrown in the air. What am I?",
-                    "\nI'm cold and hard, and I sparkle and shine. I'm used to make ice, and I taste like wine. What am I?",
-                    "\nI'm cold and slippery, and I slide on the ground. I'm used for fun, and I make a funny sound. What am I?",
-                    "\nI'm cold and wet, and I come from a tap. I'm used to clean, and I'm good for a nap. What am I?",
-                    "\nI'm cold and frozen, and I hang from the sky. I'm used for drinks, and I make them cold and dry. What am I?",
-                    "\nI'm cold and frozen, and I'm found in a cave. I'm used for drinks, and I'm smooth on the tongue. What am I?",
-                    "\nI'm cold and crisp, and I'm good with a beer. I'm used to snack, and I'm salty and clear. What am I?",
-                    "\nI'm cold and strong, and I keep you safe at night. I'm used for defense, and I'm made of metal and light. What am I?",
-                    "\nI'm cold and soft, and I'm found on your head. I'm used for warmth, and I'm made of fur and thread. What am I?",
-                    "\nI'm cold and clear, and I'm frozen in time. I'm used for art, and I make things shine. What am I?"
-                ]
-
-                # List of answers
-                answers = [
-                    "Snowball",
-                    "Salt",
-                    "Sled",
-                    "Water",
-                    "Ice Cubes",
-                    "Ice Cream",
-                    "Pretzel",
-                    "Shield",
-                    "Hat",
-                    "Ice Sculpture"
-                ]
-
-                # Function to ask a random riddle and check the answer
-                def askRiddle():
-                    # Select a random riddle
-                    index = random.randint(0, len(riddles) - 1)
-                    riddle = riddles[index]
-                    answer = answers[index]
-
-                    # Ask the riddle and get the user's answer
-                    user_answer = input(f'{bulletpoint}Type "help" for a list of potential answers\n{riddle}\nWhat is your answer: ')
-
-                    # Check if the user's answer is correct
-                    if user_answer.lower() == answer.lower():
-                        print(f'{bulletpoint2}Correct! You may pass!')
-                        pass
-                    elif user_answer.lower() == 'help':
-                        print(f'{bulletpoint2}Potential Answers:')
-                        for i in answers:
-                            print(i)
-                        askRiddle()
+                nonlocal gamble_life
+                nonlocal current_kingdom_name
+                if icequeen_life == 'dead':
+                    input(f'{bulletpoint2}\n\nTHE QUEEN IS DEAD!!!\n\nOn your way to the castle gates, you hear a loud commotion of people shouting and being shocked and confused. You were the one who carried out the kill on the queen. You quickly realize that the commotion is because of you, and you begin to feel a sense of fear and anxiety.\n\nYou try to blend in with the crowd of people, hoping that no one will suspect you of being the killer.\n')
+                    current_kingdom_name = 'Empire of Ice'
+                input('''
+            ` : | | | |:  ||  :     `  :  |  |+|: | : : :|   .        `              .
+                ` : | :|  ||  |:  :    `  |  | :| : | : |:   |  .                    :
+                    .' ':  ||  |:  |  '       ` || | : | |: : |   .  `           .   :.
+                            `'  ||  |  ' |   *    ` : | | :| |*|  :   :               :|
+                    *    *       `  |  : :  |  .      ` ' :| | :| . : :         *   :.||
+                        .`            | |  |  : .:|       ` | || | : |: |          | ||
+                '          .         + `  |  :  .: .         '| | : :| :    .   |:| ||
+                    .                 .    ` *|  || :       `    | | :| | :      |:| |
+            .                .          .        || |.: *          | || : :     :|||
+                    .            .   . *    .   .  ` |||.  +        + '| |||  .  ||`
+                .             *              .     +:`|!             . ||||  :.||`
+            +                      .                ..!|*          . | :`||+ |||`
+                .                         +      : |||`        .| :| | | |.| ||`     .
+                *     +   '               +  :|| |`     :.+. || || | |:`|| `
+                                        .      .||` .    ..|| | |: '` `| | |`  +
+            .       +++                      ||        !|!: `       :| |
+                        +         .      .    | .      `|||.:      .||    .      .    `
+                    '                           `|.   .  `:|||   + ||'     `
+            __    +      *                         `'       `'|.    `:
+            "'  `---"""----....____,..^---`^``----.,.___          `.    `.  .    ____,.,-
+                ___,--'""`---"'   ^  ^ ^        ^       """'---,..___ __,..---""'
+            --"'                           ^                         ``--..,__ D. Rice
+                ''')
+                input('''
+                                                    
+                                . _\/ \/_ .
+                                    \  \ /  /             .      .
+                    ..    ..    -==>: X :<==-           _\/  \/_
+                    '\    /'      / _/ \_ \              _\/\/_
+                        \\\\//       '  /\ /\  '         _\_\_\/\/_/_/_
+                _.__\\\\\///__._    *  '  *            / /_/\/\_\ \\
+                    '  ///\\\\\  '                           _/\/\_
+                        //\\\\                               /\  /\\
+                    ./    \.                            '      '
+                    ''    ''            
+                                ''')
+                input('''
+                                        T~~
+                                        |
+                                        /"\\
+                                T~~     |'| T~~
+                            T~~ |    T~ WWWW|
+                            |  /"\   |  |  |/\T~~
+                            /"\ WWW  /"\ |' |WW|
+                            WWWWW/\| /   \|'/\|/"\\
+                            |   /__\/]WWW[\/__\WWWW
+                            |"  WWWW'|I_I|'WWWW'  |
+                            |   |' |/  -  \|' |'  |
+                            |'  |  |LI=H=LI|' |   |
+                            |   |' | |[_]| |  |'  |
+                            |   |  |_|###|_|  |   |
+                            '---'--'-/___\-'--'---'
+                ''')
+                if current_heir.lower().strip() == hero.name.lower().strip():
+                    if icequeen_life == 'alive':
+                        if gamble_life == False:
+                            input(f'\n{bulletpoint2}You finally arrive at the gates of the Ice Kingdom.\n\nThe guard stops you and asks for your license to pass.\nUpon seeing your crown bearing the symbol of the Red Dragon Empire, the guard\'s expression immediately changed to one of suspicion. Without a word, she signaled for her fellow guards to arrest you. You were taken into custody and brought before the queen of the Ice Kingdom, who was known for her benevolent personality.\n\nAs you stood before the queen, you could see the anger and resentment in her eyes. She accused you of being a spy and threatened to have you executed. In that moment, you knew that you had to act quickly if you wanted to save your life.\n\n')
+                            do_you_promise = input(f'{bulletpoint2}You pleaded with the queen, explaining that you were simply a curious young heir who wanted to learn more about the world beyond your own land. You begged for her mercy and offered to pay any price she demanded.\n\nTo your surprise, the queen\'s expression softened and she seemed to consider your words. After a long moment of silence, she spoke...\n\n')
+                            while do_you_promise.lower().strip() not in (yes,'i promise', 'promise', 'yes i promise', 'i promise never to return', 'i promise to never return', 'okay i promise', 'i promise to not return'):
+                                do_you_promise = input(f'{bulletpoint}"I will grant you safe passage out of my kingdom," she said, "but only on the condition that you PROMISE to never return."\nWhat is your response:')
+                            gamble_life = True
+                            input(f'{bulletpoint2}Relieved and grateful, you accepted the queen\'s offer and you were allowed to leave the Ice Kingdom unharmed. It was a harsh lesson, but one that your would never forget. The world was a dangerous place and your would have to be cautious and wise in your dealings with other kingdoms if you wanted to rule the Red Dragon Empire with honor and dignity.\n')
+                            input(f'{bulletpoint2}You were granted a boat with free passage to leave the kingdom, and you sailed off back to the Red Dragon Empire.')
+                            menu()
+                            trade_mission()
+                        else:
+                            input(f'{bulletpoint2}YOU WERE CAUGHT!!!\n\nAs you approached the gates of the Ice Kingdom, you could feel a sense of trepidation rising within you. Despite the promise you had made to the benevolent ice queen, you couldn\'t shake the feeling that you needed to return.\n\nAs you entered the kingdom, the guards immediately seized you and escorted you onto the gallows. You knew that you had betrayed the trust of the ice queen and now you would have to face the consequences.\n')
+                            input(f'{bulletpoint2}You were brought before the Ice Queen and she turned away and wouldn\'t even look at you. The crowd gathered around you, their eyes full of anger and resentment. The ice queen herself appeared, her face cold and unforgiving. She glared at you with icy eyes as the executioner placed the noose around your neck.\n\nShe then all of a sudden yelled "Halt!", and gave you one last chance to earn your life... ')
+                            hangman()
+                            input(f'{bulletpoint2}You were allowed to leave the Empire of Ice unharmed. It was a harsh lesson, but one that your would never forget. The world was a dangerous place and your would have to be cautious and wise in your dealings with other kingdoms if you wanted to rule the Red Dragon Empire with honor and dignity.\n')
+                            input(
+                                f'{bulletpoint2}You were granted a boat with free passage to leave the kingdom, and you sailed off back to the Red Dragon Empire.')
+                            menu()
+                            trade_mission()
                     else:
-                        print(
-                            f'{bulletpoint2}Incorrect, you may not pass until you answer a riddle correctly.')
-                        askRiddle()
-                askRiddle()
-                input(f'\n{bulletpoint2}The ice kingdom is a breathtaking sight. The city is built of shining white marble and crystal, and it glows with a soft, ethereal light. The streets are filled with people of all shapes and sizes, all dressed in beautiful and colorful clothes.\n\nAs you walk through the city, you are amazed by the sights and sounds around you. You see snow-white horses pulling elegant carriages, and you hear the soothing melodies of harps and flutes. You feel a sense of peace and tranquility that you have never experienced before.\n\nYou decide to explore the city further and discover its hidden secrets. You visit the palace of the queen, who greets you with kindness and generosity. You learn about the history and culture of the ice kingdom, and you marvel at the wonders of its magical technology.\n')
-                go_sailing = input(
-                    f'\n{bulletpoint}You see an opportunity to hike a ride on a ship sailing over to the Red Dragon Empire, do you go?\n')
-                if go_sailing.strip().lower() in yes:
-                    menu()
-                    trade_mission()
+                        input(f'\n{bulletpoint2}You finally arrive at the gates of the Empire of Ice.\n\nThe guard stops you and asks for your license to pass.\nUpon seeing your crown bearing the symbol of the Red Dragon Empire, the guard\'s expression immediately changed to one of suspicion. Without a word, she signaled for her fellow guards to arrest you. You were taken into custody and brought before the new queen of the Empire of Ice, who was known for her ruthless and cruel nature.\n\nAs you stood before the queen, you could see the anger and hatred in her eyes. She accused you of being a spy and threatened to have you executed. In that moment, you knew that you had to act quickly if you wanted to save your life.\n\n')
+                        input(f'{bulletpoint2}You pleaded with the queen, explaining that you were simply a curious young heir who wanted to learn more about the world beyond your own land. You begged for her mercy and offered to pay any price she demanded.\n\nBut the queen was unmoved by your pleas. She sneered at you and ordered her guards to take you to the gallows to be hanged!\n')
+                        gamble_life = True
+                        hangman()
+                        input(f'{bulletpoint2}You were allowed to leave the Empire of Ice unharmed. It was a harsh lesson, but one that your would never forget. The world was a dangerous place and your would have to be cautious and wise in your dealings with other kingdoms if you wanted to rule the Red Dragon Empire with honor and dignity.\n')
+                        input(
+                            f'{bulletpoint2}You were granted a boat with free passage to leave the kingdom, and you sailed off back to the Red Dragon Empire.')
+                        menu()
+                        trade_mission()
                 else:
-                    pass
-                # Only accesses the vendor lady scenario if it's been turned on.
-                if vendor_lady_object == 1:
-                    vendor_lady()
-                else:
-                    input(f'\n{bulletpoint2}As you stand in the Ice Kingdom, you gaze upon the majestic high mountain next to it. The mountain is covered in snow and ice, and it towers above the surrounding landscape.\n\nYou feel a sudden urge to climb to the highest peak of the mountain. You have never done anything like this before, but you are excited by the challenge and the thrill of the climb.\n\nYou gather your gear and supplies, and you set off on your journey. You trudge through the snow, making your way up the mountain. The air is cold and thin, and you feel the strain on your body as you climb higher and higher.\n\nAs you reach the higher elevations, you encounter treacherous ice and snow. You must use your climbing skills and your determination to overcome these obstacles.\n\nFinally, after many hours of grueling climb, you reach the summit of the mountain. You are exhausted and exhilarated at the same time. You look out at the stunning view from the top of the mountain, and you feel a sense of accomplishment and pride.\n')
-                    mountain_secret()
+
+                    input(f'\n{bulletpoint2}After many days of travel, you finally arrive at the gates of the {current_kingdom_name}.\n\nThe guard stops you and asks for your license to pass. Since you don\'t have one, the guard says she can let you through if you answer her riddle correctly...\n')
+                    # List of riddles
+                    riddles = [
+                        "\nI'm cold and white, and I'm found in the sky. I'm used for sports, and I'm thrown in the air. What am I?",
+                        "\nI'm cold and hard, and I sparkle and shine. I'm used to make ice, and I taste like wine. What am I?",
+                        "\nI'm cold and slippery, and I slide on the ground. I'm used for fun, and I make a funny sound. What am I?",
+                        "\nI'm cold and wet, and I come from a tap. I'm used to clean, and I'm good for a nap. What am I?",
+                        "\nI'm cold and frozen, and I hang from the sky. I'm used for drinks, and I make them cold and dry. What am I?",
+                        "\nI'm cold and frozen, and I'm found in a cave. I'm used for drinks, and I'm smooth on the tongue. What am I?",
+                        "\nI'm cold and crisp, and I'm good with a beer. I'm used to snack, and I'm salty and clear. What am I?",
+                        "\nI'm cold and strong, and I keep you safe at night. I'm used for defense, and I'm made of metal and light. What am I?",
+                        "\nI'm cold and soft, and I'm found on your head. I'm used for warmth, and I'm made of fur and thread. What am I?",
+                        "\nI'm cold and clear, and I'm frozen in time. I'm used for art, and I make things shine. What am I?"
+                    ]
+
+                    # List of answers
+                    answers = [
+                        "Snowball",
+                        "Salt",
+                        "Sled",
+                        "Water",
+                        "Ice Cubes",
+                        "Ice Cream",
+                        "Pretzel",
+                        "Shield",
+                        "Hat",
+                        "Ice Sculpture"
+                    ]
+
+                    # Function to ask a random riddle and check the answer
+                    def askRiddle():
+                        # Select a random riddle
+                        index = random.randint(0, len(riddles) - 1)
+                        riddle = riddles[index]
+                        answer = answers[index]
+
+                        # Ask the riddle and get the user's answer
+                        user_answer = input(f'{bulletpoint}Type "help" for a list of potential answers\n{riddle}\nWhat is your answer: ')
+
+                        # Check if the user's answer is correct
+                        if user_answer.lower() == answer.lower():
+                            print(f'{bulletpoint2}Correct! You may pass!')
+                            pass
+                        elif user_answer.lower() == 'help':
+                            print(f'{bulletpoint2}Potential Answers:')
+                            for i in answers:
+                                print(i)
+                            askRiddle()
+                        else:
+                            print(
+                                f'{bulletpoint2}Incorrect, you may not pass until you answer a riddle correctly.')
+                            askRiddle()
+                    askRiddle()
+                    if icequeen_life == 'alive':
+                        input(f'\n{bulletpoint2}The ice kingdom is a breathtaking sight. The city is built of shining white marble and crystal, and it glows with a soft, ethereal light. The streets are filled with people of all shapes and sizes, all dressed in beautiful and colorful clothes.\n\nAs you walk through the city, you are amazed by the sights and sounds around you. You see snow-white horses pulling elegant carriages, and you hear the soothing melodies of harps and flutes. You feel a sense of peace and tranquility that you have never experienced before.\n\nYou decide to explore the city further and discover its hidden secrets. You visit the palace of the queen, who greets you with kindness and generosity. You learn about the history and culture of the ice kingdom, and you marvel at the wonders of its magical technology.\n')
+                    else:
+                        input(f'\n{bulletpoint2}The {current_kingdom_name} is a breathtaking sight. The city is built of shining white marble and crystal, and it glows with a soft, ethereal light. The streets are filled with people of all shapes and sizes, all dressed in beautiful and colorful clothes.\n\nAs you walk through the city, you are amazed by the sights and sounds around you. You see snow-white horses pulling elegant carriages, and you hear the soothing melodies of harps and flutes. You feel a sense of peace and tranquility that you have never experienced before.\n\nBut as you continue to explore the city, you begin to notice signs of unrest and tension. You overhear people talking about the death of the queen, and you hear rumors of a power struggle within the royal family.\n\nYou eventually learn that the Ice kingdom is in the process of being usurped by someone in the queen\'s family. The new ruler has declared themselves the emperor of the Ice Kingdom, and they are using their power and authority to oppress the people and crush any opposition.\n\nYou are shocked and dismayed by this turn of events. The Ice kingdom was a place of beauty and wonder, but it has now been corrupted and transformed into the Empire of Ice.')
+                    go_sailing = input(
+                        f'\n{bulletpoint}You see an opportunity to hike a ride on a ship sailing over to the Red Dragon Empire, do you go?\n')
+                    if go_sailing.strip().lower() in yes:
+                        menu()
+                        trade_mission()
+                    else:
+                        pass
+                    # Only accesses the vendor lady scenario if it's been turned on.
+                    if vendor_lady_object == 1:
+                        vendor_lady()
+                    else:
+                        input(f'\n{bulletpoint2}As you stand in the {current_kingdom_name}, you gaze upon the majestic high mountain next to it. The mountain is covered in snow and ice, and it towers above the surrounding landscape.\n\nYou feel a sudden urge to climb to the highest peak of the mountain. You have never done anything like this before, but you are excited by the challenge and the thrill of the climb.\n\nYou gather your gear and supplies, and you set off on your journey. You trudge through the snow, making your way up the mountain. The air is cold and thin, and you feel the strain on your body as you climb higher and higher.\n\nAs you reach the higher elevations, you encounter treacherous ice and snow. You must use your climbing skills and your determination to overcome these obstacles.\n\nFinally, after many hours of grueling climb, you reach the summit of the mountain. You are exhausted and exhilarated at the same time. You look out at the stunning view from the top of the mountain, and you feel a sense of accomplishment and pride.\n')
+                        mountain_secret()
 
             # The Forest
             def the_forest():
@@ -1983,10 +2192,10 @@ jgs .-=-.    ) -.
                     add_money(50, 150)
                     menu()
                     input(f'\n{bulletpoint2}After a long and fierce battle, you finally manage to defeat the Minotaur. The creature falls to the ground, and you stand victorious. You are exhausted and battered, but you are also proud and triumphant.')
-                    input(f'\n{bulletpoint}As you leave the ancient waterfall, you continue on your journey through the forest. The sun is shining, and the birds are singing, and you feel a sense of joy and adventure.\n\nBut as you walk, you notice that the air is getting colder and colder. The trees are starting to look more and more frosted, and the ground is covered in snow. You realize that you are entering a new and different part of the forest.\n\nAs you continue on your journey, you see a vast and frozen landscape in front of you. The snow is deep and white, and the ice is sparkling and blue. You see tall and majestic mountains in the distance, and you feel a sense of awe and wonder.\n\nYou realize that you have entered the ice kingdom. You are amazed by the beauty and majesty of this frozen land, and you cannot help but explore and learn more.\n\nYou continue on your journey, marveling at the ice sculptures and frozen lakes. You see animals that you have never seen before, and you hear music and laughter from hidden villages.\n')
+                    input(f'\n{bulletpoint}As you leave the ancient waterfall, you continue on your journey through the forest. The sun is shining, and the birds are singing, and you feel a sense of joy and adventure.\n\nBut as you walk, you notice that the air is getting colder and colder. The trees are starting to look more and more frosted, and the ground is covered in snow. You realize that you are entering a new and different part of the forest.\n\nAs you continue on your journey, you see a vast and frozen landscape in front of you. The snow is deep and white, and the ice is sparkling and blue. You see tall and majestic mountains in the distance, and you feel a sense of awe and wonder.\n\nYou realize that you have entered the {current_kingdom_name}. You are amazed by the beauty and majesty of this frozen land, and you cannot help but explore and learn more.\n\nYou continue on your journey, marveling at the ice sculptures and frozen lakes. You see animals that you have never seen before, and you hear music and laughter from hidden villages.\n')
                     ice_kingdom()
                 else:
-                    input(f'\n{bulletpoint}As you leave the ancient waterfall, you continue on your journey through the forest. The sun is shining, and the birds are singing, and you feel a sense of joy and adventure.\n\nBut as you walk, you notice that the air is getting colder and colder. The trees are starting to look more and more frosted, and the ground is covered in snow. You realize that you are entering a new and different part of the forest.\n\nAs you continue on your journey, you see a vast and frozen landscape in front of you. The snow is deep and white, and the ice is sparkling and blue. You see tall and majestic mountains in the distance, and you feel a sense of awe and wonder.\n\nYou realize that you have entered the ice kingdom. You are amazed by the beauty and majesty of this frozen land, and you cannot help but explore and learn more.\n\nYou continue on your journey, marveling at the ice sculptures and frozen lakes. You see animals that you have never seen before, and you hear music and laughter from hidden villages.')
+                    input(f'\n{bulletpoint}As you leave the ancient waterfall, you continue on your journey through the forest. The sun is shining, and the birds are singing, and you feel a sense of joy and adventure.\n\nBut as you walk, you notice that the air is getting colder and colder. The trees are starting to look more and more frosted, and the ground is covered in snow. You realize that you are entering a new and different part of the forest.\n\nAs you continue on your journey, you see a vast and frozen landscape in front of you. The snow is deep and white, and the ice is sparkling and blue. You see tall and majestic mountains in the distance, and you feel a sense of awe and wonder.\n\nYou realize that you have entered the {current_kingdom_name}. You are amazed by the beauty and majesty of this frozen land, and you cannot help but explore and learn more.\n\nYou continue on your journey, marveling at the ice sculptures and frozen lakes. You see animals that you have never seen before, and you hear music and laughter from hidden villages.')
                     ice_kingdom()
                 
             def the_marriage():
@@ -2002,7 +2211,7 @@ jgs .-=-.    ) -.
                     menu()
                     mysterious_monk()
                 else:
-                    input(f'\n{bulletpoint2}You become a skilled and accomplished warrior, and you earn the respect and admiration of the people of the empire. You become a favorite of the emperor, who rewards you with wealth and privilege.\nThe emperor is impressed by your skills and loyalty, and he offers you a position as his right-hand man. You are hesitant at first, but you decide to accept the emperor\'s offer.\nAs the right-hand man to the emperor, you are given a position of great power and influence in the empire. You are responsible for advising the emperor and carrying out his orders. You are also tasked with protecting the emperor and the empire from threats and dangers.\nYour new position is challenging and demanding, but also rewarding and fulfilling. You use your skills and knowledge to serve the emperor and the empire, and you are praised and rewarded for your efforts.\nHowever, you also face challenges and dangers. The nobles and courtiers of the empire are jealous and resentful of your position, and they plot and scheme against you. You must be careful and cautious, and always be on your guard.\nDespite the challenges, you are happy and content in your new life. You are proud to serve the emperor and the empire, and you are grateful for the opportunities and experiences that the empire has given you. You vow to always protect and serve the empire and its people, and to make your new position a success.')
+                    input(f'\n{bulletpoint2}You become a skilled and accomplished warrior, and you earn the respect and admiration of the people of the empire. You become a favorite of the emperor, who rewards you with wealth and privilege.\n\nThe emperor is impressed by your skills and loyalty, and he offers you a position as his right-hand man. You are hesitant at first, but you decide to accept the emperor\'s offer.\nAs the right-hand man to the emperor, you are given a position of great power and influence in the empire. You are responsible for advising the emperor and carrying out his orders. You are also tasked with protecting the emperor and the empire from threats and dangers.\n\nYour new position is challenging and demanding, but also rewarding and fulfilling. You use your skills and knowledge to serve the emperor and the empire, and you are praised and rewarded for your efforts.\n\nHowever, you also face challenges and dangers. The nobles and courtiers of the empire are jealous and resentful of your position, and they plot and scheme against you. You must be careful and cautious, and always be on your guard.\n\nDespite the challenges, you are happy and content in your new life. You are proud to serve the emperor and the empire, and you are grateful for the opportunities and experiences that the empire has given you. You vow to always protect and serve the empire and its people, and to make your new position a success.')
                     new_rank = ranks[-1]
                     input(
                         f'\n{bulletpoint2}\nCongratulations, on reaching the end! Try to discover other secret endings and possibilities...')
@@ -2011,7 +2220,7 @@ jgs .-=-.    ) -.
                     
             # Kill Best Friend
             def kill_best_friend():
-                input(f'\n{bulletpoint2}As you walk up to your best friend\'s house, you feel a heavy weight in your chest. You have never felt so torn in your life. On the one hand, you are loyal to the Red Dragon empire and you don\'t want to disappoint them. On the other hand, you cannot imagine a world without your best friend. You have known him for so long, and you have been through so much together.\nYou knock on the door, and your friend answers. He looks happy to see you, as always. But as you step inside, you know that you have to do what the empire has asked of you. You have to kill him.\n\nYou try to convince yourself that it is for the greater good, that the empire needs you to do this in order to maintain its power and control. But deep down, you know that it is wrong.\n\nAs you sit down in the living room and start to chat, you can feel your heart pounding in your chest. You know that you have to act fast, before you lose your nerve. You reach for your concealed knife, and before your friend knows what is happening, you plunge it into his chest.\n\nThe shock and betrayal on his face is something that you will never forget. You watch as the light in his eyes fades away, and you know that you have done the unthinkable. You have killed your best friend, and there is no going back.\n\nYou flee the scene, knowing that you have to report back to the empire and face the consequences of your actions. You have betrayed your friend and your own morals, and you know that you will have to live with that guilt for the rest of your life.\n')
+                input(f'\n{bulletpoint2}As you walk up to your best friend\'s house, you feel a heavy weight in your chest. You have never felt so torn in your life. On the one hand, you are loyal to the Red Dragon empire and you don\'t want to disappoint them. On the other hand, you cannot imagine a world without your best friend. You have known him for so long, and you have been through so much together.\n\nYou knock on the door, and your friend answers. He looks happy to see you, as always. But as you step inside, you know that you have to do what the empire has asked of you. You have to kill him.\n\nYou try to convince yourself that it is for the greater good, that the empire needs you to do this in order to maintain its power and control. But deep down, you know that it is wrong.\n\nAs you sit down in the living room and start to chat, you can feel your heart pounding in your chest. You know that you have to act fast, before you lose your nerve. You reach for your concealed knife, and before your friend knows what is happening, you plunge it into his chest.\n\nThe shock and betrayal on his face is something that you will never forget. You watch as the light in his eyes fades away, and you know that you have done the unthinkable. You have killed your best friend, and there is no going back.\n\nYou flee the scene, knowing that you have to report back to the empire and face the consequences of your actions. You have betrayed your friend and your own morals, and you know that you will have to live with that guilt for the rest of your life.\n')
                 add_money(50, 200)
                 if noble_life == 'alive':
                     bf_ans = input(f'\n{bulletpoint}After the deed was done you travel into the castle to collect your earnings. You meet an attractive noble inside the castle hallway, but you also see a hidden entrance in the hallway. Do you decide to speak with the noble?')
@@ -2144,48 +2353,47 @@ jgs .-=-.    ) -.
                 sea_down_middle = [ship_ocean, ship_ocean, ship_ocean, ship_ocean, ship_boat,
                                 ship_ocean, ship_ocean, ship_ocean, ship_ocean]
                 # Different multiplied empty strings are used for a clue to the player for navigation purposes
-                sea_start = [clouds1, ' '*36 + '༌ ⭒༌', ship_castle, ship_trees, ship_boat,
+                sea_start = [clouds1, ' '*20 + '༌ ⭒༌', ship_castle, ship_trees, ship_boat,
                             ship_ocean, ship_ocean, ship_ocean]
 
-                ice_castle = [night4, ' '*20 + '༌ ⭒༌', snow_castle, xmas_trees, ship_boat,
-                            ship_ocean, ship_ocean, ship_ocean]
-                ship_surf = [night4, ' '*20 + '༌ ⭒༌', snow_castle, xmas_trees, ship_surf,
-                            ship_ocean, ship_ocean, ship_ocean]
-
-                sea_top_left = [clouds2, ' '*34 + '༌ ⭒༌', ship_boat, ship_fish,
+                sea_top_left = [clouds2, ' '*22 + '༌ ⭒༌', ship_boat, ship_fish,
                                 ship_ocean, ship_ocean, ship_ocean]
 
-                sea_left_2 = [clouds4, ' '*32 + '༌ ⭒༌', ship_boat, ship_ocean,
+                sea_left_2 = [clouds4, ' '*24 + '༌ ⭒༌', ship_boat, ship_ocean,
                             ship_fish, ship_ocean, ship_ocean]
 
-                sea_left_3 = [clouds4, ' '*30 + '༌ ⭒༌', ship_boat, ship_ocean,
+                sea_left_3 = [clouds4, ' '*26 + '༌ ⭒༌', ship_boat, ship_ocean,  
                             ship_ocean, ship_fish, ship_ocean, ship_island]
 
-                sea_island = [clouds4, ' '*30 + '༌ ⭒༌',
-                            ship_ocean, ship_ocean, ship_ocean, ship_boat, ship_island]
+                sea_island = [clouds4, ' '*26 + '༌ ⭒༌',
+                            ship_ocean, ship_ocean, ship_ocean, ship_boat, ship_island] 
 
-                sea_island_south = [clouds2, ' '*30 + '༌ ⭒༌', ship_boat, ship_ocean,
+                sea_island_south = [clouds2, ' '*26 + '༌ ⭒༌', ship_boat, ship_ocean,
+                                    ship_ocean, ship_fish, ship_ocean, ship_ocean] 
+
+                sea_island_south1 = [clouds3, ' '*26 + '༌ ⭒༌', ship_ocean, ship_boat, 
                                     ship_ocean, ship_fish, ship_ocean, ship_ocean]
 
-                sea_island_south1 = [clouds3, ' '*30 + '༌ ⭒༌', ship_ocean, ship_boat, 
-                                    ship_ocean, ship_fish, ship_ocean, ship_ocean]
-
-                sea_island_south2 = [clouds4, ' '*30 + '༌ ⭒༌',  ship_ocean, ship_ocean, 
+                sea_island_south2 = [clouds4, ' '*26 + '༌ ⭒༌',  ship_ocean, ship_ocean, 
                                     ship_boat, ship_fish, ship_ocean, ship_ocean]
 
-                new_colony = [clouds4, ' '*30 + '༌ ⭒༌',
-                              ship_ocean, ship_ocean, ship_ocean, ship_boat, palm_trees]
+                new_colony = [clouds4, ' '*26 + '༌ ⭒༌',
+                              ship_ocean, ship_ocean, ship_ocean, ship_boat, palm_trees] # same
 
                 sea_left_4 = [clouds4, ' '*28 + '༌ ⭒༌', ship_boat, ship_ocean,
                             ship_ocean, ship_fish, ship_ocean, ship_ocean]
-                sea_left_5 = [night1, ' '*26 + '༌ ⭒༌', ship_boat, ship_ocean,
+                sea_left_5 = [night1, ' '*30 + '༌ ⭒༌', ship_boat, ship_ocean,
                             ship_ocean, ship_fish, ship_ocean, ship_ocean]
-                sea_left_6 = [night2, ' '*24 + '༌ ⭒༌', ship_boat, ship_ocean,
+                sea_left_6 = [night2, ' '*32 + '༌ ⭒༌', ship_boat, ship_ocean,
                             ship_ocean, ship_fish, ship_ocean, ship_ocean]
-                sea_left_7 = [night3, ' '*22 + '༌ ⭑༌༌', ship_boat, ship_ocean, # Different stars as another clue for navigating to the secret island
+                sea_left_7 = [night3, ' '*34 + '༌ ⭑༌༌', ship_boat, ship_ocean, # Different stars as another clue for navigating to the secret island
                             ship_ocean, ship_fish, ship_ocean, ship_ocean]
-                sea_left_8 = [night4, ' '*20 + '༌ ⭒༌', ship_boat, ship_ocean,
+                sea_left_8 = [night4, ' '*36 + '༌ ⭒༌', ship_boat, ship_ocean,
                             ship_ocean, ship_fish, ship_ocean, ship_ocean]
+                ice_castle = [night4, ' '*38+ '༌ ⭒༌', snow_castle, xmas_trees, ship_boat,
+                            ship_ocean, ship_ocean, ship_ocean]
+                ship_surf = [night4, ' '*40 + '༌ ⭒༌', snow_castle, xmas_trees, ship_surf,
+                            ship_ocean, ship_ocean, ship_ocean]
 
                 sea_dark = [stormy, ship_ocean, ship_boat, ship_ocean,
                             ship_ocean, ship_ocean]
@@ -2518,7 +2726,7 @@ jgs .-=-.    ) -.
                             elif command == 'yes':
                                 current_position = ice_castle
                                 print(
-                                    f'{bulletpoint2}Current Position: Ice Kingdom')
+                                    f'{bulletpoint2}Current Position: {current_kingdom_name}')
                                 print(
                                     f'{bulletpoint2}You reached the destination!')
                                 anchor = False # Ends the while loop
@@ -2598,6 +2806,7 @@ jgs .-=-.    ) -.
                 if new_rank in ranks: # Checks if the player already has a rank in the ranks list.
                     input( # If the player already has a rank, they can still roll against the old guard to compare intelligence levels.
                         f'{bulletpoint}It seems that you\'ve already been employed in the Red Dragon Military as {new_rank} {hero_name}. You can still roll from 0 to 10 to see if you have a higher intelligence level than the old guard. Press enter to roll...')
+                    ascii_dice()
                     hero_smart_level = random.randint(0, 10)
                     old_guart_smart = random.randint(0, 10)
                     if hero_smart_level == old_guart_smart:
@@ -2614,6 +2823,7 @@ jgs .-=-.    ) -.
                         new_rank = input(
                             f'{bulletpoint}Your rank depends on your intelligence level and luck...mostly luck. Press enter to roll from 1 to 10:')
                         roll = random.randint(1, 10)
+                        ascii_dice()
                         new_rank = ranks[roll] # Player rolls for the rank. The higher the number, the higher the rank.
 
                         input(
@@ -2712,27 +2922,34 @@ jgs .-=-.    ) -.
                     input(f'\n{bulletpoint2}The monster lunged at you, but the monk ran towards you and pushed you away. Sand filled the air making it impossible to see. Once the sand dissipated, you saw a shadow in the midst and the monk slowly appeared safe and sound. You both successfully managed to escape! ')
 
             # Frozen Wasteland
-                frozen_wasteland_ans = input(f'\n{bulletpoint}After walking for miles, you face a frozen wasteland with a massive thin-ice lake you needed to cross to reach the mountain. You take one step and see a crack in the ice. Do you still proceed?')
+                frozen_wasteland_ans = input(
+                    f'\n{bulletpoint}As you and the monk walked through the frozen wasteland, you both could feel the cold seeping into your bones. The air was frigid and biting, and your breath came out in white plumes.\n\nEventually, you both reached the edge of a massive, thin-ice lake. In the distance, you can see the towering peak of the mountain you were trying to reach. But first, you both would have to cross the lake.\n\n Do you still proceed?')
                 if frozen_wasteland_ans.strip().lower() in yes:
 
-                    input(f'\n{bulletpoint2}You both start making your way slowly... there were some cracks that appeared while you walk, but halfway in the lake you managed to find a strange metal ship that you decided to camp in. The monk started a small campfire to keep you warm.') 
+                    input(f'\n{bulletpoint2}You both start making your way slowly... you took a tentative step onto the ice, and immediately felt a crack beneath your feet. You both froze, unsure of what to do. The ice beneath you felt thin and brittle, and one wrong move could send you both plunging into the icy waters below.\n\n As you continued the journey across the frozen lake, you stumbled upon a strange metal ship that was partially submerged in the ice. You both decided to camp inside the ship for the night, and the monk set a small campfire to keep both of you warm.\n')
                     menu()
 
                     #The Betrayal
-                    the_betrayal_ans = input(f'\n{bulletpoint}You both started making your way again to finish crossing the lake at first daylight. As you almost reach the end, the monk had fallen through the ice. You turn around and saw what happened, but the ice under your feet immediately started breaking as well. Do you save yourself and cross the lake? ')
+                    the_betrayal_ans = input(f'\n{bulletpoint}The next morning, as you both were making your way towards the other side of the lake, the monk suddenly fell through the ice. You turned around and saw what had happened, but before you could react, the ice beneath your own feet began to crack and break. Do you save yourself and cross the lake? ')
                     if the_betrayal_ans.strip().lower() in yes:
 
-                        input(f'\n{bulletpoint2}You start sprinting towards the end of the lake and saved yourself. There was no point in attempting to save the monk.')
+                        input(f'\n{bulletpoint2}You start sprinting towards the end of the lake and saved yourself. There was no point in attempting to save the monk.\n\nAs you run, the ice beneath your feet cracks and breaks, but you are able to maintain your balance and keep moving forward. You push yourself to your limits, pouring all your energy into reaching the shore.\n\nEventually, you reach the end of the lake and scramble onto solid ground. You are cold, wet, and exhausted, but you are alive. You take a moment to catch your breath and look back at the lake, knowing that you have made it through a difficult and dangerous situation.\n\nYou feel a sense of regret for leaving the monk behind, but you also know that you made the best decision for yourself in the moment. You must now continue on your journey, facing whatever challenges and dangers come your way.\n')
                         menu()
                         mountain_secret()
 
                     else:
-                        input(f'\n{bulletpoint2}You turn back, but the ice under you breaks, and one of your legs gets caught in the numbing cold water below the ice. You manage to pull free, but the monk had already fallen through... never to be seen again. ')
+                        if current_heir.strip().lower() == hero.name.strip().lower():
+                            input(f'\n{bulletpoint2}As the monk falls through the ice, you decide to turn back and try to save them. You frantically search for a way to rescue your companion, and eventually, you come up with a plan.\n\nYou are the current heir to the red dragon empire, and you have some soldiers at your disposal. You call out to them, and they immediately come to your aid. Together, you manage to find a way to pull the monk out of the water and onto solid ground.\n\nThe monk is cold, wet, and shaken, but they are alive. You quickly make arrangements to have them sent back home to get the medical attention they need. You are relieved that you were able to save your companion, and you are grateful for the help of your soldiers.\n\nYou continue on your journey, knowing that you were able to overcome a difficult and dangerous situation. You feel a sense of pride and satisfaction for having saved the monk.\n')
+                        else:
+                            input(f'\n{bulletpoint2}As the monk falls through the ice, you decide to turn back and try to save them. But as you do, the ice beneath your feet cracks and breaks, and one of your legs gets caught in the numbing cold water below.\n\nYou struggle to free yourself, using all your strength and determination to pull yourself out of the water. Finally, after what feels like an eternity, you manage to pull your leg free and scramble back onto the ice.\n\nBut it is too late for the monk. They have already fallen through the ice and disappeared beneath the frigid waters. You are alone, stranded on the frozen lake, with no way to save your companion.\n\nYou are cold, wet, and exhausted, but you are alive. You take a moment to catch your breath and come to terms with what has happened. You feel a sense of regret for attempting to save the monk, but you also know that you did everything you could.\n\nYou must now continue on your journey, facing whatever challenges and dangers come your way. You will never forget the monk, but you must move forward and keep going, no matter what.')
                         menu()
                         mountain_secret()
 
                 else:
-                    input(f'\n{bulletpoint2}You were frozen in fear of crossing this lake. You luckily found a way around but you would need to climb up the frozen part of the mountain. As you climbed up the mountain and almost reached the top, the monk slipped. You immediately extended your hand but to no avail... the monk had fallen, and shall never be seen again. ')
+                    if current_heir.strip().lower() == hero.name.strip().lower() :
+                        input(f'\n{bulletpoint2}Instead of crossing the lake, you and the monk decide to go around it. You follow a winding path that leads you along the shore, and eventually, you come to a steep, frozen slope that leads up the side of the mountain.\n\nYou begin to climb, using all your skill and determination to make your way up the slope. The ice is treacherous and slippery, and you must be careful with every step you take.\n\nAs you near the top of the mountain, the monk slips and begins to fall. But you are the current heir to the red dragon empire, and you have some special tools at your disposal. You quickly pull out a special grappling rope and toss it to the monk, who manages to grab onto it and halt their fall.\n\nYou and the monk work together to pull each other up the slope, and eventually, you both make it to the top of the mountain. You are relieved and grateful that you were able to save your companion, and you ask some of the red dragon empire soldiers to help send the monk home to rest.\n\nYou may feel a sense of pride and satisfaction for having saved the monk, and you are determined to face whatever challenges and dangers come your way. You will never forget the treacherous climb up the mountain, but you are stronger for having overcome it.\n')
+                    else:
+                        input(f'\n{bulletpoint2}Instead of crossing the lake, you and the monk decide to go around it. You follow a winding path that leads you along the shore, and eventually, you come to a steep, frozen slope that leads up the side of the mountain.\n\nYou begin to climb, using all your skill and determination to make your way up the slope. The ice is treacherous and slippery, and you must be careful with every step you take.\n\nAs you near the top of the mountain, the monk slips and begins to fall. You immediately extend your hand, trying to grab them and pull them back up. But it is too late. The monk falls, tumbling down the steep slope and disappearing from sight.\n\nYou are left alone, stranded on the side of the mountain. You may feel a sense of regret and sorrow for what has happened to the monk, but you also know that there was nothing you could have done to prevent it.\n\nYou must now continue on your journey, facing whatever challenges and dangers come your way. You will never forget the monk, but you must move forward and keep going, no matter what.\n')
                     menu()
                     mountain_secret()
 
@@ -2831,7 +3048,7 @@ _,'    \_>\_/    ',_
                         if monster_guild_membership == True:
                             input(f'\n{bulletpoint2}The Phoenix\'s eyes glazed over, and it let out a final, pitiful cry before becoming still. You had done it. You had defeated the Phoenix and added it to your collection of tamed monsters.\n\nAs you stood there, panting and exhausted, you couldn\'t help but feel a sense of pride and satisfaction. You were a member of the Monster Hunter Guild, and with every monster you defeated, your power grew. Now, every time you faced a new monster, you knew that you could tame it and add it to your collection.\n\nWith each new monster you tamed, you gained more chances to summon them into battle. You knew that with your collection of powerful allies at your side, you could take on any challenge that came your way. You were ready for whatever the future might hold.\n\nYou are now the Beastmaster! Next time you cannot afford an item at the vendor lady shop, enter "gimmethebread";)')
                         erase_name = input(
-                            f'\n{bulletpoint}The Phoenix had been guarding a secret letter, and now that it was defeated, the letter was revealed. You picked it up and read it...\n\nIt says that the next heir to the throne is {current_heir}. Do you decide to erase this name and change it to something else?\n')
+                            f'\n{bulletpoint2}The Phoenix had been guarding a secret letter, and now that it was defeated, the letter was revealed. You picked it up and read it...\n\nIt says that the next heir to the throne is {current_heir}.\n{bulletpoint}Do you decide to erase this name and change it to something else?\n')
                         if erase_name.strip().lower() in yes:
                             new_heir = input(
                                 f'📜 What name would you like to change this to?')
@@ -2842,7 +3059,49 @@ _,'    \_>\_/    ',_
                                 input(
                                     f'\n{bulletpoint2}You remembered that you were told not to open the letter and failed on your promise. You decide to deliver the letter back to the beggar. The beggar opens up the letter and a legendary phoenix with electric feathers pops out.\n\nThe phoenix says that it is the guardian of this letter, and that the beggar is the next heir to the Red Dragon Empire. The beggar is in shock and thanks you for delivering this message.\n\nThe beggar will hand you a special reward the next time he sees you. The phoenix then kicks some dirt in your face and flies far away...\n')
                             elif hero_name.title() == current_heir: # Checking if the player changed the name to hero_name.
-                                print(f'You decided to alter the course of humanity for your own benefit!')
+                                print(f'\n{bulletpoint2}You are not satisfied with the current heir, and you decide to change the letter. Using your cunning and intelligence, you alter the letter to show that you are the true heir to the Red Dragon Empire.\n\nYou have the power and authority that comes with that position.\n\nYou have achieved a great victory, but the challenges and dangers that lie ahead are even greater. You must be prepared for whatever comes your way, and use all your skills and abilities to protect your new-found position and power.\n\nYou decided to alter the course of humanity for your own benefit!')
+                            input("""
+                                                      .
+                                              .       |         .    .
+                                        .  *         -*-          *
+                                             \        |         /   .
+                            .    .            .      /^\     .              .    .
+                               *    |\   /\    /\  / / \ \  /\    /\   /|    *
+                             .   .  |  \ \/ /\ \ / /     \ \ / /\ \/ /  | .     .
+                                     \ | _ _\/_ _ \_\_ _ /_/_ _\/_ _ \_/
+                                       \  *  *  *   \ \/ /  *  *  *  /
+                                        ` ~ ~ ~ ~ ~  ~\/~ ~ ~ ~ ~ ~ '
+                            """)
+                            input(f"""
+                                                                              _______________________
+                                    _______________________-------------------                       `\\
+                                  /:--__                                                              |
+                                 ||< > |                                   ___________________________/
+                                 | \__/_________________-------------------                         |
+                                 |                                                                  |
+                                  |                 THE HEIR TO THE RED DRAGON EMPIRE               |
+                                  |                                                                 |
+                                  |       Oh, {current_heir}, so fair and so bold,                  
+                                   |       The next in line to the Red Dragon's hold,               |
+                                   |       Your future is bright, your fate is sealed,              |
+                                   |       The kingdom's throne, your destiny revealed.             |
+                                   |                                                                |
+                                    |       With fire in your veins and strength in your heart,     |
+                                    |       You'll rule with grace, a true work of art,             |
+                                    |       A guardian of peace, a defender of might,               |
+                                    |       The Red Dragon Empire's shining light.                  |
+                                    |                                                               |
+                                    |       So let us raise a glass and toast to you,               |
+                                    |       Our future leader, both strong and true,                |
+                                    |       May your reign be long and your rule just and fair,     |
+                                    |       The next great heir to the Red Dragon's throne,         |
+                                    |       you'll wear with care.                                   |
+                                   |                                              ____________________|_
+                                   |  ___________________-------------------------                      `\\
+                                   |/`--_                                                                 |
+                                   ||[ ]||                                            ___________________/
+                                    \===/___________________--------------------------
+                            """)
                             input(
                                 f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         else:
@@ -3042,6 +3301,46 @@ _,'    \_>\_/    ',_
                     menu()
                     beggar()
                 elif treasure_ans == '7':
+                    input("""
+                                                  _.--""-._
+                      .                         ."         ".
+                     / \    ,^.         /(     Y             |      )\
+                    /   `---. |--'\    (  \__..'--   -   -- -'""-.-'  )
+                    |        :|    `>   '.     l_..-------.._l      .'
+                    |      __l;__ .'      "-.__.||_.-'v'-._||`"----"
+                     \  .-' | |  `              l._       _.'
+                      \/    | |                   l`^^'^^'j
+                            | |                _   \_____/     _
+                            j |               l `--__)-'(__.--' |
+                            | |               | /`---``-----'"1 |  ,-----.
+                            | |               )/  `--' '---'   \'-'  ___  `-.
+                            | |              //  `-'  '`----'  /  ,-'   I`.  \
+                          _ L |_            //  `-.-.'`-----' /  /  |   |  `. \
+                         '._' / \         _/(   `/   )- ---' ;  /__.J   L.__.\ :
+                          `._;/7(-.......'  /        ) (     |  |            | |
+                          `._;l _'--------_/        )-'/     :  |___.    _._./ ;
+                            | |                 .__ )-'\  __  \  \  I   1   / /
+                            `-'                /   `-\-(-'   \ \  `.|   | ,' /
+                                               \__  `-'    __/  `-. `---'',-'
+                                                  )-._.-- (        `-----'
+                                                 )(  l\ o ('..-.
+                                           _..--' _'-' '--'.-. |
+                                    __,,-'' _,,-''            \ \
+                                   f'. _,,-'                   \ \
+                                  ()--  |                       \ \
+                                    \.  |                       /  \
+                                      \ \                      |._  |
+                                       \ \                     |  ()|
+                                        \ \                     \  /
+                                         ) `-.                   | |
+                                        // .__)                  | |
+                                     _.//7'                      | |
+                                   '---'                         j_| `
+                                                                (| |
+                                                                 |  \
+                                                                 |lllj
+                                                                 |||||  -nabis
+                    """)
                     add_health(skeletonwarrior) # Adds monster health if it has already been killed.
                     input(
                         f'\n{bulletpoint2}When you enter the room, you see a skeleton with a shield and sword displayed in the middle of the room. You walk over and touch it. All of a sudden the hand grabs your arm and it starts attacking you!\n')
@@ -3154,6 +3453,7 @@ _,'    \_>\_/    ',_
                     nonlocal emperor_life
                     nonlocal noble_life
                     nonlocal thugs_life
+                    nonlocal icequeen_life
                     input(
                         f'\n{bulletpoint2}The wizard introduces himself as Merlin. He said he had been imprisoned by the empire for decades, forced to build gadgets for the empire\'s grand plan. He was recently working on these metal beings and planned to copy them on behalf of the empire in order to save human lives.\n')
                     merlin_ans = input(
@@ -3174,6 +3474,7 @@ _,'    \_>\_/    ',_
                         emperor_life = 'alive'
                         noble_life = 'alive'
                         thugs_life = 'alive'
+                        icequeen_life = 'alive'
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
@@ -3187,6 +3488,7 @@ _,'    \_>\_/    ',_
                         emperor_life = 'alive'
                         noble_life = 'alive'
                         thugs_life = 'alive'
+                        icequeen_life = 'alive'
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
@@ -3200,6 +3502,7 @@ _,'    \_>\_/    ',_
                         emperor_life = 'alive'
                         noble_life = 'alive'
                         thugs_life = 'alive'
+                        icequeen_life = 'alive'
                         print(
                             f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         menu()
@@ -3794,8 +4097,11 @@ _,'    \_>\_/    ',_
                 else:
                     beggar_ans = input(f'\n{bulletpoint}You\'re walking through the bustling streets of the Red Dragon Empire. A dirty old beggar comes up to you asking $5 for food. Do you give him the money?')
                 if beggar_ans.strip().lower() in yes:
-                    print(f'\n{bulletpoint2}You hand over $5 and he thanks you for your kindness. The beggar introduces you to a mysterious monk who needs some assistance with something.') 
-                    hero.money -= 5
+                    if hero.money >= 5:
+                        print(f'\n{bulletpoint2}You hand over $5 and he thanks you for your kindness. The beggar introduces you to a mysterious monk who needs some assistance with something.') 
+                        hero.money -= 5
+                    else:
+                        print(f'\n{bulletpoint2}You cannot afford to give the beggar money! The beggar thanks you anyways and introduces you to a mysterious monk who needs some assistance with something.') 
                     menu()
                     mysterious_monk() 
                 else:
@@ -3814,10 +4120,13 @@ _,'    \_>\_/    ',_
                     three_thugs_ans = input(
                         f'\n{bulletpoint}The beggar calls three {new_goons} over and asks them to rough you up. Do you stay and fight?')
                     if three_thugs_ans.strip().lower() in yes:
-                        damage = random.randint(3,20)
-                        input(f'\n{bulletpoint2}The {new_goons} landed a couple large blows to your stomach and did {damage} damage to your health. You managed to run away as fast as possible to a local street vendor nearby to hide.')
-                        hero.health -= damage
-                        menu()
+                        if current_heir.strip().lower() == hero.name.strip().lower():
+                            input(f'\n{bulletpoint}You are the current heir to the red dragon empire, and you have some powerful allies at your disposal. When the goons arrive, you call out to the castle guards, who immediately come to your aid.\n\nThe guards quickly arrest the goons, who are no match for their superior training and weaponry. You are unharmed, and the beggar is left empty-handed and disappointed.\n')
+                        else:
+                            damage = random.randint(3,20)
+                            input(f'\n{bulletpoint2}The {new_goons} landed a couple large blows to your stomach and did {damage} damage to your health. You managed to run away as fast as possible to a local street vendor nearby to hide.')
+                            hero.health -= damage
+                            menu()
                         if vendor_lady_object == 1: # Only accesses the vendor lady scenario if it's been turned on.
                             vendor_lady()
                         else:
@@ -3866,8 +4175,11 @@ _,'    \_>\_/    ',_
                                     if snitch_ans.strip().lower() in ('tattle', 'tattle tale', 'tell the guards', 'tell the guards about the plan',) or 'snitch' in snitch_ans.strip().lower():
                                         input(
                                             f'\n{bulletpoint2}Initially, you were tempted by the idea of escape, but then you had a change of heart. You decided to tell the prisoner guards about the inmate\'s plans, hoping that they would take appropriate action.\n\nThe prisoner guards took the inmate into custody and decided to sentence him to death by hanging. They escorted him to the gallows, where he was to be hanged.\n\nAs the inmate was being hanged, you realized that you had made a terrible mistake. You had second thoughts about turning the inmate in, and you felt incredibly guilty about what had happened.\n\nFortunately, there was a rule in this prison that if you could win a game of hangman, they would release the prisoner.\n')
+                                        if gamble_life == True:
+                                            gamble_life = False
                                         hangman()
                                         input(f'\n{bulletpoint2}The prisoner guard is impressed by your quick thinking and resourcefulness. He offers to let you go on the condition that you join the ranks of the Red Dragon Empire.\n\nThe Red Dragon Empire is a powerful and feared organization that rules over a vast territory. They are known for their martial prowess and their ruthless tactics, and they are always looking for strong and capable individuals to join their ranks.\n\nYou are hesitant at first, but you realize that this may be your only chance to escape from the prison and start a new life. You agree to join the Red Dragon Empire, and the prisoner guard lets you go free.\n')
+                                        gamble_life = True
                                         menu()
                                         empire_recruitment()
                                     else:
@@ -3912,6 +4224,9 @@ _,'    \_>\_/    ',_
             beggar()
 
         def menu():
+            # Make hero money 0 if it is less than 0
+            if hero.money < 0:
+                hero.money = 0
             
             def items():
 
