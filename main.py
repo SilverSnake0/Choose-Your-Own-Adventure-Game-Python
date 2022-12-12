@@ -157,7 +157,7 @@ def adventure_game():
         def add_money(min, max):
             new_money = random.randint(min, max)
             hero.money += new_money
-            print(f'{bulletpoint2}{hero.name} earned ${new_money}!')
+            input(f'{bulletpoint2}{hero.name} earned ${new_money}!')
 
         def add_health(person):
             try: # Try and except added for monsters that have already been killed. This is in case the function is called before the monster, so it won't add health to monsters that have not been encountered yet.
@@ -295,7 +295,7 @@ def adventure_game():
                 # Breaks out of the while loop once monster health reaches less than 0
                 if monster.health <= 0:
                     break
-                print('\n\n\n\n\n\n\n\n\n\n\n\n\n')
+                print('\n')
                 # If there are items existing in the battle_items list, then it will print the special item commands to be shown in the battle menu.
                 if battle_items:
                     for i in battle_items:
@@ -402,7 +402,7 @@ def adventure_game():
                         'Odin. A highly revered god wielding a spear. Odin summons a dark storm that shadows the battlefield. A powerful lightning bolt shoots down']
                     summoned = random.choice(summons) # Selects a random summon from the summoned list.
                     if summoned == summons[0]:
-                        print('''
+                        input('''
                                         .                                            .
      *   .                  .              .        .   *          .
   .         .                     .       .           .      .        .
@@ -432,7 +432,7 @@ Robert Casey
                         print(levi_image)
                         print(levi_image2)
                     elif summoned == summons[2]:
-                        print('''
+                        input('''
                             ,-.
        ___,---.__          /'|`\          __,---,___
     ,-'    \`    `-.____,-'  |  `-.____,-'    //    `-.
@@ -452,9 +452,9 @@ eViL        /   /     ||--+--|--+-/-|     \   \\
              `-._,-'   `-._______,-'   `-._,-'
                         ''')
                     elif summoned == summons[3]:
-                        print('>>>>>----------------------->    '*50)
+                        input('>>>>>----------------------->    '*50)
                     elif summoned == summons[4]:
-                        print('''
+                        input('''
                                   ⢰⡖⢺⡟⠛⠛⣗⠒⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⠶⠞⣿⠈⢷⠀⢸⠇⣰⠟⠶⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠞⢿⡦⠖⠚⣿⡆⠸⣆⡏⢀⣿⡛⠲⠦⣽⠻⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -480,7 +480,7 @@ eViL        /   /     ||--+--|--+-/-|     \   \\
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⠛⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀''')
-                        print('''
+                        input('''
       _, .--.
     (  / (  '-.
 jgs .-=-.    ) -.
@@ -496,7 +496,7 @@ jgs .-=-.    ) -.
         -.'.`\.'.-''')
 
                     summon_damage = random.randint(99,10000)
-                    print(
+                    input(
                         f'{bulletpoint}You are surrounded by a protective shield. {person.name} summoned {summoned} and deals 💥{summon_damage} damage to {monster.name}!\n')
                     monster.health -= summon_damage
                     battlemenu()
@@ -617,7 +617,7 @@ jgs .-=-.    ) -.
                     else:
                         pass
                 else:
-                    print(
+                    input(
                         f'{bulletpoint}{person.name} did nothing... {monster.name} attacked and dealt {monster_attack} damage to {person.name}.\n')
                     person.health -= monster_attack
                     battlemenu()
@@ -812,9 +812,6 @@ jgs .-=-.    ) -.
 
             # Generate a deck of cards as a list of tuples, with each tuple containing a rank and a suit
             deck = [(rank, suit) for rank in ranks for suit in suits]
-
-            # Import the random module to shuffle the deck
-            import random
 
             # Shuffle the deck
             random.shuffle(deck)
@@ -1384,13 +1381,16 @@ jgs .-=-.    ) -.
         # The story objects that can be mixed and matched depending on the storyline and player decisions.
         def story():
             new_rank = '' # Sets the empty rank for the empire_recruitment scenario.
-            current_heir = hero.name
+            current_heir = 'beggar..'
             emperor_life = 'alive'
+            current_emperor = 'emperor'
             noble_life = 'alive'
             thugs_life = 'alive'
             icequeen_life = 'alive'
             current_kingdom_name = 'Ice Kingdom'
             coin_guess_correctly = False
+            new_monk_replacement_list = ['knight', 'healer', 'bard', 'adventurer', 'fairy', 'dwarf']
+            new_monk_replacement = 'monk'
 
             #Vendor Lady
             def show_vendor_menu():
@@ -1797,14 +1797,18 @@ jgs .-=-.    ) -.
                       `:::::`::::::::;' /  / `:#                  
                        ::::::`:::::;'  /  /   `#              
                 """)
-                enter_assassin_guild = input(f'\n{bulletpoint}After exploring the city for a while, the old man leads you to a secluded part of the city, where a mysterious sign stands in front of a hidden door. The sign bears the emblem of a hooded figure holding a curved blade. The old man tells you that this is the entrance to the Assassin Guild, a secretive organization of skilled assassins who serve as protectors.\n\nYou thank the old man for showing you around the city, and he tells you that he will be waiting for you if you ever need anything. You stand in front of the mysterious sign, considering whether or not you should enter the Assassin Guild and see what secrets it holds. The choice is yours, do you enter the building?\n\n')
+                print(f'\n{bulletpoint}After exploring the city for a while, the old man leads you to a secluded part of the city, where a mysterious sign stands in front of a hidden door. The sign bears the emblem of a hooded figure holding a curved blade. The old man tells you that this is the entrance to the Assassin Guild, a secretive organization of skilled assassins who serve as protectors.\n\nYou thank the old man for showing you around the city, and he tells you that he will be waiting for you if you ever need anything. You stand in front of the mysterious sign, considering whether or not you should enter the Assassin Guild and see what secrets it holds.\n\n')
+                if assassin_guild_membership == False:
+                    enter_assassin_guild = input(f'{bulletpoint}The choice is yours, do you enter the building and join the guild?')
+                else:
+                    enter_assassin_guild = input(f'Do you enter the building and catch up with your fellow guild members?')
                 if enter_assassin_guild.strip().lower() in yes:
                     if assassin_guild_membership == False:
                         input(f'\n{bulletpoint2}Inside, you are greeted by a group of hooded figures who introduce themselves as members of the assassin guild. They explain that they are a secret society of trained assassins who use their skills and knowledge to serve the greater good.\n\nThe guild members offer to train you in the ancient ways of assassination, and you are intrigued by the offer. You decide to accept their offer and become a member of the guild.\n')
                         input(f'...')
-                        philosophy_ans = input(f'{bulletpoint2}You spend the next few weeks training with the guild, learning the art of stealth, deception, and assassination. You undergo rigorous physical and mental training, and you master the use of a variety of weapons and tools.\n\nAs you progress in your training, you are taught the secrets of the guild and the philosophy that guides its members. You learn to balance the need for justice with the harsh realities of the world, and you become a skilled and deadly assassin. Do you want to go over the philosophy of the Assassin guild?\n')
+                        philosophy_ans = input(f'{bulletpoint2}You spend the next few months vigorously training with the guild, learning the art of stealth, deception, and assassination. You undergo rigorous physical and mental training, and you master the use of a variety of weapons and tools.\n\nAs you progress in your training, you are taught the secrets of the guild and the philosophy that guides its members. You learn to balance the need for justice with the harsh realities of the world, and you become a skilled and deadly assassin. Do you want to go over the philosophy of the Assassin guild?\n')
                         if philosophy_ans.strip().lower() in yes:
-                            input(f'{bulletpoint2}\n\n\n\n\n\n\n\n\n\n\nThe philosophy of the assassin guild is based on the principle of balance. The guild members believe that the world is a complex and dangerous place, and that there is a constant struggle between good and evil, order and chaos.\n\nThey believe that the guild has a responsibility to maintain the balance of power and prevent any one side from gaining too much control. To achieve this, the guild members use their skills and knowledge to eliminate threats and protect the innocent.\n\nThe guild has a complicated relationship with the {current_kingdom_name} and the Red Dragon Empire. On the one hand, the guild is neutral and does not take sides in political conflicts. On the other hand, the guild members are not afraid to intervene if they believe that the balance of power is being threatened.\n\nIn the case of the {current_kingdom_name}, the guild has a positive relationship with the queen and her people. The queen values the guild\'s skills and knowledge, and she often hires the guild members to carry out important missions. In return, the guild members protect the {current_kingdom_name} and its people from threats and dangers.\n\nIn the case of the Red Dragon Empire, the guild has a more complicated relationship. The emperor and his followers view the guild as a threat and a nuisance, and they often try to suppress the guild\'s activities. However, the guild members are not afraid to challenge the empire and its corrupt rulers, and they will not hesitate to strike if the balance of power is threatened.\n\n')
+                            input(f'\n\n\n\n\n\n\n\n\n\n\n{bulletpoint2}The philosophy of the assassin guild is based on the principle of balance. The guild members believe that the world is a complex and dangerous place, and that there is a constant struggle between good and evil, order and chaos.\n\nThey believe that the guild has a responsibility to maintain the balance of power and prevent any one side from gaining too much control. To achieve this, the guild members use their skills and knowledge to eliminate threats and protect the innocent.\n\nThe guild has a complicated relationship with the {current_kingdom_name} and the Red Dragon Empire. On the one hand, the guild is neutral and does not take sides in political conflicts. On the other hand, the guild members are not afraid to intervene if they believe that the balance of power is being threatened.\n\nIn the case of the {current_kingdom_name}, the guild has a positive relationship with the queen and her people. The queen values the guild\'s skills and knowledge, and she often hires the guild members to carry out important missions. In return, the guild members protect the {current_kingdom_name} and its people from threats and dangers.\n\nIn the case of the Red Dragon Empire, the guild has a more complicated relationship. The emperor and his followers view the guild as a threat and a nuisance, and they often try to suppress the guild\'s activities. However, the guild members are not afraid to challenge the empire and its corrupt rulers, and they will not hesitate to strike if the balance of power is threatened.\n\n')
                     input(
                         f'{bulletpoint2} You recall the poem they taught you:\n\nThe assassin guild is a secret sect\nOf skilled and deadly powers,\nTheir mission is to keep the check\nIn a world of chaos all hours.\n\nThey move through the shadows unseen,\nSilent and deadly as the night,\nReady to strike at a moment\'s bright\nAnd eliminate any threat in sight.\n\nThey are masters of the blade and the bow,\nTrained in the arts of stealth and deception,\nThey are feared by their enemies\nAnd respected by those who know their profession.\n\nThe guild is a force for right,\nA protector of the innocent and the weak,\nThey will continue to fight\nFor balance and justice in a world that seeks.\n')
                     if assassin_guild_membership == False:
@@ -1818,13 +1822,14 @@ jgs .-=-.    ) -.
                         new_kill = input(
                             f'{bulletpoint2}You cannot kill yourself...\n{bulletpoint}Please enter a new assassination target: ')
                     if new_kill.strip().lower() in ('beggar', 'the beggar'):
+                        nonlocal current_heir
                         input(
                             f'\n{bulletpoint2}You are to assassinate a beggar who has been terrorizing the people of the Red Dragon Empire. You accept the mission.\n')
                         input(f'\n{bulletpoint2}You are initially puzzled by the mission. You cannot understand why the guild would want to kill a homeless beggar, who poses no threat to anyone. You decide to question the guild leader about the mission.\n\nThe guild leader explains that the beggar is not what he seems. He is actually a spy for the {current_kingdom_name}, who has been gathering information about the empire\'s defenses and plans. The guild has been hired by the empire to eliminate the spy and prevent him from passing on his information.\n\nYou are uneasy about the mission, but you trust the guild leader and you decide to carry it out. You disguise yourself as a beggar and approach the beggar outside the castle gates. You strike up a conversation and gain his trust.\nWhen the time is right, you strike the beggar with a hidden blade.\n\n{bulletpoint}Press enter to roll 1 to 10 to determine if the kill was clean...\n')
                         clean_kill_beggar = random.randint(1, 10)
                         ascii_dice()
                         print(f'{bulletpoint2}You rolled a {clean_kill_beggar}.')
-                        if clean_kill_beggar >= 5:
+                        if clean_kill_beggar > 5:
                             input(
                                 f'\n{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.\n')
                         else:
@@ -1861,10 +1866,11 @@ jgs .-=-.    ) -.
                             if clean_kill_emperor == 10:
                                 input(
                                     f'\n{bulletpoint2}As you reached the emperor\'s bedside, you unsheathed your blade and struck with precision and speed. The emperor never saw it coming. With a single, clean strike, you ended his reign and claimed your reward.\n\nAs you turned to leave, you spotted something out of the corner of your eye. A hidden compartment in the wall, cleverly concealed by a painting. You reached out and touched it, and the painting swung open to reveal an ancient tablet.\n\nYou hesitated for a moment, unsure of what to do. But then you noticed a strange inscription on the tablet. It said, "iamgod.". Could it be a command of some sort?\nYou placed your hand on the tablet and spoke the words out loud. "iamgod."\n\nSuddenly, you felt a surge of power coursing through your veins. You could feel your senses heightening, your strength increasing, your reflexes sharpening. You had gained the abilities of a god.\n\nYou grinned with excitement and anticipation. With your newfound powers, you could take on any challenge that came your way. You were ready for anything the battlefield might throw at you.\n\nYou dispose of the body and return to the guild, reporting the mission as completed.\n')
-                            elif clean_kill_emperor >= 5:
+                            elif clean_kill_emperor > 5:
                                 input(
                                     f'\n{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.\n')
                             else:
+                                nonlocal current_emperor
                                 add_health(emperorbattle)
                                 battle(hero, emperorbattle, 'raises shield',
                                     'groans in pain', 'calls guards over', 'uses sharp end of the shield')
@@ -1877,9 +1883,12 @@ jgs .-=-.    ) -.
                                 input(
                                     f'\n{bulletpoint2}The kill was messy. You dispose of the body and return to the guild, reporting the mission as completed.\n')
                             emperor_life = 'dead'
+                            # updates the next in line to the empire which is the current_heir variable
+                            current_emperor = current_heir
+                            current_heir = 'no one'
                         else:
                             input(
-                                f'\n{bulletpoint2}The emperor is already dead and has already been quickly replaced by a new emperor!')
+                                f'\n{bulletpoint2}The previous emperor is already dead and has already been quickly replaced by {current_emperor}!')
                         menu()
                         input(
                             f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
@@ -1893,7 +1902,7 @@ jgs .-=-.    ) -.
                             ascii_dice()
                             print(f'{bulletpoint2}You rolled a {clean_kill_queen}')
 
-                            if clean_kill_queen >= 5:
+                            if clean_kill_queen > 5:
                                 input(
                                     f'\n{bulletpoint2}The kill was clean. You dispose of the body and return to the guild, reporting the mission as completed.\n')
                             else:
@@ -1917,8 +1926,11 @@ jgs .-=-.    ) -.
                             f'\n{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         beggar()
                     else:
+                        nonlocal new_monk_replacement
                         if new_kill.strip().lower() in ('noble', 'noble lady'):
                             noble_life = 'dead'
+                        elif new_kill.strip().lower() == new_monk_replacement.strip().lower():
+                            new_monk_replacement = random.choice(new_monk_replacement_list)
                         input(
                             f'\n{bulletpoint2}You are to assassinate {new_kill}. You accept the mission.')
                         input(f'{bulletpoint2}The night was dark and cold, the perfect conditions for an assassination. You crept through the shadows, senses heightened and your heart pounding with anticipation.\n\nYour target was {new_kill}. You had studied {new_kill}\'s routine and habits, and you knew exactly when and where they would be most vulnerable.\n\nYou made your way to the designated spot, a secluded alleyway near their residence. Your waited in the shadows, your weapon of choice at the ready.\n\nAs {new_kill} walked past, you stepped out of the darkness and struck. Your blade sliced through the air with deadly precision, finding its mark in {new_kill}\'s throat. {new_kill} gasped and clutched at their neck, but it was too late. You watched as the life drained from their eyes, and then disappeared into the night, leaving no trace of your presence behind.\n\nThe kill was clean and efficient, a testament to your skills as an assassin. you would be rewarded for the successful mission, and you would be ready for the next one. That was the life of an assassin, a life of danger and deception, but one that you embraced wholeheartedly.\n')
@@ -1934,6 +1946,7 @@ jgs .-=-.    ) -.
 
             # The Hidden City
             def hidden_city():
+                kingdom_or_empire_var = '.'
                 city_ans = input(f'{bulletpoint}As you wander through the streets of the city called “The City of the Rising Sun”, you come across a small shop selling trinkets and souvenirs. You decide to take a look and see if there is anything interesting.\n\nAs you browse the shelves, a friendly old man approaches you and says that this city is a safe haven for those who seek refuge from the troubles of the outside world. It is hidden from the eyes of the Red Dragon Empire and the {current_kingdom_name}, and it is a place of harmony. Do you ask him more about the Red Dragon Empire and the {current_kingdom_name}?\n')
                 if city_ans.strip().lower() in yes:
                     if icequeen_life == 'alive':
@@ -1941,7 +1954,12 @@ jgs .-=-.    ) -.
                     else:
                         city_ans2 = input(f'\n{bulletpoint}The Red Dragon Empire is a vast and powerful kingdom ruled by a cruel and tyrannical emperor. It is a land of war and conquest, where the strong prey on the weak and the weak must fight to survive.\n\nThe Empire of Ice\'s new ruler was the sister to the original benevolent Queen and had usurped the throne. She is a ruthless and power-hungry individual who is willing to resort to violence and treachery in order to gain and maintain power. The people of the Empire of Ice may be in danger under this ruler\'s rule, and it is possible that there may be political unrest and conflict within the kingdom. Do you want to hear more?\n')
                     if city_ans2.strip().lower() in yes:
-                        city_ans3 = input(f'\n{bulletpoint2}The old man nods and begins to tell you the history of the Red Dragon Empire. He explains that, long ago, the empire was ruled by a peaceful and benevolent ruler who was loved and respected by his people.\nBut one day, a cruel and ambitious emperor overthrew the peaceful ruler and seized control of the empire.\n\nUnder the emperor\'s rule, the Red Dragon Empire became a land of conquest and aggression. The emperor sought to expand his power and territory, and he set his sights on the Ice Kingdom.\n\nBut the Ice Kingdom was a land of magic, and its queen was a powerful sorceress. She used her powers to protect her kingdom and repel the emperor\'s armies. Despite his best efforts,\nthe emperor was unable to conquer the Ice Kingdom... now called the Empire of Ice, and the two kingdoms have been in a state of cold war ever since.\n\n{bulletpoint}The old man concludes his story by saying that the City of the Rising Sun is a safe haven for those who seek refuge from the conflicts and dangers of the outside world. He offers to show you around the city, if you are interested. What do you say?\n')
+                        # This is to update a variable in the city_ans3 story if the current kingdom name had been changed to Empire of Ice.
+                        if current_kingdom_name == 'Empire of Ice':
+                            kingdom_or_empire_var = '. now called the Empire of Ice'
+                        else:
+                            kingdom_or_empire_var = '.'
+                        city_ans3 = input(f'\n{bulletpoint2}The old man nods and begins to tell you the history of the Red Dragon Empire. He explains that, long ago, the empire was ruled by a peaceful and benevolent ruler who was loved and respected by his people.\nBut one day, a cruel and ambitious emperor overthrew the peaceful ruler and seized control of the empire.\n\nUnder the emperor\'s rule, the Red Dragon Empire became a land of conquest and aggression. The emperor sought to expand his power and territory, and he set his sights on the Ice Kingdom.\n\nBut the Ice Kingdom was a land of magic, and its queen was a powerful sorceress. She used her powers to protect her kingdom and repel the emperor\'s armies. Despite his best efforts,\nthe emperor was unable to conquer the Ice Kingdom..{kingdom_or_empire_var}, and the two kingdoms have been in a state of cold war ever since.\n\n{bulletpoint}The old man concludes his story by saying that the City of the Rising Sun is a safe haven for those who seek refuge from the conflicts and dangers of the outside world. He offers to show you around the city, if you are interested. What do you say?\n')
                         if city_ans3.strip().lower() in yes:
                             menu()
                             assassins_guild()
@@ -2060,15 +2078,15 @@ jgs .-=-.    ) -.
                             |   |  |_|###|_|  |   |
                             '---'--'-/___\-'--'---'
                 ''')
-                if current_heir.lower().strip() == hero.name.lower().strip():
+                if current_heir.strip().lower() == hero.name.strip().lower() or current_emperor.strip().lower() == hero.name.strip().lower():
                     if icequeen_life == 'alive':
                         if gamble_life == False:
                             input(f'\n{bulletpoint2}You finally arrive at the gates of the Ice Kingdom.\n\nThe guard stops you and asks for your license to pass.\nUpon seeing your crown bearing the symbol of the Red Dragon Empire, the guard\'s expression immediately changed to one of suspicion. Without a word, she signaled for her fellow guards to arrest you. You were taken into custody and brought before the queen of the Ice Kingdom, who was known for her benevolent personality.\n\nAs you stood before the queen, you could see the anger and resentment in her eyes. She accused you of being a spy and threatened to have you executed. In that moment, you knew that you had to act quickly if you wanted to save your life.\n\n')
-                            do_you_promise = input(f'{bulletpoint2}You pleaded with the queen, explaining that you were simply a curious young heir who wanted to learn more about the world beyond your own land. You begged for her mercy and offered to pay any price she demanded.\n\nTo your surprise, the queen\'s expression softened and she seemed to consider your words. After a long moment of silence, she spoke...\n\n')
+                            do_you_promise = input(f'{bulletpoint2}You pleaded with the queen, explaining that you were simply curious and wanted to learn more about the world beyond your own land. You begged for her mercy and offered to pay any price she demanded.\n\nTo your surprise, the queen\'s expression softened and she seemed to consider your words. After a long moment of silence, she spoke...\n\n')
                             while do_you_promise.lower().strip() not in (yes,'i promise', 'promise', 'yes i promise', 'i promise never to return', 'i promise to never return', 'okay i promise', 'i promise to not return'):
                                 do_you_promise = input(f'{bulletpoint}"I will grant you safe passage out of my kingdom," she said, "but only on the condition that you PROMISE to never return."\nWhat is your response:')
                             gamble_life = True
-                            input(f'{bulletpoint2}Relieved and grateful, you accepted the queen\'s offer and you were allowed to leave the Ice Kingdom unharmed. It was a harsh lesson, but one that your would never forget. The world was a dangerous place and your would have to be cautious and wise in your dealings with other kingdoms if you wanted to rule the Red Dragon Empire with honor and dignity.\n')
+                            input(f'{bulletpoint2}Relieved and grateful, you accepted the queen\'s offer and you were allowed to leave the Ice Kingdom unharmed. It was a harsh lesson, but one that you would never forget. The world was a dangerous place and your would have to be cautious and wise in your dealings with other kingdoms if you wanted to rule the Red Dragon Empire with honor and dignity.\n')
                             input(f'{bulletpoint2}You were granted a boat with free passage to leave the kingdom, and you sailed off back to the Red Dragon Empire.')
                             menu()
                             trade_mission()
@@ -2076,21 +2094,30 @@ jgs .-=-.    ) -.
                             input(f'{bulletpoint2}YOU WERE CAUGHT!!!\n\nAs you approached the gates of the Ice Kingdom, you could feel a sense of trepidation rising within you. Despite the promise you had made to the benevolent ice queen, you couldn\'t shake the feeling that you needed to return.\n\nAs you entered the kingdom, the guards immediately seized you and escorted you onto the gallows. You knew that you had betrayed the trust of the ice queen and now you would have to face the consequences.\n')
                             input(f'{bulletpoint2}You were brought before the Ice Queen and she turned away and wouldn\'t even look at you. The crowd gathered around you, their eyes full of anger and resentment. The ice queen herself appeared, her face cold and unforgiving. She glared at you with icy eyes as the executioner placed the noose around your neck.\n\nShe then all of a sudden yelled "Halt!", and gave you one last chance to earn your life... ')
                             hangman()
-                            input(f'{bulletpoint2}You were allowed to leave the Empire of Ice unharmed. It was a harsh lesson, but one that your would never forget. The world was a dangerous place and your would have to be cautious and wise in your dealings with other kingdoms if you wanted to rule the Red Dragon Empire with honor and dignity.\n')
+                            input(f'{bulletpoint2}You were allowed to leave the Empire of Ice unharmed. It was a harsh lesson, but one that you would never forget. The world was a dangerous place and your would have to be cautious and wise in your dealings with other kingdoms if you wanted to rule the Red Dragon Empire with honor and dignity.\n')
                             input(
                                 f'{bulletpoint2}You were granted a boat with free passage to leave the kingdom, and you sailed off back to the Red Dragon Empire.')
                             menu()
                             trade_mission()
                     else:
                         input(f'\n{bulletpoint2}You finally arrive at the gates of the Empire of Ice.\n\nThe guard stops you and asks for your license to pass.\nUpon seeing your crown bearing the symbol of the Red Dragon Empire, the guard\'s expression immediately changed to one of suspicion. Without a word, she signaled for her fellow guards to arrest you. You were taken into custody and brought before the new queen of the Empire of Ice, who was known for her ruthless and cruel nature.\n\nAs you stood before the queen, you could see the anger and hatred in her eyes. She accused you of being a spy and threatened to have you executed. In that moment, you knew that you had to act quickly if you wanted to save your life.\n\n')
-                        input(f'{bulletpoint2}You pleaded with the queen, explaining that you were simply a curious young heir who wanted to learn more about the world beyond your own land. You begged for her mercy and offered to pay any price she demanded.\n\nBut the queen was unmoved by your pleas. She sneered at you and ordered her guards to take you to the gallows to be hanged!\n')
+                        input(f'{bulletpoint2}You pleaded with the queen, explaining that you were simply curious and wanted to learn more about the world beyond your own land. You begged for her mercy and offered to pay any price she demanded.\n\nBut the queen was unmoved by your pleas. She sneered at you and ordered her guards to take you to the gallows to be hanged!\n')
                         gamble_life = True
                         hangman()
-                        input(f'{bulletpoint2}You were allowed to leave the Empire of Ice unharmed. It was a harsh lesson, but one that your would never forget. The world was a dangerous place and your would have to be cautious and wise in your dealings with other kingdoms if you wanted to rule the Red Dragon Empire with honor and dignity.\n')
-                        input(
-                            f'{bulletpoint2}You were granted a boat with free passage to leave the kingdom, and you sailed off back to the Red Dragon Empire.')
-                        menu()
-                        trade_mission()
+                        if current_emperor.strip().lower() == hero.name.strip().lower():
+                            input(f'\n{bulletpoint2}The queen all of a sudden shouted "HALT!"')
+                            input(f'{bulletpoint2}She says she just discovered from her spies that you\'re the real emperor of the Red Dragon Empire.\nShe then says "Your presence in my kingdom was a threat to my rule and the safety of my people. Now, you will pay the price for your deception and your treachery. You may be the Red Dragon Emperor, but in my Empire of Ice, you are nothing but a common traitor. May your death serve as a warning to all who would dare to challenge my authority."')
+                            input(hangman().fullbody())
+                            input(
+                        f'\n{bulletpoint2}Congratulations, on reaching a bad ending! Try to discover other secret endings and possibilities...')
+                            hero.health = 0
+                            check_health(hero)
+                        else:
+                            input(f'{bulletpoint2}You were allowed to leave the Empire of Ice unharmed. It was a harsh lesson, but one that you would never forget. The world was a dangerous place and your would have to be cautious and wise in your dealings with other kingdoms if you wanted to rule the Red Dragon Empire with honor and dignity.\n')
+                            input(
+                                f'{bulletpoint2}You were granted a boat with free passage to leave the kingdom, and you sailed off back to the Red Dragon Empire.')
+                            menu()
+                            trade_mission()
                 else:
 
                     input(f'\n{bulletpoint2}After many days of travel, you finally arrive at the gates of the {current_kingdom_name}.\n\nThe guard stops you and asks for your license to pass. Since you don\'t have one, the guard says she can let you through if you answer her riddle correctly...\n')
@@ -2251,11 +2278,11 @@ jgs .-=-.    ) -.
                             menu()
                             the_marriage()
                         else:
-                            input(f'\n{bulletpoint2}So you don\'t want to kill your best friend and you don\'t want to marry a noble. The empire has instead forced you to go on a task to destroy a mysterious secret. The hooded messenger has guards escort you in a cart. You look next to you and see a mysterious monk as one of the passengers who is joining you on this task.')
+                            input(f'\n{bulletpoint2}So you don\'t want to kill your best friend and you don\'t want to marry a noble. The empire has instead forced you to go on a task to destroy a mysterious secret. The hooded messenger has guards escort you in a cart. You look next to you and see a mysterious {new_monk_replacement} as one of the passengers who is joining you on this task.')
                             menu()
                             the_secret()
                     else:
-                        input(f'\n{bulletpoint2}So you don\'t want to kill your best friend. The empire has instead forced you to go on a task to destroy a mysterious secret. The hooded messenger has guards escort you in a cart. You look next to you and see a mysterious monk as one of the passengers who would be joining you on this task.')
+                        input(f'\n{bulletpoint2}So you don\'t want to kill your best friend. The empire has instead forced you to go on a task to destroy a mysterious secret. The hooded messenger has guards escort you in a cart. You look next to you and see a mysterious {new_monk_replacement} as one of the passengers who would be joining you on this task.')
                         menu()
                         the_secret()
 
@@ -2436,7 +2463,7 @@ jgs .-=-.    ) -.
                     trade_count = 1
                     while trade_count > 0: # Start of the while loop
                         print(
-                            f'\n\n\n\n\n\n\n\n\n{bulletpoint2}Local Shop Items for Trade ($100 each):')
+                            f'\n{bulletpoint2}Local Shop Items for Trade ($100 each):')
                         print([(k, land_dict[k]) for k in land_dict]) # Displaying the Key and Value for the Trade items available.
                         #Player can enter the key string to purchase the value which is an emote of the item.
                         buy_land = input(
@@ -2444,6 +2471,9 @@ jgs .-=-.    ) -.
                         print(f'{bulletpoint2}Current Trade Items Held: {hero_land_items}') # Displaying currently held trade items.
                         if buy_land.lower() == 'exit': #Player can exit the menu by typing exit.
                             trade_count -= 1 # Ends the while loop.
+                        if buy_land.lower() in ('conquer', 'take over', 'conquer it' 'claim', 'claim it', 'take over it', 'conquer it', 'take it', 'take it over'):
+                            if current_position == new_colony:
+                                input(f'\n{bulletpoint2}You have decided to embark on a journey to take over a mysterious jungle continent in the south. After months of sailing, you and your crew finally reach the shores of the continent and make your way inland. The jungle is dense and teeming with life, and you soon come across towering mountains and a massive volcano.\n\nAs you continue deeper into the jungle, you come across a mysterious abandoned temple and city. The city is in ruins, and it appears that it has been abandoned for many years. Despite this, you are struck by the advanced architecture and impressive stonework of the temple and city.\n\nAs you explore the temple, you come across a strange sight. Lava flowing through the temple, creating a surreal and otherworldly atmosphere. You realize that this must be a powerful and sacred place, and you decide to claim it as your new home.\n\nYou order your crew to set up camp and begin to explore the city, looking for any clues as to what may have happened to the previous inhabitants. You also send out scouts to explore the surrounding area and see if there are any other civilizations nearby.\n\nAs you explore the temple and city, you are filled with a sense of excitement and adventure. You have claimed new land and you are determined to make this new home a thriving and prosperous one!\n')
                         else: # Player to enter the item number they wish to purchase.
                             try: # Try and Except to make sure the player inputs a valid number and not a word.
                                 # Player to enter the item amount they wish to purchase from the dictionary for the island.
@@ -2496,7 +2526,7 @@ jgs .-=-.    ) -.
                     open_seas(current_position) #opening the first starting scene.
                     if (current_position in land) and (start_count != 0):
                         land_command = input(
-                            f'{bulletpoint}Would you like to anchor the ship?\n\n\n\n\n\n\n\n\n\n\n')
+                            f'{bulletpoint}Would you like to anchor the ship?\n\n\n\n\n\n')
                         if land_command in directions:
                             command = land_command
                     else:
@@ -2505,7 +2535,7 @@ jgs .-=-.    ) -.
                             pass
                         else:
                             command = input(
-                                f'{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n\n\n\n\n\n\n\n\n\n\n')
+                                f'{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n\n\n\n\n\n')
                     # Start count being at 0 prevents the "Would you like to anchor the ship?" string from being displayed.
                     start_count -= 1
                     # Below are the different scenes and each of their connections depending on how the user travels. Venturing too far from the path will put them in stormy weather.
@@ -2610,7 +2640,7 @@ jgs .-=-.    ) -.
                                 print(
                                     f'{bulletpoint2}You reached the destination!')
                                 land_trade(colony, island_dict,
-                                          'horse', 'coffee', 'corn')
+                                          'grapes', 'coffee', 'corn')
                             elif command == 'north':
                                 current_position = sea_island_south2
                             else:
@@ -2890,9 +2920,9 @@ jgs .-=-.    ) -.
 
             # The Secret
             def the_secret():
-                desert_ans = input(f'\n{bulletpoint}In the mountains at the highest peak, there lies a secret. You must retrieve this secret but you may never open it...\nYou lead the monk to the borders of the empire. You see a vast never ending desert, and the map shows that\'s the quickest route. There is another longer route through the forest. \nDo you take the desert route?')
+                desert_ans = input(f'\n{bulletpoint}In the mountains at the highest peak, there lies a secret. You must retrieve this secret but you may never open it...\nYou lead the {new_monk_replacement} to the borders of the empire. You see a vast never ending desert, and the map shows that\'s the quickest route. There is another longer route through the forest. \nDo you take the desert route?')
                 if desert_ans.strip().lower() in yes or desert_ans.strip().lower() == 'desert':
-                    print(f'\n{bulletpoint2}As you and the monk struggle through the blazing heat. You both hear a roaring rumble underneath your feet...') 
+                    print(f'\n{bulletpoint2}As you and the {new_monk_replacement} struggle through the blazing heat. You both hear a roaring rumble underneath your feet...') 
                     menu()
                 else:
                     print('You decided to take the forest route.')
@@ -2900,13 +2930,13 @@ jgs .-=-.    ) -.
 
             # Sand Monster Battle
                 add_health(sandworm) # Adds monster health if it has already been killed.
-                sand_monster_ans = input(f'\n{bulletpoint}You see something like a mountain rise up from the sand. The monk says that this must be the legendary 1000 year old {sandworm.name}. You stare up and see a massive hole with thousands of sharp teeth at every corner of its mouth. Do you even attempt to fight this thing?')
+                sand_monster_ans = input(f'\n{bulletpoint}You see something like a mountain rise up from the sand. The {new_monk_replacement} says that this must be the legendary 1000 year old {sandworm.name}. You stare up and see a massive hole with thousands of sharp teeth at every corner of its mouth. Do you even attempt to fight this thing?')
                 if sand_monster_ans.strip().lower() in yes:
                     # Cleaning up the hero item strings to play be displayed properly
                     clean_hero_items = ', '.join(
                         [f'{letter}' for letter in hero_items])
                     sand_monster_weapon = input(
-                        f'\n{bulletpoint}The monk asks you what weapon you plan to fight this thing when we only have {clean_hero_items}? You respond with "I\'ll just use the..."')
+                        f'\n{bulletpoint}The {new_monk_replacement} asks you what weapon you plan to fight this thing when we only have {clean_hero_items}? You respond with "I\'ll just use the..."')
                     input(f'\n{bulletpoint2}As you try your plan of attacking with the {sand_monster_weapon}... you utterly failed. The {sandworm.name} then surrounded you with a giant wall of sand, preventing your escape...') 
                     battle(hero, sandworm, 'digs at ground',
                            'twists body', 'shrieks', 'moves underground')
@@ -2919,37 +2949,37 @@ jgs .-=-.    ) -.
                     add_money(50, 200)
                     menu()
                 else:
-                    input(f'\n{bulletpoint2}The monster lunged at you, but the monk ran towards you and pushed you away. Sand filled the air making it impossible to see. Once the sand dissipated, you saw a shadow in the midst and the monk slowly appeared safe and sound. You both successfully managed to escape! ')
+                    input(f'\n{bulletpoint2}The monster lunged at you, but the {new_monk_replacement} ran towards you and pushed you away. Sand filled the air making it impossible to see. Once the sand dissipated, you saw a shadow in the midst and the {new_monk_replacement} slowly appeared safe and sound. You both successfully managed to escape! ')
 
             # Frozen Wasteland
                 frozen_wasteland_ans = input(
-                    f'\n{bulletpoint}As you and the monk walked through the frozen wasteland, you both could feel the cold seeping into your bones. The air was frigid and biting, and your breath came out in white plumes.\n\nEventually, you both reached the edge of a massive, thin-ice lake. In the distance, you can see the towering peak of the mountain you were trying to reach. But first, you both would have to cross the lake.\n\n Do you still proceed?')
+                    f'\n{bulletpoint}As you and the {new_monk_replacement} walked through the frozen wasteland, you both could feel the cold seeping into your bones. The air was frigid and biting, and your breath came out in white plumes.\n\nEventually, you both reached the edge of a massive, thin-ice lake. In the distance, you can see the towering peak of the mountain you were trying to reach. But first, you both would have to cross the lake.\n\n Do you still proceed?')
                 if frozen_wasteland_ans.strip().lower() in yes:
 
-                    input(f'\n{bulletpoint2}You both start making your way slowly... you took a tentative step onto the ice, and immediately felt a crack beneath your feet. You both froze, unsure of what to do. The ice beneath you felt thin and brittle, and one wrong move could send you both plunging into the icy waters below.\n\n As you continued the journey across the frozen lake, you stumbled upon a strange metal ship that was partially submerged in the ice. You both decided to camp inside the ship for the night, and the monk set a small campfire to keep both of you warm.\n')
+                    input(f'\n{bulletpoint2}You both start making your way slowly... you took a tentative step onto the ice, and immediately felt a crack beneath your feet. You both froze, unsure of what to do. The ice beneath you felt thin and brittle, and one wrong move could send you both plunging into the icy waters below.\n\n As you continued the journey across the frozen lake, you stumbled upon a strange metal ship that was partially submerged in the ice. You both decided to camp inside the ship for the night, and the {new_monk_replacement} set a small campfire to keep both of you warm.\n')
                     menu()
 
                     #The Betrayal
-                    the_betrayal_ans = input(f'\n{bulletpoint}The next morning, as you both were making your way towards the other side of the lake, the monk suddenly fell through the ice. You turned around and saw what had happened, but before you could react, the ice beneath your own feet began to crack and break. Do you save yourself and cross the lake? ')
+                    the_betrayal_ans = input(f'\n{bulletpoint}The next morning, as you both were making your way towards the other side of the lake, the {new_monk_replacement} suddenly fell through the ice. You turned around and saw what had happened, but before you could react, the ice beneath your own feet began to crack and break. Do you save yourself and cross the lake? ')
                     if the_betrayal_ans.strip().lower() in yes:
 
-                        input(f'\n{bulletpoint2}You start sprinting towards the end of the lake and saved yourself. There was no point in attempting to save the monk.\n\nAs you run, the ice beneath your feet cracks and breaks, but you are able to maintain your balance and keep moving forward. You push yourself to your limits, pouring all your energy into reaching the shore.\n\nEventually, you reach the end of the lake and scramble onto solid ground. You are cold, wet, and exhausted, but you are alive. You take a moment to catch your breath and look back at the lake, knowing that you have made it through a difficult and dangerous situation.\n\nYou feel a sense of regret for leaving the monk behind, but you also know that you made the best decision for yourself in the moment. You must now continue on your journey, facing whatever challenges and dangers come your way.\n')
+                        input(f'\n{bulletpoint2}You start sprinting towards the end of the lake and saved yourself. There was no point in attempting to save the {new_monk_replacement}.\n\nAs you run, the ice beneath your feet cracks and breaks, but you are able to maintain your balance and keep moving forward. You push yourself to your limits, pouring all your energy into reaching the shore.\n\nEventually, you reach the end of the lake and scramble onto solid ground. You are cold, wet, and exhausted, but you are alive. You take a moment to catch your breath and look back at the lake, knowing that you have made it through a difficult and dangerous situation.\n\nYou feel a sense of regret for leaving the {new_monk_replacement} behind, but you also know that you made the best decision for yourself in the moment. You must now continue on your journey, facing whatever challenges and dangers come your way.\n')
                         menu()
                         mountain_secret()
 
                     else:
-                        if current_heir.strip().lower() == hero.name.strip().lower():
-                            input(f'\n{bulletpoint2}As the monk falls through the ice, you decide to turn back and try to save them. You frantically search for a way to rescue your companion, and eventually, you come up with a plan.\n\nYou are the current heir to the red dragon empire, and you have some soldiers at your disposal. You call out to them, and they immediately come to your aid. Together, you manage to find a way to pull the monk out of the water and onto solid ground.\n\nThe monk is cold, wet, and shaken, but they are alive. You quickly make arrangements to have them sent back home to get the medical attention they need. You are relieved that you were able to save your companion, and you are grateful for the help of your soldiers.\n\nYou continue on your journey, knowing that you were able to overcome a difficult and dangerous situation. You feel a sense of pride and satisfaction for having saved the monk.\n')
+                        if current_heir.strip().lower() == hero.name.strip().lower() or current_emperor.strip().lower() == hero.name.strip().lower():   
+                            input(f'\n{bulletpoint2}As the {new_monk_replacement} falls through the ice, you decide to turn back and try to save them. You frantically search for a way to rescue your companion, and eventually, you come up with a plan.\n\nYou oversee the red dragon empire, and you have some soldiers at your disposal. You call out to them, and they immediately come to your aid. Together, you manage to find a way to pull the {new_monk_replacement} out of the water and onto solid ground.\n\nThe {new_monk_replacement} is cold, wet, and shaken, but they are alive. You quickly make arrangements to have them sent back home to get the medical attention they need. You are relieved that you were able to save your companion, and you are grateful for the help of your soldiers.\n\nYou continue on your journey, knowing that you were able to overcome a difficult and dangerous situation. You feel a sense of pride and satisfaction for having saved the {new_monk_replacement}.\n')
                         else:
-                            input(f'\n{bulletpoint2}As the monk falls through the ice, you decide to turn back and try to save them. But as you do, the ice beneath your feet cracks and breaks, and one of your legs gets caught in the numbing cold water below.\n\nYou struggle to free yourself, using all your strength and determination to pull yourself out of the water. Finally, after what feels like an eternity, you manage to pull your leg free and scramble back onto the ice.\n\nBut it is too late for the monk. They have already fallen through the ice and disappeared beneath the frigid waters. You are alone, stranded on the frozen lake, with no way to save your companion.\n\nYou are cold, wet, and exhausted, but you are alive. You take a moment to catch your breath and come to terms with what has happened. You feel a sense of regret for attempting to save the monk, but you also know that you did everything you could.\n\nYou must now continue on your journey, facing whatever challenges and dangers come your way. You will never forget the monk, but you must move forward and keep going, no matter what.')
+                            input(f'\n{bulletpoint2}As the {new_monk_replacement} falls through the ice, you decide to turn back and try to save them. But as you do, the ice beneath your feet cracks and breaks, and one of your legs gets caught in the numbing cold water below.\n\nYou struggle to free yourself, using all your strength and determination to pull yourself out of the water. Finally, after what feels like an eternity, you manage to pull your leg free and scramble back onto the ice.\n\nBut it is too late for the {new_monk_replacement}. They have already fallen through the ice and disappeared beneath the frigid waters. You are alone, stranded on the frozen lake, with no way to save your companion.\n\nYou are cold, wet, and exhausted, but you are alive. You take a moment to catch your breath and come to terms with what has happened. You feel a sense of regret for attempting to save the {new_monk_replacement}, but you also know that you did everything you could.\n\nYou must now continue on your journey, facing whatever challenges and dangers come your way. You will never forget the {new_monk_replacement}, but you must move forward and keep going, no matter what.')
                         menu()
                         mountain_secret()
 
                 else:
-                    if current_heir.strip().lower() == hero.name.strip().lower() :
-                        input(f'\n{bulletpoint2}Instead of crossing the lake, you and the monk decide to go around it. You follow a winding path that leads you along the shore, and eventually, you come to a steep, frozen slope that leads up the side of the mountain.\n\nYou begin to climb, using all your skill and determination to make your way up the slope. The ice is treacherous and slippery, and you must be careful with every step you take.\n\nAs you near the top of the mountain, the monk slips and begins to fall. But you are the current heir to the red dragon empire, and you have some special tools at your disposal. You quickly pull out a special grappling rope and toss it to the monk, who manages to grab onto it and halt their fall.\n\nYou and the monk work together to pull each other up the slope, and eventually, you both make it to the top of the mountain. You are relieved and grateful that you were able to save your companion, and you ask some of the red dragon empire soldiers to help send the monk home to rest.\n\nYou may feel a sense of pride and satisfaction for having saved the monk, and you are determined to face whatever challenges and dangers come your way. You will never forget the treacherous climb up the mountain, but you are stronger for having overcome it.\n')
+                    if current_heir.strip().lower() == hero.name.strip().lower() or current_emperor.strip().lower() == hero.name.strip().lower():
+                        input(f'\n{bulletpoint2}Instead of crossing the lake, you and the {new_monk_replacement} decide to go around it. You follow a winding path that leads you along the shore, and eventually, you come to a steep, frozen slope that leads up the side of the mountain.\n\nYou begin to climb, using all your skill and determination to make your way up the slope. The ice is treacherous and slippery, and you must be careful with every step you take.\n\nAs you near the top of the mountain, the {new_monk_replacement} slips and begins to fall. But you oversee the red dragon empire, and you have some special tools at your disposal. You quickly pull out a special grappling rope and toss it to the {new_monk_replacement}, who manages to grab onto it and halt their fall.\n\nYou and the {new_monk_replacement} work together to pull each other up the slope, and eventually, you both make it to the top of the mountain. You are relieved and grateful that you were able to save your companion, and you ask some of the red dragon empire soldiers to help send the {new_monk_replacement} home to rest.\n\nYou may feel a sense of pride and satisfaction for having saved the {new_monk_replacement}, and you are determined to face whatever challenges and dangers come your way. You will never forget the treacherous climb up the mountain, but you are stronger for having overcome it.\n')
                     else:
-                        input(f'\n{bulletpoint2}Instead of crossing the lake, you and the monk decide to go around it. You follow a winding path that leads you along the shore, and eventually, you come to a steep, frozen slope that leads up the side of the mountain.\n\nYou begin to climb, using all your skill and determination to make your way up the slope. The ice is treacherous and slippery, and you must be careful with every step you take.\n\nAs you near the top of the mountain, the monk slips and begins to fall. You immediately extend your hand, trying to grab them and pull them back up. But it is too late. The monk falls, tumbling down the steep slope and disappearing from sight.\n\nYou are left alone, stranded on the side of the mountain. You may feel a sense of regret and sorrow for what has happened to the monk, but you also know that there was nothing you could have done to prevent it.\n\nYou must now continue on your journey, facing whatever challenges and dangers come your way. You will never forget the monk, but you must move forward and keep going, no matter what.\n')
+                        input(f'\n{bulletpoint2}Instead of crossing the lake, you and the {new_monk_replacement} decide to go around it. You follow a winding path that leads you along the shore, and eventually, you come to a steep, frozen slope that leads up the side of the mountain.\n\nYou begin to climb, using all your skill and determination to make your way up the slope. The ice is treacherous and slippery, and you must be careful with every step you take.\n\nAs you near the top of the mountain, the {new_monk_replacement} slips and begins to fall. You immediately extend your hand, trying to grab them and pull them back up. But it is too late. The {new_monk_replacement} falls, tumbling down the steep slope and disappearing from sight.\n\nYou are left alone, stranded on the side of the mountain. You may feel a sense of regret and sorrow for what has happened to the {new_monk_replacement}, but you also know that there was nothing you could have done to prevent it.\n\nYou must now continue on your journey, facing whatever challenges and dangers come your way. You will never forget the {new_monk_replacement}, but you must move forward and keep going, no matter what.\n')
                     menu()
                     mountain_secret()
 
@@ -3053,13 +3083,19 @@ _,'    \_>\_/    ',_
                             new_heir = input(
                                 f'📜 What name would you like to change this to?')
                             current_heir = new_heir.title() # Updating the current_heir variable. Depending on the name, this will change certain parts of the story.
-                            input(
-                                f'{bulletpoint2}The new heir to the Red Dragon Empire shall be {current_heir}!')
+                            # If the player does not input anything, then this will be displayed
+                            if new_heir != '':
+                                input(
+                                    f'{bulletpoint2}The new heir to the Red Dragon Empire shall be {current_heir}!')
                             if 'Beggar' in current_heir.title(): # Checking if the player changed the name back to the beggar.
                                 input(
                                     f'\n{bulletpoint2}You remembered that you were told not to open the letter and failed on your promise. You decide to deliver the letter back to the beggar. The beggar opens up the letter and a legendary phoenix with electric feathers pops out.\n\nThe phoenix says that it is the guardian of this letter, and that the beggar is the next heir to the Red Dragon Empire. The beggar is in shock and thanks you for delivering this message.\n\nThe beggar will hand you a special reward the next time he sees you. The phoenix then kicks some dirt in your face and flies far away...\n')
-                            elif hero_name.title() == current_heir: # Checking if the player changed the name to hero_name.
-                                print(f'\n{bulletpoint2}You are not satisfied with the current heir, and you decide to change the letter. Using your cunning and intelligence, you alter the letter to show that you are the true heir to the Red Dragon Empire.\n\nYou have the power and authority that comes with that position.\n\nYou have achieved a great victory, but the challenges and dangers that lie ahead are even greater. You must be prepared for whatever comes your way, and use all your skills and abilities to protect your new-found position and power.\n\nYou decided to alter the course of humanity for your own benefit!')
+                            elif hero_name.strip().lower() == current_heir.strip().lower(): # Checking if the player changed the name to hero_name.
+                                input(f'\n{bulletpoint2}You are not satisfied with the current heir, and you decide to change the letter. Using your cunning and intelligence, you alter the letter to show that you are the true heir to the Red Dragon Empire.\n\nYou have the power and authority that comes with that position.\n\nYou have achieved a great victory, but the challenges and dangers that lie ahead are even greater. You must be prepared for whatever comes your way, and use all your skills and abilities to protect your new-found position and power.\n\nYou decided to alter the course of humanity for your own benefit!')
+                            # If the player does not input anything, then this will be displayed
+                            elif new_heir == '':
+                                input(f'{bulletpoint2}You\'ve decided to make the current heir no one!')
+                                current_heir = 'no one'
                             input("""
                                                       .
                                               .       |         .    .
@@ -3072,36 +3108,37 @@ _,'    \_>\_/    ',_
                                        \  *  *  *   \ \/ /  *  *  *  /
                                         ` ~ ~ ~ ~ ~  ~\/~ ~ ~ ~ ~ ~ '
                             """)
-                            input(f"""
-                                                                              _______________________
-                                    _______________________-------------------                       `\\
-                                  /:--__                                                              |
-                                 ||< > |                                   ___________________________/
-                                 | \__/_________________-------------------                         |
-                                 |                                                                  |
-                                  |                 THE HEIR TO THE RED DRAGON EMPIRE               |
-                                  |                                                                 |
-                                  |       Oh, {current_heir}, so fair and so bold,                  
-                                   |       The next in line to the Red Dragon's hold,               |
-                                   |       Your future is bright, your fate is sealed,              |
-                                   |       The kingdom's throne, your destiny revealed.             |
-                                   |                                                                |
-                                    |       With fire in your veins and strength in your heart,     |
-                                    |       You'll rule with grace, a true work of art,             |
-                                    |       A guardian of peace, a defender of might,               |
-                                    |       The Red Dragon Empire's shining light.                  |
-                                    |                                                               |
-                                    |       So let us raise a glass and toast to you,               |
-                                    |       Our future leader, both strong and true,                |
-                                    |       May your reign be long and your rule just and fair,     |
-                                    |       The next great heir to the Red Dragon's throne,         |
-                                    |       you'll wear with care.                                   |
-                                   |                                              ____________________|_
-                                   |  ___________________-------------------------                      `\\
-                                   |/`--_                                                                 |
-                                   ||[ ]||                                            ___________________/
-                                    \===/___________________--------------------------
-                            """)
+                            if current_heir.lower() != 'no one':
+                                input(f"""
+                                                                                _______________________
+                                        _______________________-------------------                       `\\
+                                    /:--__                                                              |
+                                    ||< > |                                   ___________________________/
+                                    | \__/_________________-------------------                         |
+                                    |                                                                  |
+                                    |                 THE HEIR TO THE RED DRAGON EMPIRE               |
+                                    |                                                                 |
+                                    |       Oh, {current_heir}, so fair and so bold,                  
+                                    |       The next in line to the Red Dragon's hold,               |
+                                    |       Your future is bright, your fate is sealed,              |
+                                    |       The kingdom's throne, your destiny revealed.             |
+                                    |                                                                |
+                                        |       With fire in your veins and strength in your heart,     |
+                                        |       You'll rule with grace, a true work of art,             |
+                                        |       A guardian of peace, a defender of might,               |
+                                        |       The Red Dragon Empire's shining light.                  |
+                                        |                                                               |
+                                        |       So let us raise a glass and toast to you,               |
+                                        |       Our future leader, both strong and true,                |
+                                        |       May your reign be long and your rule just and fair,     |
+                                        |       The next great heir to the Red Dragon's throne,         |
+                                        |       you'll wear with care.                                   |
+                                    |                                              ____________________|_
+                                    |  ___________________-------------------------                      `\\
+                                    |/`--_                                                                 |
+                                    ||[ ]||                                            ___________________/
+                                        \===/___________________--------------------------
+                                """)
                             input(
                                 f'{bulletpoint2}Congratulations, on reaching the end! Try to discover other secret endings and possibilities...')
                         else:
@@ -3587,7 +3624,7 @@ _,'    \_>\_/    ',_
             def passageway():
 
                 passageway_ans = input(
-                    f'\n{bulletpoint}While walking through the castle, you notice an obscure passageway behind a painting that wasn\'t fully closed. Do you enter it?\n\n\n\n\n\n\n\n\n\n')
+                    f'\n{bulletpoint}While walking through the castle, you notice an obscure passageway behind a painting that wasn\'t fully closed. Do you enter it?\n')
                 if passageway_ans.lower().strip() in yes:
                     left = 'left'
                     right = 'right'
@@ -3597,7 +3634,7 @@ _,'    \_>\_/    ',_
                     spider_alive = 1 # If the spider has already been killed, the spider monster will not show up in the map. 1 represents the spider still being alive, and this wil reset the spider if player is going through another round of the game.
 
                     def maze():
-                        input(
+                        print(
                             f'Movements:\n🠸: "Left"     🠺: "Right" \n🠹: "Up"     🠻: "Down" ')
                         while movement == 1:
 
@@ -3608,7 +3645,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄     𐀪 ▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄')
                                 direction = input(
-                                    f'{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == up:
                                     wall_1down()
                                 elif direction == left:
@@ -3623,7 +3660,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ 𐀪     ▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:')
                                 if direction == down:
                                     wall_2leftdown()
                                 elif direction == right:
@@ -3638,7 +3675,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄▄▄▄▩              𐀪 ▄▄▄▄▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:')
                                 if direction == left:
                                     wall_2leftdownleft()
                                 elif direction == up:
@@ -3657,13 +3694,13 @@ _,'    \_>\_/    ',_
                                 if openchest == 'yes':
                                     print('Chest opened. Nothing inside.')
                                     input(
-                                        f'{bulletpoint}Which direction would you like to take:\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
+                                        f'\n{bulletpoint}Which direction would you like to take:\n')
                                     if spider_alive == 1: # Opens up the monster scene if spider is still alive.
                                         maze_monster()
                                     wall_2leftdown()
                                 else:
                                     input(
-                                        f'{bulletpoint}Which direction would you like to take:\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
+                                        f'\n{bulletpoint}Which direction would you like to take:\n')
                                     if spider_alive == 1:  # Opens up the monster scene if spider is still alive.
                                         maze_monster()
                                     wall_2leftdown()
@@ -3676,22 +3713,22 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄         ▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 if ring_of_nirvana.name not in hero_items:
                                     take_ring = input(
-                                        f'{bulletpoint}You hear a acoustic humming noise and see a shining ring floating in mid air. Do you take it?')
+                                        f'\n{bulletpoint}You hear a acoustic humming noise and see a shining ring floating in mid air. Do you take it?\n')
                                     if take_ring.lower() == 'yes':
                                         if ring_of_nirvana not in hero_items:
                                             input(
-                                                f'{bulletpoint2}You took it and wore the {ring_of_nirvana.name}!')
+                                                f'\n{bulletpoint2}You took it and wore the {ring_of_nirvana.name}!\n')
                                             hero.add_item(ring_of_nirvana) # Add the item's attributes to the hero and add the item's name to hero's items list.
                                             menu()
                                     else:
                                         input(
-                                            f'{bulletpoint}You left it where it stood.')
+                                            f'\n{bulletpoint}You left it where it stood.\n')
                                 else:
                                     input(
-                                        f'{bulletpoint}You hear a acoustic humming noise and you glance at the ring on your finger.')
+                                        f'\n{bulletpoint}You hear a acoustic humming noise and you glance at the ring on your finger.\n')
                                     menu()
                                 direction = input(
-                                    f'{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == left:
                                     wall_1down()
                                 else:
@@ -3709,14 +3746,14 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄               𐀪 ▄▄▄▄▄▄')
                                 print('▄▄▄▄         ▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == down:
                                     wall_2down()
                                 elif direction == left:
                                     wall_1left()
                                 elif direction == up:
                                     print(
-                                        f'{bulletpoint2}The passageway entrance is locked.')
+                                        f'\n{bulletpoint2}The passageway entrance is locked.\n')
                                     wall_1entrance()
                                 elif direction == right:
                                     if spider_alive == 0:
@@ -3733,7 +3770,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ 𐀪               ▄▄▄▄▄▄')
                                 print('▄▄▄▄         ▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == down:
                                     wall_1leftdown()
                                 elif direction == right:
@@ -3748,7 +3785,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄         𐀪 ▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == left:
                                     wall_1leftdownleft()
                                 elif direction == up:
@@ -3763,7 +3800,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄ 𐀪         ▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == up:
                                     wall_1leftdownleftup()
                                 elif direction == right:
@@ -3778,7 +3815,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄           ▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == left:
                                     wall_1leftdownleftupleft()
                                 elif direction == down:
@@ -3793,7 +3830,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄           ▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == down:
                                     wall_3()
                                 elif direction == right:
@@ -3808,7 +3845,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄           ▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == right:
                                     wall_3right()
                                 elif direction == down:
@@ -3818,6 +3855,23 @@ _,'    \_>\_/    ',_
                                 else:
                                     wall_3()
 
+                            def wall_locked_room():
+                                print('▄▄▄▄ 🚪▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
+                                print('▄▄▄᭄    ᭄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
+                                print('▄▄ᬛ|🚽    ⚙|ᬊ▄▄▄▄▄▄▄▄▄')
+                                print('▄▄ᬛ|📠      📯|ᬊ▄▄▄▄▄▄')
+                                print('▄ᬛ|📷    𐀪  🔭|ᬊ▄▄▄▄▄▄')
+                                print('▄▄ᬛ|        ☎|ᬊ▄▄▄▄▄▄▄')
+                                print('▄▄▄ᬛ|📺 ⚽ 🏆|ᬊ▄▄▄▄▄▄')
+                                print('▄▄▄▄▄ᬛ🖼𝄩𝄩🖼ᬊ▄▄▄▄▄▄▄▄')
+                                input(f'\n{bulletpoint2}You are currently in a room that appears to have been untouched for a long time. As you look around, you see a variety of ancient artifacts that appear to be examples of advanced technology from a long-gone civilization.\n\nYou see an ancient toilet, camera, telescope, phone, trophy, gear piece, trumpet, fax machine, and soccer ball. These objects are all unfamiliar to you, as the civilization that created them has long since disappeared.\n\nYou are intrigued by these artifacts and are eager to learn more about them, but without any way to access information about their purpose or how they were used, you are left to simply wonder about their significance.\n')
+                                direction = input(
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
+                                if direction == up:
+                                    wall_3down()
+                                else:
+                                    wall_locked_room()
+
                             def wall_3down():
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄ᬛ')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄')
@@ -3826,9 +3880,18 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄🚪▄▄▄▄▄▄▄▄▄▄▄')
                                 print('The door is locked.')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == up:
                                     wall_3()
+                                elif direction == down:
+                                    if current_heir.strip().lower() == hero.name.strip().lower() or current_emperor.strip().lower() == hero.name.strip().lower():
+                                        input(
+                                            f'\n{bulletpoint2}You use your key to access the room.\n')
+                                        wall_locked_room()
+                                    else:
+                                        input(
+                                            f'\n{bulletpoint2}The passageway entrance is locked.\n')
+                                        wall_3down()
                                 else:
                                     wall_3down()
 
@@ -3839,7 +3902,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄           ▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == left:
                                     wall_3()
                                 elif direction == down:
@@ -3854,7 +3917,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄         𐀪 ▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == left:
                                     wall_3_rightdownleft()
                                 elif direction == up:
@@ -3869,7 +3932,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
                                 opendoor = input(
-                                    f'{bulletpoint}Would you like to open the door?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
+                                    f'\n{bulletpoint}Would you like to open the door?\n')
                                 if opendoor.lower() == 'yes':
                                     vaulted_chambers()
                                 else:
@@ -3889,25 +3952,25 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄🚪𐀐𝄩𐀢𝄩𐀩🚪▄▄▄▄▄▄▄▄▄')
                                 print('▄▄▄▄🚪▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄🚪▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
                                 three_doors_ans = input(
-                                    f'{bulletpoint}You\'re in a black colored mirror room with symbols on the walls that are glowing. Which door would you like to open?\n Choices are "Left", or "Down", or "Right":')
+                                    f'\n{bulletpoint}You\'re in a black colored mirror room with symbols on the walls that are glowing. Which door would you like to open?\n Choices are "Left", or "Down", or "Right":\n')
                                 if three_doors_ans.lower() == left:
                                     print(f'{bulletpoint2}Treasure room')
                                     input(
-                                        f'{bulletpoint2}Press enter to open to door...')
+                                        f'\n{bulletpoint2}Press enter to open to door...\n')
                                     menu()
                                     movement -= 1
                                     treasure_room()
                                 elif three_doors_ans.lower() == right:
                                     print(f'{bulletpoint2}Wizard room')
                                     input(
-                                        f'{bulletpoint2}Press enter to open to door...')
+                                        f'\n{bulletpoint2}Press enter to open to door...\n')
                                     menu()
                                     movement -= 1
                                     wizard()
                                 elif three_doors_ans.lower() == down:
                                     print(f'{bulletpoint2}Dragon room')
                                     input(
-                                        f'{bulletpoint2}Press enter to open to door...')
+                                        f'\n{bulletpoint2}Press enter to open to door...\n')
                                     menu()
                                     movement -= 1
                                     red_dragon()
@@ -3923,7 +3986,7 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄▄▄▄▩               𐀪▄▄▄▄▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
                                 input(
-                                    f'{bulletpoint}A Massive 10 foot {arachne.name} dropped from the ceiling! You\'re trapped, there\'s no where to run except to fight!')
+                                    f'\n{bulletpoint}A Massive 10 foot {arachne.name} dropped from the ceiling! You\'re trapped, there\'s no where to run except to fight!\n')
                                 battle(hero, arachne, 'spins web',
                                     'shrieks', 'sprays web', 'shows fangs')
                                 check_health(hero)
@@ -3932,7 +3995,7 @@ _,'    \_>\_/    ',_
                                 add_money(50, 200) # Adds hero money between 50 to 200.
                                 menu()
                                 input(
-                                    f'{bulletpoint2}You hear the walls rumbling in the distance...')
+                                    f'\n{bulletpoint2}You hear the walls rumbling in the distance...\n')
                                 wall_2leftdown()
 
                             def wall_1entrance():
@@ -3943,13 +4006,19 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄                 ▄▄▄▄▄▄')
                                 print('▄▄▄▄         ▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄')
                                 direction = input(
-                                    f'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n{bulletpoint}Which direction would you like to take:')
+                                    f'\n{bulletpoint}Which direction would you like to take:\n')
                                 if direction == down:
                                     wall_1down()
                                 elif direction == up:
-                                    print(
-                                        f'{bulletpoint}The passageway entrance is locked.')
-                                    wall_1entrance()
+                                    if current_heir.strip().lower() == hero.name.strip().lower() or current_emperor.strip().lower() == hero.name.strip().lower():
+                                        input(
+                                            f'\n{bulletpoint2}You use your key to leave.\n')
+                                        menu()
+                                        beggar()
+                                    else:
+                                        input(
+                                            f'\n{bulletpoint2}The passageway entrance is locked.\n')
+                                        wall_1entrance()
                                 elif direction == 'opensesame':
                                     vaulted_chambers()
 
@@ -3988,16 +4057,16 @@ _,'    \_>\_/    ',_
                     maze()
                     
                 else:
-                    input(f'\n{bulletpoint2}You walk along the streets to find a job, but no one you encountered would hire you. You then come across a mysterious monk.')
+                    input(f'\n{bulletpoint2}You walk along the streets to find a job, but no one you encountered would hire you. You then come across a mysterious {new_monk_replacement}.\n')
                     menu()
                     mysterious_monk()
 
             # The Mysterious Monk
             def mysterious_monk():
                 mysterious_monk_ans = input(
-                    f'\n{bulletpoint}A mysterious monk came to you and asks if you would be so kind to help with a task. The monk says it won\'t be easy and there is no pay. Do you still help?')
+                    f'\n{bulletpoint}A mysterious {new_monk_replacement} came to you and asks if you would be so kind to help with a task. The {new_monk_replacement} says it won\'t be easy and there is no pay. Do you still help?\n')
                 if mysterious_monk_ans.strip().lower() in yes:
-                    print(f'\n{bulletpoint2} You\'ll be joining the monk to help lead this journey. The monk gives you an ancient map that shows different routes you can take to reach the top. ') 
+                    print(f'\n{bulletpoint2} You\'ll be joining the {new_monk_replacement} to help lead this journey. The {new_monk_replacement} gives you an ancient map that shows different routes you can take to reach the top.\n')
                     menu()
                     the_secret()
                 else:
@@ -4014,19 +4083,19 @@ _,'    \_>\_/    ',_
                         f'\n{bulletpoint2}The game is called Rock Paper Scissors! 🪨 Rock beats ✂ Scissors, 📜 Paper beats 🪨 Rock, ✂ Scissors beats 📜 Paper!\n Enter Rock, Paper, or Scissors:')
                     playGame(game_ans)
                     game_ans2 = input(
-                        f'\n{bulletpoint2}Your best friend laughs!\n Enter Rock, Paper, or Scissors:')
+                        f'\n{bulletpoint2}Your best friend laughs!\n Enter Rock, Paper, or Scissors:\n')
                     playGame(game_ans2)
                     game_ans3 = input(
-                        f'\n{bulletpoint2}Last round to see who\'s the true winner!\n Enter Rock, Paper, or Scissors:')
+                        f'\n{bulletpoint2}Last round to see who\'s the true winner!\n Enter Rock, Paper, or Scissors:\n')
                     playGame(game_ans3)
                     riddle_ans1 = random.choice(alphabet).capitalize()
                     riddle_ans2 = random.choice(['emperor', 'queen', 'dragon'])
-                    input(f'{bulletpoint2}Good times! Drinks on your best friend\'s tab! After the last drink, your best friend proposed an idea to make some life-changing money. During his extensive time of imprisonment, he overheard the Emperor whispering about some hidden castle passageway. It was apparently located behind a painting of the {riddle_ans2} at tower {riddle_ans1} to access his bank...\n\n\n\n\n\n\n\n\n\n')
+                    input(f'\n{bulletpoint2}Good times! Drinks on your best friend\'s tab! After the last drink, your best friend proposed an idea to make some life-changing money. During his extensive time of imprisonment, he overheard the Emperor whispering about some hidden castle passageway. It was apparently located behind a painting of the {riddle_ans2} at tower {riddle_ans1} to access his bank...\n')
                     menu()
 
                     # The Bank Robbery
                     riddle_ans3 = random.choice(['2:38', '3:28', '3:32'])
-                    bank_robbery_ans = input(
+                    input(
                         f'\n{bulletpoint2}You meet with your best friend to discuss the plan. He proposed that we first meet outside the tavern at precisely {riddle_ans3} in the morning. Then we take out the two guards and wear their black and red clothing...')
                     tavern_ans = input(f'\n{bulletpoint}He says we need to remember this plan. He asks you if you remember where outside we meet again?\n\n\n\n\n\n\n\n\n\n')
                     if tavern_ans.lower().strip() in ['tavern','the tavern']:
@@ -4049,31 +4118,38 @@ _,'    \_>\_/    ',_
                                     passageway()
                                 else:
                                     print(
-                                        f'{bulletpoint2}You were so close! Your best friend says you can think about this job another time.')
+                                        f'\n{bulletpoint2}You were so close! Your best friend says you can think about this job another time.\n')
                                     menu()
                                     secret_job()
                             else:
                                 print(
-                                    f'{bulletpoint2}Nice try! Your best friend says you can think about this job another time.')
+                                    f'\n{bulletpoint2}Nice try! Your best friend says you can think about this job another time.\n')
                                 menu()
                                 secret_job()
                         else:
-                            print(f'{bulletpoint2}Perhaps listen carefully! Your best friend says you can think about this job another time.')
+                            print(
+                                f'\n{bulletpoint2}Perhaps listen carefully! Your best friend says you can think about this job another time.\n')
                             menu()
                             secret_job()
                     else:
-                        print(f'{bulletpoint2}You\'re not listening! Your best friend says you can think about this job another time.')
+                        print(
+                            f'\n{bulletpoint2}You\'re not listening! Your best friend says you can think about this job another time.\n')
                         menu()
                         secret_job()
                 else:
-                    input(f'\n{bulletpoint2}Perhaps next time then. Your best friend says it\'s getting late and we should leave before the nightwolves start roaming the streets. As you leave a hooded person with an insignia of the red dragon empire grabbed you in the darkness... ')
-                    menu()
-                    secret_job()
+                    if current_heir.strip().lower() == hero.name.strip().lower() or current_emperor.strip().lower() == hero.name.strip().lower():
+                        input(f'\n{bulletpoint2}Perhaps next time then. Your best friend says it\'s getting late and we should leave before the nightwolves start roaming the streets. As you leave a beggar walks up to you...\n')
+                        menu()
+                        beggar()
+                    else:
+                        input(f'\n{bulletpoint2}Perhaps next time then. Your best friend says it\'s getting late and we should leave before the nightwolves start roaming the streets. As you leave a hooded person with an insignia of the red dragon empire grabbed you in the darkness...\n')
+                        menu()
+                        secret_job()
 
             # Vendor Lady
             def vendor_lady():
                 nonlocal vendor_lady_object # Accesses the vendor_lady count.
-                vendor_ans = input(f'\n{bulletpoint}An elder vendor lady has some rare and mythical items for sale. She says that she\'s only going to be available now one time, as she needs to leave to a faraway kingdom. Would you like to purchase something?') 
+                vendor_ans = input(f'\n{bulletpoint}An elder vendor lady has some rare and mythical items for sale. She says that she\'s only going to be available now one time, as she needs to leave to a faraway kingdom. Would you like to purchase something?\n') 
                 if vendor_ans.strip().lower() in yes:
                     show_vendor_menu()
                     menu()
@@ -4084,7 +4160,7 @@ _,'    \_>\_/    ',_
                         secret_item()
                         menu()
                     else:
-                        print(f'\n{bulletpoint2}You visit a local tavern and meet someone who became your best friend over the course of months.')
+                        print(f'\n{bulletpoint2}You visit a local tavern and meet someone who became your best friend over the course of months.\n')
                         vendor_lady_object -= 1  # Turns off the vendor_lady scenario
                         best_friend()
                         menu()
@@ -4092,25 +4168,25 @@ _,'    \_>\_/    ',_
             # The Beggar
             def beggar():
                 if current_heir == 'Beggar' or current_heir == 'The Beggar':
-                    beggar_ans = input(f'\n{bulletpoint}The beggar shows his gratitude for delivering the message and as a small token of appreciation hands you a lump of gold that he retrieved from the castle bank.\nHe says he just remembered he needs $5 back since he needs to buy some food from the local shops. Do you give him the money?')
+                    beggar_ans = input(f'\n{bulletpoint}The beggar shows his gratitude for delivering the message and as a small token of appreciation, he hands you a lump of gold that he retrieved from the castle bank.\nHe says he just remembered he needs $5 back since he needs to buy some food from the local shops. Do you give him the money?\n')
                     add_money(100,1000)
                 else:
-                    beggar_ans = input(f'\n{bulletpoint}You\'re walking through the bustling streets of the Red Dragon Empire. A dirty old beggar comes up to you asking $5 for food. Do you give him the money?')
+                    beggar_ans = input(f'\n{bulletpoint}You\'re walking through the bustling streets of the Red Dragon Empire. A dirty old beggar comes up to you asking $5 for food. Do you give him the money?\n')
                 if beggar_ans.strip().lower() in yes:
                     if hero.money >= 5:
-                        print(f'\n{bulletpoint2}You hand over $5 and he thanks you for your kindness. The beggar introduces you to a mysterious monk who needs some assistance with something.') 
+                        print(f'\n{bulletpoint2}You hand over $5 and he thanks you for your kindness. The beggar introduces you to a mysterious {new_monk_replacement} who needs some assistance with something.\n') 
                         hero.money -= 5
                     else:
-                        print(f'\n{bulletpoint2}You cannot afford to give the beggar money! The beggar thanks you anyways and introduces you to a mysterious monk who needs some assistance with something.') 
+                        print(f'\n{bulletpoint2}You cannot afford to give the beggar money! The beggar thanks you anyways and introduces you to a mysterious {new_monk_replacement} who needs some assistance with something.\n')
                     menu()
                     mysterious_monk() 
                 else:
                     if current_heir == 'Beggar' or current_heir == 'The Beggar':
                         input(
-                            f'\n{bulletpoint2}You kick him, spit on him, and yell that you don\'t acknowledge a dirty beggar as the next heir and walk away laughing.')
+                            f'\n{bulletpoint2}You kick him, spit on him, and yell that you don\'t acknowledge a dirty beggar as the next heir and walk away laughing.\n')
                         menu()
                     else:
-                        print(f'\n{bulletpoint2}You kick his bowl of change, spit on him, and walk away laughing.')
+                        print(f'\n{bulletpoint2}You kick his bowl of change, spit on him, and walk away laughing.\n')
                         menu()
 
                     # Three Thugs
@@ -4118,13 +4194,13 @@ _,'    \_>\_/    ',_
                     if thugs_life == 'dead':
                         new_goons = 'wolves'
                     three_thugs_ans = input(
-                        f'\n{bulletpoint}The beggar calls three {new_goons} over and asks them to rough you up. Do you stay and fight?')
+                        f'\n{bulletpoint}The beggar calls three {new_goons} over and asks them to rough you up. Do you stay and fight?\n')
                     if three_thugs_ans.strip().lower() in yes:
-                        if current_heir.strip().lower() == hero.name.strip().lower():
-                            input(f'\n{bulletpoint}You are the current heir to the red dragon empire, and you have some powerful allies at your disposal. When the goons arrive, you call out to the castle guards, who immediately come to your aid.\n\nThe guards quickly arrest the goons, who are no match for their superior training and weaponry. You are unharmed, and the beggar is left empty-handed and disappointed.\n')
+                        if current_heir.strip().lower() == hero.name.strip().lower() or current_emperor.strip().lower() == hero.name.strip().lower():
+                            input(f'\n{bulletpoint}You oversee the red dragon empire, and you have some powerful allies at your disposal. When the goons arrive, you call out to the castle guards, who immediately come to your aid.\n\nThe guards quickly arrest the goons, who are no match for their superior training and weaponry. You are unharmed, and the beggar is left empty-handed and disappointed.\n')
                         else:
                             damage = random.randint(3,20)
-                            input(f'\n{bulletpoint2}The {new_goons} landed a couple large blows to your stomach and did {damage} damage to your health. You managed to run away as fast as possible to a local street vendor nearby to hide.')
+                            input(f'\n{bulletpoint2}The {new_goons} landed a couple large blows to your stomach and did {damage} damage to your health. You managed to run away as fast as possible to a local street vendor nearby to hide.\n')
                             hero.health -= damage
                             menu()
                         if vendor_lady_object == 1: # Only accesses the vendor lady scenario if it's been turned on.
@@ -4132,44 +4208,62 @@ _,'    \_>\_/    ',_
                         else:
                             secret_item()
                     else:
-                        input(f'\n{bulletpoint2}You ran over to the castle guards and the street thugs dissapeared. ')
+                        input(
+                            f'\n{bulletpoint2}You ran over to the castle guards and the street thugs dissapeared.\n')
                         menu()
-                        if current_heir == hero_name.title():
-                            input(f'{bulletpoint2}The guards yell to PROTECT THE HEIR! The guards then locate the street thugs and proceed to send them to jail. The guards then royally escort you into the castle immediately.')
-                            new_path = input(f'\n{bulletpoint}One of your advisors tells you that there is a trade mission that you should go on. You also feel like exploring the castle more. What do you do?')
-                            if 'trade' or 'mission' in new_path:
+                        if current_heir.strip().lower() == hero_name.strip().lower():
+                            input(f'\n{bulletpoint2}The guards yell to PROTECT THE HEIR! The guards then locate the street thugs and proceed to send them to jail. The guards then royally escort you into the castle immediately.\n')
+                            new_path = input(
+                                f'\n{bulletpoint}One of your advisors tells you that there is a trade mission that you should go on. You also feel like exploring the castle more. What do you do?\n')
+                            if 'trade' in new_path.lower() or 'mission' in new_path.lower():
                                 menu()
-                                input(f'{bulletpoint2}There was new land to the south just recently discovered. Your mission was to conquer it and establish a colony on behalf of the Red Dragon Empire.')
+                                input(
+                                    f'\n{bulletpoint2}There was new land to the south just recently discovered. Your mission was to conquer it and establish a colony on behalf of the Red Dragon Empire.\n')
+                                trade_mission()
+                            else:
+                                menu()
+                                passageway()
+                        elif current_emperor.strip().lower() == hero.name.strip().lower():
+                            input(f'\n{bulletpoint2}The guards yell to PROTECT THE EMPEROR! The guards then locate the street thugs, beat them up, and then proceed to send them to jail. The guards then royally escort you into the castle immediately.\n')
+                            new_path = input(
+                                f'\n{bulletpoint}One of your advisors tells you that there is a trade mission that you may want to go on. You also feel like exploring the castle more. What do you do?\n')
+                            if 'trade' in new_path.lower() or 'mission' in new_path.lower():
+                                menu()
+                                input(
+                                    f'{bulletpoint2}There was new land to the south just recently discovered. Your mission was to conquer it and establish a colony on behalf of the Red Dragon Empire.\n')
                                 trade_mission()
                             else:
                                 menu()
                                 passageway()
                         else:
                             # Guard Bribe
-                            guard_bribe_ans = input(f'\n{bulletpoint}One of the guards suspects you as being an illegal foreigner from the neighboring enemy kingdom, but if you give him some bribe money, he\'ll turn a blind eye. Do you give him the money?')
+                            guard_bribe_ans = input(f'\n{bulletpoint}One of the guards suspects you as being an illegal foreigner from the neighboring enemy kingdom, but if you give him some bribe money, he\'ll turn a blind eye. Do you give him the money?\n')
                             if guard_bribe_ans.strip().lower() in yes:
                                 bribe = random.randint(1,10)
                                 if bribe >= 5:
-                                    input(f'\n{bulletpoint2}You give the guard ${bribe}.') 
+                                    input(f'\n{bulletpoint2}You give the guard ${bribe}.\n') 
                                     hero.money -= bribe
                                     menu()
                                     empire_recruitment()
                                 else:
                                     damage = random.randint(1,10)
-                                    input(f'\n{bulletpoint2}You give the guard ${bribe}. He yells that this is barely anything and slams you into the ground dealing {damage} to you.')
+                                    input(
+                                        f'\n{bulletpoint2}You give the guard ${bribe}. He yells that this is barely anything and slams you into the ground dealing {damage} to you.\n')
                                     hero.health -= damage
                                     hero.money -= bribe
                                     menu()
                                     empire_recruitment()
                             else:
-                                input(f'\n{bulletpoint2}He yells at you, calls you a peasant, and then proceeds to jail you in the castle dungeon. ')
+                                input(
+                                    f'\n{bulletpoint2}He yells at you, calls you a peasant, and then proceeds to jail you in the castle dungeon.\n')
                                 menu()
 
                                 #Jail Inmate
                                 global body_part
                                 body_part = 'arm'
                                 body_part = input(f'In your jail cell, you see the inmate next to you with one only one...(type which body part)...body part:')
-                                jail_inmate_ans = input(f'\n{bulletpoint}The inmate with only one {body_part} asks if you would like to be his friend?')
+                                jail_inmate_ans = input(
+                                    f'\n{bulletpoint}The inmate with only one {body_part} asks if you would like to be his friend?\n')
                                 if jail_inmate_ans.strip().lower() in yes:
                                     snitch_ans = input(f'\n{bulletpoint}The inmate tells you that for the last year he\'s been digging a hole underneath his bed. He says it\'s finally ready and proposes for you to join him to make the escape. Do you snitch to the prisoner guards of the inmate\'s plans or join the inmate in the escape?\n')
                                     if snitch_ans.strip().lower() in ('tattle', 'tattle tale', 'tell the guards', 'tell the guards about the plan',) or 'snitch' in snitch_ans.strip().lower():
@@ -4237,6 +4331,7 @@ _,'    \_>\_/    ',_
             
             # This is the menu display that would be shown throughout the game. It shows hero health, money, morality, and a different display if hero health is under a certain amount.
             def display():
+                print('\n')
                 print('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
                 if hero.health <= 25:
                     print('█             █     █          █    ▐        ▐               █    █     █    ▐   █          █   █    █       █ █    ▐   ▐              ')
@@ -4248,7 +4343,7 @@ _,'    \_>\_/    ',_
                 if hero.health <=70:
                     print('        █             █     █          █    ▐        ▐               █    █     █    ▐   █          █   █    █       █ █    ▐   ▐              ')
                     print('        ▐             ▐     ▐          ▐                             ▐    ▐     ▐        ▐          ▐   ▐    ▐       ▐ ▐                        ')
-                print('\n\n\n\n\n\n\n\n\n\n\n')
+                print('\n')
             display()
         menu()
         story()
