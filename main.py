@@ -1023,6 +1023,7 @@ jgs .-=-.    ) -.
                     input(f'\n{bulletpoint2}Sorry, you lost the game. The word was "{word}". As the trapdoor beneath your feet opened and you fell into the dark abyss, your last thoughts were of regret. You had been so close to freedom, but in the end, you had failed.\n\n{bulletpoint2}But even as you breathed your last, Your knew that your spirit would not be broken. You would fight on, even in death, until the Empire of Ice was brought to justice and the Red Dragon Empire was restored to its former glory.\n')
                     hero.health = 0
                     check_health(hero)
+                    
         def restaurant_menu():
             import random
             # List of dish items for the restaurant as a dictionary
@@ -1250,12 +1251,12 @@ jgs .-=-.    ) -.
             # prompt the user to input the dish they would like to try
             # if the dish is not on the menu, generate a random dish instead
             dish_name = input(
-                '(Enter the full dish name)\nWhat dish would you like to try: ').lower().strip()
+                f'(Enter the full dish name)\n{bulletpoint}What dish would you like to try: ').lower().strip()
             selected_dish = next(
                 (dish for dish in dishes if dish['name'].lower().strip() == dish_name.lower().strip()), None)
             if selected_dish is None:
                 selected_dish = random.choice(dishes)
-                input(f'This dish is not on our menu, we\'ll instead give you the chef special!')
+                input(f'{bulletpoint2}This dish is not on our menu, we\'ll instead give you the chef special!')
 
             # prompt the user to press enter to see the main desserts
             input(f'Press enter to see the main desserts...')
@@ -1266,12 +1267,12 @@ jgs .-=-.    ) -.
             # prompt the user to input the dessert they would like to try
             # if the dessert is not on the menu, generate a random dessert instead
             dessert_name = input(
-                '(Enter the full dessert name)\nWhat dessert would you like to try: ').lower().strip()
+                f'(Enter the full dessert name)\n{bulletpoint}What dessert would you like to try: ').lower().strip()
             selected_dessert = next(
                 (dessert for dessert in desserts if dessert['name'].lower().strip() == dessert_name.lower().strip()), None)
             if selected_dessert is None:
                 selected_dessert = random.choice(desserts)
-                input(f'This dessert is not on our menu, we\'ll instead give you the chef special!')
+                input(f'{bulletpoint2}This dessert is not on our menu, we\'ll instead give you the chef special!')
 
             # set order_complete to True, since the order is complete
             order_complete = True
@@ -1284,16 +1285,18 @@ jgs .-=-.    ) -.
             dish_tastes = selected_dish["ingredients"][-1]["taste"]
             dessert_tastes = selected_dessert["ingredients"][-1]["taste"]
             input(
-                f'You decided to order the "{selected_dish["name"]}". It arrived at your table a couple minutes later, and you could hardly contain your excitement as you took your first bite.\nThe "{selected_dish["name"]}" has a {", ".join(dish_tastes)} taste!')
+                f'{bulletpoint2}You decided to order the "{selected_dish["name"]}". It arrived at your table a couple minutes later, and you could hardly contain your excitement as you took your first bite.\nThe "{selected_dish["name"]}" has a {", ".join(dish_tastes)} taste!')
             # print the selected dessert and its taste
             input(
-                f'You decided to order the "{selected_dessert["name"]}". It arrived at your table after your main dish, and you started drooling as you took the first bite.\nThe "{selected_dessert["name"]}" had a {", ".join(dessert_tastes)} taste!')
+                f'{bulletpoint2}You decided to order the "{selected_dessert["name"]}". It arrived at your table after your main dish, and you started drooling as you took the first bite.\nThe "{selected_dessert["name"]}" had a {", ".join(dessert_tastes)} taste!')
 
             # if the order is complete, print the food bill and prompt the user for a tip
             if order_complete == True:
-                input('\nYour food bill: $100')
-                food_tip = input('\nHow much tip do you pay:')
-                input(f'\nYour total bill: $100 plus {food_tip}.')
+                input(f'\n{bulletpoint2}Your food bill: $100')
+                food_tip = input(f'\n{bulletpoint}How much tip do you pay:')
+                if food_tip == '':
+                    food_tip = 'nothing'
+                input(f'\n{bulletpoint2}Your total bill: $100 plus {food_tip}.')
 
         def ascii_dice():
             input('''
@@ -1455,7 +1458,7 @@ jgs .-=-.    ) -.
                     check_health(hero)
                     add_money(50, 150)
                     menu()
-                    input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way\n')
+                    input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way.\n')
                     the_restaurant()
                 if monster_guild_membership == False:
                     input(f'\n{bulletpoint2}The leader of the group, a fierce-looking woman with a scar across her face, sizes you up with a critical eye. She seems impressed by your determination and skill, and she agrees to take you on as a member of the guild.\n\n{bulletpoint2}You are excited and eager to begin your new career as a monster hunter. You know that it will be dangerous and challenging, but you are ready for the challenge. You will use your skills and abilities to protect the innocent and keep the world safe from the dangers that lurk in the shadows.\n')
@@ -1516,7 +1519,7 @@ jgs .-=-.    ) -.
                         input(f'\n{bulletpoint2}You decide that none of them are worth recruiting and told them all to get lost!\n')
                         behemoth_battle()
 
-                input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way\n')
+                input(f'\n{bulletpoint2}You are proud of your accomplishment, and you feel a sense of satisfaction and fulfillment as you continue on your journey as a monster hunter. You know that there will be many more challenges and dangers ahead, but you are ready for whatever comes your way.\n')
                 menu()
                 the_restaurant()
 
@@ -4185,26 +4188,26 @@ _,'    \_>\_/    ',_
                     input(
                         f'\n{bulletpoint2}The beggar understands what you mean😉')
                     beggar_direction = input(
-                        f'\nVisit the {new_monk_replacement}\nVisit the vendor lady stall\nVisit the castle\nVisit the ice kingdom\nVisit the mountain\nVisit the assassin guild\nVisit the monster hunter guild\nGo sail on a trade mission?\n{bulletpoint}Where would you like to go:')
+                        f'\nVisit the {new_monk_replacement}\nVisit the Vendor Lady Stall\nVisit the Red Dragon Castle\nVisit the Ice Kingdom\nVisit the Mountain\nVisit the Assassin Guild\nVisit the Monster Hunter Guild\nGo Sail on a Trade Mission?\n{bulletpoint}Where would you like to go:')
                     if beggar_direction.strip().lower() in ('vendor lady', 'vendor', 'stall', 'vendor lady stall'):
                         menu()
                         vendor_lady()
-                    if beggar_direction.strip().lower() in ('castle', 'passageway'):
+                    elif beggar_direction.strip().lower() in ('castle', 'passageway', 'red', 'red dragon', 'red dragon castle'):
                         menu()
                         passageway()
-                    if beggar_direction.strip().lower() in ('ice', 'ice kingdom', 'icekingdom'):
+                    elif beggar_direction.strip().lower() in ('ice', 'ice kingdom', 'icekingdom'):
                         menu()
                         ice_kingdom()
-                    if beggar_direction.strip().lower() in ('mountain', 'mountain secret'):
+                    elif beggar_direction.strip().lower() in ('mountain', 'mountain secret'):
                         menu()
                         mountain_secret()
-                    if beggar_direction.strip().lower() in ('assassin', 'assassinguild', 'assassin guild'):
+                    elif beggar_direction.strip().lower() in ('assassin', 'assassinguild', 'assassin guild'):
                         menu()
                         assassins_guild()
-                    if beggar_direction.strip().lower() in ('monster', 'monster hunter', 'monster hunter guild'):
+                    elif beggar_direction.strip().lower() in ('monster', 'monster hunter', 'monster hunter guild'):
                         menu()
                         monster_hunter_guild()
-                    if beggar_direction.strip().lower() in ('sail', 'trade', 'trade mission', 'sailing', 'trademission'):
+                    elif beggar_direction.strip().lower() in ('sail', 'trade', 'trade mission', 'sailing', 'trademission'):
                         menu()
                         trade_mission()
                     else:
