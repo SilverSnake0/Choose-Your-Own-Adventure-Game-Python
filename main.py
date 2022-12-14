@@ -3143,7 +3143,7 @@ jgs .-=-.    ) -.
 
             # Sand Monster Battle
                 add_health(sandworm) # Adds monster health if it has already been killed.
-                sand_monster_ans = input(f'\n{bulletpoint}You see something like a mountain rise up from the sand. The {new_monk_replacement} says that this must be the legendary 1000 year old {sandworm.name}. You stare up and see a massive hole with thousands of sharp teeth at every corner of its mouth. Do you even attempt to fight this thing?')
+                sand_monster_ans = input(f'\n{bulletpoint}Suddenly, you see a massive, ancient {sandworm.name} rise up from the sand before you.\nIts thousand year old body towers over you, a monstrous behemoth with thousands of sharp teeth lining all edges of its massive cavernous mouth.\nThe {new_monk_replacement} warns you that this creature is legendary, feared by all who have laid eyes upon it. Do you have the courage to face this terrifying beast, or will you turn and flee in terror?\n')
                 if sand_monster_ans.strip().lower() in yes:
                     # Cleaning up the hero item strings to play be displayed properly
                     clean_hero_items = ', '.join(
@@ -3165,8 +3165,9 @@ jgs .-=-.    ) -.
                     input(f'\n{bulletpoint2}The monster lunged at you, but the {new_monk_replacement} ran towards you and pushed you away. Sand filled the air making it impossible to see. Once the sand dissipated, you saw a shadow in the midst and the {new_monk_replacement} slowly appeared safe and sound. You both successfully managed to escape! ')
 
             # Frozen Wasteland
+                input(f'\n{bulletpoint2}As you and the {new_monk_replacement} walk out of the scorching desert, the landscape around you begins to change.\n\n{bulletpoint2}The ground beneath your feet grows harder and the air grows colder. Soon, you find yourself trudging through the snow, your breath forming plumes of steam in the frigid air.\n\n{bulletpoint2}The sun is a distant memory, replaced by dark storm clouds that loom overhead. You wrap your coat tighter around yourself and keep moving, your companion by your side.\n\n{bulletpoint2}The frozen wasteland stretches out before you, a vast and unforgiving terrain. But you press on, determined to survive and find your way out of this desolate place.\n')
                 frozen_wasteland_ans = input(
-                    f'\n{bulletpoint}As you and the {new_monk_replacement} walked through the frozen wasteland, you both could feel the cold seeping into your bones. The air was frigid and biting, and your breath came out in white plumes.\n\n{bulletpoint2}Eventually, you both reached the edge of a massive, thin-ice lake. In the distance, you can see the towering peak of the mountain you were trying to reach. But first, you both would have to cross the lake.\n\n{bulletpoint2} Do you still proceed?')
+                    f'\n{bulletpoint}As you and the {new_monk_replacement} walked through the frozen wasteland, you both could feel the cold seeping into your bones. The air was frigid and biting, and your breath came out in white plumes.\n\n{bulletpoint2}After a long journey, you and your companion finally reach the edge of a massive, frozen lake. In the distance, the towering peak of the mountain you are trying to reach looms over the landscape. But first, you must cross the treacherous ice.\n\n{bulletpoint2}As you take your first steps onto the frozen surface, you can\'t help but feel a sense of excitement and fear. Will you make it across, or will the thin ice give way beneath your feet? Only time will tell.\n\n{bulletpoint}Do you still proceed?\n')
                 if frozen_wasteland_ans.strip().lower() in yes:
                     kindness_list = ['brings you a warm blanket', 'made a bed to keep you warm', 'shared their food with you', 'checked on you regularly to make sure you\'re okay', 'shared their water with you', 'teaches you how to start a fire', 'provided emotional support and encouragement', 'stayed by your side through the entire ordeal', 'listened to your life concerns and offers advice throughout the night', 'kept you company and helped you pass the time', 'set a small campfire to keep both of you warm']
                     print('''
@@ -3226,61 +3227,72 @@ _,'    \_>\_/    ',_
                     add_health(boxer) # Adds monster health if it has already been killed.
                     #Box Puzzle
                     white_square = '◽' * 16
-
                     mixed_squares = '◽◽⯀◽◽◽◽⯀◽◽◽⯀◽◽⯀◽'
                     confused_square = '◽◽⯀◽◽◽◽●◽◽◽⯀◽◽⯀◽'
 
-                    white_box_list = (mixed_squares, white_square) * 4
+                    white_box_list = [white_square,
+                                      mixed_squares, confused_square, white_square, mixed_squares]
                     # Function to count the printed squares.
-                    def count_boxes(list):
+                    def count_boxes():
                         count = 0
-                        for i in list:
+                        for i in white_box_list:
                             for a in i:
-                                count += 1
+                                if a in ('◽', '⯀'):
+                                    count += 1
                         return count
-
-                    for item in white_box_list:
-                        print(item)
-                    print(confused_square)
                     for item in white_box_list:
                         print(item)
                     box_question = input(
-                        f'{bulletpoint}If you are worthy of this secret, you must pass the test. How many squares are there?')
-                    correct_box_number = (count_boxes(white_box_list) * 2) - 1
-                    print(
-                        f'{bulletpoint2}Your Answer: {box_question} \n{bulletpoint2}Correct Number of Boxes: {correct_box_number}')
+                        f'{bulletpoint}If you are worthy of this secret, you must pass the Counting Test.\nHow many are squares are there?')
+                    # Calculate the correct number of squares.
+                    correct_box_number = count_boxes()
                     if box_question == '1':
                         print('You cheated!')
-                    elif box_question != str(correct_box_number):
-                        print(f'{bulletpoint2}You failed!')
-                    else:
+                    elif box_question == str(correct_box_number):
                         print(f'{bulletpoint2}You passed!')
+                    else:
+                        print(f'{bulletpoint2}You failed!')
+                    input(
+                        f'{bulletpoint2}Your Answer: {box_question} \n{bulletpoint2}Correct Number of Boxes: {correct_box_number}')
 
-                        # Triangle Puzzle
-                        double_triangles = '⟁ ' * 8
-                        triangle = '🞁 ' * 8
-                        confused_triangle = '◤ ◣ ◤ ◣ ◤ ◢ ◤ ⧗'
+                    # Triangle Puzzle
+                    double_triangles = '⟁ ' * 8 # Count equals to 16
+                    triangle = '🞁 ' * 8 # Count equals to 8
+                    confused_triangle = '◤ ◣ ◤ ◣ ◤ ◢ ◤ ⧗' # Count equals to 9
 
-                        triangle_list = (triangle, double_triangles) * 6
+                    triangle_list = [confused_triangle, triangle, double_triangles,
+                                     triangle, double_triangles, triangle, double_triangles, confused_triangle]
 
-                        print(confused_triangle)
-                        for item in triangle_list:
-                            print(item)
-                        triangle_question = input(f'How many white triangles are there?')
-                        print(
-                            f'{bulletpoint2}Your Answer: {triangle_question} \n{bulletpoint2}Correct Number of Triangles: 153')
-                        if triangle_question == '1':
-                            print('You cheated!')
-                        elif (triangle_question) != '153': # If the player input does not equal to 153, then they will face a monster.
-                            input(
-                                f'{bulletpoint}You failed! You hear a rumbling in the snow beneath your feet. Out pops out an ancient man with some gloves on his fists that look like 🥊. The monster starts coming at you!')
-                            battle(hero, boxer, 'ducks down','prepares to punch!', 'jumps on rock', 'does a phoenix punch!')
-                            check_health(boxer)
-                            add_health(hero)
-                            check_health(hero)
-                            menu()
-                        else:
-                            print('You passed!')
+                    def count_triangles():
+                        count = 0
+                        for i in triangle_list:
+                            if i == confused_triangle:
+                                count += 9
+                            for a in i:
+                                if a == '🞁':
+                                    count += 1
+                                elif a =='⟁':
+                                    count += 2
+                        return count
+
+                    for item in triangle_list:
+                        print(item)
+                    triangle_question = input(f'How many white triangles are there?')
+                    correct_triangle_num = count_triangles()
+                    print(
+                        f'{bulletpoint2}Your Answer: {triangle_question} \n{bulletpoint2}Correct Number of Triangles: {correct_triangle_num}')
+                    if triangle_question == '1':
+                        print('You cheated!')
+                    elif (triangle_question) != str(correct_triangle_num): # If the player input does not equal to the correct answer, they will face a monster.
+                        input(
+                            f'{bulletpoint}You failed! You hear a rumbling in the snow beneath your feet. Out pops out an ancient man with some gloves on his fists that look like 🥊. The monster starts coming at you!')
+                        battle(hero, boxer, 'ducks down','prepares to punch!', 'jumps on rock', 'does a phoenix punch!')
+                        check_health(boxer)
+                        add_health(hero)
+                        check_health(hero)
+                        menu()
+                    else:
+                        print('You passed!')
                 input('''
                                      |					
                             .               /				
@@ -3311,7 +3323,7 @@ _,'    \_>\_/    ',_
                       /...\.../..:.\. ..:::::::..:..... . ...\{:... / %... \\\\/..%. \  /./:..\__   \\
                        .:..\:..:::....:::;;;;;;::::::::.:::::.\}.....::%.:. \ .:::. \/.%:::.:..\\
                 ''')
-                input(f'\n{bulletpoint2}You finally reach the peak of the mountain. The weather is bright and snowing. You see a breathtaking view of the frozen lake, and a large castle made of ice below the mountain. You don\'t see anything on top except something that seems to be glowing underneath the snow. You try to wipe the snow and then all of a sudden glowing squares pop up from the ground. A whispering voice asks you a question...')
+                input(f'\n{bulletpoint2}As you reach the peak of the mountain, the bright snowfall surrounds you. From this vantage point, you are treated to a breathtaking view of the frozen lake below and the massive castle of ice that stands at its edge. But something seems off about the peak itself.\n\n{bulletpoint2}Beneath the blanket of snow, you see a faint glow emanating from the ground. As you brush the snow away, you uncover a series of glowing squares that begin to pulsate with light.\n{bulletpoint}A whispering voice fills your ears, asking you a question...')
                 box_puzzle() # Asks the first two puzzle questions.
                 snowball_question = input( # Third question asked.
                     f'{bulletpoint}The last question is... What kind of ball does not bounce? \nPlease enter your answer:')
@@ -4435,7 +4447,7 @@ _,'    \_>\_/    ',_
                 mysterious_monk_ans = input(
                     f'\n{bulletpoint}A mysterious {new_monk_replacement} came to you and asks if you would be so kind to help with a task. The {new_monk_replacement} says it won\'t be easy and there is no pay. Do you still help?\n')
                 if mysterious_monk_ans.strip().lower() in yes:
-                    print(f'\n{bulletpoint2} You\'ll be joining the {new_monk_replacement} to help lead this journey. The {new_monk_replacement} gives you an ancient map that shows different routes you can take to reach the top.\n')
+                    input(f'\n{bulletpoint2} You\'ll be joining the {new_monk_replacement} to help lead this journey. The {new_monk_replacement} gives you an ancient map that shows different routes you can take to reach the top.\n')
                     menu()
                     the_secret()
                 else:
@@ -4573,10 +4585,10 @@ _,'    \_>\_/    ',_
                     beggar_ans = input(f'\n{bulletpoint}You\'re walking through the bustling streets of the Red Dragon Empire. A dirty old beggar comes up to you asking $5 for food. Do you give him the money?\n')
                 if beggar_ans.strip().lower() in yes:
                     if hero.money >= 5:
-                        print(f'\n{bulletpoint2}You hand over $5 and he thanks you for your kindness. The beggar introduces you to a mysterious {new_monk_replacement} who needs some assistance with something.\n') 
+                        input(f'\n{bulletpoint2}You hand over $5 and he thanks you for your kindness. The beggar introduces you to a mysterious {new_monk_replacement} who needs some assistance with something.\n') 
                         hero.money -= 5
                     else:
-                        print(f'\n{bulletpoint2}You cannot afford to give the beggar money! The beggar thanks you anyways and introduces you to a mysterious {new_monk_replacement} who needs some assistance with something.\n')
+                        input(f'\n{bulletpoint2}You cannot afford to give the beggar money! The beggar thanks you anyways and introduces you to a mysterious {new_monk_replacement} who needs some assistance with something.\n')
                     menu()
                     mysterious_monk()
                 elif beggar_ans.strip().lower() == 'm@x':
