@@ -951,7 +951,7 @@ jgs .-=-.    ) -.
                     player_whackjack = True
                     current_bet *= 2
                     return player_whackjack, current_bet
-                elif player_total <= 11:
+                elif player_total == 11:
                     eleven_ans = input(f'Player hit a soft 11! Would you like to double down your bet and play one more hand?')
                 if eleven_ans.strip().lower() in (yes):
                     double_down = current_bet
@@ -2052,7 +2052,7 @@ jgs .-=-.    ) -.
                 else:
                     menu()
                     blackjack_ans = input(
-                        f'\n{bulletpoint}A customer nearby walks up to you and asks if you would like to play Whackjack?\n')
+                        f'\n{bulletpoint}A vendor nearby walks up to you and asks if you would like to play Whackjack?\n')
                     if blackjack_ans.strip().lower() in yes:
                         input(
                             f'\n{bulletpoint2}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\nPress enter to continue...')
