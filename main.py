@@ -775,94 +775,190 @@ jgs .-=-.    ) -.
 
             # Define a function to play a game of Blackjack
             def play_blackjack():
+                current_bet = 0
+                def bet_result(result):
+                    nonlocal current_bet
+                    if current_bet > 0:
+                        if result == 'lost':
+                            input(f'You lost ${current_bet} :(\n')
+                            current_bet = 0
+                            return hero.money, current_bet
+                        elif result == 'won':
+                            current_bet *= 2
+                            input(f'You gained ${current_bet}! 💰\n')
+                            hero.money += current_bet
+                            current_bet = 0
+                            return hero.money, current_bet
+                        else:
+                            hero.money += current_bet
+                            input(f'The bet has been returned to your wallet.\n')
+                            current_bet = 0
+                            return hero.money, current_bet
+
+
                 # Deal the player and dealer two cards each
                 player_hand = [deck.pop(0), deck.pop(0)]
                 dealer_hand = [deck.pop(0), deck.pop(0)]
 
-                # Print the player's hand
-                print("")
+                # Cleans up the hands to look nicer when printed
+                def clean_hand(hand):
+                    card_image = ''
+                    if hand is player_hand:
+                        card_image ='🃏'
+                    else:
+                        card_image = '🃟'
+                    player_hand_str = ', '.join(
+                        [f'{card[0]} of {card[1]}{card_image}' for card in hand])
+                    return player_hand_str
 
-                    # Calculate the total value of the player's hand
+                blackjack_bet = 0
+                if hero.money > 0:    
+                    # Request the player's bet amount. Try and Except added in the event the player doesn't input a valid number which will result in no bet being placed.
+                    try:
+                        blackjack_bet = int(input(
+                            f'\n{bulletpoint2}Would you like to place a bet?\nCurrent money: ${hero.money}\nEnter the number of the bet you want to place, or enter "0" to play for free.\n{bulletpoint}[BET]:'))
+                        print(f'You placed down a bet of ${blackjack_bet}')
+                        #Checks if the bet is less than or equal to the player's current money
+                        if int(blackjack_bet) <= hero.money:
+                            hero.money -= int(blackjack_bet) # Hero's money is deducted by the player's bet amount
+                            current_bet += int(blackjack_bet) # Current bet amount is updated with the player's bet amount
+                    except:
+                        input(f'\nNo bet was placed.')
+                        pass
+                
+                def whackjack_results():
+                        # Calculate the total value of the dealer's hand
+                        dealer_total = calculate_hand_total(dealer_hand)
+
+                        # Print the dealer's hand
+                        print(
+                            f'Dealer\'s hand: {clean_hand(dealer_hand)} Total: {dealer_total}')
+
+                        # Check if the dealer has 21 (Blackjack)
+                        if dealer_total == 21:
+                            if player_whackjack == True:
+                                input('Player and Dealer both have 21. Push..')
+                            else:
+                                # If so, end the game and print a message
+                                input('Dealer has Whackjack! Dealer wins.')
+                                bet_result('lost')
+                                return
+
+                        # While the dealer's hand is less than 17, hit
+                        while dealer_total < 17:
+                            if player_total > 21:
+                                break
+                            # Deal a card to the dealer
+                            input('Dealer draws a card...press enter to continue...')
+                            deal_card(dealer_hand)
+
+                            # Calculate the total value of the dealer's hand
+                            dealer_total = calculate_hand_total(dealer_hand)
+
+                            # Print the dealer's hand
+                            print(
+                                f'Dealer\'s hand: {clean_hand(dealer_hand)} Total: {dealer_total}')
+
+                        # Check if the dealer has busted (total > 21)
+                        if dealer_total > 21:
+                            # Check if the player already has 21
+                            if player_total == 21:
+                                input('Dealer has busted. Player has 21.')
+                            else:
+                                input('Dealer has busted! Player wins.')
+                            bet_result('won')
+                        elif dealer_total == 21:
+                            if player_total == 21:
+                                input('Player and Dealer both have 21. Push..')
+                                bet_result('push')
+
+                        print(
+                            f'Current Player Total: {player_total} 🃏\nCurrent Dealer Total: {dealer_total} 🃟')
+                        # Compare the player's and dealer's totals
+                        if player_total > dealer_total:
+                            if player_total <= 21:
+                                # If the player's total is greater and less than or equal to 21, the player wins
+                                input('Player wins!')
+                                bet_result('won')
+                        elif player_total < dealer_total:
+                            if dealer_total <= 21:
+                                # If the dealer's total is greater and less than or equal to 21, the dealer wins
+                                input('Dealer wins..')
+                                bet_result('lost')
+                        else:
+                            # If the totals are equal, the game is a push
+                            input('Push..')
+                            bet_result('push')
+                        
+                # Calculate the total value of the player's hand
                 player_total = calculate_hand_total(player_hand)
-
                 # Print the total value of the player's hand
-                print("Player's hand:", player_hand, "Total:", player_total)
-
+                print(f'Player\'s hand: {clean_hand(player_hand)} Total: {player_total}')
+                player_whackjack = False
+                eleven_double_bet = 0
+                eleven_ans = ''
                 # Check if the player has 21 (Blackjack)
                 if player_total == 21:
                     # If so, end the game and print a message
-                    print("Player has Blackjack! Player wins.")
-                    return
-
-                # Prompt the player to hit or stand
-                while True:
+                    input('PLAYER HAS WHACKJACK! Winnings are doubled. Player wins.')
+                    bet_result('won')
+                    player_whackjack = True
+                    current_bet *= 2
+                    return player_whackjack, current_bet
+                elif player_total <= 11:
+                    eleven_ans = input(f'Player hit a soft 11! Would you like to double down your bet and play one more hand?')
+                if eleven_ans.strip().lower() in (yes):
+                    double_down = current_bet
+                    if double_down <= hero.money:
+                        print('You doubled down!')
+                        eleven_double_bet += 1
+                        hero.money -= double_down
+                        current_bet += double_down
+                        # Calculate the total value of the player's hand
+                        player_total = calculate_hand_total(player_hand)
+                        # Deals another hand
+                        deal_card(player_hand)
+                        # Calculate the total value of the player's hand
+                        player_total = calculate_hand_total(player_hand)
+                        # Print the player's hand
+                        print(
+                            f'Player\'s hand: {clean_hand(player_hand)} Total: {player_total}')
+                        whackjack_results()
+                    else:
+                        input(f'You cannot afford to double down!')
+                while eleven_double_bet == 0:
+                    # If player has whackjack, this will break the while loop
+                    if player_whackjack == True:
+                        break
                     # Get the player's decision
-                    decision = input("Hit or Stand? ")
+                    decision = input(f'\n{bulletpoint2}(You can type ".." or "hit", and "stand" or the enter key to Stand)\n{bulletpoint}Hit or Stand?')
 
                     # Check if the player decided to hit
-                    if decision.lower() == "hit":
+                    if decision.lower() in ('hit', '..', '  '):
                         # If so, deal a card to the player
-                        print('Player draws a card...')
+                        print('Player draws a card...press enter to continue...')
                         deal_card(player_hand)
 
                         # Calculate the total value of the player's hand
                         player_total = calculate_hand_total(player_hand)
 
                         # Print the player's hand
-                        print("Player's hand:", player_hand, "Total:", player_total)
+                        print(f'Player\'s hand: {clean_hand(player_hand)} Total: {player_total}')
 
                         # Check if the player has busted (total > 21)
                         if player_total > 21:
                             # If so, end the game and print a message
-                            input("Player has busted! Dealer wins.")
+                            input('Player has busted! Dealer wins.')
+                            bet_result('lost')
                             break
-                    # If the player decided to stand, break out of the loop
                     else:
                         break
-
-                # Calculate the total value of the dealer's hand
-                dealer_total = calculate_hand_total(dealer_hand)
-
-                # Print the dealer's hand
-                print("Dealer's hand:", dealer_hand, "Total:", dealer_total)
-
-                # Check if the dealer has 21 (Blackjack)
-                if dealer_total == 21:
-                    # If so, end the game and print a message
-                    input("Dealer has Blackjack! Dealer wins.")
-                    return
-
-                # While the dealer's hand is less than 17, hit
-                while dealer_total < 17:
-                    # Deal a card to the dealer
-                    input('Dealer draws a card...')
-                    deal_card(dealer_hand)
-
-                    # Calculate the total value of the dealer's hand
-                    dealer_total = calculate_hand_total(dealer_hand)
-
-                    # Print the dealer's hand
-                    print("Dealer's hand:", dealer_hand, "Total:", dealer_total)
-
-                    # Check if the dealer has busted (total > 21)
-                    if dealer_total > 21:
-                        # If so, end the game and print a message
-                        input("Dealer has busted! Player wins.")
-                        return
-
-                # Compare the player's and dealer's totals
-                if player_total > dealer_total:
-                    if player_total <= 21:
-                    # If the player's total is greater and less than or equal to 21, the player wins
-                        input("Player wins.")
-                elif player_total < dealer_total:
-                    if dealer_total <= 21:
-                    # If the dealer's total is greater and less than or equal to 21, the dealer wins
-                        input("Dealer wins.")
+                    # If the player decided to stand, break out of the loop
+                if eleven_double_bet == 0:
+                    whackjack_results()
+                    menu()
                 else:
-                    # If the totals are equal, the game is a push
-                    input("Push.")
-
+                    pass
             # Play a game of Blackjack
             play_blackjack()
 
@@ -1906,11 +2002,11 @@ jgs .-=-.    ) -.
                         f'\n{bulletpoint}A customer nearby walks up to you and asks if you would like to play Whackjack?\n')
                     if blackjack_ans.strip().lower() in yes:
                         input(
-                            f'\n{bulletpoint2}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\n')
-                    while blackjack_ans.strip().lower() in yes:
+                            f'\n{bulletpoint2}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\nPress enter to continue...')
+                    while blackjack_ans.strip().lower() in yes or blackjack_ans.strip().lower() == '':
                         blackjack()
                         blackjack_ans = input(
-                            f'\n{bulletpoint2}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\n{bulletpoint}Play another round of Whackjack?\n')
+                            f'\n{bulletpoint2}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\n\n{bulletpoint2}(You can also press enter to play again)\n{bulletpoint}Play another round of Whackjack?\n')
                     else:
                         print(f'\n{bulletpoint2}The customer says take care!\n')
                         ice_kingdom()
