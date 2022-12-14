@@ -183,8 +183,54 @@ def adventure_game():
                 ┃┃┃┃┃┃┃┃┃┃━┛┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃
                 ┃┃┃┃┃┃┃┃┃┃━━┛┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃┃
                 '''
+            ending_ascii = '''
+                        ^^                   @@@@@@@@@
+                   ^^       ^^            @@@@@@@@@@@@@@@
+                                        @@@@@@@@@@@@@@@@@@              ^^
+                                       @@@@@@@@@@@@@@@@@@@@
+             ~~~~ ~~ ~~~~~ ~~~~~~~~ ~~ &&&&&&&&&&&&&&&&&&&& ~~~~~~~ ~~~~~~~~~~~ ~~~
+             ~         ~~   ~  ~       ~~~~~~~~~~~~~~~~~~~~ ~       ~~     ~~ ~
+               ~      ~~      ~~ ~~ ~~  ~~~~~~~~~~~~~ ~~~~  ~     ~~~    ~ ~~~  ~ ~~ 
+               ~  ~~     ~         ~      ~~~~~~  ~~ ~~~       ~~ ~ ~~  ~~ ~ 
+             ~  ~       ~ ~      ~           ~~ ~~~~~~  ~      ~~  ~             ~~
+                   ~             ~        ~      ~      ~~   ~             ~
+            '''
+            ending_ascii2 = '''
+              ........::::::::::::..           .......|...............::::::::........
+                 .:::::;;;;;;;;;;;:::::.... .     \   | ../....::::;;;;:::::.......
+                     .       ...........   / \\\\_   \  |  /     ......  .     ........./\\
+            ...:::../\\\\_  ......     ..._/'   \\\\\_  \###/   /\_    .../ \_.......   _//
+            .::::./   \\\\\ _   .../\    /'      \\\\\\\\#######//   \/\   //   \_   ....////
+                _/      \\\\\\\\   _/ \\\\\ /  x       \\\\\\\\###////      \////     \__  _/////
+              ./   x       \\\\\/     \/ x X           \//////                   \/////
+             /     XxX     \\\\/         XxX X                                    ////   x
+            -----XxX-------------|-------XxX-----------*--------|---*-----|------------X--
+                   X        _X      *    X      **         **             x   **    *  X
+                  _X                    _X           x                *          x     X_
+            '''
+            ending_ascii3 = '''
+                                   * *    
+                                 *    *  *
+                            *  *    *     *  *
+                           *     *    *  *    *
+                       * *   *    *    *    *   *
+                       *     *  *    * * .#  *   *
+                       *   *     * #.  .# *   *
+                        *     "#.  #: #" * *    *
+                       *   * * "#. ##"       *
+                         *       "###
+                                   "##
+                                    ##.
+                                    .##:
+                                    :###
+                                    ;###
+                                  ,####.
+                      /\/\/\/\/\/.######.\/\/\/\/\
+            '''
             congrats_list = [congrats1, congrats2, congrats3]
+            ending_ascii_list = [ending_ascii, ending_ascii2, ending_ascii3]
             if scenario > 0:
+                print(random.choice(ending_ascii_list))
                 print(random.choice(congrats_list))
                 input(
                     f'\n{bulletpoint2}You\'ve reached a new ending! Try to discover other secret endings and possibilities...')
@@ -2095,21 +2141,52 @@ jgs .-=-.    ) -.
                     ''    ''            
                                 ''')
                 input('''
-                                        T~~
-                                        |
-                                        /"\\
-                                T~~     |'| T~~
-                            T~~ |    T~ WWWW|
-                            |  /"\   |  |  |/\T~~
-                            /"\ WWW  /"\ |' |WW|
-                            WWWWW/\| /   \|'/\|/"\\
-                            |   /__\/]WWW[\/__\WWWW
-                            |"  WWWW'|I_I|'WWWW'  |
-                            |   |' |/  -  \|' |'  |
-                            |'  |  |LI=H=LI|' |   |
-                            |   |' | |[_]| |  |'  |
-                            |   |  |_|###|_|  |   |
-                            '---'--'-/___\-'--'---'
+                                             __ 
+                                            (  )
+                                             )( 
+                                            | | 
+                                            | | 
+                                           ;  :
+                                          /    \\
+                                       ,-v|::::|    ,`^,
+                                   v.   )/:::::|_  `)v(
+                                ,-'),\  |:::::/ ^\   ||
+                                 )(||   |:::::"\/"  | |                    _
+                                | |||   )`----'||   | |                 __( )
+                             __ | || \  |._____||   | |   __           (  )(
+                            (  )| || | | v v v|'`|  | |  (  )           )(| |
+                             )( | |I |(^)v v v|,.| .' |   )(            | | |
+                         __  ||/  |I | )|v v v|I | |  |  | |           _| | |
+                        (  ) ||mmm|   \||v v v|I '||  |  | |          (  )| |
+                         ||  ||/v,+--'|||v(^)v|I  || ^|  | |           || | |
+                         ||  | \ |^ ^^`'`vv||v|vvv|| ^'.|  |           /| | |
+                         | \ |-| |^ ^^/  \\v||/^ ^^|/\^^||  |          .'| | |
+                         |  || | |    |  |v|||^ ^^|  \^|   |          | '.|.'
+                         |  \+-\ |^ ^^|__| |||    |   \|   |          |  | |
+                         |--|   \|^ ^,+  |+--+^ ^ |    Y _ | _        |  | |
+                         |  |   \|,-.:|  ||  |^ ^ |    |(.) (.)  _   |   | |
+                         |   \  \|; `;|  \/--+    | | /--.-._|_ (.)  |   | |
+                         |   |   \/ ( |   |  |^ ^d| |/| /|   | `-,-- |   | |,
+                         |   |   \ \ \|   |  | ^|8||o |o |  /|  /|   |   | '.
+              -hrr-      |   |  _,\--.|   |   | `"||| || | o | o |  |    '. |
+                         |\,-|-' _|--.|   |   |^ ^| | || | | | | | o|    ||  |
+                        /| |,|,-'   \ |._ |   |^^^|/O\/^\|/^\|/^\|/ |    ||  .
+                  _.Y._/ |   |       \|  `|   |  ^|_ / O Y O | O\/ |   ,'||  |
+                ,'     `\|   |    |   Y   |`--|  |   |---|.__|  /  |_,'  |   |
+             ,-,         )   |   -+-  |   |   | /^\  |   |   |  /  |    ,.   |
+            (  \       /\|       ,|.  |   |   |/   \/^\ /\  /\ /\\\\ |   | _'  |
+             \  \ \\\\/\//\    _,-_/  `.|   |    | o | o Y  \/  \//\|    ' [  /|
+              ) /\,-       ,:--'::-.  `.  |    |,-.|__ | o| o /\\\\\|   |   |/||
+             (  \   \/\/\,( ...:::::`-. `.     ( . |. ),-.|,- \\\\//\   |  //||
+              `--`-.___  /\-,----,._   `-.`.   /\  `-' `._| .//\\\\\/ _|.,'/||
+                       `--//// //|  `-._  `-\  | \_    |   _/\\\\\///\    /|||
+                         //// //|,: \\\\ \\\\--._\ |_| `---|__/  //\\\\/\\\\   / ||
+                        `-'`'//_|,   \\\\ \\\\ \\\\ /v\/\,      `.//_|| | | /|
+                            (_)       \\\\ \\\\ \\\\-._   \/ \;.,.    `-^',' |
+                                      (_)) \(_)  `---.__  ` \/\/\  (
+                                         `-'            `---._  /   \\
+                                                              `(     )
+                                                                `---'
                 ''')
                 if current_heir.strip().lower() == hero.name.strip().lower() or current_emperor.strip().lower() == hero.name.strip().lower():
                     if icequeen_life == 'alive':
@@ -2251,14 +2328,31 @@ jgs .-=-.    ) -.
 
             # The Forest
             def the_forest():
+                ascii_waterfall = '''
+                                                                         ---\=,__,>,_`-.     |
+                        :  |  `"""V#######,,_ `-  ""##################' --z--;" /_/  `. `.   |
+                           |          `/"""".`|`|| } }|.""""""""|"""""  --'//`/'  `    \  '. |
+                     :          :      |:     ||   |  |  :   :  |   :   ,_\---_\._   :  `.\ |/
+                                    :  /  :   |  |   || :  :      :    //--'> ___ ``-,_   \  \\
+                          `"^            :  ` ||   || |   :  :         '=-`',' / `-, __`-. |
+                       :    :          : :  : |  |    ||    :     ---  //7;<\     / ,--._ ` |
+                          .,      :        :  |   ||| || '       :     -/;\\'/` -='/|(    \ \\
+                         %#'            :    `| |||    |  :   :      :  // '\   // | `    | |
+                     :         :   `'   :  :  || # | |||    :            `    .        :  | 
+                                          :   | ||#|#| | ':    :    :             :       ` 
+                          '#"      :   :    : | ||,|, ||   :      /        :           |:  ||
+                   ""'                    :  \\\\|\ X XX///`      :|   :    |   :      : |   |
+                '''
                 forest_ans = input(f'\n{bulletpoint}As you travel through the mysterious forest, you are struck by its beauty and serenity. The trees are tall and majestic, and the air is fresh and clean. You feel a sense of peace and calm as you walk along the forest path.\n\n{bulletpoint2}But you also feel a sense of curiosity and wonder. The forest is filled with strange and exotic plants and animals, and you have never seen anything like them before. You are amazed by the diversity and beauty of the forest, and you cannot help but explore and learn more.\n\n{bulletpoint2}Suddenly, you come across a fork in the path. One path leads to the left, and the other to the right. You are unsure which way to go, and you stop to think. If you choose to take the path on the left, you continue on your journey through the forest and pass by a pond. If you choose to take the path on the right, you pass through a cave. Do you choose the pond route?\n')
                 if forest_ans.lower().strip() in yes:
-                    input(f'\n{bulletpoint2}You come across a small pond, where you see a family of ducks swimming and playing. You are charmed by their playful antics, and you cannot help but watch them for a while. You eventually come across an ancient waterfall. You are struck by its beauty and majesty, and you cannot help but admire it for a while. You are grateful for the journey that brought you to this beautiful place.\n')
+                    input(f'\n{bulletpoint2}You come across a small pond, where you see a family of ducks swimming and playing. You are charmed by their playful antics, and you cannot help but watch them for a while. You eventually come across an ancient waterfall. You are struck by its beauty and majesty, and you cannot help but admire it for a while.\n')
+                    input(ascii_waterfall)
                     menu()
                 else:
                     damage = random.randint(3, 20)
                     hero.health -= damage
-                    input(f'\n{bulletpoint2}You come across a dark and foreboding cave, and you feel a sense of danger and excitement. You decide to enter the cave, and you find yourself in a beautiful and hidden underground world. You are amazed by the beauty and wonder of this hidden place, and you cannot help but explore but you accidently trip and cut yourself and take {damage} damage to your health.\n\n{bulletpoint2}You decide to get back on track and eventually come across an ancient waterfall. You are struck by its beauty and majesty, and you cannot help but admire it for a while. You are grateful for the journey that brought you to this beautiful place.\n')
+                    input(f'\n{bulletpoint2}You come across a dark and foreboding cave, and you feel a sense of danger and excitement. You decide to enter the cave, and you find yourself in a beautiful and hidden underground world. You are amazed by the beauty and wonder of this hidden place, and you cannot help but explore but you accidently trip and cut yourself and take {damage} damage to your health.\n\n{bulletpoint2}You decided to get back on track and eventually came across an ancient waterfall. You are struck by its beauty and majesty, and you cannot help but admire it for a while.\n')
+                    input(ascii_waterfall)
                     menu()
                 
                 # Ancient Waterfall
@@ -2899,6 +2993,35 @@ jgs .-=-.    ) -.
             def empire_recruitment():
                 global ranks
                 nonlocal new_rank
+                input('''
+                                   (   .                   _ _ _ _ _
+                    (   .     .  .=##                      ]-I-I-I-[                    /
+                  .=##   .  (      ( .                     \ `  ' /        \\\\\\' ,      / //
+                    ( .   .=##  .       .                   |'  []          \\\\\//    _/ //'
+                  .     .   ( .    .        _----|          |.  '|           \_-//' /  //<'
+                                             ----|_----|    | ' .|             \ ///  >   \\\\\`
+                    ]-I-I-I-I-[       ----|      |     |    |. ` |            /,)-^>>  _\`
+                     \ `   '_/            |     / \    |    | /^\|            (/   \\\\ / \\\\\\
+                      []  `__|            ^    / ^ \   ^    | |*||                  //  //\\\\\\
+                      |__   ,|           / \  / ^ ^`\ / \   | ===|                 ((`
+                   ___| ___ ,|__        / ^  /=_=_=_=\ ^ \  |, `_|
+                   I_I__I_I__I_I       (====(_________)_^___|____|____                 
+                   \-\--|-|--/-/       |     I  [ ]__I I_I__|____I_I_|                     
+                    |[] `    '|__   _  |_   _|`__  ._[  _-\--|-|--/-/                      
+                   / \  [] ` .|  |-| |-| |-| |_| |_| |_| | []   [] |                
+                  <===>    `  |.            .      .     |    '    |
+                  ] []|  `    |   []    --   []      `   |   [] '  |
+                  <===>.  `   |  .   '  .       '  .[]   | '       |             
+                   \_/    .   |       .       '          |   `  [] |           
+                    | []    . |   .  .           ,  .    | ,    .  |                   
+                    |    . '  |       . []  '            |    []'  |
+                   / \   ..   |  `      .    .     `[]   | -   `   |                     
+                  <===>      .|=-=-=-=-=-=-=-=-=-=-=-=-=-|    .   / \                   
+                  ] []|` ` [] |`  .  .   _________   .   |-      <===>            
+                  <===>  `  ' | '   |||  |       |  |||  |  []   <===>                      
+                   \_/     -- |   . |||  |       |  |||  | .  '   \_/                     
+                  ./|' . . . .|. . .||||/|_______|\|||| /|. . . . .|\_
+                ''')
                 # list of random ranks that can be offered to the player.
                 ranks = [
                     'Stable sweep', 'Swordsman', 'Axeman', 'Spearman', 'Archer', 'Cavalry', 'Lieutenant', 'Captain', 
@@ -2994,6 +3117,24 @@ jgs .-=-.    ) -.
             def the_secret():
                 desert_ans = input(f'\n{bulletpoint}In the mountains at the highest peak, there lies a secret. You must retrieve this secret but you may never open it...\nYou lead the {new_monk_replacement} to the borders of the empire. You see a vast never ending desert, and the map shows that\'s the quickest route. There is another longer route through the forest. \nDo you take the desert route?')
                 if desert_ans.strip().lower() in yes or desert_ans.strip().lower() == 'desert':
+                    input('''
+                        .    _    +     .  ______   .          .
+                     (      /|\      .    |      \      .   +
+                         . |||||     _    | |   | | ||         .
+                    .      |||||    | |  _| | | | |_||    .
+                       /\  ||||| .  | | |   | |      |       .
+                    __||||_|||||____| |_|_____________\__________
+                    . |||| |||||  /\   _____      _____  .   .
+                      |||| ||||| ||||   .   .  .         ________
+                     . \|`-'|||| ||||    __________       .    .
+                        \__ |||| ||||      .          .     .
+                     __    ||||`-'|||  .       .    __________
+                    .    . |||| ___/  ___________             .
+                       . _ ||||| . _               .   _________
+                    _   ___|||||__  _ \\\\--//    .          _
+                         _ `---'    .)=\oo|=(.   _   .   .    .
+                    _  ^      .  -    . \.|
+                    ''')
                     print(f'\n{bulletpoint2}As you and the {new_monk_replacement} struggle through the blazing heat. You both hear a roaring rumble underneath your feet...') 
                     menu()
                 else:
@@ -3028,6 +3169,19 @@ jgs .-=-.    ) -.
                     f'\n{bulletpoint}As you and the {new_monk_replacement} walked through the frozen wasteland, you both could feel the cold seeping into your bones. The air was frigid and biting, and your breath came out in white plumes.\n\n{bulletpoint2}Eventually, you both reached the edge of a massive, thin-ice lake. In the distance, you can see the towering peak of the mountain you were trying to reach. But first, you both would have to cross the lake.\n\n{bulletpoint2} Do you still proceed?')
                 if frozen_wasteland_ans.strip().lower() in yes:
                     kindness_list = ['brings you a warm blanket', 'made a bed to keep you warm', 'shared their food with you', 'checked on you regularly to make sure you\'re okay', 'shared their water with you', 'teaches you how to start a fire', 'provided emotional support and encouragement', 'stayed by your side through the entire ordeal', 'listened to your life concerns and offers advice throughout the night', 'kept you company and helped you pass the time', 'set a small campfire to keep both of you warm']
+                    print('''
+                               (                 ,&&&.
+                               )                .,.&&
+                              (  (              \=__/
+                                  )             ,'-'.
+                            (    (  ,,      _.__|/ /|
+                             ) /\ -((------((_|___/ |
+                           (  // | (`'      ((  `'--|
+                         _ -.;_/ \\--._      \\ \-._/.
+                        (_;-// | \ \-'.\    <_,\_\`--'|
+                        ( `.__ _  ___,')      <_,-'__,'
+                   jrei  `'(_ )_)(_)_)'
+                    ''')
                     random_kindness = random.choice(kindness_list)
                     input(f'\n{bulletpoint2}You both start making your way slowly... you took a tentative step onto the ice, and immediately felt a crack beneath your feet. You both froze, unsure of what to do. The ice beneath you felt thin and brittle, and one wrong move could send you both plunging into the icy waters below.\n\n{bulletpoint2} As you continued the journey across the frozen lake, you stumbled upon a strange metal ship that was partially submerged in the ice. You both decided to camp inside the ship for the night, and the {new_monk_replacement} {random_kindness}.\n')
                     menu()
@@ -3127,7 +3281,36 @@ _,'    \_>\_/    ',_
                             menu()
                         else:
                             print('You passed!')
-
+                input('''
+                                     |					
+                            .               /				
+                             \       I     				
+                                         /
+                               \  ,g88R_
+                                 d888(`  ).                   _
+                        -  --==  888(     ).=--           .+(`  )`.
+                       )         Y8P(       '`.          :(   .    )
+                               .+(`(      .   )     .--  `.  (    ) )
+                              ((    (..__.:'-'   .=(   )   ` _`  ) )
+                       `.     `(       ) )       (   .  )     (   )  ._
+                         )      ` __.:'   )     (   (   ))     `-'.:(`  )
+                       )  )  ( )   *    --'   *   `- __.'   *    *:(      ))  *
+                       .-'  (_.'    *   *  *     .')   *     *      `(    )  ))  *
+                                            _  (_  )     *    *    *  ` __.:'
+                         *    *      *     /#\\        *    *    *    *      *
+                           *     *        /###\     /\\  *        *      *     *     *
+                        *         *   *  /  ###\   /##\  /\\  *     *   *     *    *
+                           *   *    *   /      #\ /####\/##\\*    *     *    *   *    *    *
+                      *       *  *     /  /      /   # /  ##\   *     *   _   *   /\\  *
+                        *      *     // //  /\  /    _/  /  #\ _    *    /#\    _/##\   */\\
+                           *      * // /   /  \     /   /    #\ \  * * _/###\_ /   ##\__/ _\\
+                        *      *   /  \   / .. \   / /   _   { \ \   _/       / //    /    \\\\
+                           /\     /    /\  ...  \_/   / / \   } \ | /  /\  \ /  _    /  /    \ /\\
+                        _ /  \  /// / .\  ..%:.  /... /\ . \ {:  \\\\   /. \     / \  /   ___   /  \\
+                       /.\ .\.\// \/... \.::::..... _/..\ ..\:|:. .  / .. \\\\  /.. \    /...\ /  \ \\
+                      /...\.../..:.\. ..:::::::..:..... . ...\{:... / %... \\\\/..%. \  /./:..\__   \\
+                       .:..\:..:::....:::;;;;;;::::::::.:::::.\}.....::%.:. \ .:::. \/.%:::.:..\\
+                ''')
                 input(f'\n{bulletpoint2}You finally reach the peak of the mountain. The weather is bright and snowing. You see a breathtaking view of the frozen lake, and a large castle made of ice below the mountain. You don\'t see anything on top except something that seems to be glowing underneath the snow. You try to wipe the snow and then all of a sudden glowing squares pop up from the ground. A whispering voice asks you a question...')
                 box_puzzle() # Asks the first two puzzle questions.
                 snowball_question = input( # Third question asked.
@@ -3386,6 +3569,28 @@ _,'    \_>\_/    ',_
                         beggar()
         
                 elif treasure_ans == '6':
+                    input('''
+                                             _
+                                            _)\.-.
+                            .-.__,___,_.-=-. )\`  a`\_
+                        .-.__\__,__,__.-=-. `/  \     `\\
+                        {~,-~-,-~.-~,-,;;;;\ |   '--;`)/
+                        \-,~_-~_-,~-,(_(_(;\/   ,;/
+                        ",-.~_,-~,-~,)_)_)'.  ;;(
+                            `~-,_-~,-~(_(_(_(_\  `;\\
+                    ,          `"~~--,)_)_)_)\_   \\
+                    |\              (_(_/_(_,   \  ;
+                    \ '-.       _.--'  /_/_/_)   | |
+                        '--.\    .'          /_/    | |
+                            ))  /       \      |   /.'
+                        //  /,        | __.'|  ||
+                        //   ||        /`    (  ||
+                        ||    ||      .'       \ \\\\
+                        ||    ||    .'_         \ \\\\
+                        \\\\   //   / _ `\        \ \\\\__
+                    jgs    \\'-'/(   _  `\,;        \ '--:,
+                            `"`  `"` `-,,;         `"`",,;
+                    ''')
                     add_health(griffin) # Adds monster health if it has already been killed.
                     input(
                         f'\n{bulletpoint2}When you enter the room, you see a magestic griffin monster with the body, tail, and back legs of a lion; the head and wings of an eagle. It turns over to you and starts attacking!\n')
@@ -3724,7 +3929,30 @@ _,'    \_>\_/    ',_
                 beggar()
             # Passageway
             def passageway():
-
+                ascii_locked_door = '''
+                88888888888888888888888888888888888888888888888888888888888888888888888
+                88.._|      | `-.  | `.  -_-_ _-_  _-  _- -_ -  .'|   |.'|     |  _..88
+                88   `-.._  |    |`!  |`.  -_ -__ -_ _- _-_-  .'  |.;'   |   _.!-'|  88
+                88      | `-!._  |  `;!  ;. _______________ ,'| .-' |   _!.i'     |  88
+                88..__  |     |`-!._ | `.| |_______________||."'|  _!.;'   |     _|..88
+                88   |``"..__ |    |`";.| i|_|MMMMMMMMMMM|_|'| _!-|   |   _|..-|'    88
+                88   |      |``--..|_ | `;!|l|MMoMMMMoMMM|1|.'j   |_..!-'|     |     88
+                88   |      |    |   |`-,!_|_|MMMMP'YMMMM|_||.!-;'  |    |     |     88
+                88___|______|____!.,.!,.!,!|d|MMMo * loMM|p|,!,.!.,.!..__|_____|_____88
+                88      |     |    |  |  | |_|MMMMb,dMMMM|_|| |   |   |    |      |  88
+                88      |     |    |..!-;'i|r|MPYMoMMMMoM|r| |`-..|   |    |      |  88
+                88      |    _!.-j'  | _!,"|_|M<>MMMMoMMM|_||!._|  `i-!.._ |      |  88
+                88     _!.-'|    | _."|  !;|1|MbdMMoMMMMM|l|`.| `-._|    |``-.._  |  88
+                88..-i'     |  _.''|  !-| !|_|MMMoMMMMoMM|_|.|`-. | ``._ |     |``"..88
+                88   |      |.|    |.|  !| |u|MoMMMMoMMMM|n||`. |`!   | `".    |     88
+                88   |  _.-'  |  .'  |.' |/|_|MMMMoMMMMoM|_|! |`!  `,.|    |-._|     88
+                88  _!"'|     !.'|  .'| .'|[@]MMMMMMMMMMM[@] \|  `. | `._  |   `-._  88
+                88-'    |   .'   |.|  |/| /                 \|`.  |`!    |.|      |`-88
+                88      |_.'|   .' | .' |/                   \  \ |  `.  | `._-Lee|  88
+                88     .'   | .'   |/|  /                     \ |`!   |`.|    `.  |  88
+                88  _.'     !'|   .' | /                       \|  `  |  `.    |`.|  88
+                88 8888888888888888888888888888888888888888888888888888888888888(FL)888
+                '''
                 passageway_ans = input(
                     f'\n{bulletpoint}While walking through the castle, you notice an obscure passageway behind a painting that wasn\'t fully closed. Do you enter it?\n')
                 if passageway_ans.lower().strip() in yes:
@@ -3958,6 +4186,7 @@ _,'    \_>\_/    ',_
                                     wall_3()
 
                             def wall_locked_room():
+                                input(ascii_locked_door)
                                 nonlocal wall_key_count
                                 print('▄▄▄▄ 🚪▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
                                 print('▄▄▄᭄    ᭄▄▄▄▄▄▄▄▄▄▄▄▄▄')
@@ -4046,6 +4275,7 @@ _,'    \_>\_/    ',_
                                 opendoor = input(
                                     f'\n{bulletpoint}Would you like to open the door?\n')
                                 if opendoor.lower() == 'yes':
+                                    input(ascii_locked_door)
                                     vaulted_chambers()
                                 else:
                                     wall_3rightdown()
@@ -4096,7 +4326,33 @@ _,'    \_>\_/    ',_
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄       ▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ 🕷▄▄▄▄▄▄▄▄▄▄')
                                 print('▄▄▄▄   ▄▄▄▄▄▄▩               𐀪▄▄▄▄▄▄▄▄▄▄')
-                                print('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
+                                input('▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄')
+                                input('''
+                                               \_______/
+                                           `.,-'\_____/`-.,'
+                                            /`..'\ _ /`.,'\\
+                                           /  /`.,' `.,'\  \\
+                                          /__/__/     \__\__\__
+                                          \  \  \     /  /  /
+                                           \  \,'`._,'`./  /
+                                            \,'`./___\,'`./
+                                           ,'`-./_____\,-'`.
+                                               /       \\
+                                              (
+                                              )
+                                             (
+                                       /\  .-"""-.  /\\
+                                      //\\\\/  ,,,  \//\\\\
+                                      |/\| ,;;;;;, |/\|
+                                      //\\\\\;-"""-;///\\\\
+                                     //  \/   .   \/  \\\\
+                                    (| ,-_| \ | / |_-, |)
+                                      //`__\.-.-./__`\\\\
+                                     // /.-(() ())-.\ \\\\
+                                    (\ |)   '---'   (| /)
+                                     ` (|           |) `
+                               jgs     \)           (/
+                                ''')
                                 input(
                                     f'\n{bulletpoint}A Massive 10 foot {arachne.name} dropped from the ceiling! You\'re trapped, there\'s no where to run except to fight!\n')
                                 battle(hero, arachne, 'spins web',
@@ -4123,6 +4379,7 @@ _,'    \_>\_/    ',_
                                     wall_1down()
                                 elif direction == up:
                                     if current_heir.strip().lower() == hero.name.strip().lower() or current_emperor.strip().lower() == hero.name.strip().lower():
+                                        input(ascii_locked_door)
                                         input(
                                             f'\n{bulletpoint2}You use your key to leave.\n')
                                         menu()
@@ -4280,6 +4537,35 @@ _,'    \_>\_/    ',_
             # The Beggar
             def beggar():
                 nonlocal current_emperor
+                print('''
+                    .                  .-.    .  _   *     _   .
+                           *          /   \     ((       _/ \       *    .
+                         _    .   .--'\/\_ \     `      /    \  *    ___
+                     *  / \_    _/ ^      \/\\'__        /\/\  /\  __/   \ *
+                       /    \  /    .'   _/  /  \  *' /    \/  \/ .`'\_/\   .
+                  .   /\/\  /\/ :' __  ^/  ^/    `--./.'  ^  `-.\ _    _:\ _
+                     /    \/  \  _/  \-' __/.' ^ _   \_   .'\   _/ \ .  __/ \\
+                   /\  .-   `. \/     \ / -.   _/ \ -. `_/   \ /    `._/  ^  \\
+                  /  `-.__ ^   / .-'.--'    . /    `--./ .-'  `-.  `-. `.  -  `.
+                @/        `.  / /      `-.   /  .-'   / .   .'   \    \  \  .-  \%
+                ''')
+                print('''
+                                                T~~
+                                                |
+                                                /"\\
+                                        T~~     |'| T~~
+                                    T~~ |    T~ WWWW|
+                                    |  /"\   |  |  |/\T~~
+                                    /"\ WWW  /"\ |' |WW|
+                                    WWWWW/\| /   \|'/\|/"\\
+                                    |   /__\/]WWW[\/__\WWWW
+                                    |"  WWWW'|I_I|'WWWW'  |
+                                    |   |' |/  -  \|' |'  |
+                                    |'  |  |LI=H=LI|' |   |
+                                    |   |' | |[_]| |  |'  |
+                                    |   |  |_|###|_|  |   |
+                                    '---'--'-/___\-'--'---'  
+                ''')
                 if current_heir == 'Beggar' or current_heir == 'The Beggar':
                     beggar_ans = input(f'\n{bulletpoint}The beggar shows his gratitude for delivering the message and as a small token of appreciation, he hands you a lump of gold that he retrieved from the castle bank.\nHe says he just remembered he needs $5 back since he needs to buy some food from the local shops. Do you give him the money?\n')
                     add_money(100,1000)
@@ -4405,7 +4691,17 @@ _,'    \_>\_/    ',_
                                 input(
                                     f'\n{bulletpoint2}He yells at you, calls you a peasant, and then proceeds to jail you in the castle dungeon.\n')
                                 menu()
-
+                                input('''
+                                     ================================
+                                      ||     ||<(.)>||<(.)>||     || 
+                                      ||    _||     ||     ||_    || 
+                                      ||   (__D     ||     C__)   || 
+                                      ||   (__D     ||     C__)   ||
+                                      ||   (__D     ||     C__)   ||
+                                      ||   (__D     ||     C__)   ||
+                                      ||     ||     ||     ||  dwb||
+                                     ================================
+                                ''')
                                 #Jail Inmate
                                 global body_part
                                 body_part = 'arm'
