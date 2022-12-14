@@ -1414,6 +1414,8 @@ jgs .-=-.    ) -.
             current_emperor = 'emperor'
             noble_life = 'alive'
             thugs_life = 'alive'
+            new_goons = 'thugs'
+            new_goons_list = ['wolves', 'ruffians', 'brutes', 'hoodlums', 'hooligans', 'rowdies', 'gang members', 'enforcers']
             icequeen_life = 'alive'
             current_kingdom_name = 'Ice Kingdom'
             new_monk_replacement = 'monk'
@@ -1955,10 +1957,13 @@ jgs .-=-.    ) -.
                         beggar()
                     else:
                         nonlocal new_monk_replacement
+                        nonlocal new_goons
                         if new_kill.strip().lower() in ('noble', 'noble lady'):
                             noble_life = 'dead'
                         elif new_kill.strip().lower() == new_monk_replacement.strip().lower():
                             new_monk_replacement = random.choice(new_monk_replacement_list)
+                        elif new_kill.strip().lower() == new_goons.strip().lower():
+                            new_goons = random.choice(new_goons_list)
                         input(
                             f'\n{bulletpoint2}You are to assassinate {new_kill}. You accept the mission.')
                         input(f'{bulletpoint2}The night was dark and cold, the perfect conditions for an assassination. You crept through the shadows, senses heightened and your heart pounding with anticipation.\n\n{bulletpoint2}Your target was {new_kill}. You had studied {new_kill}\'s routine and habits, and you knew exactly when and where they would be most vulnerable.\n\n{bulletpoint2}You made your way to the designated spot, a secluded alleyway near their residence. Your waited in the shadows, your weapon of choice at the ready.\n\nAs {new_kill} walked past, you stepped out of the darkness and struck. Your blade sliced through the air with deadly precision, finding its mark in {new_kill}\'s throat. {new_kill} gasped and clutched at their neck, but it was too late. You watched as the life drained from their eyes, and then disappeared into the night, leaving no trace of your presence behind.\n\n{bulletpoint2}The kill was clean and efficient, a testament to your skills as an assassin. you would be rewarded for the successful mission, and you would be ready for the next one. That was the life of an assassin, a life of danger and deception, but one that you embraced wholeheartedly.\n')
@@ -4311,6 +4316,7 @@ _,'    \_>\_/    ',_
                         mysterious_monk()
 
                 else:
+                    nonlocal new_goons
                     if current_heir == 'Beggar' or current_heir == 'The Beggar':
                         input(
                             f'\n{bulletpoint2}You kick him, spit on him, and yell that you don\'t acknowledge a dirty beggar as the next heir and walk away laughing.\n')
@@ -4320,14 +4326,15 @@ _,'    \_>\_/    ',_
                         menu()
 
                     # Three Thugs
-                    new_goons = 'muscular street thugs'
                     if thugs_life == 'dead':
-                        new_goons = 'wolves'
+                        new_goons = random.choice(new_goons)
+                    else:
+                        new_goons = 'thugs'
                     three_thugs_ans = input(
                         f'\n{bulletpoint}The beggar calls three {new_goons} over and asks them to rough you up. Do you stay and fight?\n')
                     if three_thugs_ans.strip().lower() in yes:
                         if current_heir.strip().lower() == hero.name.strip().lower() or current_emperor.strip().lower() == hero.name.strip().lower():
-                            input(f'\n{bulletpoint}You oversee the red dragon empire, and you have some powerful allies at your disposal. When the goons arrive, you call out to the castle guards, who immediately come to your aid.\n\n{bulletpoint2}The guards quickly arrest the goons, who are no match for their superior training and weaponry. You are unharmed, and the beggar is left empty-handed and disappointed.\n')
+                            input(f'\n{bulletpoint}You oversee the red dragon empire, and you have some powerful allies at your disposal. When the {new_goons} arrive, you call out to the castle guards, who immediately come to your aid.\n\n{bulletpoint2}The guards quickly arrest the {new_goons}, who are no match for their superior training and weaponry. You are unharmed, and the beggar is left empty-handed and disappointed.\n')
                         else:
                             damage = random.randint(3,20)
                             input(f'\n{bulletpoint2}The {new_goons} landed a couple large blows to your stomach and did {damage} damage to your health. You managed to run away as fast as possible to a local street vendor nearby to hide.\n')
@@ -4339,10 +4346,10 @@ _,'    \_>\_/    ',_
                             secret_item()
                     else:
                         input(
-                            f'\n{bulletpoint2}You ran over to the castle guards and the street thugs dissapeared.\n')
+                            f'\n{bulletpoint2}You ran over to the castle guards and the {new_goons} dissapeared.\n')
                         menu()
                         if current_heir.strip().lower() == hero_name.strip().lower():
-                            input(f'\n{bulletpoint2}The guards yell to PROTECT THE HEIR! The guards then locate the street thugs and proceed to send them to jail. The guards then royally escort you into the castle immediately.\n')
+                            input(f'\n{bulletpoint2}The guards yell to PROTECT THE HEIR! The guards then locate the {new_goons} and proceed to send them to jail. The guards then royally escort you into the castle immediately.\n')
                             new_path = input(
                                 f'\n{bulletpoint}One of your advisors tells you that there is a trade mission that you should go on. You also feel like exploring the castle more. What do you do?\n')
                             if 'trade' in new_path.lower() or 'mission' in new_path.lower():
@@ -4354,7 +4361,7 @@ _,'    \_>\_/    ',_
                                 menu()
                                 passageway()
                         elif current_emperor.strip().lower() == hero.name.strip().lower():
-                            input(f'\n{bulletpoint2}The guards yell to PROTECT THE EMPEROR! The guards then locate the street thugs, beat them up, and then proceed to send them to jail. The guards then royally escort you into the castle immediately.\n')
+                            input(f'\n{bulletpoint2}The guards yell to PROTECT THE EMPEROR! The guards then locate the street {new_goons}, beat them up, and then proceed to send them to jail. The guards then royally escort you into the castle immediately.\n')
                             new_path = input(
                                 f'\n{bulletpoint}One of your advisors tells you that there is a trade mission that you may want to go on. You also feel like exploring the castle more. What do you do?\n')
                             if 'trade' in new_path.lower() or 'mission' in new_path.lower():
