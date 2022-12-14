@@ -2003,7 +2003,7 @@ jgs .-=-.    ) -.
                     if blackjack_ans.strip().lower() in yes:
                         input(
                             f'\n{bulletpoint2}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\nPress enter to continue...')
-                    while blackjack_ans.strip().lower() in yes:
+                    while blackjack_ans.strip().lower() in yes or blackjack_ans.strip().lower() == '':
                         blackjack()
                         blackjack_ans = input(
                             f'\n{bulletpoint2}(The goal is to get as close to 21 as possible. "Hit" will draw another card, while "Stand" will stop drawing)\n\n{bulletpoint2}(You can also press enter to play again)\n{bulletpoint}Play another round of Whackjack?\n')
