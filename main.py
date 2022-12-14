@@ -1958,12 +1958,14 @@ jgs .-=-.    ) -.
                     else:
                         nonlocal new_monk_replacement
                         nonlocal new_goons
+                        nonlocal thugs_life
                         if new_kill.strip().lower() in ('noble', 'noble lady'):
                             noble_life = 'dead'
                         elif new_kill.strip().lower() == new_monk_replacement.strip().lower():
                             new_monk_replacement = random.choice(new_monk_replacement_list)
                         elif new_kill.strip().lower() == new_goons.strip().lower():
                             new_goons = random.choice(new_goons_list)
+                            thugs_life = 'dead'
                         input(
                             f'\n{bulletpoint2}You are to assassinate {new_kill}. You accept the mission.')
                         input(f'{bulletpoint2}The night was dark and cold, the perfect conditions for an assassination. You crept through the shadows, senses heightened and your heart pounding with anticipation.\n\n{bulletpoint2}Your target was {new_kill}. You had studied {new_kill}\'s routine and habits, and you knew exactly when and where they would be most vulnerable.\n\n{bulletpoint2}You made your way to the designated spot, a secluded alleyway near their residence. Your waited in the shadows, your weapon of choice at the ready.\n\nAs {new_kill} walked past, you stepped out of the darkness and struck. Your blade sliced through the air with deadly precision, finding its mark in {new_kill}\'s throat. {new_kill} gasped and clutched at their neck, but it was too late. You watched as the life drained from their eyes, and then disappeared into the night, leaving no trace of your presence behind.\n\n{bulletpoint2}The kill was clean and efficient, a testament to your skills as an assassin. you would be rewarded for the successful mission, and you would be ready for the next one. That was the life of an assassin, a life of danger and deception, but one that you embraced wholeheartedly.\n')
@@ -2516,9 +2518,10 @@ jgs .-=-.    ) -.
                 previous_position = '' # Important variable to keep track of the last position. This will help return the player to their previous location if they enter the opposite cardinal direction.
                 start_count = 0
                 saved_direction = ''
-
+                claimed_land = 1
                 #Island Trade Menu
                 def land_trade(land_emote, land_dict, item1, item2, item3):
+                    nonlocal claimed_land
                     input('Press enter to continue...')
                     open_seas(land_emote) # Displaying the area
                     trade_count = 1
@@ -2527,14 +2530,22 @@ jgs .-=-.    ) -.
                             f'\n{bulletpoint2}Local Shop Items for Trade ($100 each):')
                         print([(k, land_dict[k]) for k in land_dict]) # Displaying the Key and Value for the Trade items available.
                         #Player can enter the key string to purchase the value which is an emote of the item.
+                        if current_position == new_colony:
+                            if claimed_land == 1:
+                                print(f'{bulletpoint2}You can try to claim this new continent.')
+                            else:
+                                print(f'{bulletpoint2}You\'ve claimed this land as your new home.')
                         buy_land = input(
-                            f'{bulletpoint2}Current Money: ${hero.money}\n{bulletpoint}Please enter the number for the local item you wish to purchase ({item1}, {item2}, {item3}):\n{bulletpoint2}Type "exit" to exit the menu.')
+                            f'{bulletpoint2}Current Money: ${hero.money}\n{bulletpoint}Please enter the number for the local item you wish to purchase ({item1}, {item2}, {item3}):\n{bulletpoint2}Type "exit" to exit the menu.\n{bulletpoint}What would you like to do:')
                         print(f'{bulletpoint2}Current Trade Items Held: {hero_land_items}') # Displaying currently held trade items.
                         if buy_land.lower() == 'exit': #Player can exit the menu by typing exit.
                             trade_count -= 1 # Ends the while loop.
-                        if buy_land.lower() in ('conquer', 'take over', 'conquer it' 'claim', 'claim it', 'take over it', 'conquer it', 'take it', 'take it over'):
+                        elif buy_land.lower() == 'claim' or buy_land.lower() == 'claim it':
                             if current_position == new_colony:
-                                input(f'\n{bulletpoint2}You have decided to embark on a journey to take over a mysterious jungle continent in the south. After months of sailing, you and your crew finally reach the shores of the continent and make your way inland. The jungle is dense and teeming with life, and you soon come across towering mountains and a massive volcano.\n\n{bulletpoint2}As you continue deeper into the jungle, you come across a mysterious abandoned temple and city. The city is in ruins, and it appears that it has been abandoned for many years. Despite this, you are struck by the advanced architecture and impressive stonework of the temple and city.\n\n{bulletpoint2}As you explore the temple, you come across a strange sight. Lava flowing through the temple, creating a surreal and otherworldly atmosphere. You realize that this must be a powerful and sacred place, and you decide to claim it as your new home.\n\n{bulletpoint2}You order your crew to set up camp and begin to explore the city, looking for any clues as to what may have happened to the previous inhabitants. You also send out scouts to explore the surrounding area and see if there are any other civilizations nearby.\n\n{bulletpoint2}As you explore the temple and city, you are filled with a sense of excitement and adventure. You have claimed new land and you are determined to make this new home a thriving and prosperous one!\n')
+                                if claimed_land > 0:
+                                    input(f'\n{bulletpoint2}You have decided to embark on a journey to take over a mysterious jungle continent in the south. After months of sailing, you and your crew finally reach the shores of the continent and make your way inland. The jungle is dense and teeming with life, and you soon come across towering mountains and a massive volcano.\n\n{bulletpoint2}As you continue deeper into the jungle, you come across a mysterious abandoned temple and city. The city is in ruins, and it appears that it has been abandoned for many years. Despite this, you are struck by the advanced architecture and impressive stonework of the temple and city.\n\n{bulletpoint2}As you explore the temple, you come across a strange sight. Lava flowing through the temple, creating a surreal and otherworldly atmosphere. You realize that this must be a powerful and sacred place, and you decide to claim it as your new home.\n\n{bulletpoint2}You order your crew to set up camp and begin to explore the city, looking for any clues as to what may have happened to the previous inhabitants. You also send out scouts to explore the surrounding area and see if there are any other civilizations nearby.\n\n{bulletpoint2}As you explore the temple and city, you are filled with a sense of excitement and adventure. You have claimed new land and you are determined to make this new home a thriving and prosperous one!\n')
+                                    # Set the claimed_land variable to be 0 to indicate that land has been claimed
+                                    claimed_land = 0
                         else: # Player to enter the item number they wish to purchase.
                             try: # Try and Except to make sure the player inputs a valid number and not a word.
                                 # Player to enter the item amount they wish to purchase from the dictionary for the island.
@@ -4326,10 +4337,10 @@ _,'    \_>\_/    ',_
                         menu()
 
                     # Three Thugs
-                    if thugs_life == 'dead':
-                        new_goons = random.choice(new_goons)
-                    else:
+                    if thugs_life == 'alive':
                         new_goons = 'thugs'
+                    else:
+                        pass
                     three_thugs_ans = input(
                         f'\n{bulletpoint}The beggar calls three {new_goons} over and asks them to rough you up. Do you stay and fight?\n')
                     if three_thugs_ans.strip().lower() in yes:
