@@ -780,7 +780,6 @@ jgs .-=-.    ) -.
             print(
                 f'{hero.name} played: {userChoice}.\n Best Friend Played: {computerChoice}.\n {determineWinner(userChoice, computerChoice)}')
 
-
         def blackjack():
             # Define a list of suits
             suits = ["Hearts", "Spades", "Clubs", "Diamonds"]
@@ -1465,7 +1464,7 @@ jgs .-=-.    ) -.
             thugs_life = 'alive'
             new_goons = 'thugs'
             new_goons_list = ['wolves', 'ruffians', 'brutes', 'hoodlums', 'hooligans', 'rowdies', 'gang members', 'enforcers']
-            icequeen_life = 'dead'
+            icequeen_life = 'alive'
             current_kingdom_name = 'Ice Kingdom'
             current_empire_name = 'Red Dragon Empire'
             new_monk_replacement = 'monk'
