@@ -377,8 +377,7 @@ def adventure_game():
             # Combined the battle menu with the checking health function together to make it easier to call for the code below.
             battle_Health_Menu()
             def battlemenu():
-                nonlocal drone_battery
-                nonlocal elixir_turns
+                nonlocal drone_battery, elixir_turns
                 if drone_actived == True:
                     if drone_battery > 0:
                         print(f'{bulletpoint2}Incoming Drone Strikes!!!')
@@ -521,54 +520,54 @@ def adventure_game():
                     summoned = random.choice(summons) # Selects a random summon from the summoned list.
                     if summoned == summons[0]:
                         input('''
-                                        .                                            .
-     *   .                  .              .        .   *          .
-  .         .                     .       .           .      .        .
-        o                             .                   .
-         .              .                  .           .
-          0     .
-                 .          .                 ,                ,    ,
- .          \          .                         .
-      .      \   ,
-   .          o     .                 .                   .            .
-     .         \                 ,             .                .
-               #\##\#      .                              .        .
-             #  #O##\###                .                        .
-   .        #*#  #\##\###                       .                     ,
-        .   ##*#  #\##\##               .                     .
-      .      ##*#  #o##\#         .                             ,       .
-          .     *#  #\#     .                    .             .          ,
-                      \          .                         .
-____^/\___^--____/\____O______________/\/\---/\___________---______________
-   /\^   ^  ^    ^                  ^^ ^  '\ ^          ^       ---
-         --           -            --  -      -         ---  __       ^
-   --  __                      ___--  ^  ^                         --  __
-
-Robert Casey
+                                                          .                                            .
+                       *   .                  .              .        .   *          .
+                    .         .                     .       .           .      .        .
+                          o                             .                   .
+                           .              .                  .           .
+                            0     .
+                                   .          .                 ,                ,    ,
+                   .          \          .                         .
+                        .      \   ,
+                     .          o     .                 .                   .            .
+                       .         \                 ,             .                .
+                                 #\##\#      .                              .        .
+                               #  #O##\###                .                        .
+                     .        #*#  #\##\###                       .                     ,
+                          .   ##*#  #\##\##               .                     .
+                        .      ##*#  #o##\#         .                             ,       .
+                            .     *#  #\#     .                    .             .          ,
+                                        \          .                         .
+                  ____^/\___^--____/\____O______________/\/\---/\___________---______________
+                     /\^   ^  ^    ^                  ^^ ^  '\ ^          ^       ---
+                           --           -            --  -      -         ---  __       ^
+                     --  __                      ___--  ^  ^                         --  __
+                  
+                  Robert Casey
                         ''')
                     elif summoned == summons[1]:
                         print(levi_image)
                         print(levi_image2)
                     elif summoned == summons[2]:
                         input('''
-                            ,-.
-       ___,---.__          /'|`\          __,---,___
-    ,-'    \`    `-.____,-'  |  `-.____,-'    //    `-.
-  ,'        |           ~'\     /`~           |        `.
- /      ___//              `. ,'          ,  , \___      \\
-|    ,-'   `-.__   _         |        ,    __,-'   `-.    |
-|   /          /\_  `   .    |    ,      _/\          \   |
-\  |           \ \`-.___ \   |   / ___,-'/ /           |  /
- \  \           | `._   `\\  |  //'   _,' |           /  /
-  `-.\         /'  _ `---'' , . ``---' _  `\         /,-'
-     ``       /     \    ,='/ \`=.    /     \       ''
-             |__   /|\_,--.,-.--,--._/|\   __|
-             /  `./  \\`\ |  |  | /,//' \,'  \\
-eViL        /   /     ||--+--|--+-/-|     \   \\
-           |   |     /'\_\_\ | /_/_/`\     |   |
-            \   \__, \_     `~'     _/ .__/   /
-             `-._,-'   `-._______,-'   `-._,-'
-                        ''')
+                                                 ,-.
+                            ___,---.__          /'|`\          __,---,___
+                         ,-'    \`    `-.____,-'  |  `-.____,-'    //    `-.
+                       ,'        |           ~'\     /`~           |        `.
+                      /      ___//              `. ,'          ,  , \___      \\
+                     |    ,-'   `-.__   _         |        ,    __,-'   `-.    |
+                     |   /          /\_  `   .    |    ,      _/\          \   |
+                     \  |           \ \`-.___ \   |   / ___,-'/ /           |  /
+                      \  \           | `._   `\\  |  //'   _,' |           /  /
+                       `-.\         /'  _ `---'' , . ``---' _  `\         /,-'
+                          ``       /     \    ,='/ \`=.    /     \       ''
+                                  |__   /|\_,--.,-.--,--._/|\   __|
+                                  /  `./  \\`\ |  |  | /,//' \,'  \\
+                     eViL        /   /     ||--+--|--+-/-|     \   \\
+                                |   |     /'\_\_\ | /_/_/`\     |   |
+                                 \   \__, \_     `~'     _/ .__/   /
+                                  `-._,-'   `-._______,-'   `-._,-'
+                                             ''')
                     elif summoned == summons[3]:
                         input('>>>>>----------------------->    '*50)
                     elif summoned == summons[4]:
@@ -599,19 +598,19 @@ eViL        /   /     ||--+--|--+-/-|     \   \\
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀''')
                         input('''
-      _, .--.
-    (  / (  '-.
-jgs .-=-.    ) -.
-   /   (  .' .   \\
-   \ ( ' ,_) ) \_/
-    (_ , /\  ,_/
-      '--\ `\--`
-         _\ _\\
-         `\ \\
-          _\_\\
-          `\\
-            \\
-        -.'.`\.'.-''')
+                                   _, .--.
+                                 (  / (  '-.
+                             jgs .-=-.    ) -.
+                                /   (  .' .   \\
+                                \ ( ' ,_) ) \_/
+                                 (_ , /\  ,_/
+                                   '--\ `\--`
+                                      _\ _\\
+                                      `\ \\
+                                       _\_\\
+                                       `\\
+                                         \\
+                                     -.'.`\.'.-''')
 
                     summon_damage = random.randint(99,10000)
                     input(
@@ -1000,6 +999,7 @@ jgs .-=-.    ) -.
                             bet_result('lost')
                             break
                     else:
+                        print('Player stands 👋')
                         break
                     # If the player decided to stand, break out of the loop
                 if eleven_double_bet == 0:
@@ -1014,9 +1014,7 @@ jgs .-=-.    ) -.
         hanged_person = 'inmate'
         the_gamble = 'the game'
         def hangman():
-            nonlocal hanged_person
-            nonlocal gamble_life
-            nonlocal the_gamble
+            nonlocal hanged_person, gamble_life, the_gamble
             hanged_person = 'inmate'
             if gamble_life == True:
                 hanged_person = hero.name
@@ -1088,13 +1086,13 @@ jgs .-=-.    ) -.
 
                 # If the letter input is a number like "5" or symbol like "^" then this message will be printed
                 while guess not in alphabet:
-                    print(
+                    input(
                         f'{bulletpoint2}You must enter a letter in the alphabet. Please try again.')
                     break
 
                 # Check if the letter has already been guessed
                 if guess in guessed_letters:
-                    print(
+                    input(
                         f'{bulletpoint2}You already guessed that letter. Try again.')
                 else:
                     # Add the letter to the list of guessed letters
@@ -1106,13 +1104,13 @@ jgs .-=-.    ) -.
                             if all(letter in guessed_letters for letter in word):
                                 if hanged_person == hero.name:
                                     gamble_life = False
-                                print(
+                                input(
                                     f'\n{bulletpoint2}The word was "{word}".\nCongratulations, you won the game! {hanged_person} was freed!')
                                 break
                             # If the letter is not in the word, increment the incorrect guess counter
                             if guess not in word:
                                 incorrect_guesses += 1
-                                print(f'{bulletpoint2}Sorry, please try again.')
+                                input(f'{bulletpoint2}Sorry, please try again.')
                         else:
                             pass
                     # Check if the letter is in the word
@@ -1124,12 +1122,12 @@ jgs .-=-.    ) -.
                                 print(f'{bulletpoint2}You guessed the correct word!')
                                 if hanged_person == hero.name:
                                     gamble_life = False
-                                print(
+                                input(
                                     f'\n{bulletpoint2}The word was "{word}".\nCongratulations, you won the game! {hanged_person} was freed! The word was "{word}"!')
                                 break
                             else:
                                 # If the guess is not the same as the correct word, then increment the incorrect guess counter
-                                print(
+                                input(
                                     f'{bulletpoint2}Please enter another letter. Try again.')
                                 incorrect_guesses += 1
                         else:
@@ -1139,7 +1137,7 @@ jgs .-=-.    ) -.
                             if all(letter in guessed_letters for letter in word):
                                 if hanged_person == hero.name:
                                     gamble_life = False
-                                print(
+                                input(
                                     f'\n{bulletpoint2}The word was "{word}".\nCongratulations, you won the game! {hanged_person} was freed! The word was "{word}"!')
                                 break
                     else:
@@ -1542,7 +1540,7 @@ jgs .-=-.    ) -.
                             wheat = input(
                                 f'{bulletpoint2}\nSorry, you can\'t afford this item. Press enter to continue...')
                             if wheat.lower() == 'gimmethebread':
-                                input(f'{bulletpoint2}Money magically appeared in your inventory!')
+                                input(f'\n{bulletpoint2}Money magically appeared in your inventory!\n')
                                 hero.money += 10000
                             else:
                                 pass
@@ -1575,10 +1573,7 @@ jgs .-=-.    ) -.
 
                 attack_or_not = input(f'{bulletpoint}You currently hold the emperor\'s entire army. Do you proceed to attack the {current_kingdom_name}?')
                 if attack_or_not not in yes:
-                    nonlocal current_emperor
-                    nonlocal emperor_life
-                    nonlocal new_rank
-                    nonlocal victory
+                    nonlocal current_emperor, emperor_life, new_rank, victory
                     emperor_life = 'dead'
                     current_emperor = hero.name.title()
                     input(f'{bulletpoint2}As the leader of the emperor\'s army, you were given the opportunity to attack the Ice Kingdom.\nBut as you were preparing for battle, you realized that this was the perfect opportunity to seize the throne of the Red Dragon Empire and become the new ruler yourself.')
@@ -1768,8 +1763,7 @@ jgs .-=-.    ) -.
 
             # Murder of the Three Thugs
             def murder_thugs():
-                nonlocal assassin_guild_membership
-                nonlocal thugs_life
+                nonlocal assassin_guild_membership, thugs_life
                 if thugs_life == 'alive':
                     input(f'{bulletpoint2}You spend weeks investigating and gathering information about the thugs. You learn their names, their habits, and their weaknesses. You plan and prepare your attack, determined to make the thugs pay for what they have done to you.\nFinally, the day of your revenge arrives. You ambush the thugs one by one, and you kill them with cold and ruthless efficiency. You feel a sense of satisfaction and relief as you see the thugs fall, knowing that you have avenged the attack.\nBut you also feel a sense of guilt and regret. You know that what you have done is wrong, and you wonder if there was a better way to resolve the conflict. You decide to leave town and start a new life, hoping to leave the past behind and find peace and happiness.\n')
                     thugs_life = 'dead'
@@ -1900,10 +1894,7 @@ jgs .-=-.    ) -.
 
             # The Assassin Guild
             def assassins_guild():
-                nonlocal emperor_life
-                nonlocal noble_life
-                nonlocal icequeen_life
-                nonlocal assassin_guild_membership
+                nonlocal emperor_life, noble_life, icequeen_life, assassin_guild_membership
                 global current_fountain_money
                 current_fountain_money = random.randint(1, 150)
                 drink_water_ans = input(f'\n{bulletpoint2}As the old man shows you around the City of the Rising Sun, you are struck by the peaceful and serene atmosphere of the city. People from all walks of life can be seen going about their business, and there is a sense of harmony and cooperation among the various different groups.\n\n{bulletpoint2}The old man leads you through the winding streets of the city, pointing out the various landmarks and places of interest. He shows you the central market, where merchants from all over the world come to trade their goods. You also visit the city\'s library, which is filled with ancient books and scrolls that contain knowledge and wisdom from the past.\n\n{bulletpoint2}As you continue your tour, the old man brings you to the city\'s main square, where a large fountain stands in the center. People are gathered around the fountain, enjoying the cool, refreshing water on a hot day. The old man tells you that the water of the fountain has healing properties, and many people come to drink from it to cure their ailments.\n\n{bulletpoint}Do you take a drink of this water?\n')
@@ -2101,9 +2092,7 @@ jgs .-=-.    ) -.
                         ending(ending5)
                         beggar()
                     else:
-                        nonlocal new_monk_replacement
-                        nonlocal new_goons
-                        nonlocal thugs_life
+                        nonlocal new_monk_replacement, new_goons, thugs_life
                         if new_kill.strip().lower() in ('noble', 'noble lady'):
                             noble_life = 'dead'
                         elif new_kill.strip().lower() == new_monk_replacement.strip().lower():
@@ -2175,7 +2164,11 @@ jgs .-=-.    ) -.
                             f'\n{bulletpoint}You feel slightly lightheaded and dizzy, and your movements may become slightly more exaggerated and uncoordinated. Suddenly the bartender says they have a special drink for you. It\'s a rare and potent spirit from the {current_kingdom_name}. Are you brave enough to try it?\n\n')
                         if second_drink_ans.lower().strip() in yes:
                             input(
-                                f'\n{bulletpoint}You are tempted by the offer. You have always been curious about the {current_kingdom_name} and its exotic liquors. After much hesitation, you decide to take the third drink. You raise the glass to your lips and take a sip. The liquid is fiery and sweet, and it burns all the way down your throat\n\n{bulletpoint2}As you drink, you notice that the other customers in the tavern are starting to get rowdy. Suddenly, one of them bumps into you and spills your drink.\n\n{bulletpoint2}Before you know it, you are locked in a fierce bar fight with the other customer. You throw punches and dodge blows, feeling reckless and invincible.\n\n{bulletpoint2}But your drunken state makes you slow and clumsy, and soon you are on the receiving end of a beating. You stumble and fall to the ground, feeling dazed and bruised.\n\n{bulletpoint2}Just as you are about to black out, you hear a loud noise and feel yourself being lifted off the ground. You open your eyes and see that you are being carried away on a cart by a group of good samaritans...\n')
+                                f'\n{bulletpoint}You are tempted by the offer. You have always been curious about the {current_kingdom_name} and its exotic liquors. After much hesitation, you decide to take the third drink. You raise the glass to your lips and take a sip. The liquid is fiery and sweet, and it burns all the way down your throat\n\n{bulletpoint2}As you drink, you notice that the other customers in the tavern are starting to get rowdy. Suddenly, one of them bumps into you and spills your drink.\n\n{bulletpoint2}Before you know it, you are locked in a fierce bar fight with the other customer. You throw punches and dodge blows, feeling reckless and invincible.\n\n')
+                            if assassin_guild_membership == False:
+                                input(f'\n{bulletpoint2}But your drunken state makes you slow and clumsy, and soon you are on the receiving end of a beating. You stumble and fall to the ground, feeling dazed and bruised.\n\n{bulletpoint2}Just as you are about to black out, you hear a loud noise and feel yourself being lifted off the ground. You open your eyes and see that you are being carried away on a cart by a group of good samaritans...\n')
+                            else:
+                                input(f'\n{bulletpoint2}You quickly realize that your training as an assassin has given you a distinct advantage in the fight. You easily dodge the other customer\'s attacks and counter with precise strikes. Within minutes, the customer is on the ground, unconscious.\n\n{bulletpoint2}The other patrons in the tavern are stunned by your fighting skills and quickly back away, giving you a wide berth. You take a deep breath and survey the scene, feeling a mix of satisfaction and adrenaline. You grab your belongings and make your way to the door, ready to continue your journey and explore the wonders of the City of the Rising Sun.\n')
                             menu()
                             hidden_city()
                         else:
@@ -2195,8 +2188,7 @@ jgs .-=-.    ) -.
                     hidden_city()
             #Ice Kingdom
             def ice_kingdom():
-                nonlocal gamble_life
-                nonlocal current_kingdom_name
+                nonlocal gamble_life, current_kingdom_name
 
                 def ice_aftermath():
                     input(f'\n{bulletpoint2}You finally arrive at the gates of the Empire of Ice.\n\n{bulletpoint2}The guard stops you and asks for your license to pass.\nUpon seeing your crown bearing the symbol of the Red Dragon Empire, the guard\'s expression immediately changed to one of fear and lets you immediately pass through.\n\nAs you enter the once-prosperous Ice Kingdom, which was replaced by Empire of Ice, now renamed to the Winter Dragon Realm, you are struck by the scenes of destruction that greet you. The once-beautiful ice palaces and frozen towers lie in ruins, shattered by the might of the Red Dragon Empire. The streets are empty and silent, the once-bustling marketplaces now desolate and abandoned.\n\nAs you walk through the silent streets, you catch glimpses of the few remaining citizens of the Winter Dragon Realm. They huddle together in small groups, their eyes filled with fear and despair. Many of them bear the scars of the brutal attack, their bodies bruised and battered. They whisper in hushed tones, afraid to speak too loudly lest they attract the attention of the Red Dragon\'s soldiers.\n\nIn the distance, you see the Red Dragon\'s banner flying over the ruins of the ice palace, a stark reminder of the empire\'s conquest. The once-majestic Empire of Ice has been reduced to a shadow of its former self, a mere puppet state of the Red Dragon Empire.\n')
@@ -2492,8 +2484,7 @@ jgs .-=-.    ) -.
                     ice_kingdom()
                 
             def the_marriage():
-                nonlocal current_heir
-                nonlocal new_rank
+                nonlocal current_heir, new_rank
                 noble_lady_features = ['intelligence and wit', 'nice hair and eyes', 'grace and poise', 'beauty and charm', 'strength and courage', 'kindness and compassion', 'dignity and honor', 'intelligence and charm', 'elegance and sophistication', 'wisdom and foresight', 'generosity and charity', 'honesty and integrity', 'humility and modesty', 'humor and wit']
                 random_noble_feature = random.choice(noble_lady_features)
                 noble_quote = ["I have never felt this way about anyone before. I think I am falling in love with you.", "I don't know what it is about you, but you make my heart skip a beat.", "You are the most amazing person I have ever met.", "I can't imagine spending my life with anyone else but you.", "I want to spend every waking moment with you and make a lifetime of memories together.", "Will you be my partner in crime and make all of my dreams come true?", "I love you more than words can express.", "You make me feel like the most special person in the world.", "I can't wait to start our lives together and make our own happily ever after.", "I never thought I would find someone who makes me laugh as much as you do, and I want to be with you forever."]
@@ -2806,7 +2797,7 @@ jgs .-=-.    ) -.
                     open_seas(current_position) #opening the first starting scene.
                     if (current_position in land) and (start_count != 0):
                         land_command = input(
-                            f'{bulletpoint}Would you like to anchor the ship?\n\n\n\n\n\n')
+                            f'\n{bulletpoint}Would you like to anchor the ship?\n')
                         if land_command in directions:
                             command = land_command
                     else:
@@ -2815,7 +2806,7 @@ jgs .-=-.    ) -.
                             pass
                         else:
                             command = input(
-                                f'{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n\n\n\n\n\n')
+                                f'\n{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n\n')
                     # Start count being at 0 prevents the "Would you like to anchor the ship?" string from being displayed.
                     start_count -= 1
                     # Below are the different scenes and each of their connections depending on how the user travels. Venturing too far from the path will put them in stormy weather.
@@ -3016,7 +3007,7 @@ jgs .-=-.    ) -.
                                         add_money(50, 200)
                                 else:
                                     input(
-                                        '\n\n\n\n\n\n\n\n\n\n\nIt\'s too stormy in these waters, we should steer in a different direction...')
+                                        '\nIt\'s too stormy in these waters, we should steer in a different direction...')
                                 current_position = sea_storm_island
                             else:
                                 current_position = sea_dark
@@ -3048,65 +3039,61 @@ jgs .-=-.    ) -.
                                 current_position = sea_dark
                         elif current_position == sea_dark: # 1st stormy area if player travels outside of the preferred path
                             if saved_direction == 'north':
-                                print('\n\n\n\n\n\n\n\n\n\n')
+                                print('\n')
                                 open_seas(sea_dark)
                                 stormcommand = input(
-                                    f'{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n\n\n\n\n\n\n\n\n\n\n')
+                                    f'{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n')
                                 if stormcommand == 'south':
                                     current_position = previous_position
                                 else:
                                     open_seas(sea_stormy) # This is the 2nd stormy area that will teleport the player back to the previous scene, as they have strayed too far away.
                                     input(
-                                        '\n\n\n\n\n\n\n\n\n\n\nIt\'s too stormy in these waters, we should steer in a different direction...')
+                                        '\nIt\'s too stormy in these waters, we should steer in a different direction...')
                                 current_position = previous_position
                             elif saved_direction == 'south':
-                                print('\n\n\n\n\n\n\n\n\n\n')
                                 open_seas(sea_dark)
                                 stormcommand = input(
-                                    f'{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n\n\n\n\n\n\n\n\n\n\n')
+                                    f'\n{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n')
                                 if stormcommand == 'north':
                                     current_position = previous_position
                                 else:
                                     open_seas(sea_stormy)
                                     input(
-                                        '\n\n\n\n\n\n\n\n\n\n\nIt\'s too stormy in these waters, we should steer in a different direction...')
+                                        '\nIt\'s too stormy in these waters, we should steer in a different direction...\n')
                                 current_position = previous_position
                             elif saved_direction == 'west':
-                                print('\n\n\n\n\n\n\n\n\n\n')
                                 open_seas(sea_dark)
                                 stormcommand = input(
-                                    f'{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n\n\n\n\n\n\n\n\n\n\n')
+                                    f'{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n')
                                 if stormcommand == 'east':
                                     current_position = previous_position
                                 else:
                                     open_seas(sea_stormy)
                                     input(
-                                        '\n\n\n\n\n\n\n\n\n\n\nIt\'s too stormy in these waters, we should steer in a different direction...')
+                                        '\nIt\'s too stormy in these waters, we should steer in a different direction...\n')
                                 current_position = previous_position
                             elif saved_direction == 'east':
-                                print('\n\n\n\n\n\n\n\n\n\n')
                                 open_seas(sea_dark)
                                 stormcommand = input(
-                                    f'{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n\n\n\n\n\n\n\n\n\n\n')
+                                    f'{bulletpoint}Which direction would you like to steer the ship? (north, west, east, south)\n')
                                 if stormcommand == 'west':
                                     current_position = previous_position
                                 else:
                                     open_seas(sea_stormy)
                                     input(
-                                        '\n\n\n\n\n\n\n\n\n\n\nIt\'s too stormy in these waters, we should steer in a different direction...')
+                                        '\nIt\'s too stormy in these waters, we should steer in a different direction...\n')
                                 current_position = previous_position
                             else:
                                 open_seas(sea_stormy)
                                 input(
-                                    '\n\n\n\n\n\n\n\n\n\n\nIt\'s too stormy in these waters, we should steer in a different direction...')
+                                    '\nIt\'s too stormy in these waters, we should steer in a different direction...\n')
                                 current_position = previous_position
                     else:
                         print('Your input is not valid. Please try again.') # Player did not type a correct cardinal direction or yes/no.
 
             # Empire Recruitment
             def empire_recruitment():
-                global ranks
-                nonlocal new_rank
+                global ranks, new_rank
                 input('''
                                    (   .                   _ _ _ _ _
                     (   .     .  .=##                      ]-I-I-I-[                    /
@@ -3178,21 +3165,22 @@ jgs .-=-.    ) -.
                 empire_mission_ans = input(f'\n{bulletpoint}The empire\'s mission was to take care of a {giant.name} that was blocking the way of the empire\'s deforestation plan. But be wary that this {giant.name} has already taken out several experienced knights. Are you able to prove your loyalty to the empire and take care of this monster?')
                 if empire_mission_ans.strip().lower() in yes:
                     print(f'{bulletpoint2}You come across a valley with beautiful golden trees, an arched bridge, and a glistening river. On top of the bridge you see the sleeping {giant.name} blocking the way. You start walking over to the bridge and the {giant.name} immediately wakes up and stands 30 feet tall over you.')
-                    input('''⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⡀⠀⠀⠀⠀⠀⢺⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⡇⠀⠀⠀⠀⣠⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡟⢁⣤⣤⣤⣴⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⣠⣾⣿⣷⣀⠙⢉⣠⣾⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⣴⣾⣿⡿⢿⣿⣿⣿⣿⣿⣿⡏⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⣿⡟⠉⠀⠘⣿⣿⣿⣿⣿⣿⠇⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⣿⡇⠀⠀⠀⢿⣿⣿⣿⣿⣿⣠⣴⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⣿⣷⣄⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⡿⠋⠙⢿⣿⣦⣴⣶⡷⠀⠀⠀⠀⠀
-⠀⠀⠀⠙⠛⠋⠀⠀⠀⣿⣿⣿⣿⡿⠛⠉⠀⠀⠀⠀⠹⣿⠟⠁⠀⠀⡀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⣀⣶⣼⣿⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⠋⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣹⣿⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⢀⣤⣤⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡟⢿⡀⠀⠀⠀
-⠀⠀⠀⠀⠀⠙⠛⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠋⠀⠈⠃⠀⠀⠀
+                    input('''
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⡀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣤⡀⠀⠀⠀⠀⠀⢺⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⡇⠀⠀⠀⠀⣠⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⡟⢁⣤⣤⣤⣴⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⠀⠀⣠⣾⣿⣷⣀⠙⢉⣠⣾⣿⣿⣿⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⣴⣾⣿⡿⢿⣿⣿⣿⣿⣿⣿⡏⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⣿⡟⠉⠀⠘⣿⣿⣿⣿⣿⣿⠇⠀⠀⢀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⣿⡇⠀⠀⠀⢿⣿⣿⣿⣿⣿⣠⣴⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+                     ⠀⠀⣿⣷⣄⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⡿⠋⠙⢿⣿⣦⣴⣶⡷⠀⠀⠀⠀⠀
+                     ⠀⠀⠙⠛⠋⠀⠀⠀⣿⣿⣿⣿⡿⠛⠉⠀⠀⠀⠀⠹⣿⠟⠁⠀⠀⡀⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⣀⣶⣼⣿⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⠋⠀⠀⠀
+                     ⠀⠀⠀⠀⠀⠀⠀⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣹⣿⠀⠀⠀⠀
+                     ⠀⠀⠀⠀⢀⣤⣤⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⡟⢿⡀⠀⠀⠀
+                     ⠀⠀⠀⠀⠙⠛⠛⠛⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠋⠀⠈⠃⠀⠀⠀
                     ''')
                     add_health(giant) # Adds monster health if it has already been killed.
                     battle(hero, giant, 'raises left arm',
@@ -3216,6 +3204,10 @@ jgs .-=-.    ) -.
                                 if attack_kingdom_ans.strip().lower() in yes:
                                     menu()
                                     battlefield()
+                                else:
+                                    input(f'\n{bulletpoint2}You decided to prove your loyalty instead by taking on an imperial trade assignment and sail the seas.\nYou were tasked with a mission to find the shortest sea path to the {current_kingdom_name}.\n\n{bulletpoint2}The emperor will also be joining on the trip so it\'s best to showcase your ability to navigate the seas!')
+                                    menu()
+                                    trade_mission()
                             else:
                                 input(f'\n{bulletpoint2}You decided to prove your loyalty instead by taking on an imperial trade assignment and sail the seas.\nYou were tasked with a mission to capture the Leviathan monster somewhere in the stormy seas\n\n{bulletpoint2}The emperor will also be joining on the trip so it\'s best to showcase your ability to navigate the seas!')
                                 menu()
@@ -3259,14 +3251,14 @@ jgs .-=-.    ) -.
 
             # Sand Monster Battle
                 add_health(sandworm) # Adds monster health if it has already been killed.
-                sand_monster_ans = input(f'\n{bulletpoint}Suddenly, you see a massive, ancient {sandworm.name} rise up from the sand before you.\nIts thousand year old body towers over you, a monstrous behemoth with thousands of sharp teeth lining all edges of its massive cavernous mouth.\nThe {new_monk_replacement} warns you that this creature is legendary, feared by all who have laid eyes upon it. Do you have the courage to face this terrifying beast, or will you turn and flee in terror?\n')
+                sand_monster_ans = input(f'\n{bulletpoint}Suddenly, you see a massive, ancient {sandworm.name} rise up from the sand before you.\nIts thousand year old body towers over you, a monstrous behemoth with thousands of sharp teeth lining all edges of its massive cavernous mouth.\nThe {new_monk_replacement} warns you that this creature is legendary, feared by all who have laid eyes upon it. Do you have the courage to face this terrifying beast?\n')
                 if sand_monster_ans.strip().lower() in yes:
                     # Cleaning up the hero item strings to play be displayed properly
                     clean_hero_items = ', '.join(
                         [f'{letter}' for letter in hero_items])
                     sand_monster_weapon = input(
-                        f'\n{bulletpoint}The {new_monk_replacement} asks you what weapon you plan to fight this thing when we only have {clean_hero_items}? You respond with "I\'ll just use the..."')
-                    input(f'\n{bulletpoint2}As you try your plan of attacking with the {sand_monster_weapon}... you utterly failed. The {sandworm.name} then surrounded you with a giant wall of sand, preventing your escape...') 
+                        f'\n{bulletpoint}The {new_monk_replacement} asks you what weapon you plan to fight this thing when we only have {clean_hero_items}?\nYou respond with "I\'ll just use the..."\n')
+                    input(f'\n{bulletpoint2}As you try your plan of attacking with the {sand_monster_weapon}... you utterly failed. The {sandworm.name} then surrounded you with a giant wall of sand, preventing your escape...\n') 
                     battle(hero, sandworm, 'digs at ground',
                            'twists body', 'shrieks', 'moves underground')
                     random_health_gain = random.randint(10,30) # Adds health to the hero between 10 and 30.
@@ -3331,12 +3323,12 @@ jgs .-=-.    ) -.
             def mountain_secret():
                 nonlocal current_heir
                 phoenix_image = ''' Art by :nathaN
-   _,="( _  )"=,_
-_,'    \_>\_/    ',_
-.7,     {  }     ,\.
- '/:,  .m  m.  ,:\\\'
-   ')",(/  \),"('
-      '{'!!'}'
+                             _,="( _  )"=,_
+                          _,'    \_>\_/    ',_
+                          .7,     {  }     ,\.
+                           '/:,  .m  m.  ,:\\\'
+                             ')",(/  \),"('
+                                '{'!!'}'
 '''
                 # Box and Triangle counting mini game.
                 def box_puzzle():
@@ -3794,22 +3786,11 @@ _,'    \_>\_/    ',_
             
             #The Wizard
             def wizard():
-                nonlocal vendor_lady_object
-                nonlocal merlin_in_room
+                nonlocal vendor_lady_object, merlin_in_room
                 # Function to reset all the variables in the story back to the original state except "merlin_in_room"
                 def reverse_time():
-                    nonlocal current_heir
-                    nonlocal emperor_life
-                    nonlocal noble_life
-                    nonlocal thugs_life
-                    nonlocal icequeen_life
-                    nonlocal current_emperor
-                    nonlocal current_kingdom_name
-                    nonlocal new_monk_replacement
-                    nonlocal coin_guess_correctly
-                    nonlocal wall_key_count
-                    nonlocal current_empire_name
-                    nonlocal victory
+                    nonlocal current_heir, current_emperor, emperor_life, noble_life, thugs_life, icequeen_life, current_kingdom_name, new_monk_replacement, coin_guess_correctly, wall_key_count, current_empire_name, victory, vendor_lady_object, monster_guild_membership, assassin_guild_membership
+
                     current_heir = 'the beggar..' # Resets the current heir.
                     current_emperor = 'emperor'
                     emperor_life = 'alive'
@@ -3822,6 +3803,9 @@ _,'    \_>\_/    ',_
                     wall_key_count = 1
                     current_empire_name = 'Red Dragon Empire'
                     victory = 'black'
+                    vendor_lady_object = 1
+                    monster_guild_membership = False
+                    assassin_guild_membership = False
                 # Adds health to the Merlin monster battle
                 add_health(merlin)
                 blackhole = '''⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -3868,28 +3852,28 @@ _,'    \_>\_/    ',_
                     menu()
                     beggar()
                 print('''Art by Morfina
-                    ____
-                  .'* *.'
-               __/_*_*(_
-              / _______ \\
-             _\_)/___\(_/_
-            / _((\- -/))_ \\
-            \ \())(-)(()/ /
-             ' \(((()))/ '
-            / ' \)).))/ ' \\
-           / _ \ - | - /_  \\
-          (   ( .;\'''; . .')
-          _\\"__ / {o})\ __"/_
-            \/  \   ' /  \/
-             .'  '...' ' )
-              / /  |  \ \\
-             / .   .   . \\
-            /   .     .   \\
-           /   /   |   \   \\
-         .'   /    b    '.  '.
-     _.-'    /     Bb     '-. '-._ 
- _.-'       |      BBb       '-.  '-. 
-(________mrf\____.dBBBb.________)____)''')
+                                         ____
+                                       .'* *.'
+                                    __/_*_*(_
+                                   / _______ \\
+                                  _\_)/___\(_/_
+                                 / _((\- -/))_ \\
+                                 \ \())(-)(()/ /
+                                  ' \(((()))/ '
+                                 / ' \)).))/ ' \\
+                                / _ \ - | - /_  \\
+                               (   ( .;\'''; . .')
+                               _\\"__ / {o})\ __"/_
+                                 \/  \   ' /  \/
+                                  .'  '...' ' )
+                                   / /  |  \ \\
+                                  / .   .   . \\
+                                 /   .     .   \\
+                                /   /   |   \   \\
+                              .'   /    b    '.  '.
+                          _.-'    /     Bb     '-. '-._ 
+                      _.-'       |      BBb       '-.  '-. 
+                     (________mrf\____.dBBBb.________)____)''')
                 wizard_ans_one = input(
                     f'\n{bulletpoint2}You enter a massive silver colored room with various foreign gadgets that make unfamiliar noise. An old man with a long beard and purple hat turns around and is suprised to see you. He starts questioning who you are and if you were sent by the emperor to kill him.\n\n{bulletpoint}Do you say yes or no:')
                 if wizard_ans_one.lower() in yes:
@@ -3985,61 +3969,61 @@ _,'    \_>\_/    ',_
             # The Red Dragon
             def red_dragon():
                 add_health(tiamat)
-                print(
-                    '''                                                ,d888*`
-                                              ,d888`
-                                            ,d888`
-                                           ,d88`
-                                         ,d88`
-                                        ,d8`
-                                      ,d8*                 ..d**
-                                    ,d88*             ..d**`
-                                  ,d88`         ..d8*`
-                                ,d888`    ..d8P*`
-                        .     ,d8888*8888*`
-                      ,*     ,88888*8P*
-                    ,*      d888888*8b.
-                  ,P       dP  *888.*888b.
-                ,8*        8    *888  `**88888b.
-              ,dP                *88           *88b.
-             d8`                  *8b               *8b.
-           ,d8`                    *8.                  *88b.
-          d8P                       88.                    *88b
-        ,88P                        888
-       d888*       .d88P            888
-      d8888b..d888888*              888
-    ,888888888888888b.              888
-   ,8*;88888P*****788888888ba.      888
-  ,8;,8888*        `88888*          d88*
-  )8e888*          ,88888be.        888
- ,d888`           ,8888888***     d888
-,d88P`           ,8888888Pb.     d888`
-888*            ,88888888**   .d8888*
-`88            ,888888888    .d88888b
- `P           ,8888888888bd888888*
-              d888888888888d888*
-              8888888888888888b.
-              88*. *88888888888b.        .db
-              `888b.`8888888888888b. .d8888P
-               **88b.`*8888888888888888888888b...
-                *888b.`*8888888888P***7888888888888e.
-                 88888b.`********.d8888b**`88888P*
-                 `888888b     .d88888888888**`8888.
-                  )888888.   d888888888888P   `8888888b.
-                 ,88888*    d88888888888**`    `8888b
-                ,8888*    .8888888888P`          `888b.
-               ,888*      888888888b...            `888P88b.
-      .db.   ,d88*        88888888888888b          `8888
-  ,d888888b.8888`         `*888888888888888888P`   `888b.
- /*****8888b**`              `***8888P*``8888`       `8888b.
-      /**88`                 .ed8b..  .d888P`            `88888
-                           d8**888888888P*               `88b
-                          (*``,d8888***`                    `88
-                             (*`                             `88
-                                                              88
-                                                              88
-                                                             `8
-                                                             d8
+                print('''
+                                                                       ,d888*`
+                                                                     ,d888`
+                                                                   ,d888`
+                                                                  ,d88`
+                                                                ,d88`
+                                                               ,d8`
+                                                             ,d8*                 ..d**
+                                                           ,d88*             ..d**`
+                                                         ,d88`         ..d8*`
+                                                       ,d888`    ..d8P*`
+                                               .     ,d8888*8888*`
+                                             ,*     ,88888*8P*
+                                           ,*      d888888*8b.
+                                         ,P       dP  *888.*888b.
+                                       ,8*        8    *888  `**88888b.
+                                     ,dP                *88           *88b.
+                                    d8`                  *8b               *8b.
+                                  ,d8`                    *8.                  *88b.
+                                 d8P                       88.                    *88b
+                               ,88P                        888
+                              d888*       .d88P            888
+                             d8888b..d888888*              888
+                           ,888888888888888b.              888
+                          ,8*;88888P*****788888888ba.      888
+                         ,8;,8888*        `88888*          d88*
+                         )8e888*          ,88888be.        888
+                        ,d888`           ,8888888***     d888
+                       ,d88P`           ,8888888Pb.     d888`
+                       888*            ,88888888**   .d8888*
+                       `88            ,888888888    .d88888b
+                        `P           ,8888888888bd888888*
+                                     d888888888888d888*
+                                     8888888888888888b.
+                                     88*. *88888888888b.        .db
+                                     `888b.`8888888888888b. .d8888P
+                                      **88b.`*8888888888888888888888b...
+                                       *888b.`*8888888888P***7888888888888e.
+                                        88888b.`********.d8888b**`88888P*
+                                        `888888b     .d88888888888**`8888.
+                                         )888888.   d888888888888P   `8888888b.
+                                        ,88888*    d88888888888**`    `8888b
+                                       ,8888*    .8888888888P`          `888b.
+                                      ,888*      888888888b...            `888P88b.
+                             .db.   ,d88*        88888888888888b          `8888
+                         ,d888888b.8888`         `*888888888888888888P`   `888b.
+                        /*****8888b**`              `***8888P*``8888`       `8888b.
+                             /**88`                 .ed8b..  .d888P`            `88888
+                                                  d8**888888888P*               `88b
+                                                 (*``,d8888***`                    `88
+                                                    (*`                             `88
+                                                                                     88
+                                                                                     88
+                                                                                    `8
+                                                                                    d8
                 ''')
                 input(
                     f'\n{bulletpoint2}You enter a massive cavern that is pitch black. All of a sudden you see flames in front of you and its bone-chilling face appears. You realized that this was the legendary red dragon Tiamat which fell from the heavens onto Earth in the ancient past. You remembered the myth that it caused havoc across the lands, before it was finally captured and sealed by magic by the ancient advanced civilization...\n')
@@ -4668,7 +4652,7 @@ _,'    \_>\_/    ',_
 
             # The Beggar
             def beggar():
-                nonlocal current_emperor
+                nonlocal current_heir, new_monk_replacement, new_goons
                 print('''
                     .                  .-.    .  _   *     _   .
                            *          /   \     ((       _/ \       *    .
@@ -4712,13 +4696,12 @@ _,'    \_>\_/    ',_
                     menu()
                     mysterious_monk()
                 elif beggar_ans.strip().lower() == 'm@x':
-                    current_emperor = hero.name
                     hero.health = 999999
                     hero.money = 999999
-                    input(
+                    print(
                         f'\n{bulletpoint2}The beggar understands what you mean😉')
                     beggar_direction = input(
-                        f'\nVisit the {new_monk_replacement}\nVisit the Vendor Lady Stall\nVisit the Red Dragon Castle\nVisit the Ice Kingdom\nVisit the Mountain\nVisit the Assassin Guild\nVisit the Monster Hunter Guild\nGo Sail on a Trade Mission?\n{bulletpoint}Where would you like to go:')
+                        f'\nVisit the {new_monk_replacement}\nVisit the Vendor Lady Stall\nVisit the Red Dragon Castle\nVisit the Ice Kingdom\nVisit the Mountain\nVisit the Assassin Guild\nVisit the Monster Hunter Guild\nVisit the Sail Trade Mission?\n{bulletpoint}Where would you like to go:')
                     if beggar_direction.strip().lower() in ('vendor lady', 'vendor', 'stall', 'vendor lady stall'):
                         menu()
                         vendor_lady()
@@ -4745,7 +4728,6 @@ _,'    \_>\_/    ',_
                         mysterious_monk()
 
                 else:
-                    nonlocal new_goons
                     if current_heir == 'Beggar' or current_heir == 'The Beggar':
                         input(
                             f'\n{bulletpoint2}You kick him, spit on him, and yell that you don\'t acknowledge a dirty beggar as the next heir and walk away laughing.\n')
@@ -4933,18 +4915,19 @@ def ask_hero_name():
     global hero_name
     hero_name = input('What is the name of your hero?')
     print(
-        f'''              _____________________
-            / \                    \\
-           |   |     Welcome        \  
-           \_ |      {hero_name}       
-              |      to              |
-              |      Choose          |
-              |      Your Own        |                Ascii art from:       asciiart.eu
-              |      Adventure Game! |                Emotes from:          texteditor.com
-              |                      |                Game developed by:    James L.
-              |   _________________ _|__
-              |  /                     /
-              \_/_____________________/''')
+        f'''
+                  _____________________
+                / \                    \\
+               |   |     Welcome        \  
+               \_ |      {hero_name}       
+                  |      to              |
+                  |      Choose          |
+                  |      Your Own        |                Ascii art from:       asciiart.eu
+                  |      Adventure Game! |                Emotes from:          texteditor.com
+                  |                      |                Game developed by:    James L.
+                  |   _________________ _|__
+                  |  /                     /
+                  \_/_____________________/''')
     continue_game = input('Would you like to continue? "yes" or "no"?')
     if continue_game.strip().lower() in yes:
         print('You have only one life... be cautious...')
