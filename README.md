@@ -12,6 +12,9 @@ So what are you waiting for? Start your adventure today!
 
 - Python 3
 - This game is to meant to be played in the terminal
+- If you are having trouble with the UTF-8 encoding when starting the game, first go into current working directory where the game is located. 
+  Then if you're using the git bash terminal, you can try using the following command:
+```PYTHONIOENCODING=utf-8 python main.py```
 
 # Potential Choices Available
 

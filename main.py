@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import random
 
 # This list allows the player to type different forms of "yes" for variety.
