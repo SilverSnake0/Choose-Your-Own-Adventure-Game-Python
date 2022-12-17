@@ -1087,8 +1087,9 @@ def adventure_game():
 
                 # If the letter input is a number like "5" or symbol like "^" then this message will be printed
                 while guess not in alphabet:
-                    input(
-                        f'{bulletpoint2}You must enter a letter in the alphabet. Please try again.')
+                    if guess != word:
+                        input(
+                            f'{bulletpoint2}You must enter a letter in the alphabet. Please try again.')
                     break
 
                 # Check if the letter has already been guessed
@@ -1111,7 +1112,7 @@ def adventure_game():
                             # If the letter is not in the word, increment the incorrect guess counter
                             if guess not in word:
                                 incorrect_guesses += 1
-                                input(f'{bulletpoint2}Sorry, please try again.')
+                                print(f'{bulletpoint2}Sorry, please try again.')
                         else:
                             pass
                     # Check if the letter is in the word
@@ -4824,6 +4825,7 @@ def adventure_game():
                                 jail_inmate_ans = input(
                                     f'\n{bulletpoint}The inmate with only one {body_part} asks if you would like to be his friend?\n')
                                 if jail_inmate_ans.strip().lower() in yes:
+                                    nonlocal gamble_life
                                     snitch_ans = input(f'\n{bulletpoint}The inmate tells you that for the last year he\'s been digging a hole underneath his bed. He says it\'s finally ready and proposes for you to join him to make the escape. Do you snitch to the prisoner guards of the inmate\'s plans or join the inmate in the escape?\n')
                                     if snitch_ans.strip().lower() in ('tattle', 'tattle tale', 'tell the guards', 'tell the guards about the plan',) or 'snitch' in snitch_ans.strip().lower():
                                         input(
