@@ -4544,7 +4544,10 @@ def adventure_game():
                     maze()
                     
                 else:
-                    input(f'\n{bulletpoint2}You walk along the streets to find a job, but no one you encountered would hire you. You then come across a mysterious {new_monk_replacement}.\n')
+                    if hero.name.strip().lower() not in (current_emperor.strip().lower(), current_heir.strip().lower()):
+                        input(f'\n{bulletpoint2}You walk along the streets to find a job, but no one you encountered would hire you. You then come across a mysterious {new_monk_replacement}.\n')
+                    else:
+                        input(f'\n{bulletpoint2}You decide to stroll along the streets and you come across a mysterious {new_monk_replacement}.\n')
                     menu()
                     mysterious_monk()
 
