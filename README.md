@@ -8,13 +8,19 @@ But that's not all - this game also features a variety of minigames, including b
 
 So what are you waiting for? Start your adventure today!
 
+![Choose your adventure game poster](Resources\images\adventure_game_poster.png)
+Midjourney Copyright @ 2022
+Licensed under the Creative Commons Attribution-NonCommercial 4.0 International Public License. Please read the disclaimer of warranties on Section 5 – Disclaimer of Warranties and Limitation of Liability.
+This picture is licensed under this Public License: [Creative Commons BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/legalcode)
+
+
 # Requirements
 
 - Python 3
 - This game is to meant to be played in the terminal
 - If you are having trouble with the UTF-8 encoding when starting the game, first go into current working directory where the game is located. 
   Then if you're using the git bash terminal, you can try using the following command:
-```PYTHONIOENCODING=utf-8 python main.py```
+  ```PYTHONIOENCODING=utf-8 python main.py```
 
 # Potential Choices Available
 
