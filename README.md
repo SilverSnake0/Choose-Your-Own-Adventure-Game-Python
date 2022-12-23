@@ -8,7 +8,7 @@ But that's not all - this game also features a variety of minigames, including b
 
 So what are you waiting for? Start your adventure today!
 
-![Choose your adventure game poster](Resources\images\adventure_game_poster.png)
+![Choose your adventure game poster](Resources/images/adventure_game_poster.png)
 Midjourney Copyright @ 2022
 Licensed under the Creative Commons Attribution-NonCommercial 4.0 International Public License. Please read the disclaimer of warranties on Section 5 – Disclaimer of Warranties and Limitation of Liability.
 This picture is licensed under this Public License: [Creative Commons BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/legalcode)
